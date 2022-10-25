@@ -12,7 +12,7 @@ X = "\033[0m"
 UP = "\033[A"
 CUT = "\033[K"
 
-CFILES = src/main.c \
+CFILES = src/main.c src/parsing/parsing.c \
 
 OBJECTS = $(CFILES:.c=.o)
 
