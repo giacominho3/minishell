@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:53:13 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 17:47:21 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:23:25 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ typedef struct s_command
 //macros placeholder
 
 /************************************
+*				syntax				*
+*************************************/
+int		syntax(char *str);
+
+/************************************
 *			string utils			*
 *************************************/
 int		ft_strcmp(char *s1, char *s2);
@@ -50,9 +55,5 @@ void	ft_strcpy(char *dst, char *src);
 int		skip_intial_spaces(char *str);
 int		trim_spaces(char *str, int len);
 void	ft_offset_copy(char *dst, char *src, int offset, int stop);
-/************************************
-*			fr_functiones			*
-*************************************/
-// int	specialchar(char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:51:40 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 11:50:10 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:24:48 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	len_var(char *str, int index)
 
 	len = 0;
 	tmp[0] = 0;
-	while (specialchar(str[index]))
+	while (is_valid_char(str[index]))
 		tmp[len++] = str[index++];
 	var_pointer = getenv(tmp);
 	printf("get_env: %s\n", var_pointer);
