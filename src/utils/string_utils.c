@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 16:52:50 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/24 19:23:15 by tterribi         ###   ########.fr       */
+/*   Created: 2022/10/24 19:21:11 by tterribi          #+#    #+#             */
+/*   Updated: 2022/10/24 19:21:55 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/minishell.h"
+#include "../../incl/minishell.h"
 
-
-int	main(int argc, char **argv)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int		exit = 0;
-	char	*input;
-
-	while (exit != 1)
+	while (*s1 != '\0' && (*s1 == *s2))
 	{
-		input = readline("Minishell> ");
-		if (ft_strcmp(input, "luce") == 0)
-			printf("DUCE\n");
-		else
-			printf("taken input: %s\n", input);
+		s1++;
+		s2++;
 	}
+	return (*(char *)s1 - *(char *)s2);
 }

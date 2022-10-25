@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:53:13 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/24 17:51:35 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:22:43 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,10 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+
+
+/************************************
+*			string utils			*
+*************************************/
+int	ft_strcmp(char *s1, char *s2);
 #endif
