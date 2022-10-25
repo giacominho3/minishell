@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:51:40 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 08:44:34 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:50:10 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	len_var(char *str, int index)
 
 	len = 0;
 	tmp[0] = 0;
-	while ((str[index] >= 65 && str[index] <= 90) || (str[index] >= 97 && str[index] <= 122))
+	while (specialchar(str[index]))
 		tmp[len++] = str[index++];
 	var_pointer = getenv(tmp);
+	printf("get_env: %s\n", var_pointer);
 	// add error handling for get env
 	len = 0;
 	while (var_pointer[len])
@@ -80,12 +81,12 @@ char	*parse(char *str)
 			expand = expand_manager(expand);
 		if (str[i] == '$' && expand)
 			// expand_var(str);
-
 		i++;
 	}
 }
 
-int	main (void)
+int	main(void)
 {
-	parse("$USER");
+	parse("$USER $TERM_PROGRAM_VERSION");
+	printf("tterrribbbili gay");
 }
