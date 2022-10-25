@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:51:40 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 18:24:48 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:51:59 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,73 +20,57 @@ bool	expand_manager(bool expand)
 		return (true);
 }
 
-int	len_var(char *str, int index)
+int	expand_var(char *str, char *ret, int offset, int index)
 {
-	int		len;
-	char	tmp[200];
-	char	*var_pointer;
-
-	len = 0;
-	tmp[0] = 0;
-	while (is_valid_char(str[index]))
-		tmp[len++] = str[index++];
-	var_pointer = getenv(tmp);
-	printf("get_env: %s\n", var_pointer);
-	// add error handling for get env
-	len = 0;
-	while (var_pointer[len])
-		len++;
-	return (len);
-}
-
-int	len_final(char *str)
-{
+	char	*var;
+	char	*tmp;
 	int		i;
-	int		len;
-	bool	expand;
+	int		j;
 
-	expand = true;
 	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'')
-			expand = expand_manager(expand);
-		if (str[i] == '$' && expand)
-			len += len_var(str, i + 1);
-		i++;
-	}
-	return (len);
+	j = offset;
+	tmp = (char *)malloc(sizeof(char) * len_var(str, offset));
+	if (!tmp)
+		return (-1);
+	while (is_valid_char(str[offset]))
+		tmp[i++] = str[j++];
+	var = getenv(tmp);
+	i = 0;
+	while (var[i])
+		ret[index++] = var[i++];
+	return (len_var(str, offset));
 }
-
-// void	*expand_var(char *str)
-// {
-
-// }
 
 char	*parse(char *str)
 {
 	int		i;
+	int		j;
 	char	*ret;
 	bool	expand;
 
 	i = 0;
+	j = 0;
 	expand = true;
 	printf("len_final: %d", len_final(str));
-	exit(0);
 	ret = malloc(sizeof(char *) * len_final(str));
 	while (str[i])
 	{
 		if (str[i] == '\'')
 			expand = expand_manager(expand);
 		if (str[i] == '$' && expand)
-			// expand_var(str);
+		{
+			j += expand_var(str, ret, i, j);
+			continue ;
+		}
+		ret[j] = str[i];
+		j++;
 		i++;
 	}
+	return (ret);
 }
 
-int	main(void)
-{
-	parse("$USER $TERM_PROGRAM_VERSION");
-	printf("tterrribbbili gay");
-}
+// int	main(void)
+// {
+// 	parse("$USER $TERM_PROGRAM_VERSION");
+// 	printf("tterrribbbili gay");
+// }
