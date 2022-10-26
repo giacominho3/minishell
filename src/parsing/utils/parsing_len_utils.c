@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:36:42 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 19:36:43 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/26 08:14:33 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@ int len_var(char *str, int index)
 
 	len = 0;
 	tmp[0] = 0;
+	write(1, "1\n", 2);
 	while (is_valid_char(str[index]))
 		tmp[len++] = str[index++];
+	write(1, "2\n", 2);
 	var_pointer = getenv(tmp);
-	printf("get_env: %s\n", var_pointer);
+	write(1, "3\n", 2);
 	// add error handling for get env
 	len = 0;
+	printf("len_var tmp: %s\n", tmp);
+	write(1, "4\n", 2);
 	while (var_pointer[len])
 		len++;
+	printf("len_var call(param=%s, getenv: %s), var len: %d\n", str, var_pointer, len);
 	return (len);
 }
 
@@ -37,6 +42,7 @@ int len_final(char *str)
 	int len;
 	bool expand;
 
+	printf("_____len_final call_____\n");
 	expand = true;
 	i = 0;
 	len = 0;
@@ -48,5 +54,6 @@ int len_final(char *str)
 			len += len_var(str, i + 1);
 		i++;
 	}
+	printf("_________________________\n");
 	return (len);
 }

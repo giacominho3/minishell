@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:51:40 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 19:51:59 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/26 08:06:44 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,20 @@ int	expand_var(char *str, char *ret, int offset, int index)
 	int		i;
 	int		j;
 
+	printf("string in input: %s\n", str);
 	i = 0;
 	j = offset;
+	printf("len var: %d", len_var(str, offset));
 	tmp = (char *)malloc(sizeof(char) * len_var(str, offset));
 	if (!tmp)
 		return (-1);
+	write(1, "a\n", 2);
 	while (is_valid_char(str[offset]))
+	{
+		write(1, "a\n", 2);
 		tmp[i++] = str[j++];
+	}
+	printf("tmp: %s\n", tmp);
 	var = getenv(tmp);
 	i = 0;
 	while (var[i])
@@ -51,7 +58,7 @@ char	*parse(char *str)
 	i = 0;
 	j = 0;
 	expand = true;
-	printf("len_final: %d", len_final(str));
+	// printf("len_final: %d\n", len_final(str));
 	ret = malloc(sizeof(char *) * len_final(str));
 	while (str[i])
 	{
