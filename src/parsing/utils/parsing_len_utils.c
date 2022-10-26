@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_len_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:36:42 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/26 08:14:33 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:15:36 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-int len_var(char *str, int index)
+int	len_var(char *str, int index)
 {
 	int len;
 	char tmp[200];
@@ -24,23 +24,27 @@ int len_var(char *str, int index)
 	while (is_valid_char(str[index]))
 		tmp[len++] = str[index++];
 	write(1, "2\n", 2);
+	printf("len_var tmp: %s\n", tmp);
 	var_pointer = getenv(tmp);
 	write(1, "3\n", 2);
 	// add error handling for get env
 	len = 0;
-	printf("len_var tmp: %s\n", tmp);
+	printf("len_var getenv: %s\n", var_pointer);
+	write(1, "4\n", 2);
+	printf ("strlen: %d\n", ft_strlen(var_pointer));
 	write(1, "4\n", 2);
 	while (var_pointer[len])
 		len++;
+	write(1, "5\n", 2);
 	printf("len_var call(param=%s, getenv: %s), var len: %d\n", str, var_pointer, len);
 	return (len);
 }
 
-int len_final(char *str)
+int	len_final(char *str)
 {
-	int i;
-	int len;
-	bool expand;
+	int		i;
+	int		len;
+	bool	expand;
 
 	printf("_____len_final call_____\n");
 	expand = true;

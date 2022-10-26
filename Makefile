@@ -14,7 +14,7 @@ CUT = "\033[K"
 
 CFILES = src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c \
 			src/parsing/utils/parsing_utils.c src/parsing/utils/parsing_allocs.c \
-			src/utils/string_utils.c src/utils/string_utils2.c \
+			src/utils/string_utils.c src/utils/string_utils2.c src/utils/utils.c \
 
 OBJECTS = $(CFILES:.c=.o)
 
