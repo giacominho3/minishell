@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:53:13 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/26 18:11:39 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:36:54 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ struct	s_env
 int		*syntax(char *str);
 
 /************************************
+*				ENV_lists				*
+*************************************/
+void	ft_add_front(struct s_env **head, char *str);
+void	ft_add_last(struct s_env **head, char *str);
+void	ft_add_after(struct s_env *prev_node, char *str);
+void	ft_add_before(struct s_env *next_node, char *str);
+void	print_list(struct s_env **head);
+void	ft_set_data(struct s_env *node, char *str);
+void	copy_env(struct s_env **head, char **envp);
+/************************************
 *				parse				*
 *************************************/
 char	*parse(char *str);
@@ -86,5 +96,6 @@ int		skip_intial_spaces(char *str);
 int		trim_spaces(char *str, int len);
 void	ft_offset_copy(char *dst, char *src, int offset, int stop);
 char	*ft_strdup(const char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
