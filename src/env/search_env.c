@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   search_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 07:59:54 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/27 08:27:52 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:39:51 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
+/* search the env looking for the node with a certain name, if params
+are not valid or the function dosen't find a node with the same name
+it reurns NULL */
 struct s_env	*find_by_name(struct s_env **head, char *name)
 {
-	/* search the env looking for the node with a certain name, if params
-	are not valid or the function dosen't find a node with the same name
-	it reurns NULL */
 	struct s_env	*to_find;
 
 	if ((*head) == NULL || name == NULL)
@@ -36,12 +36,12 @@ struct s_env	*find_by_name(struct s_env **head, char *name)
 
 void	print_node(struct s_env **head, char *name, int print)
 {
-
 	struct s_env	*to_print;
 
 	to_print = find_by_name(head, name);
-	if (print == 0 || print == NULL)
+	if (print == 0)
 		printf("%s", to_print->content);
 	else if (print == 1)
 		printf("%s=%s", to_print->name, to_print->content);
 }
+
