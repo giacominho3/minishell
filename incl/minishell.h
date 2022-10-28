@@ -70,7 +70,7 @@ void	copy_env(struct s_env **head, char **envp);
 /************************************
 *				parse				*
 *************************************/
-char	*parse(char *str);
+void	parse(char *str);
 int		len_final(char *str);
 int		len_var(char *str, int index);
 bool	expand_manager(bool expand);

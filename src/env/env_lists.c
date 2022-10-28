@@ -23,9 +23,7 @@ void	ft_add_front(struct s_env **head, char *str)
 		printf("add_front: error while allocating new node: str(%s)\n", str);
 		return ;
 	}
-	write(1, "a\n", 2);
 	ft_set_data(new, str);
-	write(1, "b\n", 2);
 	new->next = (*head);
 	new->prev = NULL;
 	if ((*head) != NULL)

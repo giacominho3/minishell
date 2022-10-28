@@ -48,7 +48,58 @@ int	expand_var(char *str, char *ret, int offset, int index)
 	return (len_var(str, offset));
 }
 
-char	*parse(char *str)
+void	error_command_cpy(char *dst, char *src)
+{
+	// utils func for invalid command
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (src[i] != 32 && src[i])
+	{
+		if (src[i] == 34 || src[i] == 39)
+		{
+			i++;
+			continue;
+		}
+		dst[j] = src[i];
+		j++;
+		i++;
+	}
+}
+
+void	invalid_command(char *str)
+{
+	/* take the param string and read and copy it until the first space (skipping single and double quotes)
+	and then print an error message with the copied string (just like bash error: "command not found") */
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	j = 0;
+	while (str[i] && str[i] != 32)
+	{
+		if (str[i] == 34 || str[i] == 39)
+		{
+			i++;
+			continue ;
+		}
+		j++;
+		i++;
+	}
+	tmp = (char *) malloc(j + 1);
+	if (!tmp)
+	{
+		perror("parsing.c:69:71 | invalid_command()");
+		return ;
+	}
+	error_command_cpy(tmp,str);
+	printf("Minishell: %s: command not found\n", tmp);
+}
+
+void	parse(char *str)
 {
 	int		i;
 	int		j;
@@ -58,22 +109,8 @@ char	*parse(char *str)
 	i = 0;
 	j = 0;
 	expand = true;
-	// printf("len_final: %d\n", len_final(str));
-	ret = malloc(sizeof(char *) * len_final(str));
-	while (str[i])
-	{
-		if (str[i] == '\'')
-			expand = expand_manager(expand);
-		if (str[i] == '$' && expand)
-		{
-			j += expand_var(str, ret, i, j);
-			continue ;
-		}
-		ret[j] = str[i];
-		j++;
-		i++;
-	}
-	return (ret);
+	invalid_command(str);
+	return ;
 }
 
 // int	main(void)
