@@ -12,9 +12,21 @@
 
 #include "../../incl/minishell.h"
 
-int	double_quotes_syntax()
+int	couple_char_syntax(char *str, char c)
 {
+	int	i;
+	int	quotes;
 
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			quotes++;
+		i++;
+	}
+	if ((quotes % 2) == 0)
+		return (0);
+	return (1);
 }
 
 int	single_quotes_syntax()
@@ -24,5 +36,7 @@ int	single_quotes_syntax()
 
 int	syntax(char *str)
 {
+	int		quotes;
+
 
 }
