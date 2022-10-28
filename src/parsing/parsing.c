@@ -99,21 +99,6 @@ void	invalid_command(char *str)
 	printf("Minishell: %s: command not found\n", tmp);
 }
 
-/*
- * commands seprators:
- * |
- * ||
- * &&
- * ()
- * []
- * {}
- * ;
- * >
- * >>
- * <
- * <<
- * */
-
 bool	sep_conditions(char *str, int index) {
 	if (str[index] == '|')
 		return (true);
@@ -171,7 +156,6 @@ int	cmd_count( char *str)
 	return (cont);
 }
 
-
 void	parse(char *str)
 {
 	int		i;
@@ -184,8 +168,8 @@ void	parse(char *str)
 	j = 0;
 	expand = true;
 
-	syntax(str);
-
+	if (syntax(str))
+		return ;
 	cont = cmd_count(str);
 	printf("cont = %d\n", cont);
 	return ;

@@ -10,9 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
-char	*quotes_handler(char *str)
+/*
+ * Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.
+ * Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence
+ * except for $ (dollar sign).
+*/
+
+char	*quotes_handler(char *str, struct s_cmd *node)
 {
+	int		i;
+	bool	extend;
+	bool	single_quotes;
+	bool	double_quotes;
 
+	i = 0;
+	extend = true;
+	single_quotes = false;
+	double_quotes = false;
+	while (str[i])
+	{
+		if (str[i] == 34)
+			double_quotes = true;
+		if (str[i] == 39)
+			single_quotes = true;
+		if (str[i] == 36)
+			extend(str, node, i);
+
+		i++;
+	}
 }

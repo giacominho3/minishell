@@ -12,38 +12,35 @@
 
 #include "../../incl/minishell.h"
 
-int	quotes_syntax(char *str, char c)
+int	open_char_wrapper(char *str)
 {
-	/* generalized function to check if a char is opened and closed (used for quotes) */
-	int	i;
-	int	quotes;
-
-	i = 0;
-	quotes = 0;
-	while(str[i])
+	/* wrapper for open_char_syntax() */
+	if (open_char_syntax(str, 34))
 	{
-		if (str[i] == c)
-			quotes++;
-		i++;
+		printf("Minishell: syntax error: double quotes opened but not closed\n");
+		return (1);
 	}
-	if ((quotes % 2) == 0)
-		return (0);
-	return (1);
-}
-
-bool	is_valid_syntax(char *str)
-{
-	/* function to check that the input taken contains just valid characters */
-	int		i;
-
-	i = 0;
-	while(str[i])
+	if (open_char_syntax(str, 39))
 	{
-		if (!((str[i] >= 32 && str[i] <= 126) || str[i] == 10))
-			return (false);
-		i++;
+		printf("Minishell: syntax error: single quotes opened but not closed\n");
+		return (1);
 	}
-	return (true);
+	if (open_char_syntax(str, 40))
+	{
+		printf("Minishell: syntax error: '(' opened but not closed\n");
+		return (1);
+	}
+	if (open_char_syntax(str, 91))
+	{
+		printf("Minishell: syntax error: '[' opened but not closed\n");
+		return (1);
+	}
+	if (open_char_syntax(str, 123))
+	{
+		printf("Minishell: syntax error: '{' opened but not closed\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	syntax(char *str)
@@ -54,15 +51,7 @@ int	syntax(char *str)
 		printf("Minishell: syntax error: invalid character\n");
 		return (1);
 	}
-	if (quotes_syntax(str, 34))
-	{
-		printf("Minishell: syntax error: double quotes opened but not closed\n");
+	if (open_char_wrapper(str))
 		return (1);
-	}
-	if (quotes_syntax(str, 39))
-	{
-		printf("Minishell: syntax error: single quotes opened but not closed\n");
-		return (1);
-	}
 	return (0);
 }
