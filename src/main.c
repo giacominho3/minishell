@@ -26,10 +26,12 @@ int	main(int argc, char **argv, char **envp)
 		buff = readline("Minishell> ");
 		if (!buff)
 			return (printf("\nMinishell> exit\n"));
+		add_history(buff);
 		parse(buff);
 		if (ft_strcmp(buff, "luce") == 0)
 			printf("DUCE\n");
 		else
 			printf("%s\n", buff);
+		rl_redisplay();
 	}
 }

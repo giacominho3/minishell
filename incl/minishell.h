@@ -26,12 +26,26 @@
 # include <termios.h>
 # include <unistd.h>
 
-typedef struct s_command
+/*
+ *
+ *
+ *
+ *
+ * */
+typedef enum e_tokens
 {
-	char	**commands;
-	int		mat_y;
-	int		mat_x;
-}	t_command;
+	//multichar params
+	E_CMD, E_PARAM
+
+}	t_tokens;
+
+//struct	s_cmd
+//{
+//	static const ctokens[];
+//	int				val;
+//	struct s_cmd	*next;
+//	struct s_cmd	*prev;
+//};
 
 typedef struct s_shell
 {
@@ -55,7 +69,7 @@ struct	s_env
 /************************************
 *				syntax				*
 *************************************/
-int		*syntax(char *str);
+int		syntax(char *str);
 
 /************************************
 *				ENV_lists				*
@@ -74,7 +88,6 @@ void	parse(char *str);
 int		len_final(char *str);
 int		len_var(char *str, int index);
 bool	expand_manager(bool expand);
-void	matrix_alloc_wrapper(char *str, t_command *cmds);
 int		logic_skip(char *str, int index);
 bool	sep_conditions(char *str, int index);
 

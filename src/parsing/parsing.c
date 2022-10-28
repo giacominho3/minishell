@@ -99,17 +99,95 @@ void	invalid_command(char *str)
 	printf("Minishell: %s: command not found\n", tmp);
 }
 
+/*
+ * commands seprators:
+ * |
+ * ||
+ * &&
+ * ()
+ * []
+ * {}
+ * ;
+ * >
+ * >>
+ * <
+ * <<
+ * */
+
+bool	sep_conditions(char *str, int index) {
+	if (str[index] == '|')
+		return (true);
+	if (str[index] == '|' && str[index + 1] == '|')
+		return (true);
+	if (str[index] == '&' && str[index + 1] == '&')
+		return (true);
+	if (str[index] == '(')
+		return (true);
+	if (str[index] == '[')
+		return (true);
+	if (str[index] == '{')
+		return (true);
+	if (str[index] == ';')
+		return (true);
+	return (false);
+}
+
+int	logic_skip(char *str, int index)
+{
+	if (str[index] == '|' && str[index + 1] == '|')
+		return (2);
+	if (str[index] == '|')
+		return (1);
+	if (str[index] == '&' && str[index + 1] == '&')
+		return (2);
+	if (str[index] == '(')
+		return (1);
+	if (str[index] == '[')
+		return (1);
+	if (str[index] == '{')
+		return (1);
+	if (str[index] == ';')
+		return (1);
+	return (0);
+}
+
+int	cmd_count( char *str)
+{
+	int	i;
+	int	cont;
+
+	i = 0;
+	cont = 1;
+	while(str[i])
+	{
+		if (sep_conditions(str, i))
+		{
+			i += logic_skip(str, i);
+			cont++;
+			continue ;
+		}
+		i++;
+	}
+	return (cont);
+}
+
+
 void	parse(char *str)
 {
 	int		i;
 	int		j;
 	char	*ret;
 	bool	expand;
+	int cont;
 
 	i = 0;
 	j = 0;
 	expand = true;
-	invalid_command(str);
+
+	syntax(str);
+
+	cont = cmd_count(str);
+	printf("cont = %d\n", cont);
 	return ;
 }
 
