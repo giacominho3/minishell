@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:51:40 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/26 08:06:44 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:45:23 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void	parse(char *str)
 	if (syntax(str))
 		return ;
 	cont = cmd_count(str);
+	cmds_node_create();
 	printf("cont = %d\n", cont);
 	return ;
 }

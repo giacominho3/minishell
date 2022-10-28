@@ -8,6 +8,7 @@ Y = "\033[33m"
 R = "\033[31m"
 G = "\033[32m"
 B = "\033[34m"
+P = "\033[36m"
 X = "\033[0m"
 UP = "\033[A"
 CUT = "\033[K"
@@ -19,7 +20,7 @@ CFILES = src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c 
 
 OBJECTS = $(CFILES:.c=.o)
 
-all: libraries $(NAME)
+all: $(NAME)
 
 %.o : %.c
 	@echo $(Y)Compiling [$<]...$(X)
@@ -37,7 +38,7 @@ $(NAME): $(OBJECTS)
 	@echo $(G)Finished [$(CFILES)]$(X)
 	@echo
 	@echo $(Y)Compiling [$(NAME)]...$(X)
-	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(PRINTF_LIB) $(OBJECTS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:

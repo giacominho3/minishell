@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:53:13 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/27 12:36:54 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:44:28 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ typedef enum e_tokens
 
 }	t_tokens;
 
-//struct	s_cmd
-//{
-//	static const ctokens[];
-//	int				val;
-//	struct s_cmd	*next;
-//	struct s_cmd	*prev;
-//};
+struct	s_cmd
+{
+	// static const ctokens[];
+	int				val;
+	char			*out;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+};
 
 typedef struct s_shell
 {
