@@ -12,6 +12,21 @@
 
 #include "../incl/minishell.h"
 
+void	fancy_init()
+{
+	printf ("\033[0;36m");
+	printf("\t███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗\n"
+		   "\t████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║\n"
+		   "\t██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║\n"
+		   "\t██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║\n"
+		   "\t██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗\n"
+		   "\t╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n");
+	printf("\033[0m\n");
+	printf("\033[0;35m");
+	printf("\t\t\t |As beautiful as a shell T.T|\n");
+	printf("\033[0m\n");
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int		exit = 0;
@@ -19,8 +34,8 @@ int	main(int argc, char **argv, char **envp)
 	int i = 0;
 	struct s_env *env_head = NULL;
 
+	fancy_init();
 	copy_env(&env_head, envp);
-
 	while (exit != 1)
 	{
 		buff = readline("Minishell> ");

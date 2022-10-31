@@ -65,14 +65,13 @@ struct	s_env
 //macros placeholder
 
 /************************************
-*			syntax utils			*
-*************************************/
-bool	is_valid_syntax(char *str);
-int		open_char_syntax(char *str, char c);
-/************************************
 *				syntax				*
 *************************************/
 int		syntax(char *str);
+bool	is_valid_syntax(char *str);
+int		open_quotes_syntax(char *str, char c);
+int	open_parenthesis_syntax(char *str, char open, char close);
+
 
 /************************************
 *				ENV_lists				*

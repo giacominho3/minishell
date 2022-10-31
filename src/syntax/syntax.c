@@ -15,27 +15,27 @@
 int	open_char_wrapper(char *str)
 {
 	/* wrapper for open_char_syntax() */
-	if (open_char_syntax(str, 34))
+	if (open_quotes_syntax(str, 34))
 	{
 		printf("Minishell: syntax error: double quotes opened but not closed\n");
 		return (1);
 	}
-	if (open_char_syntax(str, 39))
+	if (open_quotes_syntax(str, 39))
 	{
 		printf("Minishell: syntax error: single quotes opened but not closed\n");
 		return (1);
 	}
-	if (open_char_syntax(str, 40))
+	if (open_parenthesis_syntax(str, 40, 41))
 	{
 		printf("Minishell: syntax error: '(' opened but not closed\n");
 		return (1);
 	}
-	if (open_char_syntax(str, 91))
+	if (open_parenthesis_syntax(str, 91, 92))
 	{
 		printf("Minishell: syntax error: '[' opened but not closed\n");
 		return (1);
 	}
-	if (open_char_syntax(str, 123))
+	if (open_parenthesis_syntax(str, 123, 125))
 	{
 		printf("Minishell: syntax error: '{' opened but not closed\n");
 		return (1);
