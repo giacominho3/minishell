@@ -34,15 +34,27 @@
  * */
 typedef enum e_tokens
 {
-	//multichar params
-	E_CMD, E_PARAM
-
+	LOOKING_FOR_CMD,
+	LOOKING_FOR_FLAGS,
+	LOOKING_FOR_ARGS,
+	LOOKING_FOR_PREV_LOGIC_OP,
+	LOOKING_FOR_NEXT_LOGIC_OP,
+	TOKENIZER_ERROR,
+	END_OF_DATA,
 }	t_tokens;
+
+typedef struct s_token_list
+{
+	t_tokens		type;
+	struct s_list	*next;
+}	t_token_list;
 
 struct	s_cmd
 {
-	// static const ctokens[];
 	int				val;
+	char 			*cmd;
+	char 			*arg;
+	char			*flags;
 	char			*out;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;

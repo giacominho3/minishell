@@ -171,7 +171,7 @@ void	parse(char *str)
 	if (syntax(str))
 		return ;
 	cont = cmd_count(str);
-	cmds_node_create();
+	//cmds_node_create();
 	printf("cont = %d\n", cont);
 	return ;
 }
