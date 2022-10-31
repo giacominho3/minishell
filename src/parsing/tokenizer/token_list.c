@@ -3,8 +3,8 @@
 /* this function set the values of a new node */
 void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 {
-	int	i;
-	t_token_list *curr;
+	int				i;
+	t_token_list	*curr;
 
 	curr = (*node);
 	i = 0;
@@ -13,6 +13,7 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 	if (!curr->token)
 	{
 		perror("token_list.c:17:20 | ft_set_tok(), allocation failure\n");
+		return ;
 	}
 	while(val[i])
 	{
@@ -20,9 +21,9 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 		i++;
 	}
 	curr->token[i] = '\0';
-	printf("___assigned_vals___\n");
-	printf("type: %u\n", curr->type);
-	printf("token: %s\n", curr->token);
+//	printf("___assigned_vals___\n");
+//	printf("type: %u\n", curr->type);
+//	printf("token: %s\n", curr->token);
 }
 /* this function adds a token to the end of the token list */
 void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val)
