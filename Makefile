@@ -33,12 +33,13 @@ libraries:
 #	@echo $(B)
 #	make -C $(PRINTF_PATH) all
 
+#$(OBJECTS)
 $(NAME): $(OBJECTS)
 	@echo $(Y)Compiling [$(CFILES)]...$(X)
 	@echo $(G)Finished [$(CFILES)]$(X)
 	@echo
 	@echo $(Y)Compiling [$(NAME)]...$(X)
-	@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:

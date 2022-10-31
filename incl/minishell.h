@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+# include "../src/parsing/tokenizer/incl/tokens.h"
 
 /*
  *
@@ -32,22 +33,6 @@
  *
  *
  * */
-typedef enum e_tokens
-{
-	LOOKING_FOR_CMD,
-	LOOKING_FOR_FLAGS,
-	LOOKING_FOR_ARGS,
-	LOOKING_FOR_PREV_LOGIC_OP,
-	LOOKING_FOR_NEXT_LOGIC_OP,
-	TOKENIZER_ERROR,
-	END_OF_DATA,
-}	t_tokens;
-
-typedef struct s_token_list
-{
-	t_tokens		type;
-	struct s_list	*next;
-}	t_token_list;
 
 struct	s_cmd
 {
@@ -99,6 +84,7 @@ void	ft_add_before(struct s_env *next_node, char *str);
 void	print_list(struct s_env **head);
 void	ft_set_data(struct s_env *node, char *str);
 void	copy_env(struct s_env **head, char **envp);
+
 /************************************
 *				parse				*
 *************************************/
