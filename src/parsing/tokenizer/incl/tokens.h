@@ -17,7 +17,8 @@ typedef struct s_token_list
 {
 	t_tokens		type;
 	char			*token;
-	struct s_list	*next;
+	struct s_token_list	*next;
+	struct s_token_list	*prev;
 }	t_token_list;
 
 
