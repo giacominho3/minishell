@@ -36,11 +36,7 @@
 
 struct	s_cmd
 {
-	int				val;
-	char 			*cmd;
-	char 			*arg;
-	char			*flags;
-	char			*out;
+	t_token_list	**tok_head;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 };

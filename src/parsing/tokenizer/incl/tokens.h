@@ -11,6 +11,7 @@ typedef enum e_tokens
 	TOK_NEXT_LOGIC_OP,
 	TOK_IN_FILE,
 	TOK_OUT_FILE,
+	TOK_ERROR,
 }	t_tokens;
 
 typedef struct s_token_list
