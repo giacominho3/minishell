@@ -15,7 +15,6 @@
 /* wrapper function for characters that can be opened such as quotes */
 int	open_char_wrapper(char *str)
 {
-	/* wrapper for open_char_syntax() */
 	if (open_quotes_syntax(str, 34))
 	{
 		printf("Minishell: syntax error: double quotes opened but not closed\n");

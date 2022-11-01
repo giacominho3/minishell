@@ -108,7 +108,7 @@ void	print_list(struct s_env **head)
 	tmp = (*head);
 	while (tmp != NULL)
 	{
-		printf("[%d]%s=%s\n", i, tmp->name, tmp->content);
+		printf("%s=%s\n", tmp->name, tmp->content);
 		tmp = tmp->next;
 		i++;
 	}
