@@ -25,6 +25,7 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 //	printf("type: %u\n", curr->type);
 //	printf("token: %s\n", curr->token);
 }
+
 /* this function adds a token to the end of the token list */
 void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val)
 {

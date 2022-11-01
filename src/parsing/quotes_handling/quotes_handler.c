@@ -13,6 +13,7 @@
 #include "../../../incl/minishell.h"
 
 /*
+ * What I have to handle:
  * Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.
  * Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence
  * except for $ (dollar sign).
@@ -21,7 +22,7 @@
 void	ft_extend(char *str, struct s_cmd *node, int index)
 {
 
-	
+
 
 }
 

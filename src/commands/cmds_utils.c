@@ -12,6 +12,7 @@
 
 #include "../../incl/minishell.h"
 
+/* not yet finished, not very sure if it's actually needed */
 void	cmds_node_create(struct s_cmd **head, char *input)
 {
 	struct s_cmd	*curr;

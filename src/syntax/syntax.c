@@ -12,6 +12,7 @@
 
 #include "../../incl/minishell.h"
 
+/* wrapper function for characters that can be opened such as quotes */
 int	open_char_wrapper(char *str)
 {
 	/* wrapper for open_char_syntax() */
@@ -43,9 +44,9 @@ int	open_char_wrapper(char *str)
 	return (0);
 }
 
+/* wrapper function for syntax checks */
 int	syntax(char *str)
 {
-	/* wrapper function for syntax checks */
 	if (!is_valid_syntax(str))
 	{
 		printf("Minishell: syntax error: invalid character\n");

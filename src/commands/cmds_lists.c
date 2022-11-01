@@ -1,5 +1,7 @@
 #include "../../incl/minishell.h"
 
+/* this function looks for the character c in the string str
+ * and if it finds it returns true otherwise returns false*/
 bool	find_char_instr(char c, char *str)
 {
 	int	i;
@@ -13,6 +15,7 @@ bool	find_char_instr(char c, char *str)
 	return (false);
 }
 
+/* not very sure if this function is actually useful or not */
 char	*ft_get_command(char *str, char c)
 {
 	int		i;
@@ -21,7 +24,10 @@ char	*ft_get_command(char *str, char c)
 	i = 0;
 	tmp = (char *)malloc(ft_strlen(str));
 	if (!tmp)
-		perror("dio");
+	{
+		perror("cmds_lists.c:25:29 | ft_get_command(): could not allocate tmp\n");
+		return ;
+	}
 	while (str[i] && str[i] != c)
 	{
 		tmp[i] = str[i];
@@ -31,6 +37,7 @@ char	*ft_get_command(char *str, char c)
 	return (tmp);
 }
 
+/* same as the one above */
 char	*ft_get_content(char *str, char c)
 {
 	int		i;
@@ -54,7 +61,7 @@ char	*ft_get_content(char *str, char c)
 	tmp[j] = 0;
 	return (tmp);
 }
-
+/* I think I've to recode this whole file */
 void	ft_set_data(struct s_env *node, char *str)
 {
 	if (!find_char_instr('=', str))

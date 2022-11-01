@@ -45,6 +45,8 @@ void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
 	dest[i] = 0;
 }
 
+/* determinate the len of a command by navigating the string until it finds
+ * a command separator */
 int	cmd_len(char *input, int offset)
 {
 	int	i;
