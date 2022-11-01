@@ -1,7 +1,8 @@
 #include "../../../incl/minishell.h"
 
 /* I've to remove this function, it's here just for tests purpose*/
-bool	sep_conditions(char *str, int index) {
+bool	sep_conditions(char *str, int index)
+{
 	if (str[index] == '|')
 		return (true);
 	if (str[index] == '|' && str[index + 1] == '|')
@@ -36,7 +37,7 @@ void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
 	int	i;
 
 	i = 0;
-	while(src[offset] && offset < len)
+	while(src[offset] && i < len)
 	{
 		dest[i] = src[offset];
 		i++;
@@ -49,35 +50,42 @@ void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
  * a command separator */
 int	cmd_len(char *input, int offset)
 {
-	int	i;
+	int		i;
+	int		cont;
+	bool	quotes;
 
 	i = offset;
+	cont = 0;
+	quotes = false;
 	while(input[i])
 	{
-		if (sep_conditions(input, i))
+		if (input[i] == 34 || input[i] == 39)
+			quotes = !quotes;
+		if (sep_conditions(input, i) && !quotes)
 		{
-			i += 2;
-			return (i);
+			cont += 2;
+			return (cont);
 		}
+		cont++;
 		i++;
 	}
-	return (i);
+	return (cont);
 }
 
 /* this functions acts like a wrapper for some sub-functions that are going to
  * search for specifics types of tokens inside the command passed as a parameter
  * and returns a pointer to the head of the list of tokens for that command*/
-void	tokenizer(char *sub_string)
+void	tokenizer(char *sub_string, t_token_list **head)
 {
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	find_cmd();
-	find_flags();
-	find_args();
+	find_flags(sub_string, head);
 	find_red_files();
 	find_logic_op();
+	find_cmd();
+	find_args();
 }
 
 /* command_splitter() takes in input the string read by readline and splits
@@ -102,6 +110,7 @@ void	command_splitter(char *input)
 			perror("tokenizer.c:97:100 error while allocating cmd");
 			return ;
 		}
+		printf("len: %d\n", cmd_len(input, i));
 		ft_cmdcpy(cmd, input, cmd_len(input, i), i);
 		printf("cmd: %s\n", cmd);
 		i += cmd_len(input, i);
@@ -113,5 +122,6 @@ void	command_splitter(char *input)
 
 int main(void)
 {
-	command_splitter("asdasd asdasd | sus sususus");
+
+	command_splitter("abc | defg");
 }
