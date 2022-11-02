@@ -26,7 +26,14 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 //	printf("token: %s\n", curr->token);
 }
 
-/* this function adds a token to the end of the token list */
+/**
+ *
+ * @param head = head to the @struct t_token_list
+ * @param type = type to assign to the @struct @param type
+ * @param tok_val = token to assign to the @struct @param type
+ *
+ * this function adds a token to the end of the token list
+ */
 void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val)
 {
 	t_token_list	*new;
@@ -51,6 +58,31 @@ void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val)
 		last = last->next;
 	last->next = new;
 	new->prev = last;
+}
+
+/**
+ *
+ * @param head = head to the token list contained in a command node
+ * @param type = type of token from the @enum t_tokens struct to look for
+ * @return = @param @param token if found, if not a null string
+ *
+ * this function scans the @struct t_token_list of a command to find if there's a node with
+ * the @struct @param type corresponding to the given @param type if found @return the
+ * @struct @param token if there isn't a node with the given @param type @return a null string
+ */
+char	*get_tok_content_by_type(t_token_list **head, t_tokens type)
+{
+	t_token_list	*curr;
+	char			tmp;
+
+	curr = (*head);
+	while (curr->next != NULL)
+	{
+		if (curr->type = type)
+			break ;
+		curr = curr->next;
+	}
+	return (curr->token);
 }
 
 /*

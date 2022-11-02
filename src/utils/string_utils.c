@@ -51,6 +51,16 @@ bool	is_valid_char(char c)
 		return (false);
 }
 
+/**
+ *
+ * @param dst = string into which @param src will be copied
+ * @param src = string to copy inside @param dst
+ * @param offset = index of @param src to start coping
+ * @param stop = index of @param src to stop coping
+ *
+ * this function simply copy @param src from @param start to @param stop
+ * inside @param dst
+ */
 void	ft_offset_copy(char *dst, char *src, int offset, int stop)
 {
 	int	i;

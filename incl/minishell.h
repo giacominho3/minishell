@@ -59,8 +59,7 @@ struct	s_env
 *************************************/
 int		syntax(char *str);
 bool	is_valid_syntax(char *str);
-int		open_quotes_syntax(char *str, char c);
-int		open_parenthesis_syntax(char *str, char open, char close);
+int		open_char_syntax(char *str, char open, char close);
 
 
 /************************************

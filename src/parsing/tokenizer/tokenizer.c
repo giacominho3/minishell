@@ -46,8 +46,14 @@ void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
 	dest[i] = 0;
 }
 
-/* determinate the len of a command by navigating the string until it finds
- * a command separator */
+/**
+ *
+ * @param input = string in which we look for a command
+ * @param offset = starting index of the research
+ * @return = len of the command
+ * determinate the len of a command by navigating the string until it finds
+ * a command separator
+ */
 int	cmd_len(char *input, int offset)
 {
 	int		i;
@@ -72,9 +78,14 @@ int	cmd_len(char *input, int offset)
 	return (cont);
 }
 
-/* this functions acts like a wrapper for some sub-functions that are going to
+/**
+ *
+ * @param sub_string = current analyzed command
+ * @param head = head to the token list of the current cmd list node
+ * this functions acts like a wrapper for some sub-functions that are going to
  * search for specifics types of tokens inside the command passed as a parameter
- * and returns a pointer to the head of the list of tokens for that command*/
+ * and returns a pointer to the head of the list of tokens for that command
+ */
 void	tokenizer(char *sub_string, t_token_list **head)
 {
 	int		i;
@@ -88,13 +99,17 @@ void	tokenizer(char *sub_string, t_token_list **head)
 	find_args();
 }
 
-/* command_splitter() takes in input the string read by readline and splits
+/**
+ *
+ * @param input = string read by readline
+ * command_splitter() takes in input the string read by readline and splits
  * it every time a command separator is found* creating a new node for the
  * command doubly linked list, at this point it calls the tokenizer() function
  * that proceeds to create a linked list of elements and for each element assigns
  * a value to make easier recognise the token stored in that node (example: in the
  * substring "echo $USER" the tokenizer will create a node for "echo" with the
- * token enum value for the commands and so on) */
+ * token enum value for the commands and so on)
+ */
 void	command_splitter(char *input)
 {
 	char	*cmd;

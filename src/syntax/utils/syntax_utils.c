@@ -1,28 +1,16 @@
 #include "../../../incl/minishell.h"
 
-/* generalized function to check if a char is opened and closed
-* (used for quotes and parenthesis) */
-int	open_quotes_syntax(char *str, char c)
-{
-	int	i;
-	int	quotes;
-
-	i = 0;
-	quotes = 0;
-	while(str[i])
-	{
-		if (str[i] == c)
-			quotes++;
-		i++;
-	}
-	if ((quotes % 2) == 0)
-		return (0);
-	return (1);
-}
-
-/* generalized function to check if a char is opened and closed
-* (used for quotes and parenthesis) */
-int	open_parenthesis_syntax(char *str, char open, char close)
+/**
+ *
+ * @param str = string to check
+ * @param open = opening char to check
+ * @param close = closure char to check
+ * @return = 1 if each @param open occurrence isn't matched with a @param close char
+ *
+ * generalized function to check if a char is opened and closed
+ * (used for parenthesis and quotes)
+ */
+int	open_char_syntax(char *str, char open, char close)
 {
 	int	i;
 	int	count_open;
@@ -44,7 +32,13 @@ int	open_parenthesis_syntax(char *str, char open, char close)
 	return (1);
 }
 
-/* function to check that the input taken contains just valid characters */
+/**
+ *
+ * @param str = string to check
+ * @return = true if the string is valid, and false if it contains invalid chars
+ *
+ * function to check that the input taken contains just valid characters
+ */
 bool	is_valid_syntax(char *str)
 {
 	int		i;
