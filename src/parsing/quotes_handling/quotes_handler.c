@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:14:43 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/28 18:43:07 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/11/03 03:25:24 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void	ft_extend(char *str, struct s_cmd *node, int index)
 {
+	
 
 
 

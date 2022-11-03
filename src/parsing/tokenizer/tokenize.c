@@ -31,7 +31,7 @@ void	find_flags(char *sub_string, t_token_list **head)
 	{
 		if (sub_string[i] == 34 || sub_string[i] == 39)
 			quotes = !quotes;
-		if (sub_string[i] == 45)
+		if (sub_string[i] == 45 && !quotes)
 			start = i;
 		if (sub_string[i] == 32)
 			end = i;

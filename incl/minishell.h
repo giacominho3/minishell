@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:53:13 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/28 18:44:28 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/11/03 03:50:47 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,12 @@ struct	s_env
 	struct s_env	*prev;
 };
 
-/************************************
+typedef struct s_main
+{
+	struct s_env **head;
+} t_main;
+
+/***********************************0*
 *			errors macros			*
 *************************************/
 //macros placeholder

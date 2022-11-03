@@ -6,46 +6,15 @@
 /*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:51:40 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/28 18:45:23 by tterribi         ###   ########.fr       */
+/*   Updated: 2022/11/03 03:57:26 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-bool	expand_manager(bool expand)
-{
-	if (expand)
-		return (false);
-	else
-		return (true);
-}
-
 int	expand_var(char *str, char *ret, int offset, int index)
 {
-	char	*var;
-	char	*tmp;
-	int		i;
-	int		j;
 
-	printf("string in input: %s\n", str);
-	i = 0;
-	j = offset;
-	printf("len var: %d", len_var(str, offset));
-	tmp = (char *)malloc(sizeof(char) * len_var(str, offset));
-	if (!tmp)
-		return (-1);
-	write(1, "a\n", 2);
-	while (is_valid_char(str[offset]))
-	{
-		write(1, "a\n", 2);
-		tmp[i++] = str[j++];
-	}
-	printf("tmp: %s\n", tmp);
-	var = getenv(tmp);
-	i = 0;
-	while (var[i])
-		ret[index++] = var[i++];
-	return (len_var(str, offset));
 }
 
 void	error_command_cpy(char *dst, char *src)
@@ -67,36 +36,6 @@ void	error_command_cpy(char *dst, char *src)
 		j++;
 		i++;
 	}
-}
-
-void	invalid_command(char *str)
-{
-	/* take the param string and read and copy it until the first space (skipping single and double quotes)
-	and then print an error message with the copied string (just like bash error: "command not found") */
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	j = 0;
-	while (str[i] && str[i] != 32)
-	{
-		if (str[i] == 34 || str[i] == 39)
-		{
-			i++;
-			continue ;
-		}
-		j++;
-		i++;
-	}
-	tmp = (char *) malloc(j + 1);
-	if (!tmp)
-	{
-		perror("parsing.c:69:71 | invalid_command()");
-		return ;
-	}
-	error_command_cpy(tmp,str);
-	printf("Minishell: %s: command not found\n", tmp);
 }
 
 bool	sep_conditions(char *str, int index) {
@@ -156,24 +95,54 @@ int	cmd_count( char *str)
 	return (cont);
 }
 
-void	parse(char *str)
+void	ft_extend(char *extended_string, char *input, int i, struct s_env **head)
+{
+	char			*tmp;
+	struct s_env	*curr;
+
+	curr = (*head);
+
+
+
+}
+
+
+/**
+ *
+ * @param input = string read by readline
+ *
+ *
+ * */
+void	ft_expand(char *input, struct s_env **head)
 {
 	int		i;
-	int		j;
-	char	*ret;
-	bool	expand;
-	int cont;
+	bool	single_quotes;
+	bool	double_quotes;
+	bool	extend;
+	char	*extended_string;
 
-	i = 0;
-	j = 0;
-	expand = true;
+	single_quotes = false;
+	double_quotes = false;
+	extend = true;
+	while (input[i])
+	{
+		if (input[i] == 34)
+			double_quotes = !double_quotes;
+		if (input[i] == 39 && input[i - 1] != 92)
+			single_quotes = !single_quotes;
+		if (double_quotes)
+			extend = true;
+		if (single_quotes && !double_quotes)
+			extend = false;
+		if (input[i] == 36 && extend)
+			ft_extend(extended_string, input, i, head);
+	}
 
-	if (syntax(str))
-		return ;
-	cont = cmd_count(str);
-	//cmds_node_create();
-	printf("cont = %d\n", cont);
-	return ;
+}
+
+void	parse(char *input, t_main *main)
+{
+	ft_expand();
 }
 
 // int	main(void)
