@@ -17,3 +17,8 @@ bool	is_valid_var_name(char c)
 		return (true);
 	return (false);
 }
+
+bool	var_term(char c)
+{
+	if(c >= 32 && c <= 37)
+}

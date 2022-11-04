@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*buff;
 	int i = 0;
 	struct s_env *env_head = NULL;
+	t_main	main;
 
 	fancy_init();
 	copy_env(&env_head, envp);
@@ -42,7 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!buff)
 			return (printf("\nMinishell> exit\n"));
 		add_history(buff);
-		parse(buff);
+		parse(buff, &main);
 		if (ft_strcmp(buff, "luce") == 0)
 			printf("DUCE\n");
 		else

@@ -90,24 +90,23 @@ int	cmd_count( char *str)
 	return (cont);
 }
 
-bool	var_name(char c)
-{
-	if ((c >= 65 && c <= 90) || (c >= 97 && <= 122) || )
-}
+//bool	var_name(char c)
+//{
+//	if ((c >= 65 && c <= 90) || (c >= 97 && <= 122) || )
+//}
 
-int	ft_var_len(char const *string, int offset)
-{
-	int i;
+//int	ft_var_len(char const *string, int offset)
+//{
+//	int i;
+//
+//	i = offset;
+//	while (string[i])
+//	{
+//
+//	}
+//}
 
-	i = offset;
-	if ()
-	while (string[i])
-	{
-
-	}
-}
-
-int	ft_extended_len(char *string, struct s_env **head)
+int	ft_extended_len(char *string, int offset, struct s_env **head)
 {
 	int				i;
 	int				var_len;
@@ -116,14 +115,12 @@ int	ft_extended_len(char *string, struct s_env **head)
 
 
 	curr = (*head);
-	while (string[i])
+	offset++;
+	while (string[offset] )
 	{
-		if (string[i] == 36 && is_valid_var_name(string[i]))
-		{
-			var_len = ft_var_len(string, i);
-			var_name = (char *)malloc(var_len + 1);
-		}
+
 	}
+	return (ft_strlen(string));
 }
 
 void	ft_extend(char *extended_string, char *input, int i, struct s_env **head)
@@ -132,7 +129,7 @@ void	ft_extend(char *extended_string, char *input, int i, struct s_env **head)
 	struct s_env	*curr;
 
 	curr = (*head);
-	extended_string = (char *)malloc(ft_extended_len(input, head) + 1);
+	extended_string = (char *)malloc(ft_extended_len(input, i,head) + 1);
 
 
 }
@@ -140,8 +137,11 @@ void	ft_extend(char *extended_string, char *input, int i, struct s_env **head)
 /**
  *
  * @param input = string read by readline
+ * @param struct s_env **head = head to the env list
  *
- *
+ * whenever a var is found in the string and it can be expanded (following the bash standard)
+ * this function (calling some other helper functions) replace the name of that variable with his
+ * value (stored in the env).
  * */
 void	ft_expand(char *input, struct s_env **head)
 {
@@ -174,11 +174,7 @@ void	ft_expand(char *input, struct s_env **head)
 
 void	parse(char *input, t_main *main)
 {
-	ft_expand(input, main->env_head);
+	syntax(input);
+	//ft_expand(input, main->env_head);
 }
 
-// int	main(void)
-// {
-// 	parse("$USER $TERM_PROGRAM_VERSION");
-// 	printf("tterrribbbili gay");
-// }

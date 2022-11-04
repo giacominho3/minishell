@@ -26,20 +26,11 @@ int	open_char_wrapper(char *str)
 		return (1);
 	}
 	if (open_char_syntax(str, 40, 41))
-	{
-		printf("Minishell: syntax error: '(' opened but not closed\n");
 		return (1);
-	}
-	if (open_char_syntax(str, 91, 92))
-	{
-		printf("Minishell: syntax error: '[' opened but not closed\n");
+	if (open_char_syntax(str, 91, 93))
 		return (1);
-	}
 	if (open_char_syntax(str, 123, 125))
-	{
-		printf("Minishell: syntax error: '{' opened but not closed\n");
 		return (1);
-	}
 	return (0);
 }
 

@@ -40,24 +40,24 @@ int	len_var(char *str, int index)
 	return (len);
 }
 
-int	len_final(char *str)
-{
-	int		i;
-	int		len;
-	bool	expand;
-
-	printf("_____len_final call_____\n");
-	expand = true;
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'')
-			expand = expand_manager(expand);
-		if (str[i] == '$' && expand)
-			len += len_var(str, i + 1);
-		i++;
-	}
-	printf("_________________________\n");
-	return (len);
-}
+//int	len_final(char *str)
+//{
+//	int		i;
+//	int		len;
+//	bool	expand;
+//
+//	printf("_____len_final call_____\n");
+//	expand = true;
+//	i = 0;
+//	len = 0;
+//	while (str[i])
+//	{
+//		if (str[i] == '\'')
+//			expand = expand_manager(expand);
+//		if (str[i] == '$' && expand)
+//			len += len_var(str, i + 1);
+//		i++;
+//	}
+//	printf("_________________________\n");
+//	return (len);
+//}

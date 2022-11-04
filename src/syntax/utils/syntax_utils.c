@@ -1,5 +1,18 @@
 #include "../../../incl/minishell.h"
 
+int print_syntax_err(int cont_open, int cont_close, char open, char close)
+{
+	if (cont_open > cont_close)
+	{
+		printf("test: Minishell: syntax error: '%c' opened but not closed\n", open);
+	}
+	if (cont_open < cont_close)
+	{
+		printf("test: Minishell: syntax error: '%c' closed but not opened\n", close);
+	}
+	return (1);
+}
+
 /**
  *
  * @param str = string to check
@@ -27,9 +40,15 @@ int	open_char_syntax(char *str, char open, char close)
 			count_close++;
 		i++;
 	}
+	if (open == close)
+	{
+		if (count_close % 2 == 0)
+			return (0);
+		return (1);
+	}
 	if (count_close == count_open)
 		return (0);
-	return (1);
+	return (print_syntax_err(count_open, count_close, open, close));
 }
 
 /**
