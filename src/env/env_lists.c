@@ -99,7 +99,7 @@ void	ft_add_before(struct s_env *next_node, char *str)
 	next_node->prev = new;
 }
 
-void	print_list(struct s_env **head)
+void	print_env(struct s_env **head)
 {
 	//prints the whole linked list
 	struct s_env *tmp;

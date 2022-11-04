@@ -23,7 +23,7 @@ void	fancy_init()
 		   "\t╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n");
 	printf("\033[0m\n");
 	printf("\033[0;35m");
-	printf("\t\t\t |As beautiful as a shell T.T|\n");
+	printf("\t\t    |Hopefully as beautiful as a shell T.T|\n");
 	printf("\033[0m\n");
 }
 
@@ -36,7 +36,8 @@ int	main(int argc, char **argv, char **envp)
 	t_main	main;
 
 	fancy_init();
-	copy_env(&env_head, envp);
+	main.env_head = NULL;
+	copy_env(&main.env_head, envp);
 	while (exit != 1)
 	{
 		buff = readline("Minishell> ");

@@ -33,16 +33,3 @@ int	logic_skip(char *str, int index)
 		return (1);
 	return (0);
 }
-
-void	extend(char *str, struct s_cmd *node, int index)
-{
-	struct s_cmd *curr;
-
-	index++;
-	curr = node;
-	while (str[index])
-	{
-
-	}
-
-}

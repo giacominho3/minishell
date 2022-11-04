@@ -89,11 +89,19 @@ int	cmd_count( char *str)
 	}
 	return (cont);
 }
-
-//bool	var_name(char c)
-//{
-//	if ((c >= 65 && c <= 90) || (c >= 97 && <= 122) || )
-//}
+/**
+ *
+ * @param c char to check
+ * @return
+ * @brief check if c is a valid env var name terminator
+ */
+bool	var_end_name(char c)
+{
+	if ((c >= 32 && c <= 39) || (c >= 42 && c <= 47) || c == 58 || c == 61
+	|| c == 63 || c == 64 || c == 92 || c == 126)
+		return (true);
+	return (false);
+}
 
 //int	ft_var_len(char const *string, int offset)
 //{
@@ -106,32 +114,74 @@ int	cmd_count( char *str)
 //	}
 //}
 
-int	ft_extended_len(char *string, int offset, struct s_env **head)
-{
-	int				i;
-	int				var_len;
-	char			*var_name;
-	struct s_env	*curr;
 
 
-	curr = (*head);
-	offset++;
-	while (string[offset] )
-	{
-
-	}
-	return (ft_strlen(string));
-}
-
-void	ft_extend(char *extended_string, char *input, int i, struct s_env **head)
+/**
+ *
+ * @param ext_string = final string
+ * @param input = string read by readline
+ * @param i = index where there's a var inside @param input
+ * @param head = head to env list
+ *
+ * @brief replace the name of a env's var with his value
+ */
+void	ft_extend(char *ext_string, char *input, int i, struct s_env **head)
 {
 	char			*tmp;
+	char			*backup;
 	struct s_env	*curr;
 
 	curr = (*head);
-	extended_string = (char *)malloc(ft_extended_len(input, i,head) + 1);
 
 
+}
+
+int	ft_env_var_len(char *string, int i, struct s_env **head)
+{
+	char	*tmp;
+
+	while (string[i] && var_end_name(string[i]))
+	{
+		tmp[i] = string[i];
+		i++;
+	}
+
+}
+
+/**
+ *
+ * @param string
+ * @param head
+ * @return
+ *
+ * @brief calculate the length of the command line with all the variables extended
+ * (excluding the ones that doesn't need to be extended)
+ */
+int	ft_extended_len(char *string, struct s_env **head)
+{
+	int		i;
+	int		len;
+	bool	single_quotes;
+	bool	double_quotes;
+	bool	extend;
+
+	single_quotes = false;
+	double_quotes = false;
+	extend = true;
+	len = ft_strlen(string);
+	while (string[i])
+	{
+		if (string[i] == 34)
+			double_quotes = !double_quotes;
+		if (string[i] == 39 && string[i - 1] != 92)
+			single_quotes = !single_quotes;
+		if (double_quotes)
+			extend = true;
+		if (single_quotes && !double_quotes)
+			extend = false;
+//		if (string[i] == 36 && extend)
+//			len += ft_env_var_len(string, i, head);
+	}
 }
 
 /**
@@ -139,7 +189,7 @@ void	ft_extend(char *extended_string, char *input, int i, struct s_env **head)
  * @param input = string read by readline
  * @param struct s_env **head = head to the env list
  *
- * whenever a var is found in the string and it can be expanded (following the bash standard)
+ * @brief whenever a var is found in the string and it can be expanded (following the bash standard)
  * this function (calling some other helper functions) replace the name of that variable with his
  * value (stored in the env).
  * */
@@ -154,6 +204,7 @@ void	ft_expand(char *input, struct s_env **head)
 	single_quotes = false;
 	double_quotes = false;
 	extend = true;
+	extended_string = (char *) malloc(ft_extended_len(input, head));
 	while (input[i])
 	{
 		if (input[i] == 34)
@@ -167,14 +218,13 @@ void	ft_expand(char *input, struct s_env **head)
 		if (input[i] == 36 && extend)
 			ft_extend(extended_string, input, i, head);
 	}
-
-
-
 }
 
 void	parse(char *input, t_main *main)
 {
 	syntax(input);
+	if (ft_strcmp(input, "env") == 0)
+		print_env(&main->env_head);
 	//ft_expand(input, main->env_head);
 }
 
