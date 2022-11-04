@@ -89,6 +89,7 @@ int	cmd_count( char *str)
 	}
 	return (cont);
 }
+
 /**
  *
  * @param c char to check
@@ -139,13 +140,22 @@ void	ft_extend(char *ext_string, char *input, int i, struct s_env **head)
 int	ft_env_var_len(char *string, int i, struct s_env **head)
 {
 	char	*tmp;
+	int		len;
 
+	len = 0;
+	while (string[len] && var_end_name(string[len]))
+		len++;
+	tmp = (char *) malloc(len);
 	while (string[i] && var_end_name(string[i]))
 	{
 		tmp[i] = string[i];
 		i++;
 	}
-
+	len = ft_strlen(get_content_by_name(head, tmp));
+	free(tmp);
+	printf("env: %s|\n", get_content_by_name(head, tmp));
+	printf("len: %d\n", len);
+	return (len);
 }
 
 /**
@@ -165,10 +175,12 @@ int	ft_extended_len(char *string, struct s_env **head)
 	bool	double_quotes;
 	bool	extend;
 
+	i = 0;
 	single_quotes = false;
 	double_quotes = false;
 	extend = true;
 	len = ft_strlen(string);
+	printf("string taken: %s\n", string);
 	while (string[i])
 	{
 		if (string[i] == 34)
@@ -179,9 +191,19 @@ int	ft_extended_len(char *string, struct s_env **head)
 			extend = true;
 		if (single_quotes && !double_quotes)
 			extend = false;
-//		if (string[i] == 36 && extend)
-//			len += ft_env_var_len(string, i, head);
+//		printf("string[%d]: %c\n", i, string[i]);
+//		printf("extend: %d\n", extend);
+//		printf("is_valid_var_name: %d\n", is_valid_var_name(string[i+1]));
+		if (string[i] == 36 && extend && is_valid_var_name(string[i+1]))
+		{
+			write(1, "e\n" ,2);
+			len += ft_env_var_len(string, i+1, head);
+			i += ft_env_var_len(string, i+1, head);
+			continue ;
+		}
+		i++;
 	}
+	printf("len of found var: %d\n", len);
 }
 
 /**
@@ -204,7 +226,9 @@ void	ft_expand(char *input, struct s_env **head)
 	single_quotes = false;
 	double_quotes = false;
 	extend = true;
-	extended_string = (char *) malloc(ft_extended_len(input, head));
+	ft_extended_len(input, head);
+//	extended_string = (char *) malloc(ft_extended_len(input, head));
+	return ;
 	while (input[i])
 	{
 		if (input[i] == 34)
@@ -215,14 +239,16 @@ void	ft_expand(char *input, struct s_env **head)
 			extend = true;
 		if (single_quotes && !double_quotes)
 			extend = false;
-		if (input[i] == 36 && extend)
+		if (input[i] == 36 && extend && is_valid_var_name(input[i]))
 			ft_extend(extended_string, input, i, head);
+		i++;
 	}
 }
 
 void	parse(char *input, t_main *main)
 {
 	syntax(input);
+	ft_expand(input, &main->env_head);
 	if (ft_strcmp(input, "env") == 0)
 		print_env(&main->env_head);
 	//ft_expand(input, main->env_head);

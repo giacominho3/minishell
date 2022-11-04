@@ -12,13 +12,7 @@
 
 bool	is_valid_var_name(char c)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)
-		|| c == 95)
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c == 95)
 		return (true);
 	return (false);
-}
-
-bool	var_term(char c)
-{
-	if(c >= 32 && c <= 37)
 }

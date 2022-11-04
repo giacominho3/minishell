@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(buff);
 		parse(buff, &main);
 		if (ft_strcmp(buff, "luce") == 0)
-			printf("DUCE\n");
+			printf("DVCE\n");
 		else
 			printf("%s\n", buff);
 		rl_redisplay();
