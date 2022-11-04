@@ -12,11 +12,6 @@
 
 #include "../../incl/minishell.h"
 
-int	expand_var(char *str, char *ret, int offset, int index)
-{
-
-}
-
 void	error_command_cpy(char *dst, char *src)
 {
 	// utils func for invalid command
@@ -95,17 +90,52 @@ int	cmd_count( char *str)
 	return (cont);
 }
 
+bool	var_name(char c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && <= 122) || )
+}
+
+int	ft_var_len(char const *string, int offset)
+{
+	int i;
+
+	i = offset;
+	if ()
+	while (string[i])
+	{
+
+	}
+}
+
+int	ft_extended_len(char *string, struct s_env **head)
+{
+	int				i;
+	int				var_len;
+	char			*var_name;
+	struct s_env	*curr;
+
+
+	curr = (*head);
+	while (string[i])
+	{
+		if (string[i] == 36 && is_valid_var_name(string[i]))
+		{
+			var_len = ft_var_len(string, i);
+			var_name = (char *)malloc(var_len + 1);
+		}
+	}
+}
+
 void	ft_extend(char *extended_string, char *input, int i, struct s_env **head)
 {
 	char			*tmp;
 	struct s_env	*curr;
 
 	curr = (*head);
-
+	extended_string = (char *)malloc(ft_extended_len(input, head) + 1);
 
 
 }
-
 
 /**
  *
@@ -138,11 +168,13 @@ void	ft_expand(char *input, struct s_env **head)
 			ft_extend(extended_string, input, i, head);
 	}
 
+
+
 }
 
 void	parse(char *input, t_main *main)
 {
-	ft_expand();
+	ft_expand(input, main->env_head);
 }
 
 // int	main(void)

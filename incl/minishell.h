@@ -51,7 +51,8 @@ struct	s_env
 
 typedef struct s_main
 {
-	struct s_env **head;
+	struct s_env	**env_head;
+	short			main_exit_status;
 } t_main;
 
 /***********************************0*
@@ -81,7 +82,7 @@ void	copy_env(struct s_env **head, char **envp);
 /************************************
 *				parse				*
 *************************************/
-void	parse(char *str);
+void	parse(char *str, t_main *main);
 int		len_final(char *str);
 int		len_var(char *str, int index);
 bool	expand_manager(bool expand);
@@ -107,5 +108,6 @@ int		trim_spaces(char *str, int len);
 void	ft_offset_copy(char *dst, char *src, int offset, int stop);
 char	*ft_strdup(const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
+bool	is_valid_var_name(char c);
 
 #endif
