@@ -27,7 +27,7 @@ int	syntax_wrapper(struct s_cmd **cmd_head)
 	tmp = (*cmd_head);
 	printf("starting node: %s\n", tmp->cmd);
 	printf("second node: %s\n", tmp->next->cmd);
-	while(tmp->next)
+	while(tmp != NULL)
 	{
 		sleep(1);
 		printf("passing> %s <to syntax checker\n", tmp->cmd);

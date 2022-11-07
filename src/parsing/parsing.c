@@ -166,7 +166,7 @@ void	ft_expand(char *input, struct s_env **head)
 
 void	parse(char *input, t_main *main)
 {
-	syntax(input);
+//	syntax(input);
 	ft_expand(input, &main->env_head);
 	if (ft_strcmp(input, "env") == 0)
 		print_env(&main->env_head);
