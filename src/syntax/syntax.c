@@ -34,15 +34,26 @@ int	open_char_wrapper(char *str)
 	return (0);
 }
 
+int	ft_isprint(int arg)
+{
+	if (arg >= 32 && arg <= 126)
+		return (1);
+	return (0);
+}
+
 /* wrapper function for syntax checks */
 int	syntax(char *str)
 {
+	printf("call\n");
+	printf("syntax input: %s\n", str);
 	if (!is_valid_syntax(str))
 	{
 		printf("Minishell: syntax error: invalid character\n");
 		return (1);
 	}
-	if (open_char_wrapper(str))
+	if (open_char_wrapper(str)) {
+		write(1, "a\n", 2);
 		return (1);
+	}
 	return (0);
 }

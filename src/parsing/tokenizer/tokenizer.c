@@ -21,62 +21,9 @@ bool	sep_conditions(char *str, int index)
 }
 
 /* tmp, has to be removed */
-int	ft_strlen(const char *str)
-{
-	int	count;
 
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
 
-/* I've to move this into tokenizer utils */
-void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
-{
-	int	i;
 
-	i = 0;
-	while(src[offset] && i < len)
-	{
-		dest[i] = src[offset];
-		i++;
-		offset++;
-	}
-	dest[i] = 0;
-}
-
-/**
- *
- * @param input = string in which we look for a command
- * @param offset = starting index of the research
- * @return = len of the command
- * determinate the len of a command by navigating the string until it finds
- * a command separator
- */
-int	cmd_len(char *input, int offset)
-{
-	int		i;
-	int		cont;
-	bool	quotes;
-
-	i = offset;
-	cont = 0;
-	quotes = false;
-	while(input[i])
-	{
-		if (input[i] == 34 || input[i] == 39)
-			quotes = !quotes;
-		if (sep_conditions(input, i) && !quotes)
-		{
-			cont += 2;
-			return (cont);
-		}
-		cont++;
-		i++;
-	}
-	return (cont);
-}
 
 /**
  *
@@ -88,51 +35,19 @@ int	cmd_len(char *input, int offset)
  */
 void	tokenizer(char *sub_string, t_token_list **head)
 {
-	int		i;
-	char	*tmp;
+	int	offset;
 
-	i = 0;
-	find_flags(sub_string, head);
-	find_red_files();
-	find_logic_op();
-	find_cmd();
-	find_args();
-}
-
-/**
- *
- * @param input = string read by readline
- * command_splitter() takes in input the string read by readline and splits
- * it every time a command separator is found* creating a new node for the
- * command doubly linked list, at this point it calls the tokenizer() function
- * that proceeds to create a linked list of elements and for each element assigns
- * a value to make easier recognise the token stored in that node (example: in the
- * substring "echo $USER" the tokenizer will create a node for "echo" with the
- * token enum value for the commands and so on)
- */
-void	command_splitter(char *input)
-{
-	char	*cmd;
-	int		i;
-
-
-	i = 0;
-	while (input[i] != 0)
+	offset = 0;
+	while (sub_string[offset])
 	{
-		cmd = (char *)malloc(cmd_len(input, i) + 1);
-		if (!cmd)
-		{
-			perror("tokenizer.c:97:100 error while allocating cmd");
-			return ;
-		}
-		printf("len: %d\n", cmd_len(input, i));
-		ft_cmdcpy(cmd, input, cmd_len(input, i), i);
-		printf("cmd: %s\n", cmd);
-		i += cmd_len(input, i);
-		tokenizer(cmd);
-		free(cmd);
+		offset = head_tokens();
+		offset = body_tokens();
+		offset = tail_tokens();
 	}
+
 }
+
+
 
 
 int main(void)

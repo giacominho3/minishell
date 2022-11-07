@@ -26,32 +26,20 @@ void	ft_strcpy(char *dst, char *src)
 
 int main(void)
 {
-	char *string1;
+	int user = ft_strlen("tterribi ");
+	int less = ft_strlen("-R ");
+	int login = ft_strlen("1 ");
+	int shell = ft_strlen("/bin/zsh ");
+	int string = ft_strlen("a ");
+	int pager = ft_strlen("less");
+	printf("intial len:%d\n", ft_strlen("$USER $LESS $LOGIN_SHELL $SHELL"));
+	printf("USER: %d\n", user);
+	printf("LESS: %d\n", less);
+	printf("LOGIN_SHELL: %d\n", login);
+	printf("SHELL: %d\n", shell);
+	printf("string: %d\n", string);
+	printf("PAGER: %d\n", pager);
 
-	string1 = malloc(7);
-	char a = 97;
-	int i = 0;
-	while (a < 102)
-	{
-		string1[i] = a;
-		i++;
-		a++;
-	}
-	string1[i] = 0;
-	char *string2 = malloc(ft_strlen(string1));
-	ft_strcpy(string2, string1);
-	free(string1);
-	string1 = malloc(8);
-	ft_strcpy(string1, string2);
-	string1[5] = 'f';
-	string1[6] = 'g';
-	string1[7] = 'h';
-	string1[8] = 'i';
-	string1[9] = 'i';
-	i = 0;
-	while(string1[i])
-	{
-		printf("%c ", string1[i]);
-		i++;
-	}
+	printf("total len: %d\n", (user + less + login + shell + string));
+
 }

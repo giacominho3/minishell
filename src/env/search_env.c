@@ -27,7 +27,7 @@ char	*get_content_by_name(struct s_env **head, char *name)
 	to_find = (*head);
 	while (to_find != NULL)
 	{
-		if (to_find->name == name)
+		if (ft_strcmp(to_find->name , name) == 0)
 			return (to_find->content);
 		to_find = to_find->next;
 	}

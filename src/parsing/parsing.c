@@ -126,85 +126,6 @@ bool	var_end_name(char c)
  *
  * @brief replace the name of a env's var with his value
  */
-void	ft_extend(char *ext_string, char *input, int i, struct s_env **head)
-{
-	char			*tmp;
-	char			*backup;
-	struct s_env	*curr;
-
-	curr = (*head);
-
-
-}
-
-int	ft_env_var_len(char *string, int i, struct s_env **head)
-{
-	char	*tmp;
-	int		len;
-
-	len = 0;
-	while (string[len] && var_end_name(string[len]))
-		len++;
-	tmp = (char *) malloc(len);
-	while (string[i] && var_end_name(string[i]))
-	{
-		tmp[i] = string[i];
-		i++;
-	}
-	len = ft_strlen(get_content_by_name(head, tmp));
-	free(tmp);
-	printf("env: %s|\n", get_content_by_name(head, tmp));
-	printf("len: %d\n", len);
-	return (len);
-}
-
-/**
- *
- * @param string
- * @param head
- * @return
- *
- * @brief calculate the length of the command line with all the variables extended
- * (excluding the ones that doesn't need to be extended)
- */
-int	ft_extended_len(char *string, struct s_env **head)
-{
-	int		i;
-	int		len;
-	bool	single_quotes;
-	bool	double_quotes;
-	bool	extend;
-
-	i = 0;
-	single_quotes = false;
-	double_quotes = false;
-	extend = true;
-	len = ft_strlen(string);
-	printf("string taken: %s\n", string);
-	while (string[i])
-	{
-		if (string[i] == 34)
-			double_quotes = !double_quotes;
-		if (string[i] == 39 && string[i - 1] != 92)
-			single_quotes = !single_quotes;
-		if (double_quotes)
-			extend = true;
-		if (single_quotes && !double_quotes)
-			extend = false;
-//		printf("string[%d]: %c\n", i, string[i]);
-//		printf("extend: %d\n", extend);
-//		printf("is_valid_var_name: %d\n", is_valid_var_name(string[i+1]));
-		if (string[i] == 36 && extend && is_valid_var_name(string[i+1]))
-		{
-			write(1, "e\n" ,2);
-			len += ft_env_var_len(string, i+1, head);
-			i += ft_env_var_len(string, i+1, head);
-			continue ;
-		}
-		i++;
-	}
-	printf("len of found var: %d\n", len);
-}
 
 /**
  *
@@ -226,21 +147,19 @@ void	ft_expand(char *input, struct s_env **head)
 	single_quotes = false;
 	double_quotes = false;
 	extend = true;
-	ft_extended_len(input, head);
 //	extended_string = (char *) malloc(ft_extended_len(input, head));
 	return ;
 	while (input[i])
 	{
 		if (input[i] == 34)
 			double_quotes = !double_quotes;
-		if (input[i] == 39 && input[i - 1] != 92)
+		if (input[i] == 39 && input[i - 1] != 92 && !single_quotes)
 			single_quotes = !single_quotes;
 		if (double_quotes)
 			extend = true;
 		if (single_quotes && !double_quotes)
 			extend = false;
 		if (input[i] == 36 && extend && is_valid_var_name(input[i]))
-			ft_extend(extended_string, input, i, head);
 		i++;
 	}
 }

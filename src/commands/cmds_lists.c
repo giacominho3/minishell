@@ -1,75 +1,48 @@
 #include "../../incl/minishell.h"
 
-/* this function looks for the character c in the string str
- * and if it finds it returns true otherwise returns false*/
-bool	find_char_instr(char c, char *str)
+void	ft_set_cmd(struct s_cmd *node, char *cmd)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == c)
-			return (true);
-	}
-	return (false);
+	if (!cmd)
+		return ;
+	node->cmd = ft_strdup(cmd);
 }
 
-/* not very sure if this function is actually useful or not */
-char	*ft_get_command(char *str, char c)
+void	add_cmd_last(struct s_cmd **head, char *cmd)
 {
-	int		i;
-	char	*tmp;
+	struct s_cmd	*new;
+	struct s_cmd	*last;
 
-	i = 0;
-	tmp = (char *)malloc(ft_strlen(str));
-	if (!tmp)
+//	if (empty_command())
+//		return ;
+	last = (*head);
+	new = (struct s_cmd *) malloc(sizeof(struct s_cmd));
+	if (!new)
 	{
-		perror("cmds_lists.c:25:29 | ft_get_command(): could not allocate tmp\n");
+		printf("add_cmd_last: error while allocating new node: cmd: (%s)\n", cmd);
 		return ;
 	}
-	while (str[i] && str[i] != c)
+	ft_set_cmd(new, cmd);
+	new->next = NULL;
+	if ((*head) == NULL)
 	{
-		tmp[i] = str[i];
-		i++;
-	}
-	tmp[i] = 0;
-	return (tmp);
-}
-
-/* same as the one above */
-char	*ft_get_content(char *str, char c)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	tmp = (char *)malloc(sizeof(int) * ft_strlen(str));
-	if (!tmp)
-		perror("env.c:55:57 | ft_get_content()");
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	i++;
-	j = 0;
-	while (str[i])
-	{
-		tmp[j] = str[i];
-		i++;
-		j++;
-	}
-	tmp[j] = 0;
-	return (tmp);
-}
-/* I think I've to recode this whole file */
-void	ft_set_data(struct s_env *node, char *str)
-{
-	if (!find_char_instr('=', str))
-	{
-		node->name = ft_get_name(str, 61);
-		node->content = NULL;
+		new->prev = NULL;
+		(*head) = new;
 		return ;
 	}
-	node->name = ft_get_name(str, 61);
-	node->content = ft_get_content(str, 61);
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new;
+	new->prev = last;
 }
+
+/**
+ *
+ * @param input = string read by readline
+ * command_splitter() takes in input the string read by readline and splits
+ * it every time a command separator is found* creating a new node for the
+ * command doubly linked list, at this point it calls the tokenizer() function
+ * that proceeds to create a linked list of elements and for each element assigns
+ * a value to make easier recognise the token stored in that node (example: in the
+ * substring "echo $USER" the tokenizer will create a node for "echo" with the
+ * token enum value for the commands and so on)
+ */

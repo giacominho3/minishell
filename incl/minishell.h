@@ -26,6 +26,7 @@
 # include <termios.h>
 # include <unistd.h>
 # include "../src/parsing/tokenizer/incl/tokens.h"
+# include "../src/commands/incl/commands.h"
 
 /*
  *
@@ -33,13 +34,6 @@
  *
  *
  * */
-
-struct	s_cmd
-{
-	struct t_token_list	**tok_head;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-};
 
 struct	s_env
 {
@@ -52,6 +46,7 @@ struct	s_env
 typedef struct s_main
 {
 	struct s_env	*env_head;
+	struct s_cmd	*cmd_head;
 	short			main_exit_status;
 } t_main;
 

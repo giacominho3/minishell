@@ -17,6 +17,7 @@ CFILES = src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c 
 			src/syntax/syntax.c src/syntax/utils/syntax_utils.c \
 			src/utils/string_utils.c src/utils/string_utils2.c src/utils/utils.c \
 			src/env/env_lists.c src/env/env.c src/env/search_env.c src/utils/string_utils3.c \
+			src/commands/commands.c src/commands/cmds_utils.c src/commands/cmds_lists.c \
 
 OBJECTS = $(CFILES:.c=.o)
 

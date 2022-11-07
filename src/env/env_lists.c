@@ -103,14 +103,12 @@ void	print_env(struct s_env **head)
 {
 	//prints the whole linked list
 	struct s_env *tmp;
-	int i = 0;
 
 	tmp = (*head);
 	while (tmp != NULL)
 	{
 		printf("%s=%s\n", tmp->name, tmp->content);
 		tmp = tmp->next;
-		i++;
 	}
 }
 
