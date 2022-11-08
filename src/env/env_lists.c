@@ -99,33 +99,18 @@ void	ft_add_before(struct s_env *next_node, char *str)
 	next_node->prev = new;
 }
 
-void	print_env(struct s_env **head)
+void clear_env(struct s_env **head)
 {
-	//prints the whole linked list
-	struct s_env *tmp;
+	struct s_env	*current;
+	struct s_env	*next;
 
-	tmp = (*head);
-	while (tmp != NULL)
+	current = (*head);
+	while (current != NULL)
 	{
-		printf("%s=%s\n", tmp->name, tmp->content);
-		tmp = tmp->next;
+		next = current->next;
+		free(current);
+		current = next;
 	}
+	(*head) = NULL;
 }
 
-// int main(void)
-// {
-// 	struct s_env *list = NULL;
-
-// 	printf("starting\n");
-// 	ft_add_front(&list, "gugu=gaga");
-// 	printf("add front 1 done\n");
-// 	ft_add_front(&list, "suca=melo");
-// 	printf("add front 2 done\n");
-// 	ft_add_after(list->next, "among=us");
-// 	ft_add_before(list->next, "nicco nicco=niiiiii");
-// 	printf("add after done\n");
-// 	ft_add_last(&list, "pray the sun=bitch");
-// 	printf("add last done\n");
-// 	printf("________print_list________\n");
-// 	print_list(&list);
-// }

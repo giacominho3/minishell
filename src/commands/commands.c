@@ -25,18 +25,19 @@ int	syntax_wrapper(struct s_cmd **cmd_head)
 	char			*buff;
 
 	tmp = (*cmd_head);
-	printf("starting node: %s\n", tmp->cmd);
-	printf("second node: %s\n", tmp->next->cmd);
+	printf("\n");
 	while(tmp != NULL)
 	{
-		sleep(1);
 		printf("passing> %s <to syntax checker\n", tmp->cmd);
 		if (syntax(tmp->cmd))
+		{
 			return (1);
+			printf("\n");
+		}
 		tmp = tmp->next;
-		usleep(100);
 	}
 	return (0);
+	printf("\n");
 }
 
 /**
@@ -71,6 +72,9 @@ int	command_splitter(char *input, t_main *main)
 	printf("syntax:\n");
 	if (syntax_wrapper(&main->cmd_head))
 		return (1);
+	clear_cmd_list(&main->cmd_head);
+	printf("commands after clear:\n");
+	print_cmd(&main->cmd_head);
 	return (0);
 }
 

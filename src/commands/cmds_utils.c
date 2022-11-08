@@ -31,7 +31,6 @@ int	cmd_len(char *input, int offset)
 	return (cont);
 }
 
-
 bool	cmd_split(char *str, int index)
 {
 	if (str[index] == '|')

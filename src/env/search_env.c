@@ -34,6 +34,19 @@ char	*get_content_by_name(struct s_env **head, char *name)
 	return (" ");
 }
 
+
+void	print_env(struct s_env **head)
+{
+	struct s_env *tmp;
+
+	tmp = (*head);
+	while (tmp != NULL)
+	{
+		printf("%s=%s\n", tmp->name, tmp->content);
+		tmp = tmp->next;
+	}
+}
+
 /* this function prints a specific node (found by his name param) */
 //void	print_node(struct s_env **head, char *name, int print)
 //{
@@ -45,4 +58,3 @@ char	*get_content_by_name(struct s_env **head, char *name)
 //	else if (print == 1)
 //		printf("%s=%s", to_print->name, to_print->content);
 //}
-

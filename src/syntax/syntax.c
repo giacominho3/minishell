@@ -44,16 +44,12 @@ int	ft_isprint(int arg)
 /* wrapper function for syntax checks */
 int	syntax(char *str)
 {
-	printf("call\n");
-	printf("syntax input: %s\n", str);
 	if (!is_valid_syntax(str))
 	{
 		printf("Minishell: syntax error: invalid character\n");
 		return (1);
 	}
-	if (open_char_wrapper(str)) {
-		write(1, "a\n", 2);
+	if (open_char_wrapper(str))
 		return (1);
-	}
 	return (0);
 }
