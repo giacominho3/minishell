@@ -2,7 +2,7 @@ NAME = Minishell
 
 CC = gcc
 
-CFLAGS = -lreadline #-Wall -Werror -Wextra -g
+CFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include/readline -lreadline -Wextra -Werror -Wall
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -18,6 +18,7 @@ CFILES = src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c 
 			src/utils/string_utils.c src/utils/string_utils2.c src/utils/utils.c \
 			src/env/env_lists.c src/env/env.c src/env/search_env.c src/utils/string_utils3.c \
 			src/commands/commands.c src/commands/cmds_utils.c src/commands/cmds_lists.c \
+			src/signals/signals.c \
 
 OBJECTS = $(CFILES:.c=.o)
 

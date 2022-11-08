@@ -136,7 +136,7 @@ bool	var_end_name(char c)
  * this function (calling some other helper functions) replace the name of that variable with his
  * value (stored in the env).
  * */
-void	ft_expand(char *input, struct s_env **head)
+int	ft_expand(char *input, struct s_env **head)
 {
 	int		i;
 	bool	single_quotes;
@@ -148,7 +148,7 @@ void	ft_expand(char *input, struct s_env **head)
 	double_quotes = false;
 	extend = true;
 //	extended_string = (char *) malloc(ft_extended_len(input, head));
-	return ;
+	return (0);
 	while (input[i])
 	{
 		if (input[i] == 34)
@@ -164,12 +164,11 @@ void	ft_expand(char *input, struct s_env **head)
 	}
 }
 
-void	parse(char *input, t_main *main)
+int	parse(char *input, t_main *main)
 {
-//	syntax(input);
-	ft_expand(input, &main->env_head);
-	if (ft_strcmp(input, "env") == 0)
-		print_env(&main->env_head);
+	if (ft_expand(input, &main->env_head))
+		return (1);
+	return (0);
 	//ft_expand(input, main->env_head);
 }
 

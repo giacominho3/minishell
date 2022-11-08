@@ -19,4 +19,8 @@ bool	cmd_split(char *str, int index);
 int		cmd_len(char *input, int offset);
 void	clear_cmd_list(struct s_cmd **head);
 
+
+//debug
+void	print_cmd(struct s_cmd **head);
+
 #endif

@@ -15,6 +15,8 @@
 # include <curses.h>
 # include <dirent.h>
 # include <readline/readline.h>
+# include <readline/history.h>
+# include "signal.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -27,13 +29,7 @@
 # include <unistd.h>
 # include "../src/parsing/tokenizer/incl/tokens.h"
 # include "../src/commands/incl/commands.h"
-
-/*
- *
- *
- *
- *
- * */
+# include "../src/signals/incl/signals.h"
 
 struct	s_env
 {
@@ -58,6 +54,7 @@ typedef struct s_main
 /************************************
 *				syntax				*
 *************************************/
+int		syntax_wrapper(struct s_cmd **cmd_head);
 int		syntax(char *str);
 bool	is_valid_syntax(char *str);
 int		open_char_syntax(char *str, char open, char close);
@@ -74,11 +71,12 @@ void	print_env(struct s_env **head);
 void	ft_set_data(struct s_env *node, char *str);
 void	copy_env(struct s_env **head, char **envp);
 char	*get_content_by_name(struct s_env **head, char *name);
+void	clear_env(struct s_env **head);
 
 /************************************
 *				parse				*
 *************************************/
-void	parse(char *str, t_main *main);
+int 	parse(char *str, t_main *main);
 int		len_final(char *str);
 int		len_var(char *str, int index);
 //bool	expand_manager(bool expand);
