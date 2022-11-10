@@ -57,7 +57,7 @@ int	syntax(char *str)
 int	syntax_wrapper(struct s_cmd **cmd_head)
 {
 	struct s_cmd *tmp;
-	char			*buff;
+//	char			*buff;
 
 	tmp = (*cmd_head);
 	printf("\n");

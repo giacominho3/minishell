@@ -24,8 +24,6 @@ int	skip_intial_spaces(char *str)
 
 int	trim_spaces(char *str, int len)
 {
-	int	i;
-
 	while (is_in_strings(str[len - 1], "\t\n\v\f\r "))
 		len--;
 	return (len);

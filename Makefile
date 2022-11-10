@@ -2,7 +2,9 @@ NAME = Minishell
 
 CC = gcc
 
-CFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include/readline -lreadline -Wextra -Werror -Wall
+CFLAGS = -Wextra -Werror -Wall
+
+	RL_FAGS = -L/usr/include -lreadline -L$$HOME/.brew/opt/readline/lib -I $$HOME/.brew/opt/readline/include
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -41,7 +43,7 @@ $(NAME): $(OBJECTS)
 	@echo $(G)Finished [$(CFILES)]$(X)
 	@echo
 	@echo $(Y)Compiling [$(NAME)]...$(X)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
+	$(CC) $(CFLAGS) $(RL_FAGS) $(OBJECTS) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:

@@ -31,6 +31,8 @@
 # include "../src/commands/incl/commands.h"
 # include "../src/signals/incl/signals.h"
 
+extern   void   rl_replace_line(const char *text, int clear_undo);
+
 struct	s_env
 {
 	char			*name;

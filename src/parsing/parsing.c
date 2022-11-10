@@ -142,8 +142,10 @@ int	ft_expand(char *input, struct s_env **head)
 	bool	single_quotes;
 	bool	double_quotes;
 	bool	extend;
-	char	*extended_string;
+//	char	*extended_string;
 
+	if ((*head) == NULL)
+		return (1);
 	single_quotes = false;
 	double_quotes = false;
 	extend = true;

@@ -10,7 +10,6 @@
  */
 int	cmd_len(char *input, int offset)
 {
-	int		i;
 	int		cont;
 	bool	quotes;
 

@@ -43,40 +43,33 @@ void	interpreter(char *input, t_main *main)
 	clear_cmd_list(&main->cmd_head);
 	printf("commands after clear:\n");
 	print_cmd(&main->cmd_head);
+	printf("\n");
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	int		exit = 0;
 	char	*buff;
-	int i = 0;
-	struct s_env	*env_head = NULL;
+//	int i = 0;
 	t_main	main;
 
+	(void)argc;
+	(void)argv;
 	fancy_init();
 	main.env_head = NULL;
 	main.cmd_head = NULL;
 	copy_env(&main.env_head, envp);
 	signal(SIGINT, wt_sig);
-	signal(SIGQUIT, wt_sig);
 	while (exit != 1)
 	{
 		buff = readline("Minishell> ");
-		if (!buff || (ft_strcmp(buff, "exit") == 0))
-		{
-			printf("\nMinishell> exit\n");
-			exit = 1;
-			break ;
-		}
-		add_history(buff);
-		if (ft_strcmp(buff, "luce") == 0)
-			printf("DVCE\n");
-		else
-			printf("%s\n", buff);
+		if (!buff)
+			return (printf("Minishell> exit\n"));
 		if (ft_strcmp(buff, "env") == 0)
 			print_env(&main.env_head);
-		interpreter(buff, &main);
-		rl_redisplay();
+		add_history(buff);
+		if (buff)
+			interpreter(buff, &main);
 	}
 	clear_env(&main.env_head);
 	return (0);
