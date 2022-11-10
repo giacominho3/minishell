@@ -116,16 +116,20 @@ bool	var_end_name(char c)
 //}
 
 
-
-/**
- *
- * @param ext_string = final string
- * @param input = string read by readline
- * @param i = index where there's a var inside @param input
- * @param head = head to env list
- *
- * @brief replace the name of a env's var with his value
- */
+int	ft_extend(char *input, char *ext, struct s_env **head, int *j)
+{
+	int i= 0;
+	while (i < 2)
+	{
+		printf("ignore: %c\n", input[i]);
+		i++;
+	}
+	ext = "suca";
+	(void)head;
+	write(1, "a\n", 2);
+	(*j) = 10;
+	return (10);
+}
 
 /**
  *
@@ -136,39 +140,49 @@ bool	var_end_name(char c)
  * this function (calling some other helper functions) replace the name of that variable with his
  * value (stored in the env).
  * */
-int	ft_expand(char *input, struct s_env **head)
+int	ft_expand(char *input, char *extended_string, struct s_env **head)
 {
 	int		i;
+	int		j;
 	bool	single_quotes;
 	bool	double_quotes;
 	bool	extend;
-//	char	*extended_string;
 
-	if ((*head) == NULL)
-		return (1);
+	i = 0;
+	j = 0;
 	single_quotes = false;
 	double_quotes = false;
 	extend = true;
-//	extended_string = (char *) malloc(ft_extended_len(input, head));
-	return (0);
+	printf("PARSING\n");
 	while (input[i])
 	{
 		if (input[i] == 34)
 			double_quotes = !double_quotes;
-		if (input[i] == 39 && input[i - 1] != 92 && !single_quotes)
+		if (input[i] == 39 && input[i - 1] != 92)
 			single_quotes = !single_quotes;
 		if (double_quotes)
 			extend = true;
 		if (single_quotes && !double_quotes)
 			extend = false;
-		if (input[i] == 36 && extend && is_valid_var_name(input[i]))
+		if (input[i] == 36 && extend && is_valid_var_name(input[i+1]))
+		{
+			write(1, "e\n" ,2);
+			i += ft_extend(input, extended_string, head, &j);
+			printf("i: %d\n", i);
+			printf("j: %d\n", j);
+			continue ;
+		}
 		i++;
 	}
+	return (0);
 }
 
 int	parse(char *input, t_main *main)
 {
-	if (ft_expand(input, &main->env_head))
+	char *extended_string;
+
+	extended_string = (char *)malloc(ft_strlen(input));
+	if (ft_expand(input, extended_string, &main->env_head))
 		return (1);
 	return (0);
 	//ft_expand(input, main->env_head);

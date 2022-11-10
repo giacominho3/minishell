@@ -34,10 +34,7 @@ void	interpreter(char *input, t_main *main)
 	if (command_splitter(input, main))
 		return ;
 	if (syntax_wrapper(&main->cmd_head))
-	{
 		clear_cmd_list(&main->cmd_head);
-		return ;
-	}
 	if (parse(input, main))
 		return ;
 	clear_cmd_list(&main->cmd_head);
