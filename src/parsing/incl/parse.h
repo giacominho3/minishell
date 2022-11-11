@@ -9,8 +9,8 @@ typedef struct	s_parse
 	bool	extend;
 	bool	single_quotes;
 	bool	double_quotes;
-	char	*input_string;
-	char	*extended_string;
+	char	*out;
+	char	*input;
 }	t_parse;
 
 bool	var_end_name(char c);

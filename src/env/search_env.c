@@ -31,9 +31,8 @@ char	*get_content_by_name(struct s_env **head, char *name)
 			return (to_find->content);
 		to_find = to_find->next;
 	}
-	return (" ");
+	return ("");
 }
-
 
 void	print_env(struct s_env **head)
 {
@@ -47,7 +46,7 @@ void	print_env(struct s_env **head)
 	}
 }
 
-/* this function prints a specific node (found by his name param) */
+/* this function prints a specific node (found by his name) */
 //void	print_node(struct s_env **head, char *name, int print)
 //{
 //	struct s_env	*to_print;

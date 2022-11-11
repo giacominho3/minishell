@@ -16,17 +16,10 @@ typedef enum e_tokens
 
 typedef struct s_token_list
 {
-	t_tokens		type;
+	t_tokens			type;
 	char				*token;
 	struct s_token_list	*next;
 	struct s_token_list	*prev;
 }	t_token_list;
 
-
-
-
-#endif //MINISHELL_TOKENS_H
-
-/**
-* 		x_1 x_2 x_3 x_4 ...
-*/
+#endif
