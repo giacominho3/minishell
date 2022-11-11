@@ -116,20 +116,15 @@ bool	var_end_name(char c)
 //}
 
 
-int	ft_extend(char *input, char *ext, struct s_env **head, int *j)
-{
-	int i= 0;
-	while (i < 2)
-	{
-		printf("ignore: %c\n", input[i]);
-		i++;
-	}
-	ext = "suca";
-	(void)head;
-	write(1, "a\n", 2);
-	(*j) = 10;
-	return (10);
-}
+//		if (input[i] == 34)
+//			double_quotes = !double_quotes;
+//		if (input[i] == 39 && input[i - 1] != 92)
+//			single_quotes = !single_quotes;
+//		if (double_quotes)
+//			extend = true;
+//		if (single_quotes && !double_quotes)
+//			extend = false;
+//		if (input[i] == 36 && extend && is_valid_var_name(input[i+1]))
 
 /**
  *
@@ -140,49 +135,53 @@ int	ft_extend(char *input, char *ext, struct s_env **head, int *j)
  * this function (calling some other helper functions) replace the name of that variable with his
  * value (stored in the env).
  * */
-int	ft_expand(char *input, char *extended_string, struct s_env **head)
+int	ft_expand(t_parse *birch, struct s_env **head)
 {
-	int		i;
-	int		j;
-	bool	single_quotes;
-	bool	double_quotes;
-	bool	extend;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	single_quotes = false;
-	double_quotes = false;
-	extend = true;
 	printf("PARSING\n");
-	while (input[i])
+	printf("birch input val: %s\n", birch->input_string);
+	while (birch->input_string[i])
 	{
-		if (input[i] == 34)
-			double_quotes = !double_quotes;
-		if (input[i] == 39 && input[i - 1] != 92)
-			single_quotes = !single_quotes;
-		if (double_quotes)
-			extend = true;
-		if (single_quotes && !double_quotes)
-			extend = false;
-		if (input[i] == 36 && extend && is_valid_var_name(input[i+1]))
-		{
-			write(1, "e\n" ,2);
-			i += ft_extend(input, extended_string, head, &j);
-			printf("i: %d\n", i);
-			printf("j: %d\n", j);
-			continue ;
-		}
-		i++;
+		if (birch->input_string[i] == 34)
+			birch->double_quotes = !birch->double_quotes;
+		if (birch->input_string[i] == 39 && birch->input_string[i - 1] != 92)
+			birch->single_quotes = !birch->single_quotes;
+		if (birch->double_quotes)
+			birch->extend = true;
+		if (birch->single_quotes && !birch->double_quotes)
+			birch->extend = false;
+		if (birch->input_string[i] == 36 && birch->extend
+			&& is_valid_var_name(birch->input_string[i+1]))
 	}
+	printf("IGNORE: %s\n", (*head)->content);
 	return (0);
+}
+
+void	init_birch(char *input, t_parse *birch)
+{
+	birch = malloc(sizeof(t_parse));
+	birch->input_string = malloc(ft_strlen(input));
+	if (!birch || !birch->input_string)
+	{
+		perror("error while allocating a stack of brich planks\n");
+		return ;
+	}
+	birch->extend = true;
+	birch->double_quotes = false;
+	birch->single_quotes = false;
 }
 
 int	parse(char *input, t_main *main)
 {
-	char *extended_string;
+	t_parse	*birch_planks;
 
-	extended_string = (char *)malloc(ft_strlen(input));
-	if (ft_expand(input, extended_string, &main->env_head))
+	init_birch(input, parse);
+	ft_strcpy(birch_planks->input_string, input);
+	if (ft_expand(birch_planks, main->env_head))
 		return (1);
 	return (0);
 	//ft_expand(input, main->env_head);

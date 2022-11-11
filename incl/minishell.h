@@ -27,19 +27,13 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
-# include "../src/parsing/tokenizer/incl/tokens.h"
-# include "../src/commands/incl/commands.h"
+# include "../src/env/incl/env.h"
+# include "../src/parsing//incl/parse.h"
 # include "../src/signals/incl/signals.h"
+# include "../src/commands/incl/commands.h"
+# include "../src/parsing/tokenizer/incl/tokens.h"
 
 extern   void   rl_replace_line(const char *text, int clear_undo);
-
-struct	s_env
-{
-	char			*name;
-	char			*content;
-	struct s_env	*next;
-	struct s_env	*prev;
-};
 
 typedef struct s_main
 {
@@ -61,29 +55,10 @@ int		syntax(char *str);
 bool	is_valid_syntax(char *str);
 int		open_char_syntax(char *str, char open, char close);
 
-
-/************************************
-*				ENV_lists				*
-*************************************/
-void	ft_add_front(struct s_env **head, char *str);
-void	ft_add_last(struct s_env **head, char *str);
-void	ft_add_after(struct s_env *prev_node, char *str);
-void	ft_add_before(struct s_env *next_node, char *str);
-void	print_env(struct s_env **head);
-void	ft_set_data(struct s_env *node, char *str);
-void	copy_env(struct s_env **head, char **envp);
-char	*get_content_by_name(struct s_env **head, char *name);
-void	clear_env(struct s_env **head);
-
 /************************************
 *				parse				*
 *************************************/
-int 	parse(char *str, t_main *main);
-int		len_final(char *str);
-int		len_var(char *str, int index);
-//bool	expand_manager(bool expand);
-int		logic_skip(char *str, int index);
-bool	sep_conditions(char *str, int index);
+
 
 /************************************
 *				utils				*
