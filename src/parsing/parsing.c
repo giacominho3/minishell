@@ -25,49 +25,12 @@ void	error_command_cpy(char *dst, char *src)
 		if (src[i] == 34 || src[i] == 39)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		dst[j] = src[i];
 		j++;
 		i++;
 	}
-}
-
-bool	sep_conditions(char *str, int index) {
-	if (str[index] == '|')
-		return (true);
-	if (str[index] == '|' && str[index + 1] == '|')
-		return (true);
-	if (str[index] == '&' && str[index + 1] == '&')
-		return (true);
-	if (str[index] == '(')
-		return (true);
-	if (str[index] == '[')
-		return (true);
-	if (str[index] == '{')
-		return (true);
-	if (str[index] == ';')
-		return (true);
-	return (false);
-}
-
-int	logic_skip(char *str, int index)
-{
-	if (str[index] == '|' && str[index + 1] == '|')
-		return (2);
-	if (str[index] == '|')
-		return (1);
-	if (str[index] == '&' && str[index + 1] == '&')
-		return (2);
-	if (str[index] == '(')
-		return (1);
-	if (str[index] == '[')
-		return (1);
-	if (str[index] == '{')
-		return (1);
-	if (str[index] == ';')
-		return (1);
-	return (0);
 }
 
 int	cmd_count( char *str)
@@ -90,41 +53,23 @@ int	cmd_count( char *str)
 	return (cont);
 }
 
-/**
- *
- * @param c char to check
- * @return
- * @brief check if c is a valid env var name terminator
- */
-bool	var_end_name(char c)
+
+void	expand_check(t_parse *parse, int i)
 {
-	if ((c >= 32 && c <= 39) || (c >= 42 && c <= 47) || c == 58 || c == 61
-	|| c == 63 || c == 64 || c == 92 || c == 126)
-		return (true);
-	return (false);
+	if (parse->input_string[i] == 34)
+		parse->double_quotes = !parse->double_quotes;
+	if (parse->input_string[i] == 39 && parse->input_string[i - 1] != 92)
+		parse->single_quotes = !parse->single_quotes;
+	if (parse->double_quotes)
+		parse->extend = true;
+	if (parse->single_quotes && !parse->double_quotes)
+		parse->extend = false;
 }
-
-//int	ft_var_len(char const *string, int offset)
+//
+//int	ft_chain_join(t_parse *parse)
 //{
-//	int i;
 //
-//	i = offset;
-//	while (string[i])
-//	{
-//
-//	}
 //}
-
-
-//		if (input[i] == 34)
-//			double_quotes = !double_quotes;
-//		if (input[i] == 39 && input[i - 1] != 92)
-//			single_quotes = !single_quotes;
-//		if (double_quotes)
-//			extend = true;
-//		if (single_quotes && !double_quotes)
-//			extend = false;
-//		if (input[i] == 36 && extend && is_valid_var_name(input[i+1]))
 
 /**
  *
@@ -135,7 +80,7 @@ bool	var_end_name(char c)
  * this function (calling some other helper functions) replace the name of that variable with his
  * value (stored in the env).
  * */
-int	ft_expand(t_parse *birch, struct s_env **head)
+int	ft_expand(t_parse *parse, struct s_env **head)
 {
 	int	i;
 	int	j;
@@ -143,45 +88,27 @@ int	ft_expand(t_parse *birch, struct s_env **head)
 	i = 0;
 	j = 0;
 	printf("PARSING\n");
-	printf("birch input val: %s\n", birch->input_string);
-	while (birch->input_string[i])
+	printf("parse input val: %s\n", parse->input_string);
+	while (parse->input_string[i])
 	{
-		if (birch->input_string[i] == 34)
-			birch->double_quotes = !birch->double_quotes;
-		if (birch->input_string[i] == 39 && birch->input_string[i - 1] != 92)
-			birch->single_quotes = !birch->single_quotes;
-		if (birch->double_quotes)
-			birch->extend = true;
-		if (birch->single_quotes && !birch->double_quotes)
-			birch->extend = false;
-		if (birch->input_string[i] == 36 && birch->extend
-			&& is_valid_var_name(birch->input_string[i+1]))
+		expand_check(parse, i);
+//		if (parse->input_string[i] == 36 && parse->extend
+//			&& is_valid_var_name(parse->input_string[i+1]))
+//		{
+//			i += ft_chain_join(parse);
+//		}
 	}
 	printf("IGNORE: %s\n", (*head)->content);
 	return (0);
 }
 
-void	init_birch(char *input, t_parse *birch)
-{
-	birch = malloc(sizeof(t_parse));
-	birch->input_string = malloc(ft_strlen(input));
-	if (!birch || !birch->input_string)
-	{
-		perror("error while allocating a stack of brich planks\n");
-		return ;
-	}
-	birch->extend = true;
-	birch->double_quotes = false;
-	birch->single_quotes = false;
-}
-
 int	parse(char *input, t_main *main)
 {
-	t_parse	*birch_planks;
+	t_parse	parse;
 
-	init_birch(input, parse);
-	ft_strcpy(birch_planks->input_string, input);
-	if (ft_expand(birch_planks, main->env_head))
+	init_parse(input, &parse);
+	ft_strcpy(parse.input_string, input);
+	if (ft_expand(&parse, &main->env_head))
 		return (1);
 	return (0);
 	//ft_expand(input, main->env_head);

@@ -13,8 +13,10 @@ typedef struct	s_parse
 	char	*extended_string;
 }	t_parse;
 
+bool	var_end_name(char c);
 int 	parse(char *str, t_main *main);
 int		logic_skip(char *str, int index);
 bool	sep_conditions(char *str, int index);
+void	init_parse(char *input, t_parse *parse);
 
 #endif
