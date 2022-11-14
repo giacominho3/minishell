@@ -1,4 +1,4 @@
-
+# include <readline/readline.h>
 #include "incl/signals.h"
 
 void  wt_sig(int sig)
@@ -14,7 +14,7 @@ void  wt_sig(int sig)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }

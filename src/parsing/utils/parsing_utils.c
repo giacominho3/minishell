@@ -77,7 +77,7 @@ void	init_parse(char *input, t_parse *parse)
 	parse->input = malloc(ft_strlen(input) + 1);
 	ft_strcpy(parse->input, input);
 	parse->out = malloc(ft_strlen(input) + 1);
-	if (parse->input || parse->out)
+	if (!parse->input || !parse->out)
 	{
 		printf("error while allocating your mom(too fat)\n");
 		return ;
