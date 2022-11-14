@@ -78,19 +78,19 @@ int var_name_len(t_parse *parse, int offset)
 	return (to_skip);
 }
 
-void	var_content_cpy(char *dst, char *var_name, struct s_env **env)
+void	var_content_cpy(char **dst, char *var_name, struct s_env **env)
 {
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	dst = malloc(ft_strlen(get_content_by_name(env, var_name)));
+	*dst = malloc(ft_strlen(get_content_by_name(env, var_name)));
 	if (!dst)
 		return ;
 	tmp = get_content_by_name(env, var_name);
 	while (*tmp)
 	{
-		dst[i] = *tmp;
+		*dst[i] = *tmp;
 		i++;
 		tmp++;
 	}
@@ -99,22 +99,29 @@ void	var_content_cpy(char *dst, char *var_name, struct s_env **env)
 int ft_extend(t_parse *parse, struct s_env **env, int offset)
 {
 	char	*var_name;
-	char	*to_insert;
+	char	*out;
 	int		i;
 	int		j;
 
+	printf("------------working on------------\n");
 	i = 0;
 	j = offset;
+	out = NULL;
 	var_name = malloc(var_name_len(parse, offset) + 1);
 	while (parse->input[j] && var_end_name(parse->input[j]))
 		var_name[i++] = parse->input[j++];
 	var_name[i] = 0;
 	printf("var_name: %s\n", var_name); //debug print
-	var_content_cpy(to_insert, var_name, env);
-	printf("to_insert: %s\n", to_insert); //debug print
+	var_content_cpy(&out, var_name, env);
+	printf("out: %s\n", out); //debug print
 	free(var_name);
-	parse->out = malloc(ft_strlen(parse->out) - ft_strlen(var_name) + ft_strlen(to_insert));
+	printf("parse.out len: %s\n", parse->out);
+	printf("var_name len: %s\n", var_name);
+	printf("out len: %s\n", out);
+	parse->out = malloc(ft_strlen(parse->out) - ft_strlen(var_name) + ft_strlen(out));
 
+	printf("----------------------------------\n");
+	return (0);
 }
 
 
@@ -129,24 +136,32 @@ int ft_extend(t_parse *parse, struct s_env **env, int offset)
  * */
 int	ft_expand(t_parse *parse, struct s_env **head)
 {
-	int	i;
-	int	j;
+	int	i; //input offset
+	int	j; //output offset
 
 	i = 0;
 	j = 0;
 	printf("PARSING\n");
 	printf("parse input val: %s\n", parse->input);
-//	while (parse->input[i])
-//	{
-//		expand_check(parse, i);
-//		if (parse->input[i] == 36 && parse->extend
-//			&& is_valid_var_name(parse->input[i+1]))
-//		{
-//			i += var_name_len(parse, i);
-//			j += ft_extend(parse, head, i);
-//		}
-//		i++;
-//	}
+	while (parse->input[i])
+	{
+		printf("squotes: %d\n", parse->single_quotes);
+		printf("dquotes: %d\n", parse->double_quotes);
+		printf("expand: %d\n", parse->extend);
+		expand_check(parse, i);
+		if (parse->input[i] == 36 && parse->extend
+			&& is_valid_var_name(parse->input[i+1]))
+		{
+			i += var_name_len(parse, i);
+			j += ft_extend(parse, head, i);
+			continue ;
+		}
+		parse->out[j] = parse->input[i];
+		i++;
+		j++;
+	}
+	parse->out[j] = 0;
+	printf("parse.out: %s\n", parse->out);
 	printf("IGNORE: %s\n", (*head)->content);
 	return (0);
 }
@@ -156,10 +171,10 @@ int	parse(char *input, t_main *main)
 	t_parse	parse;
 
 	init_parse(input, &parse);
-	ft_strcpy(parse.input, input);
+//	parse.input = malloc(ft_strlen(input) + 1);
+//	ft_strcpy(parse.input, input);
 	if (ft_expand(&parse, &main->env_head))
 		return (1);
 	return (0);
-	//ft_expand(input, main->env_head);
 }
 

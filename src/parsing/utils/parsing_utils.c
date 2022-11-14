@@ -73,16 +73,21 @@ int	logic_skip(char *str, int index)
 
 void	init_parse(char *input, t_parse *parse)
 {
-	parse = malloc(sizeof(t_parse));
-	parse->input_string = malloc(ft_strlen(input));
-	if (!parse->input_string)
+	printf("parsing init started\n");
+	parse->input = malloc(ft_strlen(input) + 1);
+	ft_strcpy(parse->input, input);
+	parse->out = malloc(ft_strlen(input) + 1);
+	if (parse->input || parse->out)
 	{
-		perror("error while allocating a stack of brich planks\n");
+		printf("error while allocating your mom(too fat)\n");
 		return ;
 	}
+	printf("input: %s\n", input);
+	printf("parse.input: %s\n", parse->input);
 	parse->extend = true;
 	parse->double_quotes = false;
 	parse->single_quotes = false;
+	printf("parsing init terminated\n");
 }
 
 /**

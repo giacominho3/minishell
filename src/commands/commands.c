@@ -49,7 +49,7 @@ int	command_splitter(char *input, t_main *main)
 	}
 	printf("commands:\n");
 	print_cmd(&main->cmd_head);
-	printf("syntax:\n");
+	printf("Command splitter terminated\n");
 	return (0);
 }
 

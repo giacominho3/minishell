@@ -57,21 +57,16 @@ int	syntax(char *str)
 int	syntax_wrapper(struct s_cmd **cmd_head)
 {
 	struct s_cmd *tmp;
-//	char			*buff;
 
 	tmp = (*cmd_head);
 	printf("\n");
 	while(tmp != NULL)
 	{
-		printf("passing> %s <to syntax checker\n", tmp->cmd);
 		if (syntax(tmp->cmd))
-		{
 			return (1);
-			printf("\n");
-		}
 		tmp = tmp->next;
 	}
+	printf("syntax check terminated\n");
 	return (0);
-	printf("\n");
 }
 
