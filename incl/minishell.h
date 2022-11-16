@@ -79,7 +79,7 @@ int		trim_spaces(char *str, int len);
 void	ft_offset_copy(char *dst, char *src, int offset, int stop);
 char	*ft_strdup(const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
-bool	is_valid_var_name(char c);
+bool	valid_var_name(char c);
 bool	var_term(char c);
 
 #endif

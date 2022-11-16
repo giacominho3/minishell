@@ -10,7 +10,7 @@
  * are accepted so we c can also be == 95
  */
 
-bool	is_valid_var_name(char c)
+bool	valid_var_name(char c)
 {
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c == 95)
 		return (true);

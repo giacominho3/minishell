@@ -12,63 +12,19 @@
 
 #include "../incl/parse.h"
 
-//bool	sep_conditions(char *str, int index) {
-//	if (str[index] == '|')
-//		return (true);
-//	if (str[index] == '|' && str[index + 1] == '|')
-//		return (true);
-//	if (str[index] == '&' && str[index + 1] == '&')
-//		return (true);
-//	if (str[index] == '(')
-//		return (true);
-//	if (str[index] == '[')
-//		return (true);
-//	if (str[index] == '{')
-//		return (true);
-//	if (str[index] == ';')
-//		return (true);
-//	return (false);
-//}
-//
-//int	logic_skip(char *str, int index)
-//{
-//	if (str[index] == '|' && str[index + 1] == '|')
-//		return (2);
-//	if (str[index] == '|')
-//		return (1);
-//	if (str[index] == '&' && str[index + 1] == '&')
-//		return (2);
-//	if (str[index] == '(')
-//		return (1);
-//	if (str[index] == '[')
-//		return (1);
-//	if (str[index] == '{')
-//		return (1);
-//	if (str[index] == ';')
-//		return (1);
-//	return (0);
-//}
-
-bool	sep_conditions(char *str, int index)
+/**
+ * @brief check if a variable have to be extended or considering quotes
+ */
+void	expand_check(t_parse *parse, int i)
 {
-	if (str[index] == '|' && str[index + 1] == '|')
-		return (true);
-	if (str[index] == '&' && str[index + 1] == '&')
-		return (true);
-	if (str[index] == '|')
-		return (true);
-	return (false);
-}
-
-int	logic_skip(char *str, int index)
-{
-	if (str[index] == '|' && str[index + 1] == '|')
-		return (2);
-	if (str[index] == '&' && str[index + 1] == '&')
-		return (2);
-	if (str[index] == '|')
-		return (1);
-	return (0);
+	if (parse->input[i] == 34 && parse->input[i - 1] != 92)
+		parse->double_quotes = !parse->double_quotes;
+	if (parse->input[i] == 39 && parse->input[i - 1] != 92)
+		parse->single_quotes = !parse->single_quotes;
+	if (parse->double_quotes)
+		parse->extend = true;
+	if (parse->single_quotes && !parse->double_quotes)
+		parse->extend = false;
 }
 
 void	init_parse(char *input, t_parse *parse)
