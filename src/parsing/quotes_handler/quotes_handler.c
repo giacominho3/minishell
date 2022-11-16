@@ -45,14 +45,14 @@ void	remove_quotes(char *modified, char *original)
 	modified[j] = 0;
 	printf("modified: %s\n", modified);
 }
-
-bool	keep_quotes_check(t_parse *parse, int offset)
-{
-	if (parse->out[offset] == 34 && parse->out [offset - 1] != 92)
-		parse->double_quotes = !parse->double_quotes;
-	if (parse->out[offset] == 39 && parse->out [offset - 1] != 92)
-		parse->single_quotes = !parse->single_quotes;
-}
+//
+//bool	keep_quotes_check(t_parse *parse, int offset)
+//{
+//	if (parse->out[offset] == 34 && parse->out [offset - 1] != 92)
+//		parse->double_quotes = !parse->double_quotes;
+//	if (parse->out[offset] == 39 && parse->out [offset - 1] != 92)
+//		parse->single_quotes = !parse->single_quotes;
+//}
 
 void	quotes_handler(t_parse *parse)
 {
