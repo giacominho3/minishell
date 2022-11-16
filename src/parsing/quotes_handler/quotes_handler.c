@@ -22,16 +22,18 @@ void	remove_quotes(char *modified, char *original)
 	int		j;
 	bool	keep_single;
 	bool	keep_double;
+	bool	skip;
 
 	i = 0;
 	j = 0;
 	keep_double = false;
 	keep_single = false;
+	skip = false;
 	while (original[i])
 	{
-		if (original[i] == 34 && original[i] != 92)
+		if (original[i] == 34 && original[i - 1] != 92)
 			keep_single = !keep_single;
-		if (original[i] == 39 && original[i] != 92)
+		if (original[i] == 39 && original[i - 1] != 92)
 			keep_double = !keep_double;
 		if ((original[i] == 34 && !keep_double) || (original[i] == 39 && !keep_single))
 		{
