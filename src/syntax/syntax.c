@@ -15,16 +15,16 @@
 /* wrapper function for characters that can be opened such as quotes */
 int	open_char_wrapper(char *str)
 {
-	if (open_char_syntax(str, 34, 34))
-	{
-		printf("Minishell: syntax error: double quotes opened but not closed\n");
-		return (1);
-	}
-	if (open_char_syntax(str, 39, 39))
-	{
-		printf("Minishell: syntax error: single quotes opened but not closed\n");
-		return (1);
-	}
+//	if (open_char_syntax(str, 34, 34))
+//	{
+//		printf("Minishell: syntax error: double quotes opened but not closed\n");
+//		return (1);
+//	}
+//	if (open_char_syntax(str, 39, 39))
+//	{
+//		printf("Minishell: syntax error: single quotes opened but not closed\n");
+//		return (1);
+//	}
 	if (open_char_syntax(str, 40, 41))
 		return (1);
 	if (open_char_syntax(str, 91, 93))
@@ -69,4 +69,3 @@ int	syntax_wrapper(struct s_cmd **cmd_head)
 	printf("syntax check terminated\n");
 	return (0);
 }
-
