@@ -38,8 +38,10 @@ int	open_quotes_syntax(char *str, char quote)
 			in_double = !in_double;
 		if (str[i] == 34 && !in_double)
 			in_single = !in_single;
-		if (str[i] == quote && !in_double)
+		if (str[i] == quote && (!in_double || !in_single))
 		{
+			printf("quote found at index: %d\n", i);
+			printf("next char: %c\n", str[i + 1]);
 			cont++;
 			i++;
 			continue ;
