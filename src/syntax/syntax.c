@@ -15,22 +15,22 @@
 /* wrapper function for characters that can be opened such as quotes */
 int	open_char_wrapper(char *str)
 {
-//	if (open_char_syntax(str, 34, 34))
-//	{
-//		printf("Minishell: syntax error: double quotes opened but not closed\n");
+	if (open_quotes_syntax(str, 34))
+	{
+		printf("Minishell: syntax error: double quotes opened but not closed\n");
+		return (1);
+	}
+	if (open_quotes_syntax(str, 39))
+	{
+		printf("Minishell: syntax error: single quotes opened but not closed\n");
+		return (1);
+	}
+//	if (open_char_syntax(str, 40, 41))
 //		return (1);
-//	}
-//	if (open_char_syntax(str, 39, 39))
-//	{
-//		printf("Minishell: syntax error: single quotes opened but not closed\n");
+//	if (open_char_syntax(str, 91, 93))
 //		return (1);
-//	}
-	if (open_char_syntax(str, 40, 41))
-		return (1);
-	if (open_char_syntax(str, 91, 93))
-		return (1);
-	if (open_char_syntax(str, 123, 125))
-		return (1);
+//	if (open_char_syntax(str, 123, 125))
+//		return (1);
 	return (0);
 }
 
@@ -51,21 +51,5 @@ int	syntax(char *str)
 	}
 	if (open_char_wrapper(str))
 		return (1);
-	return (0);
-}
-
-int	syntax_wrapper(struct s_cmd **cmd_head)
-{
-	struct s_cmd *tmp;
-
-	tmp = (*cmd_head);
-	printf("\n");
-	while(tmp != NULL)
-	{
-		if (syntax(tmp->cmd))
-			return (1);
-		tmp = tmp->next;
-	}
-	printf("syntax check terminated\n");
 	return (0);
 }

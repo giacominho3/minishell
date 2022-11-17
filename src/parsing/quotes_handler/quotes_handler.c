@@ -70,6 +70,7 @@ void	remove_quotes(char *modified, char *original)
 */
 void	quotes_handler(t_parse *parse)
 {
+	int		i;
 	int		cont;
 	char	*buf;
 
@@ -85,4 +86,10 @@ void	quotes_handler(t_parse *parse)
 	printf("strcopy test: %s\n", buf);
 	remove_quotes(buf, parse->out);
 	printf("string once quotes removed: %s\n", buf);
+	free(parse->out);
+	parse->out = malloc(ft_strlen(buf) + 1);
+	i = -1;
+	while (buf[++i])
+		parse->out[i] = buf[i];
+	parse->out[++i] = 0;
 }

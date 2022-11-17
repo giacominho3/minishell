@@ -31,11 +31,11 @@ void	fancy_init(void)
 
 void	interpreter(char *input, t_main *main)
 {
-	if (command_splitter(input, main))
-		return ;
-	if (syntax_wrapper(&main->cmd_head))
+	if (syntax(input))
 		return ; //clear_cmd_list(&main->cmd_head);
 	if (parse(input, main))
+		return ;
+	if (command_splitter(main->cmd_line, main))
 		return ;
 	clear_cmd_list(&main->cmd_head);
 }

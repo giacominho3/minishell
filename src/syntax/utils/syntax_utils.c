@@ -23,32 +23,33 @@ int print_syntax_err(int cont_open, int cont_close, char open, char close)
  * generalized function to check if a char is opened and closed
  * (used for parenthesis and quotes)
  */
-int	open_char_syntax(char *str, char open, char close)
+int	open_quotes_syntax(char *str, char quote)
 {
-	int	i;
-	int	count_open;
-	int	count_close;
+	int		i;
+	int		cont;
+	bool	in_single;
+	bool	in_double;
 
 	i = 0;
-	count_open = 0;
-	count_close = 0;
-	while(str[i])
+	cont = 0;
+	while (str[i])
 	{
-		if (str[i] == open)
-			count_open++;
-		if (str[i] == close)
-			count_close++;
+		if (str[i] == 39 && !in_single)
+			in_double = !in_double;
+		if (str[i] == 34 && !in_double)
+			in_single = !in_single;
+		if (str[i] == quote && !in_double)
+		{
+			cont++;
+			i++;
+			continue ;
+		}
 		i++;
 	}
-	if (open == close)
-	{
-		if (count_close % 2 == 0)
-			return (0);
-		return (1);
-	}
-	if (count_close == count_open)
+	printf("quotes( %c )cont: %d\n",quote ,cont);
+	if ((cont % 2) == 0)
 		return (0);
-	return (print_syntax_err(count_open, count_close, open, close));
+	return (1);
 }
 
 /**

@@ -37,6 +37,7 @@ extern   void   rl_replace_line(const char *text, int clear_undo);
 
 typedef struct s_main
 {
+	char 			*cmd_line;
 	struct s_env	*env_head;
 	struct s_cmd	*cmd_head;
 	short			main_exit_status;
@@ -53,7 +54,7 @@ typedef struct s_main
 int		syntax_wrapper(struct s_cmd **cmd_head);
 int		syntax(char *str);
 bool	is_valid_syntax(char *str);
-int		open_char_syntax(char *str, char open, char close);
+int		open_quotes_syntax(char *str, char quote);
 
 /************************************
 *				parse				*

@@ -12,14 +12,20 @@ int	cmd_len(char *input, int offset)
 {
 	int		cont;
 	bool	quotes;
+	bool	parent;
 
 	cont = 0;
 	quotes = false;
+	parent = false;
 	while(input[offset])
 	{
 		if (input[offset] == 34 || input[offset] == 39)
 			quotes = !quotes;
-		if (cmd_split(input, offset) && !quotes)
+		if (input[offset] == 40)
+			quotes = true;
+		if (input[offset] == 41)
+			quotes = false;
+		if (cmd_split(input, offset) && !quotes && !parent)
 		{
 			cont++;
 			return (cont);

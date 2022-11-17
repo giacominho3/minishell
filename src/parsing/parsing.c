@@ -82,11 +82,25 @@ void	expand(t_parse *parse, t_env **head)
 	parse->out[j] = 0;
 }
 
-int	parse(char *input, t_main *main)
+void	new_cmd_line(t_main *main, t_parse *parse)
+{
+	int	i;
+
+	i = 0;
+	main->cmd_line = malloc(parse->out_len + 1);
+	while (parse->out[i])
+	{
+		main->cmd_line[i] = parse->out[i];
+		i++;
+	}
+	main->cmd_line[i] = 0;
+}
+
+int	parse(char *cmd_line, t_main *main)
 {
 	t_parse	parse;
 
-	init_parse(input, &parse);
+	init_parse(cmd_line, &parse);
 	parse.out_len = extended_len(&parse, &main->env_head);
 	parse.out = malloc(parse.out_len + 1);
 	if (!parse.out)
@@ -102,6 +116,8 @@ int	parse(char *input, t_main *main)
 	printf("el stringo: |%s|\n", parse.out); //debug print
 	printf("___quotes handler___\n"); //debug print
 	quotes_handler(&parse);
-	return (0);
+	printf("el stringo2: |%s|\n", parse.out); //debug print
+	new_cmd_line(main, &parse);
+	printf("new_command_line: %s\n", main->cmd_line);
+ 	return (0);
 }
-
