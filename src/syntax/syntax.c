@@ -17,12 +17,12 @@ int	open_char_wrapper(char *str)
 {
 	if (open_quotes_syntax(str, 34))
 	{
-		printf("Minishell: syntax error: double quotes opened but not closed\n");
+		printf(SYNTAX_ERR_DQUOT);
 		return (1);
 	}
 	if (open_quotes_syntax(str, 39))
 	{
-		printf("Minishell: syntax error: single quotes opened but not closed\n");
+		printf(SYNTAX_ERR_SQUOT);
 		return (1);
 	}
 //	if (open_char_syntax(str, 40, 41))
@@ -46,7 +46,7 @@ int	syntax(char *str)
 {
 	if (!is_valid_syntax(str))
 	{
-		printf("Minishell: syntax error: invalid character\n");
+		printf(SYNTAX_ERR_INVALID_CHAR);
 		return (1);
 	}
 	if (open_char_wrapper(str))

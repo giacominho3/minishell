@@ -59,7 +59,7 @@ int	open_quotes_syntax(char *str, char quote)
  * @param str = string to check
  * @return = true if the string is valid, and false if it contains invalid chars
  *
- * function to check that the input taken contains just valid characters
+ * @brief to check that the input taken contains just valid characters
  */
 bool	is_valid_syntax(char *str)
 {
