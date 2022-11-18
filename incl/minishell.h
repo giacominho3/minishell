@@ -27,6 +27,15 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+/**
+ * structures includes
+ * */
+# include "../src/env/incl/env_types.h"
+# include "../src/commands/incl/cmd_types.h"
+# include "../src/parsing/tokenizer/incl/tok_types.h"
+/**
+ * other includes
+ * */
 # include "../src/signals/incl/signals.h"
 # include "../src/env/incl/env.h"
 # include "../src/parsing/tokenizer/incl/tokens.h"
