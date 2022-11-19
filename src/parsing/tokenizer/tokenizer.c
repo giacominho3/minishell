@@ -20,38 +20,45 @@ bool	sep_conditions(char *str, int index)
 	return (false);
 }
 
-/* tmp, has to be removed */
+int	head_tokens(char *cmd, int offset, t_token_list **tok_head)
+{
+}
 
+int body_tokens(char *cmd, int offset, t_token_list **tok_head)
+{
+}
 
-
-
+int tail_tokens(char *cmd, int offset, t_token_list **tok_head)
+{
+}
 /**
- *
  * @param sub_string = current analyzed command
  * @param head = head to the token list of the current cmd list node
  * this functions acts like a wrapper for some sub-functions that are going to
  * search for specifics types of tokens inside the command passed as a parameter
  * and returns a pointer to the head of the list of tokens for that command
  */
-void	tokenizer(char *sub_string, t_token_list **head)
+void	_tokenizer(char *cmd, t_token_list **head)
 {
 	int	offset;
 
 	offset = 0;
-	while (sub_string[offset])
+	while (cmd[offset])
 	{
-		offset = head_tokens();
-		offset = body_tokens();
-		offset = tail_tokens();
+		offset = head_tokens(cmd, offset, head);
+		offset = body_tokens(cmd, offset, head);
+		offset = tail_tokens(cmd, offset, head);
 	}
-
 }
 
-
-
-
-int main(void)
+void	tokenizer(t_cmd **cmd_head)
 {
+	t_cmd *curr;
 
-	command_splitter("abc | defg");
+	curr =  (*cmd_head);
+	while (curr != NULL)
+	{
+		_tokenizer(curr->cmd, &curr->tok_head);
+		curr = curr->next;
+	}
 }

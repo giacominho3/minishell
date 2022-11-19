@@ -31,8 +31,9 @@
  * structures includes
  * */
 # include "../src/env/incl/env_types.h"
-# include "../src/commands/incl/cmd_types.h"
 # include "../src/parsing/tokenizer/incl/tok_types.h"
+# include "../src/commands/incl/cmd_types.h"
+# include "main_types.h"
 /**
  * other includes
  * */
@@ -43,14 +44,6 @@
 # include "../src/parsing//incl/parse.h"
 
 extern   void   rl_replace_line(const char *text, int clear_undo);
-
-typedef struct s_main
-{
-	char 			*cmd_line;
-	struct s_env	*env_head;
-	struct s_cmd	*cmd_head;
-	short			main_exit_status;
-} t_main;
 
 /***********************************0*
 *			errors macros			*
