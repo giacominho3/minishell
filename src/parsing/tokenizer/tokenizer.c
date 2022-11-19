@@ -56,14 +56,15 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 	}
 }
 
-void	tokenizer(t_cmd **cmd_head)
+int	tokenizer(t_cmd **cmd_head)
 {
 	t_cmd *curr;
 
 	curr =  (*cmd_head);
 	while (curr != NULL)
 	{
-		_tokenizer(curr->cmd, &curr->tok_head);
+		//_tokenizer(curr->cmd, &curr->tok_head);
 		curr = curr->next;
 	}
+	return (0);
 }

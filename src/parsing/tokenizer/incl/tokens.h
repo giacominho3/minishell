@@ -3,6 +3,6 @@
 # include "../../../../incl/minishell.h"
 
 int		scan_reidrections(char *string, int offset, t_token_list **head);
-void	tokenizer(t_cmd **cmd_head);
+int	tokenizer(t_cmd **cmd_head);
 
 #endif
