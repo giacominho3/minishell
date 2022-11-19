@@ -33,6 +33,8 @@ void	interpreter(char *input, t_main *main)
 {
 	if (syntax(input))
 		return ;
+	if (tokenizer())
+		return ;
 	if (parse(input, main))
 		return ;
 	if (command_splitter(main->cmd_line, main))
