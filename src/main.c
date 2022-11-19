@@ -33,11 +33,11 @@ void	interpreter(char *input, t_main *main)
 {
 	if (syntax(input))
 		return ;
-	if (tokenizer())
+	if (command_splitter(main->cmd_line, main))
+		return ;
+	if (tokenizer(main->cmd_head))
 		return ;
 	if (parse(input, main))
-		return ;
-	if (command_splitter(main->cmd_line, main))
 		return ;
 	clear_cmd_list(&main->cmd_head);
 }

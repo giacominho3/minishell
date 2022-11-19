@@ -39,20 +39,20 @@ int tail_tokens(char *cmd, int offset, t_token_list **tok_head)
 /**
  * @param sub_string = current analyzed command
  * @param head = head to the token list of the current cmd list node
- * this functions acts like a wrapper for some sub-functions that are going to
+ * @brief functions acts like a wrapper for some sub-functions that are going to
  * search for specifics types of tokens inside the command passed as a parameter
  * and returns a pointer to the head of the list of tokens for that command
  */
-void	_tokenizer(char *cmd, t_token_list **head)
+void	_tokenizer(char *cmd, t_token_list **tok_head)
 {
 	int	offset;
 
 	offset = 0;
 	while (cmd[offset])
 	{
-		offset = head_tokens(cmd, offset, head);
-		offset = body_tokens(cmd, offset, head);
-		offset = tail_tokens(cmd, offset, head);
+		offset = head_tokens(cmd, offset, tok_head);
+		offset = body_tokens(cmd, offset, tok_head);
+		offset = tail_tokens(cmd, offset, tok_head);
 	}
 }
 
