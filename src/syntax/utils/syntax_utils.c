@@ -40,18 +40,37 @@ int	open_quotes_syntax(char *str, char quote)
 			in_single = !in_single;
 		if (str[i] == quote && (!in_double || !in_single))
 		{
-			printf("quote found at index: %d\n", i);
-			printf("next char: %c\n", str[i + 1]);
 			cont++;
 			i++;
 			continue ;
 		}
 		i++;
 	}
-	printf("quotes( %c )cont: %d\n",quote ,cont);
 	if ((cont % 2) == 0)
 		return (0);
 	return (1);
+}
+
+int	open_char_syntax(char *string, char open, char close)
+{
+	int	i;
+	int	cont_open;
+	int	cont_close;
+
+	i = 0;
+	cont_close = 0;
+	cont_open = 0;
+	while (string[i])
+	{
+		if (string[i] == open)
+			cont_open++;
+		if (string[i] == close)
+			cont_close++;
+		i++;
+	}
+	if (cont_open != cont_close)
+		return (print_syntax_err(cont_open, cont_close, open, close));
+	return (0);
 }
 
 /**

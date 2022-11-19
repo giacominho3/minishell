@@ -22,14 +22,19 @@ bool	sep_conditions(char *str, int index)
 
 int	head_tokens(char *cmd, int offset, t_token_list **tok_head)
 {
+	scan_reidrections();
+	scan_parenthesis();
 }
 
 int body_tokens(char *cmd, int offset, t_token_list **tok_head)
 {
+
 }
 
 int tail_tokens(char *cmd, int offset, t_token_list **tok_head)
 {
+	scan_reidrections();
+	scan_parenthesis();
 }
 /**
  * @param sub_string = current analyzed command

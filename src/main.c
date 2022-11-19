@@ -32,7 +32,7 @@ void	fancy_init(void)
 void	interpreter(char *input, t_main *main)
 {
 	if (syntax(input))
-		return ; //clear_cmd_list(&main->cmd_head);
+		return ;
 	if (parse(input, main))
 		return ;
 	if (command_splitter(main->cmd_line, main))

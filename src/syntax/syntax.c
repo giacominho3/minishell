@@ -25,12 +25,8 @@ int	open_char_wrapper(char *str)
 		printf(SYNTAX_ERR_SQUOT);
 		return (1);
 	}
-//	if (open_char_syntax(str, 40, 41))
-//		return (1);
-//	if (open_char_syntax(str, 91, 93))
-//		return (1);
-//	if (open_char_syntax(str, 123, 125))
-//		return (1);
+	if (open_char_syntax(str, 40, 41))
+		return (1);
 	return (0);
 }
 

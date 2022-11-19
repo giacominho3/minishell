@@ -37,6 +37,7 @@
 /**
  * other includes
  * */
+# include "../src/syntax/incl/syntax.h"
 # include "../src/signals/incl/signals.h"
 # include "../src/env/incl/env.h"
 # include "../src/parsing/tokenizer/incl/tokens.h"
@@ -45,19 +46,10 @@
 
 extern   void   rl_replace_line(const char *text, int clear_undo);
 
-/***********************************0*
-*			errors macros			*
-*************************************/
-# define SYNTAX_ERR_DQUOT "Minishell: syntax error: double quotes opened but not closed\n"
-# define SYNTAX_ERR_SQUOT "Minishell: syntax error: single quotes opened but not closed\n"
-# define SYNTAX_ERR_INVALID_CHAR "Minishell: syntax error: invalid character\n"
 /************************************
 *				syntax				*
 *************************************/
-int		syntax_wrapper(struct s_cmd **cmd_head);
-int		syntax(char *str);
-bool	is_valid_syntax(char *str);
-int		open_quotes_syntax(char *str, char quote);
+
 
 /************************************
 *				utils				*

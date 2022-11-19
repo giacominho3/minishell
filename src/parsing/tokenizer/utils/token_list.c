@@ -1,4 +1,4 @@
-#include "incl/tokens.h"
+#include "../incl/tokens.h"
 
 /* this function set the values of a new node */
 void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
@@ -21,9 +21,6 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 		i++;
 	}
 	curr->token[i] = '\0';
-//	printf("___assigned_vals___\n");
-//	printf("type: %u\n", curr->type);
-//	printf("token: %s\n", curr->token);
 }
 
 /**
@@ -84,33 +81,3 @@ char	*get_tok_content_by_type(t_token_list **head, t_tokens type)
 	}
 	return (curr->token);
 }
-
-/*
- * TEST MAIN FOR TOKEN LIST
-int main(void)
-{
-	t_token_list *tokenList = NULL;
-	t_token_list **head;
-
-	ft_add_tok_last(&tokenList, TOK_CMD, "echo");
-	ft_add_tok_last(&tokenList, TOK_FLAGS, "-n");
-	head = &tokenList;
-	printf("_______________\n");
-	printf("type check, should be cmd\n");
-	if ((*head)->type == TOK_CMD)
-		printf("type: cmd\n");
-	else
-		printf("type: not cmd\n");
-	(*head) = (*head)->next;
-	printf("type check, should NOT be cmd\n");
-	if ((*head)->type == TOK_CMD)
-		printf("type: cmd\n");
-	else
-		printf("type: not cmd\n");
-	printf("__________\n");
-	printf("curr token: %s\n", (*head)->token);
-	printf("__prev test__\n");
-	(*head) = (*head)->prev;
-	printf("prev token: %s\n", (*head)->token);
-}*/
-//git commit -m "token list structured, added basic funcitons to append nodes to the list"
