@@ -55,7 +55,7 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 		offset = tail_tokens(cmd, offset, tok_head);
 	}
 }
-
+/*
 int	tokenizer(t_cmd **cmd_head)
 {
 	t_cmd *curr;
@@ -67,4 +67,4 @@ int	tokenizer(t_cmd **cmd_head)
 		curr = curr->next;
 	}
 	return (0);
-}
+}*/

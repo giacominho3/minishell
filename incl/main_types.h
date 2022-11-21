@@ -6,6 +6,7 @@ typedef struct s_main
 	char 	*cmd_line;
 	t_env	*env_head;
 	t_cmd	*cmd_head;
+	int		pid;
 	int		exit_status;
 }	t_main;
 
