@@ -4,9 +4,10 @@
 typedef struct	s_cmd
 {
 	t_token_list	*tok_head;
-	char				*cmd;
-	struct s_cmd		*next;
-	struct s_cmd		*prev;
+	char			*cmd;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+	char			*out;
 } t_cmd;
 
 #endif

@@ -33,15 +33,12 @@ void	interpreter(char *input, t_main *main)
 {
 	if (syntax(input))
 		return ;
-	printf("a\n");
 	if (command_splitter(input, main))
 		return ;
-	printf("b\n");
 //	if (tokenizer(&main->cmd_head))
 //		return ;
 	if (parse(main))
 		return ;
-	printf("c\n");
 	clear_cmd_list(&main->cmd_head);
 }
 

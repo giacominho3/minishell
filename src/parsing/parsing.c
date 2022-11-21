@@ -87,6 +87,7 @@ void	new_cmd_line(t_cmd *cmd, t_parse *parse)
 	int	i;
 
 	i = 0;
+	printf("parse.out: |%s|\n", parse->out);
 	cmd->cmd = malloc(parse->out_len + 1);
 	while (parse->out[i])
 	{
@@ -94,6 +95,7 @@ void	new_cmd_line(t_cmd *cmd, t_parse *parse)
 		i++;
 	}
 	cmd->cmd[i] = 0;
+	printf("cmd.out: |%s|\n", cmd->cmd);
 }
 
 int	_parse(char *cmd_line, t_main *main)
@@ -118,7 +120,7 @@ int	_parse(char *cmd_line, t_main *main)
 	quotes_handler(&parse);
 	printf("el stringo2: |%s|\n", parse.out); //debug print
 	new_cmd_line(main->cmd_head, &parse); // to fix: input param for t_cmd
-	printf("new_command_line: %s\n", main->cmd_line);
+	printf("new_command_line: %s\n", main->cmd_head->cmd);
  	return (0);
 }
 
@@ -126,10 +128,11 @@ int parse(t_main *main)
 {
 	t_cmd	*curr;
 
-	curr = &main->cmd_head;
+	curr = main->cmd_head;
 	while (curr != NULL)
 	{
 		_parse(curr->cmd, main);
+		printf("parsed cmd: |%s|\n", curr->cmd);
 		curr = curr->next;
 	}
 	return (0);

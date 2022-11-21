@@ -12,15 +12,9 @@ int	cmd_len(char *input, int offset)
 {
 	int		cont;
 	bool	quotes;
-	bool	parent;
 
 	cont = 0;
 	quotes = false;
-	parent = false;
-	printf("input: %s\n", input);
-	printf("offset = %d\n", offset);
-	offset += skip_intial_spaces(input);
-	printf("offset = %d\n", offset);
 	while(input[offset])
 	{
 		if (input[offset] == 34 || input[offset] == 39)
@@ -29,7 +23,7 @@ int	cmd_len(char *input, int offset)
 			quotes = true;
 		if (input[offset] == 41)
 			quotes = false;
-		if (cmd_split(input, offset) && !quotes && !parent)
+		if ((cmd_split(input, offset) && !quotes) != 0)
 		{
 			cont++;
 			return (cont);
@@ -40,7 +34,7 @@ int	cmd_len(char *input, int offset)
 	return (cont);
 }
 
-bool	cmd_split(char *str, int index)
+bool	cmd_split(const char *str, int index)
 {
 	if (str[index] == '|')
 		return (true);
@@ -54,7 +48,7 @@ bool	cmd_split(char *str, int index)
 }
 
 
-void	ft_cmdcpy(char *dest, char *src, int len, int offset)
+void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
 {
 	int	i;
 
