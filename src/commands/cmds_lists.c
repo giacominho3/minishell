@@ -47,3 +47,18 @@ void clear_cmd_list(struct s_cmd **head)
 	}
 	*head = NULL;
 }
+
+int	cont_cmd_number(t_cmd **cmd_head)
+{
+	t_cmd	*curr;
+	int		cont;
+
+	cont = 0;
+	curr = (*cmd_head);
+	while (curr != NULL)
+	{
+		cont++;
+		curr = curr->next;
+	}
+	return (cont);
+}
