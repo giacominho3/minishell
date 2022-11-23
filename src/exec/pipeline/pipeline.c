@@ -5,84 +5,67 @@
 # include <unistd.h>
 # include <sys/wait.h>
 
-int	process_gen(int i, int test)
+# define READ 0
+# define WRITE 1
+
+int	pipes_error(int **fds, int pipe_num)
 {
-	int	fd[2]; //fd[0] reads | fd[1] writes
+	int	i;
+
+	i = 0;
+	while (i < pipe_num)
+	{
+		if (!fds[i])
+		{
+			i++;
+			continue ;
+		}
+		close(fds[i][READ]);
+		close(fds[i][WRITE]);
+	}
+	return (1);
+}
+
+int	input_process(int test)
+{
+	int fd[2];
 	pid_t pid;
 
-	if (pipe(fd) == 0)
-		return 0;
-	printf("qui\n");
+	if (pipe(fd) == -1)
+		return (1);
+	close(fd[READ]);
 	pid = fork();
 	if (pid == 0)
 	{
-		close(fd[0]);
-		dup2(fd[1], 1);
+		printf("input process\n");
 		test += 5;
-		printf("process %d: %d\n", i, getpid());
+		dup2(fd[WRITE], STDOUT_FILENO);
 	}
-	else
-	{
-			close(fd[1]);
-			dup2(fd[0], 0);
-			waitpid(pid, NULL, 0);
-			return (5);
-	}
-	return (0);
+}
+
+int	output_process(int test)
+{
+
+}
+
+int	process_gen(int i, int test)
+{
+
 }
 
 int	execute(void)
 {
-	int	fd[2]; //fd[0] reads | fd[1] writes
-	pid_t	*pids;
+	int *fds[2]; //fd[0] reads | fd[1] writes
+	int i;
+	int test = 0;
 
-	pids = malloc(sizeof(pid_t) * 4);
-	if (!pids)
-	{
-		printf("error while allocating pids\n");
-		return (1);
-	}
-	printf("padre: %d\n", getpid());
+	i = 0;
+	int pipe_num = 3;
 
-	// test
-	int	test = 0;
+	input_process(test);
 
-	if (pipe(fd) == 0)
-		return (1);
-	pids[0] = fork();
-	int i = 0;
-	if (pids[0] == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		test += 5;
-		printf("process %d: %d\n", i, getpid());
-		return 1;
-	}
-	while (++i < 3)
-		process_gen(i, test);
-	pids[4] = fork();
-	if (pids[0] == 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		test += 5;
-		printf("process 4: %d\n", getpid());
-		return 1;
-	}
-	wait(NULL);
-	printf("test :%d\n", test);
-	return (0);
+
 }
-/*
-void	pipe_manager(t_main *main)
-{
-	if (cont_cmd_number(&main->cmd_head))
-	{
-		execute(&main->cmd_head);
-	}
-}*/
-
 int main(void)
 {
 	execute();
