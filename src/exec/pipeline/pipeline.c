@@ -92,103 +92,30 @@ int	pipes_error(int **fds, int pipe_num)
 	return (1);
 }
 
-int	recursive_pipeline(t_cmd *cmd)
+int	exec_pipe(t_cmd *cmd)
 {
-	pid_t	c_pid;
-
-	if (cmd == NULL)
-		return (5);
-	if (cmd->prev == NULL)
-	{
-		c_pid = fork();
-		if (c_pid < 0)
-			return (1);
-		if (c_pid == 0)
-		{
-			dup2(cmd->fd[WRITE], STDOUT_FILENO);
-			dup2(cmd->fd[READ], STDIN_FILENO);
-			close(cmd->fd[READ]);
-			printf("%s, ", cmd->cmd);
-			exit(0);
-		}
-		waitpid(c_pid, NULL, 0);
-		return (recursive_pipeline(cmd->next));
-	}
-	else if (cmd->next == NULL)
-	{
-		c_pid = fork();
-		if (c_pid < 0)
-			return (1);
-		if (c_pid == 0)
-		{
-			close(cmd->prev->fd[WRITE]);
-			dup2(cmd->fd[WRITE], STDOUT_FILENO);
-			close(cmd->fd[WRITE]);
-			dup2(cmd->fd[READ], STDIN_FILENO);
-			printf("%s, ", cmd->cmd);
-
-			//get fd[READ] content
-			char line[99999];
-			char buff[2];
-			int i = 0;
-			line[0] = 0;
-			while (read(cmd->fd[READ], &buff[0], 1) == 0)
-			{
-				line[i] = buff[0];
-				line[i + 1] = 0;
-				i++;
-			}
-			line[i] = 0;
-			printf("out: %s\n", line);
-			exit(0);
-		}
-		waitpid(c_pid, NULL, 0);
-		return (1);
-	}
-	else
-	{
-		c_pid = fork();
-		if (c_pid < 0)
-			return (1);
-		if (c_pid == 0)
-		{
-			close(cmd->prev->fd[WRITE]);
-			dup2(cmd->fd[READ], STDIN_FILENO);
-			dup2(cmd->fd[WRITE], STDIN_FILENO);
-
-			//get fd[READ] content
-			char line[99999];
-			char buff[2];
-			int i = 0;
-			line[0] = 0;
-			while (read(cmd->fd[READ], &buff[0], 1) == 0)
-			{
-				line[i] = buff[0];
-				line[i + 1] = 0;
-				i++;
-			}
-			line[i] = 0;
-			printf("%s, ", line);
-			close(cmd->fd[READ]);
-			exit(0);
-		}
-		waitpid(c_pid, NULL, 0);
-		return (recursive_pipeline(cmd->next));
-	}
+	pid_t pid;
 }
 
-void	init_pipes(t_cmd **cmd_head)
+int iterative_pipes(t_cmd **cmd_head)
 {
-	t_cmd	*curr;
+	int i;
+	int *fds[2];
+	t_cmd *curr;
 
-	curr = (*cmd_head);
+	while (i < 2)
+	{
+		if (pipe(fds[i]) == -1)
+			return (1);
+		i++;
+	}
+	curr = (*cmd_head)
 	while (curr != NULL)
 	{
-		if (pipe(curr->fd) == -1)
-			return ;
-		curr = curr->next;
+		exec_pipe();
 	}
 }
+
 
 int	execute(t_cmd **cmd_head)
 {
@@ -199,12 +126,41 @@ int	execute(t_cmd **cmd_head)
 
 	head_cpy = (*cmd_head);
 	int pipe_num = 2;
-
-	init_pipes(cmd_head);
-	recursive_pipeline(head_cpy);
+	iterative_pipes();
 	return 5;
 //	input_process(test);
 }
+
+
+int	test_with_three()
+{
+	int	fd[3][2];
+	int pid1;
+	int pid2;
+	int pid3;
+	int i = 0;
+
+	while (i < 3)
+	{
+		if (pipe(fd[i]) == -1)
+			return 1;
+		i++;
+	}
+	if ((pid1 = fork()) < 0)
+		return 2;
+	if (pid1 == 0)
+	{
+		close(fd[2][WRITE]);
+		close(fd[2][READ]);
+		close(fd[1][WRITE]);
+		close(fd[0][READ]);
+		int x = 0;
+		dup2();
+	}
+}
+
+
+
 
 int main(void)
 {
