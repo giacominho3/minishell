@@ -13,9 +13,6 @@ typedef struct	s_cmd
 	char			*cmd;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
-	char			*out;
-	int				cmd_num;
-	int				fd[2];
 } t_cmd;
 
 char	*ft_strdup(const char *src)
@@ -131,36 +128,60 @@ int	execute(t_cmd **cmd_head)
 //	input_process(test);
 }
 
-
-int	test_with_three()
+int	gen_in_process(t_cmd *cmd, int fd[], pid_t pid, int tmp)
 {
-	int	fd[3][2];
-	int pid1;
-	int pid2;
-	int pid3;
-	int i = 0;
+	pid = fork();
 
-	while (i < 3)
+	if (pid < 0)
+		return 1;
+	if (pid == 0)
 	{
-		if (pipe(fd[i]) == -1)
-			return 1;
-		i++;
+		dup2(fd[1], 1);
+		close(fd[1]);
+		close(fd[0]);
+		printf("test\n");
+//		if (execute())
+			return 2;
 	}
-	if ((pid1 = fork()) < 0)
-		return 2;
-	if (pid1 == 0)
+	else
 	{
-		close(fd[2][WRITE]);
-		close(fd[2][READ]);
-		close(fd[1][WRITE]);
-		close(fd[0][READ]);
-		int x = 0;
-		dup2();
+		close(tmp);
+		close(fd[1]);
+		tmp = fd[0];
 	}
 }
 
+void	gen_out_process(t_cmd *cmd, int fd[], pid_t pid, int tmp)
+{
+	pid = fork();
 
+	if(pid < 0)
+		return
+}
 
+void	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int tmp)
+{
+}
+
+int	test_with_three(t_cmd **cmd_head)
+{
+	int		fd[2];
+	pid_t 	pid;
+	int		tmp;
+	t_cmd *curr;
+
+	tmp = dup(0);
+	while (curr != NULL)
+	{
+		if (curr->prev == NULL)
+			gen_in_process(curr, fd, pid, tmp);
+		if (curr->next == NULL)
+			gen_out_process(curr, fd, pid, tmp);
+		gen_std_process(curr, fd, pid, tmp);
+		curr = curr->next;
+	}
+	close(tmp);
+}
 
 int main(void)
 {
