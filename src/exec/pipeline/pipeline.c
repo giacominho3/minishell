@@ -1,5 +1,5 @@
 //#include "incl/pipeline.h"
-
+#include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -11,6 +11,7 @@
 typedef struct	s_cmd
 {
 	char			*cmd;
+	char			**args;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 } t_cmd;
@@ -34,6 +35,16 @@ char	*ft_strdup(const char *src)
 	}
 	ptr[i] = '\0';
 	return (ptr);
+}
+
+int ft_strlen(char *str)
+{
+	int cont;
+
+	cont = 0;
+	while (str[cont])
+		cont++;
+	return cont;
 }
 
 void	ft_set_cmd(struct s_cmd *node, char *cmd)
@@ -89,108 +100,173 @@ int	pipes_error(int **fds, int pipe_num)
 	return (1);
 }
 
-int	exec_pipe(t_cmd *cmd)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int	gen_last_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 {
-	pid_t pid;
-}
+//	char line[8];
+//
+//	printf("*tmp: %d\n", *tmp);
+//	if (read(*tmp, &line, 7) < 0)
+//		return 1;
+//	line[7] =0;
+//	printf("line: %s\n", line);
 
-int iterative_pipes(t_cmd **cmd_head)
-{
-	int i;
-	int *fds[2];
-	t_cmd *curr;
-
-	while (i < 2)
-	{
-		if (pipe(fds[i]) == -1)
-			return (1);
-		i++;
-	}
-	curr = (*cmd_head)
-	while (curr != NULL)
-	{
-		exec_pipe();
-	}
-}
-
-
-int	execute(t_cmd **cmd_head)
-{
-	int i;
-	int num = 0;
-
-	t_cmd	*head_cpy;
-
-	head_cpy = (*cmd_head);
-	int pipe_num = 2;
-	iterative_pipes();
-	return 5;
-//	input_process(test);
-}
-
-int	gen_in_process(t_cmd *cmd, int fd[], pid_t pid, int tmp)
-{
+//	write(2, "a\n", 2);
+//	int test = open("/Users/tterribi/Desktop/minishell/src/exec/pipeline/test", O_WRONLY, O_CREAT);
 	pid = fork();
+	if (pid < 0)
+		return 2;
+	if (pid == 0)
+	{
+		dup2(*tmp, STDIN_FILENO);
+		close(*tmp);
+//		printf("test\n");
+		execve("/usr/bin/wc", cmd->args, envp);
+		return 2;
+	}
+	else
+	{
+		close(*tmp);
+		while (waitpid(-1, NULL, WUNTRACED) != -1);
+		*tmp = dup(0);
+	}
+	return 0;
+}
 
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (str == NULL)
+		return (NULL);
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+	{
+		str[j] = s2[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
+int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
+{
+
+//	int test = open("/Users/tterribi/Desktop/minishell/src/exec/pipeline/test", O_WRONLY, O_CREAT);
+//	printf("test: %d\n", test);
+//	write(2, "a\n", 2);
+	if (pipe(fd) < 0)
+		return 2;
+	pid = fork();
 	if (pid < 0)
 		return 1;
 	if (pid == 0)
 	{
-		dup2(fd[1], 1);
-		close(fd[1]);
-		close(fd[0]);
-		printf("test\n");
-//		if (execute())
-			return 2;
+		dup2(fd[WRITE], STDOUT_FILENO);
+		dup2(*tmp, STDIN_FILENO);
+		close(fd[READ]);
+//		printf("test\n");
+//		write(2, "ciao\n", 5);
+		char *path = ft_strjoin("/bin/", cmd->cmd);
+		execve(path, cmd->args, envp);
+		return 2;
 	}
 	else
 	{
-		close(tmp);
-		close(fd[1]);
-		tmp = fd[0];
+//		write(2, "here\n", 5);
+		close(*tmp);
+		close(fd[WRITE]);
+		*tmp = fd[READ];
 	}
+	return 0;
 }
 
-void	gen_out_process(t_cmd *cmd, int fd[], pid_t pid, int tmp)
-{
-	pid = fork();
-
-	if(pid < 0)
-		return
-}
-
-void	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int tmp)
-{
-}
-
-int	test_with_three(t_cmd **cmd_head)
+int	pipeline(t_cmd **cmd_head, char **envp)
 {
 	int		fd[2];
 	pid_t 	pid;
 	int		tmp;
-	t_cmd *curr;
+	t_cmd	*curr;
 
+	curr = (*cmd_head);
 	tmp = dup(0);
 	while (curr != NULL)
 	{
-		if (curr->prev == NULL)
-			gen_in_process(curr, fd, pid, tmp);
-		if (curr->next == NULL)
-			gen_out_process(curr, fd, pid, tmp);
-		gen_std_process(curr, fd, pid, tmp);
+		if (curr->next != NULL)
+			gen_last_process(curr, fd, pid, &tmp, envp);
+		gen_std_process(curr, fd, pid, &tmp, envp);
 		curr = curr->next;
 	}
 	close(tmp);
+	return 0;
 }
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
 	t_cmd *cmd_head;
+	t_cmd *cpy;
 
 	cmd_head = NULL;
 	add_cmd_last(&cmd_head, "echo");
-	add_cmd_last(&cmd_head, "cat");
-	add_cmd_last(&cmd_head, "ls");
-	if (execute(&cmd_head) == 5)
+	cpy = cmd_head;
+	cmd_head->args = malloc(sizeof(char*) * 3);
+	cmd_head->args[0] = malloc(sizeof(char) * ft_strlen("/bin/cat"));
+	cmd_head->args[0] = "bin/cat";
+	cmd_head->args[1] = malloc(sizeof(char) * ft_strlen("ciao"));
+	cmd_head->args[1] = "ciao";
+	cmd_head->args[2] = 0;
+
+	add_cmd_last(&cmd_head, "wc");
+	cpy = cpy->next;
+	cpy->args = malloc(sizeof(char*) * 2);
+	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/wc"));
+	cpy->args[0] = "/usr/bin/wc";
+	cpy->args[1] = 0;
+
+	add_cmd_last(&cmd_head, "touch");
+	cpy = cpy->next;
+	cpy->args = malloc(sizeof(char*) * 3);
+	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/touch"));
+	cpy->args[0] = "/usr/bin/touch";
+	cpy->args[1] = malloc(sizeof(char) * ft_strlen("ciao1"));
+	cpy->args[1] = "ciao1";
+	cpy->args[2] = 0;
+	if (pipeline(&cmd_head, envp) == 5)
 		printf("exec gone well\n");
 }
