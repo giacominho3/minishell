@@ -175,16 +175,6 @@ int	error(char *str, char *err)
 
 int	gen_last_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 {
-//	char line[8];
-//
-//	printf("*tmp: %d\n", *tmp);
-//	if (read(*tmp, &line, 7) < 0)
-//		return 1;
-//	line[7] =0;
-//	printf("line: %s\n", line);
-
-//	write(2, "a\n", 2);
-//	int test = open("/Users/tterribi/Desktop/minishell/src/exec/pipeline/test", O_WRONLY, O_CREAT);
 	pid = fork();
 	if (pid < 0)
 		return 2;
@@ -218,8 +208,6 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 		close(fd[READ]);
 		dup2(*tmp, STDIN_FILENO);
 		close(*tmp);
-//		printf("test\n");
-//		write(2, "ciao\n", 5);
 		char *path;
 		if (ft_strcmp("cat", cmd->cmd) == 0)
 			path = ft_strjoin("/bin/", cmd->cmd);
@@ -230,7 +218,6 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 	}
 	else
 	{
-//		write(2, "here\n", 5);
 		close(*tmp);
 		close(fd[WRITE]);
 		*tmp = fd[READ];
@@ -247,9 +234,6 @@ int	pipeline(t_cmd **cmd_head, char **envp)
 
 	curr = (*cmd_head);
 	tmp = dup(0);
-//	gen_std_process(curr, fd, pid, &tmp, envp);
-//	gen_last_process(curr, fd, pid, &tmp, envp);
-//	return 1;
 	while (curr != NULL)
 	{
 		if (curr->next == NULL)
@@ -284,12 +268,18 @@ int main(int argc, char **argv, char **envp)
 	cpy->args[0] = "/usr/bin/wc";
 	cpy->args[1] = 0;
 
-//	add_cmd_last(&cmd_head, "wc");
-//	cpy = cpy->next;
-//	cpy->args = malloc(sizeof(char*) * 2);
-//	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/wc"));
-//	cpy->args[0] = "/usr/bin/wc";
-//	cpy->args[1] = 0;
-	pipeline(&cmd_head, envp);
+	add_cmd_last(&cmd_head, "wc");
+	cpy = cpy->next;
+	cpy->args = malloc(sizeof(char*) * 2);
+	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/wc"));
+	cpy->args[0] = "/usr/bin/wc";
+	cpy->args[1] = 0;
 
+	add_cmd_last(&cmd_head, "xargs");
+	cpy = cpy->next;
+	cpy->args = malloc(sizeof(char*) * 2);
+	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/xargs"));
+	cpy->args[0] = "/usr/bin/xargs";
+	cpy->args[1] = 0;
+	pipeline(&cmd_head, envp);
 }
