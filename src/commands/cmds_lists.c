@@ -1,13 +1,14 @@
 #include "../../incl/minishell.h"
 
-void	ft_set_cmd(struct s_cmd *node, char *cmd)
+void	ft_set_cmd(t_cmd *node, t_main *main, char *cmd)
 {
 	if (!cmd)
 		return ;
 	node->cmd = ft_strdup(cmd);
+	node->main_ref = main;
 }
 
-void	add_cmd_last(struct s_cmd **head, char *cmd)
+void	add_cmd_last(t_cmd **head, t_main *main, char *cmd)
 {
 	struct s_cmd	*new;
 	struct s_cmd	*last;
@@ -19,7 +20,7 @@ void	add_cmd_last(struct s_cmd **head, char *cmd)
 		printf("add_cmd_last: error while allocating new node: cmd: (%s)\n", cmd);
 		return ;
 	}
-	ft_set_cmd(new, cmd);
+	ft_set_cmd(new, main, cmd);
 	new->next = NULL;
 	if ((*head) == NULL)
 	{
@@ -33,7 +34,7 @@ void	add_cmd_last(struct s_cmd **head, char *cmd)
 	new->prev = last;
 }
 
-void clear_cmd_list(struct s_cmd **head)
+void clear_cmd_list(t_cmd **head)
 {
 	struct s_cmd	*current;
 	struct s_cmd	*next;

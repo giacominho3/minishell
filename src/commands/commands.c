@@ -1,11 +1,10 @@
 #include "_incl/commands.h"
 
 /**
- * @brief debug function
+ * @brief debug function (print the whole command list)
  */
-void	print_cmd(struct s_cmd **head)
+void	print_cmd(t_cmd **head)
 {
-	//prints the whole linked list
 	struct s_cmd	*tmp;
 
 	tmp = (*head);
@@ -15,10 +14,6 @@ void	print_cmd(struct s_cmd **head)
 		tmp = tmp->next;
 	}
 }
-
-/**
- * @brief syntax checks wrapper for commands
- */
 
 /**
  *
@@ -44,7 +39,7 @@ int	command_splitter(char *input, t_main *main)
 		}
 		ft_cmdcpy(cmd, input, cmd_len(input, i), i);
 		i += cmd_len(input, i);
-		add_cmd_last(&main->cmd_head, cmd);
+		add_cmd_last(&main->cmd_head, main, cmd);
 		free(cmd);
 	}
 	printf("commands:\n");

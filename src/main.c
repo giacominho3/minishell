@@ -39,6 +39,9 @@ void	interpreter(char *input, t_main *main)
 //		return ;
 	if (parse(main))
 		return ;
+	printf("print:\n");
+	print_cmd(&main->cmd_head->main_ref->cmd_head);
+	printf("___________________\n");
 	clear_cmd_list(&main->cmd_head);
 }
 
