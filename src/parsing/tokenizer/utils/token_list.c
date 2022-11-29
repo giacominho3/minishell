@@ -1,4 +1,4 @@
-#include "../incl/tokens.h"
+#include "../../_incl/tokens.h"
 
 /* this function set the values of a new node */
 void	ft_set_tok(t_token_list **node, t_tokens type, char *val)

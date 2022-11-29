@@ -1,6 +1,6 @@
 #ifndef MINISHELL_PIPELINE_H
 # define MINISHELL_PIPELINE_H
-# include "../../../../incl/minishell.h"
+# include "../../../incl/minishell.h"
 
 # define READ 0
 # define WRITE 1

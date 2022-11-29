@@ -30,19 +30,21 @@
 /**
  * structures includes
  * */
-# include "../src/env/incl/env_types.h"
-# include "../src/parsing/tokenizer/incl/tok_types.h"
-# include "../src/commands/incl/cmd_types.h"
+# include "../src/env/_incl/env_types.h"
+# include "../src/parsing/_incl/tok_types.h"
+# include "../src/commands/_incl/cmd_types.h"
 # include "main_types.h"
 /**
  * other includes
  * */
-# include "../src/syntax/incl/syntax.h"
+# include "../libft/libft.h"
+# include "../src/syntax/_incl/syntax.h"
+# include "../src/env/_incl/env.h"
 # include "../src/signals/incl/signals.h"
-# include "../src/env/incl/env.h"
-# include "../src/parsing/tokenizer/incl/tokens.h"
-# include "../src/commands/incl/commands.h"
-# include "../src/parsing//incl/parse.h"
+# include "../src/parsing/_incl/tokens.h"
+# include "../src/commands/_incl/commands.h"
+# include "../src/parsing/_incl/parse.h"
+# include "../src/exec/_incl/pipeline.h"
 
 extern   void   rl_replace_line(const char *text, int clear_undo);
 

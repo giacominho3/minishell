@@ -4,9 +4,13 @@ CC = gcc
 
 CFLAGS = -Wextra -Werror -Wall
 
+LIBFT_PATH = libft/
+
+LIBFT = $(LIBFT_PATH)libft.a
+
 #M1 flags: -L/opt/homebrew/opt/ruby/lib -I/opt/homebrew/opt/ruby/include
 #42 flags: -L$$HOME/.brew/opt/readline/lib -I $$HOME/.brew/opt/readline/include
-RL_FAGS = -L/usr/include -lreadline -L/opt/homebrew/opt/ruby/lib -I/opt/homebrew/opt/ruby/include
+RL_FAGS = -L/usr/include -lreadline -L$$HOME/.brew/opt/readline/lib -I $$HOME/.brew/opt/readline/include
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -27,7 +31,7 @@ CFILES = src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c 
 
 OBJECTS = $(CFILES:.c=.o)
 
-all: $(NAME)
+all: libraries $(NAME)
 
 %.o : %.c
 	@echo $(Y)Compiling [$<]...$(X)
@@ -35,29 +39,28 @@ all: $(NAME)
 	@printf $(UP)$(CUT)
 
 libraries:
-#	@echo $(B)
-#	make -C $(LIBFT_PATH) all
+	@echo $(B)
+	make -C $(LIBFT_PATH) all
 #	@echo $(B)
 #	make -C $(PRINTF_PATH) all
 
-#$(OBJECTS)
 $(NAME): $(OBJECTS)
 	@echo $(Y)Compiling [$(CFILES)]...$(X)
 	@echo $(G)Finished [$(CFILES)]$(X)
 	@echo
 	@echo $(Y)Compiling [$(NAME)]...$(X)
-	$(CC) $(CFLAGS) $(RL_FAGS) $(OBJECTS) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBFT) $(RL_FAGS) $(OBJECTS) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
-#	@make -C $(LIBFT_PATH) clean
+	@make -C $(LIBFT_PATH) clean
 #	@make -C $(PRINTF_PATH) clean
 	@rm -f $(OBJECTS)
 	@echo $(R)Removed [$(OBJECTS)]$(X)
 	@echo $(R)Removed libraries.o$(X)
 
 fclean: clean
-#	@make -C $(LIBFT_PATH) fclean
+	@make -C $(LIBFT_PATH) fclean
 #	@make -C $(PRINTF_PATH) fclean
 	@rm -f $(NAME)
 	@echo $(R)Removed [$(NAME)]$(X)
@@ -65,8 +68,8 @@ fclean: clean
 re: fclean all
 
 norm:
-	norminette ft_printf utils checker
+	norminette libft src incl
 
-#run:	all
+run: make re && ./Minishell
 
 .PHONY: all clean fclean re norm

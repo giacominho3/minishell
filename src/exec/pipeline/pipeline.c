@@ -1,9 +1,9 @@
-//#include "incl/pipeline.h"
+//#include "_incl/pipeline.h"
 #include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 # define READ 0
 # define WRITE 1

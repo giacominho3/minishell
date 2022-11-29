@@ -1,4 +1,4 @@
-#include "../incl/parse.h"
+#include "../_incl/parse.h"
 
 int count_quotes(char *string)
 {
