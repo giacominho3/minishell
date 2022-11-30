@@ -67,7 +67,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strcmp(buff, "env") == 0)
 			print_env(&main.env_head);
 		add_history(buff);
-		if (buff)
+		if (buff != NULL)
 			interpreter(buff, &main);
 	}
 	clear_env(&main.env_head);
