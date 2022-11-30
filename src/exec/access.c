@@ -145,7 +145,7 @@ char	*ft_get_name(char *str, char c)
 	return (tmp);
 }
 
-void	ft_set_data(struct s_env *node, char *str)
+void	ft_set_data_env(struct s_env *node, char *str)
 {
 	if (!find_char_instr('=', str))
 	{
@@ -171,7 +171,7 @@ void	ft_add_last(struct s_env **head, char *str)
 		printf("add_last: error while allocating new node: str(%s)\n", str);
 		return ;
 	}
-	ft_set_data(new, str);
+	ft_set_data_env(new, str);
 	new->next = NULL;
 	if ((*head) == NULL)
 	{
@@ -196,7 +196,6 @@ void	copy_env(struct s_env **head, char **envp)
 		i++;
 	}
 }
-
 
 void	ft_set_cmd(t_cmd *node, t_main *main, char *cmd)
 {
@@ -354,7 +353,10 @@ int	exe_builtins(t_cmd *cmd)
 	char	*tmp;
 
 	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
+	if (tmp)
+		return 1;
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
+
 	if (!ft_strcmp("echo", tmp))
 		/* bin_echo(); should return 0*/
 	if (!ft_strcmp("cd", tmp))
@@ -448,59 +450,19 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*find_cmd_path(t_cmd *cmd)
-{
-	char	**path_matrix;
-	char	*path;
-	int		i;
-
-	if (!access(cmd->cmd, F_OK))
-		return("ok");
-	i = 0;
-	path_matrix = ft_split(get_content_by_name(&cmd->main_ref->env_head, "PATH"), ':');
-	while (path_matrix[i])
-	{
-		ft_strcpy(path, path_matrix[i]);
-		printf("path: %s\n", path);
-		path = ft_strjoin(path, "/wc");
-		printf("path1: %s\n", path);
-		if (!access(path, F_OK))
-		{
-			printf("matrix: %s\n", path_matrix[i]);
-			if (path_matrix)
-				ft_free_matrix(path_matrix);
-			return (path);
-		}
-		i++;
-	}
-	if (path_matrix)
-		ft_free_matrix(path_matrix);
-	return (NULL);
-}
-
-int execute(t_cmd *cmd)
-{
-	char *res;
-	res = find_cmd_path(cmd);
-	printf("res: %s\n", res);
-	return 0;
-	if (exe_builtins(cmd))
-	{
-//		args_format();
-//		execve(path, );
-	}
-}
-
 void clear_cmd_list(t_cmd **head)
 {
-	struct s_cmd	*current;
-	struct s_cmd	*next;
+	t_cmd	*current;
+	t_cmd	*next;
 
 	current = (*head);
 	while (current != NULL)
 	{
+		write(2, "seg\n", 4);
+		printf("current.name: %s\n", current->cmd);
 		next = current->next;
-		free(current);
+		if(current != NULL)
+			free(current);
 		current = next;
 	}
 	*head = NULL;
@@ -523,15 +485,56 @@ void clear_env(struct s_env **head)
 }
 
 
+
+char	*find_cmd_path(t_cmd *cmd)
+{
+	char	**path_matrix;
+	char	*path;
+	int		i;
+
+//	if (!access(cmd->cmd, F_OK))
+//		return("ok");
+	i = 0;
+	path_matrix = ft_split(get_content_by_name(&cmd->main_ref->env_head, "PATH"), ':');
+	printf("cmd.cmd: %s\n", cmd->cmd);
+	while (path_matrix[i])
+	{
+		ft_strcpy(path, path_matrix[i]);
+		path = ft_strjoin(path, "/wc");
+		if (!access(path, F_OK))
+		{
+			printf("matrix: %s\n", path_matrix[i]);
+			ft_free_matrix(path_matrix);
+			return (path);
+		}
+		i++;
+	}
+	ft_free_matrix(path_matrix);
+	return (NULL);
+}
+
+int execute(t_cmd *cmd)
+{
+	char *path;
+	if (exe_builtins(cmd))
+	{
+		path = find_cmd_path(cmd);
+//		args_format();
+		execve(path, );
+	}
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	t_main main;
 
+	main.env_head = NULL;
 	main.cmd_head = NULL;
 	copy_env(&main.env_head, envp);
-	add_cmd_last(&main.cmd_head, &main, "/usr/bin/wc");
+	add_cmd_last(&main.cmd_head, &main, "wc");
 	execute(main.cmd_head);
+//	printf("cmd.cmd2: %s\n", main.cmd_head->cmd );
 	clear_cmd_list(&main.cmd_head);
-	clear_env(&main.env_head);
+//	clear_env(&main.env_head);
 	return (printf("path took correctly\n"));
 }
