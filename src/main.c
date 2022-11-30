@@ -42,7 +42,7 @@ void	interpreter(char *input, t_main *main)
 	printf("print:\n");
 	print_cmd(&main->cmd_head->main_ref->cmd_head);
 	printf("___________________\n");
-	clear_cmd_list(&main->cmd_head);
+
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -69,7 +69,10 @@ int	main(int argc, char **argv, char **envp)
 		add_history(buff);
 		if (buff != NULL)
 			interpreter(buff, &main);
+		free(buff);
+		clear_cmd_list(&main.cmd_head);
+		clear_env(&main.env_head);
+		return 0;
 	}
-	clear_env(&main.env_head);
 	return (0);
 }
