@@ -20,22 +20,34 @@ bool	sep_conditions(char *str, int index)
 	return (false);
 }
 
-int	head_tokens(char *cmd, int offset, t_token_list **tok_head)
+/**
+ *
+ * @param current_char char of the cmd string that is being analyzed
+ * @return number of chars that compose the redirection
+ *
+ * @brief function that scans the cmd string to find if there are redirections
+ */
+int	scan_reidrections(char *cmd, int i, t_token_list **tok_head)
 {
-	scan_reidrections();
-	scan_parenthesis();
+	if (cmd[i] == 60)
+	{
+		if (cmd[i + 1] == 60)
+			ft_add_tok_last(tok_head, TOK_HEREDOC, "<<");
+		return (1);
+	}
+	return (0);
 }
 
-int body_tokens(char *cmd, int offset, t_token_list **tok_head)
+int	head_scan(char *cmd, int i, t_token_list **tok_head)
 {
-
+	while (cmd[i])
+	{
+		i += scan_reidrections(cmd, i, tok_head);
+	}
+	return (i);
 }
 
-int tail_tokens(char *cmd, int offset, t_token_list **tok_head)
-{
-	scan_reidrections();
-	scan_parenthesis();
-}
+
 /**
  * @param sub_string = current analyzed command
  * @param head = head to the token list of the current cmd list node
@@ -45,26 +57,27 @@ int tail_tokens(char *cmd, int offset, t_token_list **tok_head)
  */
 void	_tokenizer(char *cmd, t_token_list **tok_head)
 {
-	int	offset;
+	int	i;
 
-	offset = 0;
-	while (cmd[offset])
+	i = 0;
+	while (cmd[i])
 	{
-		offset = head_tokens(cmd, offset, tok_head);
-		offset = body_tokens(cmd, offset, tok_head);
-		offset = tail_tokens(cmd, offset, tok_head);
+		i += head_scan();
+		i += boddy_scan();
+		i += tail_scan();
 	}
 }
-/*
+
 int	tokenizer(t_cmd **cmd_head)
 {
-	t_cmd *curr;
+	t_cmd	*curr;
 
-	curr =  (*cmd_head);
+	curr = (*cmd_head);
 	while (curr != NULL)
 	{
-		//_tokenizer(curr->cmd, &curr->tok_head);
+		_tokenizer(curr->cmd, &curr->tok_head);
 		curr = curr->next;
 	}
+	print_token_lists(cmd_head);
 	return (0);
-}*/
+}

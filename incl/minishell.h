@@ -27,6 +27,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+# include <fcntl.h>
 /**
  * structures includes
  * */
@@ -37,6 +38,7 @@
 /**
  * other includes
  * */
+# include "../src/exec/_incl/redirections.h"
 # include "../libft/libft.h"
 # include "../src/syntax/_incl/syntax.h"
 # include "../src/env/_incl/env.h"
@@ -71,8 +73,11 @@ int		skip_intial_spaces(char *str);
 int		trim_spaces(char *str, int len);
 void	ft_offset_copy(char *dst, char *src, int offset, int stop);
 char	*ft_strdup(const char *src);
-char	*ft_strjoin(char const *s1, char const *s2);
 bool	valid_var_name(char c);
 bool	var_term(char c);
+char	*ft_strndup(char *s, size_t n);
+char	*ft_strncpy(char *dst, const char *src, size_t n);
+
+//char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

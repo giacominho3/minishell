@@ -22,16 +22,6 @@ int	ft_strcmp(char *s1, char *s2)
 	return (*(char *)s1 - *(char *)s2);
 }
 
-int	ft_strlen(const char *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
-
 bool	is_in_strings(char c, char *str)
 {
 	while (*str)

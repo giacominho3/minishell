@@ -1,6 +1,13 @@
 #include "../../_incl/tokens.h"
 
-/* this function set the values of a new node */
+/**
+ *
+ * @param node pointer to the node to set
+ * @param type type of token that you want to assign
+ * @param val string at witch assign the token type
+ *
+ * @brief set the values
+ */
 void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 {
 	int				i;
@@ -57,27 +64,76 @@ void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val)
 	new->prev = last;
 }
 
+
+/**
+ * @param head head of the token list
+ *
+ * @brief deallocate all the token list
+ */
+void clear_tokens(t_token_list **head)
+{
+	t_token_list	*current;
+	t_token_list	*next;
+
+	current = (*head);
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current->token);
+		free(current);
+		current = next;
+	}
+	(*head) = NULL;
+}
+
 /**
  *
  * @param head = head to the token list contained in a command node
  * @param type = type of token from the @enum t_tokens struct to look for
  * @return = @param @param token if found, if not a null string
  *
- * this function scans the @struct t_token_list of a command to find if there's a node with
+ * @brief function scans the @struct t_token_list of a command to find if there's a node with
  * the @struct @param type corresponding to the given @param type if found @return the
  * @struct @param token if there isn't a node with the given @param type @return a null string
  */
 char	*get_tok_content_by_type(t_token_list **head, t_tokens type)
 {
 	t_token_list	*curr;
-	char			tmp;
+//	char			tmp;
 
 	curr = (*head);
 	while (curr->next != NULL)
 	{
-		if (curr->type = type)
+		if (curr->type == type)
 			break ;
 		curr = curr->next;
 	}
 	return (curr->token);
+}
+
+void	print_toks(t_token_list **head)
+{
+	t_token_list	*tmp;
+
+	tmp = (*head);
+	while (tmp != NULL)
+	{
+		printf("%s : %d\n", tmp->token, tmp->type);
+		tmp = tmp->next;
+	}
+}
+
+void	print_token_lists(t_cmd **head)
+{
+	t_cmd *tmp;
+	int i = 1;
+
+	tmp = (*head);
+	while (tmp != NULL)
+	{
+		printf("token list of cmd %d:\n", i);
+		print_toks(&tmp->tok_head);
+		printf("--------------------------\n");
+		tmp = tmp->next;
+	}
 }

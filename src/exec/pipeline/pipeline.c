@@ -1,20 +1,4 @@
-//#include "_incl/pipeline.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-
-# define READ 0
-# define WRITE 1
-
-typedef struct	s_cmd
-{
-	char			*cmd;
-	char			**args;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-} t_cmd;
+#include "../_incl/pipeline.h"
 
 char	*ft_strdup(const char *src)
 {

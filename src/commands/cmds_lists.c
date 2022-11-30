@@ -36,13 +36,16 @@ void	add_cmd_last(t_cmd **head, t_main *main, char *cmd)
 
 void clear_cmd_list(t_cmd **head)
 {
-	struct s_cmd	*current;
-	struct s_cmd	*next;
+	t_cmd	*current;
+	t_cmd	*next;
 
 	current = (*head);
 	while (current != NULL)
 	{
 		next = current->next;
+		free(current->cmd);
+		free(current->out);
+		clear_tokens(&current->tok_head);
 		free(current);
 		current = next;
 	}

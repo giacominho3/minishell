@@ -35,8 +35,8 @@ void	interpreter(char *input, t_main *main)
 		return ;
 	if (command_splitter(input, main))
 		return ;
-//	if (tokenizer(&main->cmd_head))
-//		return ;
+	if (tokenizer(&main->cmd_head))
+		return ;
 	if (parse(main))
 		return ;
 	printf("print:\n");
