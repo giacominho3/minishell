@@ -21,34 +21,6 @@ bool	sep_conditions(char *str, int index)
 }
 
 /**
- *
- * @param current_char char of the cmd string that is being analyzed
- * @return number of chars that compose the redirection
- *
- * @brief function that scans the cmd string to find if there are redirections
- */
-int	scan_reidrections(char *cmd, int i, t_token_list **tok_head)
-{
-	if (cmd[i] == 60)
-	{
-		if (cmd[i + 1] == 60)
-			ft_add_tok_last(tok_head, TOK_HEREDOC, "<<");
-		return (1);
-	}
-	return (0);
-}
-
-int	head_scan(char *cmd, int i, t_token_list **tok_head)
-{
-	while (cmd[i])
-	{
-		i += scan_reidrections(cmd, i, tok_head);
-	}
-	return (i);
-}
-
-
-/**
  * @param sub_string = current analyzed command
  * @param head = head to the token list of the current cmd list node
  * @brief functions acts like a wrapper for some sub-functions that are going to
@@ -62,9 +34,9 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 	i = 0;
 	while (cmd[i])
 	{
-		i += head_scan();
-		i += boddy_scan();
-		i += tail_scan();
+		i = head_scan(cmd, i, tok_head);
+		i = body_scan();
+//		i = tail_scan();
 	}
 }
 

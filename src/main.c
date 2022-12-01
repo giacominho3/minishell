@@ -37,8 +37,8 @@ void	interpreter(char *input, t_main *main)
 		return ;
 	if (tokenizer(&main->cmd_head))
 		return ;
-	if (parse(main))
-		return ;
+//	if (parse(main))
+//		return ;
 	printf("print:\n");
 	print_cmd(&main->cmd_head->main_ref->cmd_head);
 	printf("___________________\n");

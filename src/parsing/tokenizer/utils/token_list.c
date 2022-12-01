@@ -86,11 +86,15 @@ void clear_tokens(t_token_list **head)
 	(*head) = NULL;
 }
 
+int	search_tok_by_type(t_token_list **head, t_tokens type)
+{
+
+}
+
 /**
- *
- * @param head = head to the token list contained in a command node
- * @param type = type of token from the @enum t_tokens struct to look for
- * @return = @param @param token if found, if not a null string
+ * @param head head to the token list contained in a command node
+ * @param type type of token from the @enum t_tokens struct to look for
+ * @return @param @param token if found, if not a null string
  *
  * @brief function scans the @struct t_token_list of a command to find if there's a node with
  * the @struct @param type corresponding to the given @param type if found @return the
@@ -99,7 +103,6 @@ void clear_tokens(t_token_list **head)
 char	*get_tok_content_by_type(t_token_list **head, t_tokens type)
 {
 	t_token_list	*curr;
-//	char			tmp;
 
 	curr = (*head);
 	while (curr->next != NULL)
@@ -129,6 +132,16 @@ void	print_token_lists(t_cmd **head)
 	int i = 1;
 
 	tmp = (*head);
+	printf("TOK_CMD: %d\n", TOK_CMD);
+	printf("TOK_FLAGS: %d\n", TOK_FLAGS);
+	printf("TOK_HEREDOC: %d\n", TOK_HEREDOC);
+	printf("TOK_REDIRECTION: %d\n", TOK_REDIRECTION);
+	printf("TOK_ARGS: %d\n", TOK_ARGS);
+	printf("TOK_PREV_LOGIC_OP: %d\n", TOK_PREV_LOGIC_OP);
+	printf("TOK_NEXT_LOGIC_OP: %d\n", TOK_NEXT_LOGIC_OP);
+	printf("TOK_IN_FILE: %d\n", TOK_IN_FILE);
+	printf("TOK_OUT_FILE: %d\n", TOK_OUT_FILE);
+	printf("TOK_ERROR: %d\n", TOK_ERROR);
 	while (tmp != NULL)
 	{
 		printf("token list of cmd %d:\n", i);
