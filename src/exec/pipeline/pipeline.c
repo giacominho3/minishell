@@ -210,18 +210,18 @@ int	_pipeline(t_cmd **cmd_head, char **matrix_env)
 
 void	pipeline(t_main *main)
 {
-	char	**matrix_env;
-	int		x_alloc_val;
-	int		i;
+	char	**matrix_env = NULL;
+//	int		x_alloc_val;
+//	int		i;
 
-	matrix_env = malloc(calc_env_y(&main->env_head) + 1);
-	x_alloc_val = calc_env_x(&main->env_head);
-	i = 0;
-	while (matrix_env[i])
-	{
-		matrix_env[i] = malloc(x_alloc_val + 1);
-		i++;
-	}
+//	matrix_env = malloc(calc_env_y(&main->env_head) + 1);
+//	x_alloc_val = calc_env_x(&main->env_head);
+//	i = 0;
+//	while (matrix_env[i])
+//	{
+//		matrix_env[i] = malloc(x_alloc_val + 1);
+//		i++;
+//	}
 	fill_env_mat(matrix_env, &main->env_head);
 }
 
