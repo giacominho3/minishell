@@ -134,7 +134,7 @@ int	error(char *str, char *err)
 }
 
 
-int	gen_last_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
+int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 {
 	pid = fork();
 	if (pid < 0)
@@ -144,7 +144,7 @@ int	gen_last_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 		dup2(*tmp, STDIN_FILENO);
 		close(*tmp);
 		char *path = ft_strjoin("/usr/bin/", cmd->cmd);
-		execve(path, cmd->args, envp);
+		execve(path, cmd->execve_args, envp);
 	}
 	else
 	{
@@ -174,7 +174,7 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 			path = ft_strjoin("/bin/", cmd->cmd);
 		else
 			path = ft_strjoin("/usr/bin/", cmd->cmd);
-		execve(path, cmd->args, envp);
+		execve(path, cmd->execve_args, envp);
 		return  (error("error: cannot execute ", path));
 	}
 	else
@@ -195,12 +195,13 @@ int	_pipeline(t_cmd **cmd_head, char **matrix_env)
 
 	curr = (*cmd_head);
 	tmp = dup(0);
+	pid = 0;
 	while (curr != NULL)
 	{
 		if (curr->next == NULL)
-			gen_last_process(curr, fd, pid, &tmp, envp);
+			gen_last_process(curr, pid, &tmp, matrix_env);
 		else
-			gen_std_process(curr, fd, pid, &tmp, envp);
+			gen_std_process(curr, fd, pid, &tmp, matrix_env);
 		curr = curr->next;
 	}
 	close(tmp);
@@ -209,9 +210,19 @@ int	_pipeline(t_cmd **cmd_head, char **matrix_env)
 
 void	pipeline(t_main *main)
 {
-	char **matrix_env;
+	char	**matrix_env;
+	int		x_alloc_val;
+	int		i;
 
-	matrix_env = (char *) malloc(calc_env_y() + 1);
+	matrix_env = malloc(calc_env_y(&main->env_head) + 1);
+	x_alloc_val = calc_env_x(&main->env_head);
+	i = 0;
+	while (matrix_env[i])
+	{
+		matrix_env[i] = malloc(x_alloc_val + 1);
+		i++;
+	}
+	fill_env_mat(matrix_env, &main->env_head);
 }
 
 //int main(int argc, char **argv, char **envp)

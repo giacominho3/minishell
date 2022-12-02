@@ -5,7 +5,11 @@
 # define READ 0
 # define WRITE 1
 
-int	calc_env_y(t_env **env_head);
-int	calc_env_x(t_env **env_head);
+void	pipeline(t_main *main);
+
+
+int		calc_env_y(t_env **env_head);
+int		calc_env_x(t_env **env_head);
+void	fill_env_mat(char **mat, t_env **env_head);
 
 #endif

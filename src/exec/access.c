@@ -1,10 +1,10 @@
 #include "_incl/exec.h"
-
-void	args_format(t_cmd *cmd)
-{
-	cmd->execve_args = malloc();
-
-}
+//
+//void	args_format(t_cmd *cmd)
+//{
+//	cmd->execve_args = malloc();
+//
+//}
 
 char	*find_cmd_path(t_cmd *cmd)
 {
