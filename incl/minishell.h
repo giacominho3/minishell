@@ -56,13 +56,13 @@ extern   void   rl_replace_line(const char *text, int clear_undo);
 
 
 /************************************
-*				utils				*
+*				tokenization_utils				*
 *************************************/
 int		ft_mat_col(char *str);
 int		ft_mat_row(char **matrix);
 
 /************************************
-*			string utils			*
+*			string tokenization_utils			*
 *************************************/
 int		ft_strcmp(char *s1, char *s2);
 bool	is_in_strings(char c, char *str);

@@ -37,12 +37,16 @@ void	interpreter(char *input, t_main *main)
 		return ;
 	if (tokenizer(&main->cmd_head))
 		return ;
-//	if (parse(main))
-//		return ;
-	printf("print:\n");
-	print_cmd(&main->cmd_head->main_ref->cmd_head);
-	printf("___________________\n");
-
+	if (parse(main))
+		return ;
+	if (main->cmd_head != NULL)
+	{
+		printf("num of heredoc tok: %d\n", search_tok_by_type(&main->cmd_head->tok_head, TOK_HEREDOC));
+		printf("print1:\n");
+		print_cmd(&main->cmd_head);
+		printf("___________________\n");
+	}
+//	clear_cmd_list(&main->cmd_head);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -70,9 +74,7 @@ int	main(int argc, char **argv, char **envp)
 		if (buff != NULL)
 			interpreter(buff, &main);
 		free(buff);
-		clear_cmd_list(&main.cmd_head);
 		clear_env(&main.env_head);
-		return 0;
 	}
 	return (0);
 }

@@ -9,20 +9,23 @@
 int	scan_redirections(char *cmd, int i, t_token_list **tok_head)
 {
 	char	*tmp;
+	int		ret;
 
-	if (cmd[i] == 60)
+	if (cmd[i] == 60 || cmd[i] == 62)
 	{
-		if (cmd[i + 1] == 60)
+		if (cmd[i] == 60 && cmd[i + 1] == 60)
 		{
-			tmp = get_redir(cmd, i, 2);
+			tmp = get_heredoc(cmd, i);
 			ft_add_tok_last(tok_head, TOK_HEREDOC, tmp);
+			ret = ft_strlen(tmp);
 			free(tmp);
-			return (i + 2);
+			return (i + ret);
 		}
-		tmp = get_redir(cmd, i, 1);
+		tmp = get_redir(cmd, i);
 		ft_add_tok_last(tok_head, TOK_REDIRECTION, tmp);
+		ret = ft_strlen(tmp);
 		free(tmp);
-		return (i + 1);
+		return (i + ret);
 	}
 	return (i);
 }
@@ -41,35 +44,10 @@ int	head_scan(char *cmd, int i, t_token_list **tok_head)
 	int	new_index;
 
 	new_index = i;
-	while (cmd[i])
-	{
-		i = new_index;
-		new_index = scan_redirections(cmd, new_index, tok_head);
-		if (i > new_index)
-			break;
-	}
-	return (i);
-}
 
-int	scan_cmd(char *cmd, int i, t_token_list **tok_head)
-{
-
-	if ()
-}
-
-int	body_scan(char *cmd, int i, t_token_list **tok_head)
-{
-	int	new_index;
-
-	new_index = i;
-	while (cmd[i])
-	{
-		i = new_index;
-		new_index = scan_cmd();
-		new_index = scan_flags();
-		new_index = scan_args();
-		if (i > new_index)
-			break ;
-	}
+	write(1, "a\n", 2);
+	i = new_index;
+	new_index += scan_redirections(cmd, new_index, tok_head);
 	return (new_index);
 }
+

@@ -1,16 +1,29 @@
 #include "../_incl/parse.h"
 
-int count_quotes(char *string)
+int count_quotes_to_remove(char *string)
 {
-	int	cont;
-	int	i;
+	int		i;
+	int		cont;
+	bool	keep_single;
+	bool	keep_double;
 
 	i = 0;
 	cont = 0;
+	keep_double = false;
+	keep_single = false;
 	while (string[i])
 	{
-		if (string[i] == 34 || string[i] == 39)
+		if (string[i] == 39 && !keep_single)
+			keep_double = !keep_double;
+		if (string[i] == 34 && !keep_double)
+			keep_single = !keep_single;
+		if ((string[i] == 34 && !keep_double)
+			|| (string[i] == 39 && !keep_single))
+		{
+			i++;
 			cont++;
+			continue ;
+		}
 		i++;
 	}
 	return (cont);
@@ -78,8 +91,8 @@ void	quotes_handler(t_parse *parse)
 	parse->double_quotes = false;
 	printf("parse.out: %s\n", parse->out);
 	printf("parse.out len: %d\n", ft_strlen(parse->out));
-	cont = count_quotes(parse->out);
-	printf("quotes found: %d\n", cont);
+	cont = count_quotes_to_remove(parse->out);
+	printf("quotes to skip found: %d\n", cont);
 	printf("buf allocated for: %d\n", ((ft_strlen(parse->out) - cont) + 1));
 	buf = malloc((ft_strlen(parse->out) - cont) + 1);
 	ft_strcpy(buf, parse->out);
@@ -91,5 +104,5 @@ void	quotes_handler(t_parse *parse)
 	i = -1;
 	while (buf[++i])
 		parse->out[i] = buf[i];
-	parse->out[++i] = 0;
+	parse->out[i] = 0;
 }

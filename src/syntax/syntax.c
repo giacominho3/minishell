@@ -25,6 +25,11 @@ int	open_char_wrapper(char *str)
 		printf(SYNTAX_ERR_SQUOT);
 		return (1);
 	}
+	if (pipe_appended(str, 124))
+	{
+
+		return (1);
+	}
 	if (open_char_syntax(str, 40, 41))
 		return (1);
 	return (0);

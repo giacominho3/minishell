@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "incl/minishell.h"
-
+/*
 int	ft_strlen(const char *str)
 {
 	int	count;
@@ -216,9 +216,10 @@ char	*find_cmd_path(char *cmd, char **env, int i)
 	return (cmd);
 }
 
-
+*/
 int main(int argc, char **argv, char **envp)
 {
+	printf("|%c|\n", 10);
 
-	find_cmd_path("lpc", envp, 0);
+//	find_cmd_path("lpc", envp, 0);
 }

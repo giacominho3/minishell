@@ -15,13 +15,11 @@ int print_syntax_err(int cont_open, int cont_close, char open, char close)
 
 /**
  *
- * @param str = string to check
- * @param open = opening char to check
- * @param close = closure char to check
- * @return = 1 if each @param open occurrence isn't matched with a @param close char
+ * @param str string to check
+ * @param quote type of quote to check
+ * @return 1 if each open occurrence isn't matched with a close char
  *
- * generalized function to check if a char is opened and closed
- * (used for parenthesis and quotes)
+ * @brief check that every occurrence of a quote is closed
  */
 int	open_quotes_syntax(char *str, char quote)
 {
@@ -51,6 +49,13 @@ int	open_quotes_syntax(char *str, char quote)
 	return (1);
 }
 
+/**
+ * @param string string to check
+ * @param open
+ * @param close
+ *
+ * @brief check that every open char is matched by one close char
+ */
 int	open_char_syntax(char *string, char open, char close)
 {
 	int	i;
@@ -74,9 +79,8 @@ int	open_char_syntax(char *string, char open, char close)
 }
 
 /**
- *
- * @param str = string to check
- * @return = true if the string is valid, and false if it contains invalid chars
+ * @param str string to check
+ * @return true if the string is valid, and false if it contains invalid chars
  *
  * @brief to check that the input taken contains just valid characters
  */
@@ -93,3 +97,18 @@ bool	is_valid_syntax(char *str)
 	}
 	return (true);
 }
+
+int	pipe_appended(char *string, char pipe)
+{
+	int	i;
+
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == pipe && string[i + 1] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+

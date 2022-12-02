@@ -30,14 +30,22 @@ bool	sep_conditions(char *str, int index)
 void	_tokenizer(char *cmd, t_token_list **tok_head)
 {
 	int	i;
+	int tmp_limiter = 0;
 
 	i = 0;
 	while (cmd[i])
 	{
-		i = head_scan(cmd, i, tok_head);
-		i = body_scan();
-//		i = tail_scan();
+		printf("i val beginning: %d\n", i);
+		i += head_scan(cmd, i, tok_head);
+		printf("i val after head: %d\n", i);
+		i += body_scan(cmd, i, tok_head);
+		printf("i val after body: %d\n", i);
+		i += tail_scan(cmd, i, tok_head);
+		tmp_limiter++;
+		if (tmp_limiter == 10)
+			break ;
 	}
+	printf("tokenization termianted\n");
 }
 
 int	tokenizer(t_cmd **cmd_head)
@@ -50,6 +58,7 @@ int	tokenizer(t_cmd **cmd_head)
 		_tokenizer(curr->cmd, &curr->tok_head);
 		curr = curr->next;
 	}
+	printf("tokenizer termianted\n");
 	print_token_lists(cmd_head);
 	return (0);
 }

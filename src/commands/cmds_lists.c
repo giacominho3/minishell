@@ -4,6 +4,7 @@ void	ft_set_cmd(t_cmd *node, t_main *main, char *cmd)
 {
 	if (!cmd)
 		return ;
+	node->tok_head = NULL;
 	node->cmd = ft_strdup(cmd);
 	node->main_ref = main;
 }
@@ -43,9 +44,15 @@ void clear_cmd_list(t_cmd **head)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->cmd);
-		free(current->out);
+		write(1, "a\n", 2);
+		if (current->cmd)
+			free(current->cmd);
+		write(1, "b\n", 2);
+		if (current->out != NULL) //for some reasons this cause:  malloc: *** error for object 0xf000000000000000: pointer being freed was not allocated
+			free(current->out);
+		write(1, "c\n", 2);
 		clear_tokens(&current->tok_head);
+		write(1, "d\n", 2);
 		free(current);
 		current = next;
 	}

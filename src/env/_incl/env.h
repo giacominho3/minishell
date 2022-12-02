@@ -18,7 +18,7 @@ void	copy_env(struct s_env **head, char **envp);
 void	clear_env(struct s_env **head);
 
 /**
- * utils functions
+ * tokenization_utils functions
  */
 bool	find_char_instr(char c, char *str);
 void	ft_set_data(struct s_env *node, char *str);

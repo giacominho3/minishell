@@ -1,4 +1,4 @@
-#include "../../_incl/tokens.h"
+#include "../_incl/tokens.h"
 
 /**
  *
@@ -86,9 +86,27 @@ void clear_tokens(t_token_list **head)
 	(*head) = NULL;
 }
 
+/**
+ * @param head head_ref to tok list
+ * @param type type of tok to search
+ * @return number of tokens that match the @param type
+ *
+ * @brief gives you the number of matching tokens inside the token list
+ */
 int	search_tok_by_type(t_token_list **head, t_tokens type)
 {
+	int cont;
+	t_token_list	*curr;
 
+	cont = 0;
+	curr = (*head);
+	while (curr != NULL)
+	{
+		if (curr->type == type)
+			cont++;
+		curr = curr->next;
+	}
+	return (cont);
 }
 
 /**
@@ -121,7 +139,7 @@ void	print_toks(t_token_list **head)
 	tmp = (*head);
 	while (tmp != NULL)
 	{
-		printf("%s : %d\n", tmp->token, tmp->type);
+		printf("%s : %d (ascii val: %d)\n", tmp->token, tmp->type, tmp->token[0]);
 		tmp = tmp->next;
 	}
 }
@@ -131,6 +149,8 @@ void	print_token_lists(t_cmd **head)
 	t_cmd *tmp;
 	int i = 1;
 
+	if ((*head) == NULL)
+		return ;
 	tmp = (*head);
 	printf("TOK_CMD: %d\n", TOK_CMD);
 	printf("TOK_FLAGS: %d\n", TOK_FLAGS);

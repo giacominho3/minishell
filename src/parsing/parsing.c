@@ -98,7 +98,7 @@ void	new_cmd_line(t_cmd *cmd, t_parse *parse)
 	printf("cmd.out: |%s|\n", cmd->cmd);
 }
 
-int	_parse(char *cmd_line, t_main *main)
+int	_parse(char *cmd_line, t_cmd *curr_cmd, t_main *main)
 {
 	t_parse	parse;
 
@@ -119,8 +119,8 @@ int	_parse(char *cmd_line, t_main *main)
 	printf("___quotes handler___\n"); //debug print
 	quotes_handler(&parse);
 	printf("el stringo2: |%s|\n", parse.out); //debug print
-	new_cmd_line(main->cmd_head, &parse); // to fix: input param for t_cmd
-	printf("new_command_line: %s\n", main->cmd_head->cmd);
+	new_cmd_line(curr_cmd, &parse); // to fix: input param for t_cmd
+	printf("new_command_line: %s\n", curr_cmd->cmd);
  	return (0);
 }
 
@@ -131,7 +131,7 @@ int parse(t_main *main)
 	curr = main->cmd_head;
 	while (curr != NULL)
 	{
-		_parse(curr->cmd, main);
+		_parse(curr->cmd, curr, main);
 		printf("parsed cmd: |%s|\n", curr->cmd);
 		curr = curr->next;
 	}
