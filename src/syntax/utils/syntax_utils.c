@@ -91,7 +91,7 @@ bool	is_valid_syntax(char *str)
 	i = 0;
 	while(str[i])
 	{
-		if (!((str[i] >= 32 && str[i] <= 126) || str[i] == 10))
+		if (!((str[i] >= 32 && str[i] <= 126) || str[i] == 10 || str[i] == 9))
 			return (false);
 		i++;
 	}

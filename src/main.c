@@ -37,15 +37,18 @@ void	interpreter(char *input, t_main *main)
 		return ;
 	if (tokenizer(&main->cmd_head))
 		return ;
-	if (parse(main))
+	if (parsing(main))
 		return ;
 	if (main->cmd_head != NULL)
 	{
 		printf("num of heredoc tok: %d\n", search_tok_by_type(&main->cmd_head->tok_head, TOK_HEREDOC));
 		printf("print1:\n");
-		print_cmd(&main->cmd_head);
+		printf("token list after parsing: \n");
+		print_token_lists(&main->cmd_head);
+//		print_cmd(&main->cmd_head);
 		printf("___________________\n");
 	}
+
 //	clear_cmd_list(&main->cmd_head);
 }
 

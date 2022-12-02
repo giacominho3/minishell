@@ -82,23 +82,23 @@ void	expand(t_parse *parse, t_env **head)
 	parse->out[j] = 0;
 }
 
-void	new_cmd_line(t_cmd *cmd, t_parse *parse)
+void	new_cmd_line(t_token_list *token, t_parse *parse)
 {
 	int	i;
 
 	i = 0;
 	printf("parse.out: |%s|\n", parse->out);
-	cmd->cmd = malloc(parse->out_len + 1);
+	token->token = malloc(parse->out_len + 1);
 	while (parse->out[i])
 	{
-		cmd->cmd[i] = parse->out[i];
+		token->token[i] = parse->out[i];
 		i++;
 	}
-	cmd->cmd[i] = 0;
-	printf("cmd.out: |%s|\n", cmd->cmd);
+	token->token[i] = 0;
+	printf("cmd.out: |%s|\n", token->token);
 }
 
-int	_parse(char *cmd_line, t_cmd *curr_cmd, t_main *main)
+int	_parse(char *cmd_line, t_token_list *curr_tok, t_main *main)
 {
 	t_parse	parse;
 
@@ -119,20 +119,32 @@ int	_parse(char *cmd_line, t_cmd *curr_cmd, t_main *main)
 	printf("___quotes handler___\n"); //debug print
 	quotes_handler(&parse);
 	printf("el stringo2: |%s|\n", parse.out); //debug print
-	new_cmd_line(curr_cmd, &parse); // to fix: input param for t_cmd
-	printf("new_command_line: %s\n", curr_cmd->cmd);
+	new_cmd_line(curr_tok, &parse); // to fix: input param for t_cmd
+	printf("new_command_line: %s\n", curr_tok->token);
  	return (0);
 }
 
-int parse(t_main *main)
+int	parse(t_token_list **tok_head, t_main *main)
+{
+	t_token_list	*curr;
+
+	curr = (*tok_head);
+	while (curr != NULL)
+	{
+		_parse(curr->token, curr, main);
+		curr = curr->next;
+	}
+	return (0);
+}
+
+int parsing(t_main *main)
 {
 	t_cmd	*curr;
 
 	curr = main->cmd_head;
 	while (curr != NULL)
 	{
-		_parse(curr->cmd, curr, main);
-		printf("parsed cmd: |%s|\n", curr->cmd);
+		parse(&curr->tok_head, main);
 		curr = curr->next;
 	}
 	return (0);

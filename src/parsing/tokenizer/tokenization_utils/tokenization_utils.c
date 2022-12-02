@@ -8,7 +8,8 @@
  */
 bool	is_metacharacter(char c)
 {
-	if (c == 124 || c == 10 || c == 60 || c == 62)
+	if (c == 124 || c == 10 || c == 60
+		|| c == 62)
 		return (true);
 	return (false);
 }
@@ -31,7 +32,8 @@ int	calc_tok_len(char *cmd, int i)
 	int cont;
 
 	cont = 0;
-	while (cmd[i] && !is_metacharacter(cmd[i]))
+	while (cmd[i] && !is_metacharacter(cmd[i])
+		&& !is_skippable(cmd[i]))
 	{
 		cont++;
 		i++;

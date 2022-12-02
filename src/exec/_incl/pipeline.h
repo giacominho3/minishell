@@ -5,4 +5,7 @@
 # define READ 0
 # define WRITE 1
 
-#endif //MINISHELL_PIPELINE_H
+int	calc_env_y(t_env **env_head);
+int	calc_env_x(t_env **env_head);
+
+#endif

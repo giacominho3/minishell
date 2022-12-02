@@ -1,68 +1,105 @@
 #include "../_incl/pipeline.h"
 
-char	*ft_strdup(const char *src)
-{
-	char	*ptr;
-	int		i;
+//char	*ft_strdup(const char *src)
+//{
+//	char	*ptr;
+//	int		i;
+//
+//	i = 0;
+//	while (src[i])
+//		i++;
+//	ptr = malloc(sizeof(char) * (i + 1));
+//	if (!ptr)
+//		return (NULL);
+//	i = 0;
+//	while (src[i])
+//	{
+//		ptr[i] = src[i];
+//		i++;
+//	}
+//	ptr[i] = '\0';
+//	return (ptr);
+//}
+//
+//int ft_strlen(char *str)
+//{
+//	int cont;
+//
+//	cont = 0;
+//	while (str[cont])
+//		cont++;
+//	return cont;
+//}
+//
+//void	ft_set_cmd(struct s_cmd *node, char *cmd)
+//{
+//	if (!cmd)
+//		return ;
+//	node->cmd = ft_strdup(cmd);
+//}
+//
+//void	add_cmd_last(struct s_cmd **head, char *cmd)
+//{
+//	struct s_cmd	*new;
+//	struct s_cmd	*last;
+//
+//	last = (*head);
+//	new = (struct s_cmd *) malloc(sizeof(struct s_cmd));
+//	if (!new)
+//	{
+//		printf("add_cmd_last: error while allocating new node: cmd: (%s)\n", cmd);
+//		return ;
+//	}
+//	ft_set_cmd(new, cmd);
+//	new->next = NULL;
+//	if ((*head) == NULL)
+//	{
+//		new->prev = NULL;
+//		(*head) = new;
+//		return ;
+//	}
+//	while (last->next != NULL)
+//		last = last->next;
+//	last->next = new;
+//	new->prev = last;
+//}
 
-	i = 0;
-	while (src[i])
-		i++;
-	ptr = malloc(sizeof(char) * (i + 1));
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		ptr[i] = src[i];
-		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
-}
+//char	*ft_strjoin(char *s1, char *s2)
+//{
+//	int		i;
+//	int		j;
+//	char	*str;
+//
+//	i = 0;
+//	j = 0;
+//	if (!s1 || !s2)
+//		return (NULL);
+//	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+//	if (str == NULL)
+//		return (NULL);
+//	while (s1[i])
+//		str[j++] = s1[i++];
+//	i = 0;
+//	while (s2[i])
+//	{
+//		str[j] = s2[i];
+//		i++;
+//		j++;
+//	}
+//	str[j] = '\0';
+//	return (str);
+//}
+//
+//int	ft_strcmp(char *s1, char *s2)
+//{
+//	while (*s1 != '\0' && (*s1 == *s2))
+//	{
+//		s1++;
+//		s2++;
+//	}
+//	return (*(char *)s1 - *(char *)s2);
+//}
 
-int ft_strlen(char *str)
-{
-	int cont;
-
-	cont = 0;
-	while (str[cont])
-		cont++;
-	return cont;
-}
-
-void	ft_set_cmd(struct s_cmd *node, char *cmd)
-{
-	if (!cmd)
-		return ;
-	node->cmd = ft_strdup(cmd);
-}
-
-void	add_cmd_last(struct s_cmd **head, char *cmd)
-{
-	struct s_cmd	*new;
-	struct s_cmd	*last;
-
-	last = (*head);
-	new = (struct s_cmd *) malloc(sizeof(struct s_cmd));
-	if (!new)
-	{
-		printf("add_cmd_last: error while allocating new node: cmd: (%s)\n", cmd);
-		return ;
-	}
-	ft_set_cmd(new, cmd);
-	new->next = NULL;
-	if ((*head) == NULL)
-	{
-		new->prev = NULL;
-		(*head) = new;
-		return ;
-	}
-	while (last->next != NULL)
-		last = last->next;
-	last->next = new;
-	new->prev = last;
-}
 
 //pipes
 
@@ -82,66 +119,6 @@ int	pipes_error(int **fds, int pipe_num)
 		close(fds[i][WRITE]);
 	}
 	return (1);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (str == NULL)
-		return (NULL);
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-	{
-		str[j] = s2[i];
-		i++;
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	while (*s1 != '\0' && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (*(char *)s1 - *(char *)s2);
 }
 
 
@@ -209,7 +186,7 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 	return 0;
 }
 
-int	pipeline(t_cmd **cmd_head, char **envp)
+int	_pipeline(t_cmd **cmd_head, char **matrix_env)
 {
 	int		fd[2];
 	pid_t 	pid;
@@ -230,40 +207,47 @@ int	pipeline(t_cmd **cmd_head, char **envp)
 	return 0;
 }
 
-int main(int argc, char **argv, char **envp)
+void	pipeline(t_main *main)
 {
-	t_cmd *cmd_head;
-	t_cmd *cpy;
+	char **matrix_env;
 
-	cmd_head = NULL;
-	add_cmd_last(&cmd_head, "cat");
-	cpy = cmd_head;
-	cmd_head->args = malloc(sizeof(char*) * 3);
-	cmd_head->args[0] = malloc(sizeof(char) * ft_strlen("/bin/cat"));
-	cmd_head->args[0] = "/bin/cat";
-	cmd_head->args[1] = malloc(sizeof(char) * ft_strlen("ciao"));
-	cmd_head->args[1] = "ciao";
-	cmd_head->args[2] = 0;
-
-	add_cmd_last(&cmd_head, "wc");
-	cpy = cpy->next;
-	cpy->args = malloc(sizeof(char*) * 2);
-	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/wc"));
-	cpy->args[0] = "/usr/bin/wc";
-	cpy->args[1] = 0;
-
-	add_cmd_last(&cmd_head, "wc");
-	cpy = cpy->next;
-	cpy->args = malloc(sizeof(char*) * 2);
-	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/wc"));
-	cpy->args[0] = "/usr/bin/wc";
-	cpy->args[1] = 0;
-
-	add_cmd_last(&cmd_head, "xargs");
-	cpy = cpy->next;
-	cpy->args = malloc(sizeof(char*) * 2);
-	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/xargs"));
-	cpy->args[0] = "/usr/bin/xargs";
-	cpy->args[1] = 0;
-	pipeline(&cmd_head, envp);
+	matrix_env = (char *) malloc(calc_env_y() + 1);
 }
+
+//int main(int argc, char **argv, char **envp)
+//{
+//	t_cmd *cmd_head;
+//	t_cmd *cpy;
+//
+//	cmd_head = NULL;
+//	add_cmd_last(&cmd_head, "cat");
+//	cpy = cmd_head;
+//	cmd_head->args = malloc(sizeof(char*) * 3);
+//	cmd_head->args[0] = malloc(sizeof(char) * ft_strlen("/bin/cat"));
+//	cmd_head->args[0] = "/bin/cat";
+//	cmd_head->args[1] = malloc(sizeof(char) * ft_strlen("ciao"));
+//	cmd_head->args[1] = "ciao";
+//	cmd_head->args[2] = 0;
+//
+//	add_cmd_last(&cmd_head, "wc");
+//	cpy = cpy->next;
+//	cpy->args = malloc(sizeof(char*) * 2);
+//	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/wc"));
+//	cpy->args[0] = "/usr/bin/wc";
+//	cpy->args[1] = 0;
+//
+//	add_cmd_last(&cmd_head, "wc");
+//	cpy = cpy->next;
+//	cpy->args = malloc(sizeof(char*) * 2);
+//	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/wc"));
+//	cpy->args[0] = "/usr/bin/wc";
+//	cpy->args[1] = 0;
+//
+//	add_cmd_last(&cmd_head, "xargs");
+//	cpy = cpy->next;
+//	cpy->args = malloc(sizeof(char*) * 2);
+//	cpy->args[0] = malloc(sizeof(char) * ft_strlen("/usr/bin/xargs"));
+//	cpy->args[0] = "/usr/bin/xargs";
+//	cpy->args[1] = 0;
+//	pipeline(&cmd_head, envp);
+//}

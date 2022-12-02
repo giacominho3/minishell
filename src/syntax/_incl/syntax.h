@@ -13,5 +13,4 @@ int		open_quotes_syntax(char *str, char quote);
 int		open_char_syntax(char *string, char open, char close);
 int		pipe_appended(char *string, char pipe);
 
-
 #endif

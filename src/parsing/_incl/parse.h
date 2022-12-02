@@ -15,8 +15,9 @@ typedef struct	s_parse
 }	t_parse;
 
 bool	var_end_name(char c);
-int		parse(t_main *main);
-int		_parse(char *str, t_cmd *curr_cmd, t_main *main);
+int		parse(t_token_list **tok_head, t_main *main);
+int		parsing(t_main *main);
+int		_parse(char *str, t_token_list *curr_tok, t_main *main);
 int		logic_skip(char *str, int index);
 bool	sep_conditions(char *str, int index);
 void	init_parse(char *input, t_parse *parse);
