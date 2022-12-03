@@ -1,10 +1,4 @@
-#include "_incl/exec.h"
-//
-//void	args_format(t_cmd *cmd)
-//{
-//	cmd->execve_args = malloc();
-//
-//}
+#include "../_incl/exec.h"
 
 char	*find_cmd_path(t_cmd *cmd)
 {
@@ -12,8 +6,8 @@ char	*find_cmd_path(t_cmd *cmd)
 	char	*path;
 	int		i;
 
-	if (!access(cmd->cmd, F_OK))
-		return("ok");
+	if (!access(get_tok_content_by_type(&cmd->tok_head, TOK_CMD), F_OK))
+		return(get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
 	i = 0;
 	path_matrix = ft_split(get_content_by_name(&cmd->main_ref->env_head, "PATH"), ':');
 	while (path_matrix[i])
@@ -36,15 +30,14 @@ int	exe_builtins(t_cmd *cmd)
 	char	*tmp;
 
 	/*			Test			*/
-	tmp = malloc(ft_strlen(cmd->cmd) + 1);
-	ft_strcpy(tmp, cmd->cmd);
+//	tmp = malloc(ft_strlen(cmd->cmd) + 1);
+//	ft_strcpy(tmp, cmd->cmd);
 
-	/*	This is the original code, the one above is just for testing
+	//This is the original code, the one above is just for testing
 	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
 	if (tmp)
 		return 1;
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
-	*/
 
 	if (!ft_strcmp("echo", tmp))
 	{
@@ -92,14 +85,14 @@ int	exe_builtins(t_cmd *cmd)
 	return (1);
 }
 
-int	execute(t_cmd *cmd)
+int	execute(t_cmd *cmd, char **env_matrix)
 {
 	char *path;
 	if (exe_builtins(cmd))
 	{
 		path = find_cmd_path(cmd);
 		printf("result path: %s\n", path);
-		args_format();
+		args_format(cmd);
 //		execve(path, );
 	}
 	return (0);

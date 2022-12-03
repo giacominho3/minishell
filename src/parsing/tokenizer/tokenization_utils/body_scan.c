@@ -6,7 +6,7 @@ int	scan_cmd(char *cmd, int i, t_token_list **tok_head)
 	char	*tok_cpy;
 	int		tok_index;
 
-	if (search_tok_by_type(tok_head, TOK_CMD) > 0)
+	if (cont_tok_by_type(tok_head, TOK_CMD) > 0)
 		return 0;
 	printf("cmd cursor before skip: %c\n", cmd[i]);
 	while (is_skippable(cmd[i]))

@@ -93,7 +93,7 @@ void clear_tokens(t_token_list **head)
  *
  * @brief gives you the number of matching tokens inside the token list
  */
-int	search_tok_by_type(t_token_list **head, t_tokens type)
+int	cont_tok_by_type(t_token_list **head, t_tokens type)
 {
 	int cont;
 	t_token_list	*curr;

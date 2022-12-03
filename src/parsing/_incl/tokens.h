@@ -23,14 +23,15 @@ bool	not_operator(char c);
 int		calc_arg_len(char *cmd, int i);
 char	*get_heredoc(char *cmd, int i);
 
-
 /**
  * List managing functions
  */
 void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val);
 void	clear_tokens(t_token_list **head);
 void	print_token_lists(t_cmd **head);
-int		search_tok_by_type(t_token_list **head, t_tokens type);
+int		cont_tok_by_type(t_token_list **head, t_tokens type);
+int		token_list_len(t_token_list **tok_head);
+char	*get_tok_content_by_type(t_token_list **head, t_tokens type);
 
 
 /**

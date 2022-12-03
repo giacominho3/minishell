@@ -39,7 +39,7 @@ void	interpreter(char *input, t_main *main)
 		return ;
 	if (parsing(main))
 		return ;
-	pipeline(main);
+	pipeline_wrapper(main);
 //	if (main->cmd_head != NULL)
 //	{
 //		printf("num of heredoc tok: %d\n", search_tok_by_type(&main->cmd_head->tok_head, TOK_HEREDOC));

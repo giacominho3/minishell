@@ -46,6 +46,7 @@
 # include "../src/parsing/_incl/tokens.h"
 # include "../src/commands/_incl/commands.h"
 # include "../src/parsing/_incl/parse.h"
+# include "../src/exec/_incl/exec.h"
 # include "../src/exec/_incl/pipeline.h"
 
 extern   void   rl_replace_line(const char *text, int clear_undo);

@@ -1,4 +1,4 @@
-#include "../../_incl/pipeline.h"
+#include "_incl/pipeline.h"
 
 int	calc_env_y(t_env **env_head)
 {
@@ -63,36 +63,41 @@ char	*join_name_and_cont(char *name, char *content)
 	return (tmp);
 }
 
-char	**fill_env_mat(char **mat, t_env **env_head)
+char	**fill_env_mat(t_env **env_head)
 {
 	int		i;
-//	int		j;
-	int		x_alloc_val;
+	char	**mat;
 	t_env	*curr;
 
-	i = 0;
 	curr = (*env_head);
 	mat = malloc(sizeof(char *) * (calc_env_y(env_head) + 1));
-	x_alloc_val = calc_env_x(env_head);
 	i = 0;
-//	while (mat[i])
-//	{
-//		mat[i] = malloc(x_alloc_val + 1);
-//		i++;
-//	}
 	while (i < calc_env_y(env_head))
 	{
 		mat [i] = join_name_and_cont(curr->name, curr->content);
-		printf("join elem and cont: %s\n", mat[i]);
+		curr = curr->next;
 		i++;
 	}
-	//---------------------//
-	printf("___fill_env_mat___\n");
-	while (mat[i])
+	return (mat);
+}
+
+void	args_format(t_cmd *cmd)
+{
+	t_token_list	*curr;
+	int				i;
+
+	cmd->execve_args = malloc(sizeof(char *) * token_list_len(&cmd->tok_head) + 1);
+	curr = cmd->tok_head;
+	cmd->execve_args[0] = find_cmd_path(cmd);
+	i = 1;
+	while (curr != NULL)
 	{
-		printf("mat[%d]: %s\n", i, mat[i]);
-		i++;
+		if (curr->type == TOK_CMD)
+		{
+			curr = curr->next;
+			continue ;
+		}
+		cmd->execve_args[i] = get_tok_content_by_type(&cmd->tok_head, curr->type);
+		curr = curr->next;
 	}
-	printf("------------------\n");
-	return mat;
 }

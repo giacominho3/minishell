@@ -1,4 +1,4 @@
-# include "_incl/exec.h"
+# include "../_incl/exec.h"
 
 void	ft_free_matrix(char **matrix)
 {
@@ -19,7 +19,7 @@ char	*complete_path(char *src, t_cmd *cmd)
 	int		i;
 	int		j;
 
-	dst = malloc(ft_strlen(src) + ft_strlen(cmd->cmd) + 2);
+	dst = malloc(ft_strlen(src) + ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 2);
 	i = 0;
 	while (src[i])
 	{
