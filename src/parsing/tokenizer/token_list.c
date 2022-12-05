@@ -64,7 +64,6 @@ void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val)
 	new->prev = last;
 }
 
-
 /**
  * @param head head of the token list
  *
@@ -79,7 +78,9 @@ void clear_tokens(t_token_list **head)
 	while (current != NULL)
 	{
 		next = current->next;
+		printf("current->token: %p\n", &current->token);
 		free(current->token);
+		printf("current: %p\n", &current);
 		free(current);
 		current = next;
 	}

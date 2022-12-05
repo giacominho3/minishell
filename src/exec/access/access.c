@@ -16,8 +16,10 @@ char	*find_cmd_path(t_cmd *cmd)
 		if (!access(path, F_OK))
 		{
 			ft_free_matrix(path_matrix);
+			printf("result path(pre return): %s\n", path);
 			return (path);
 		}
+		printf("result path(pre return out): %s\n", path);
 		free(path);
 		i++;
 	}
@@ -29,13 +31,8 @@ int	exe_builtins(t_cmd *cmd)
 {
 	char	*tmp;
 
-	/*			Test			*/
-//	tmp = malloc(ft_strlen(cmd->cmd) + 1);
-//	ft_strcpy(tmp, cmd->cmd);
-
-	//This is the original code, the one above is just for testing
 	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
-	if (tmp)
+	if (!tmp)
 		return 1;
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
 
@@ -92,30 +89,30 @@ int	execute(t_cmd *cmd, char **env_matrix)
 	{
 		path = find_cmd_path(cmd);
 		printf("result path: %s\n", path);
-		args_format(cmd);
-//		execve(path, );
+		args_format(cmd, path);
+		execve(path, cmd->execve_args, env_matrix);
+		return (write(2, "execve error\n", 13));
 	}
 	return (0);
 }
 
-/*				TEST				*/
-
-void	test(t_main *main)
-{
-	add_cmd_last(&main->cmd_head, main, "export");
-}
-
-int main(int argc, char **argv, char **envp)
-{
-	t_main main;
-
-	main.env_head = NULL;
-	main.cmd_head = NULL;
-	copy_env(&main.env_head, envp);
-	test(&main);
-	execute(main.cmd_head);
-//	printf("cmd.cmd2: %s\n", main.cmd_head->cmd );
-	clear_cmd_list(&main.cmd_head);
-	clear_env(&main.env_head);
-	return (printf("path took correctly\n"));
-}
+///*				TEST				*/
+//void	test(t_main *main)
+//{
+//	add_cmd_last(&main->cmd_head, main, "export");
+//}
+//
+//int main(int argc, char **argv, char **envp)
+//{
+//	t_main main;
+//
+//	main.env_head = NULL;
+//	main.cmd_head = NULL;
+//	copy_env(&main.env_head, envp);
+//	test(&main);
+//	execute(main.cmd_head);
+////	printf("cmd.cmd2: %s\n", main.cmd_head->cmd );
+//	clear_cmd_list(&main.cmd_head);
+//	clear_env(&main.env_head);
+//	return (printf("path took correctly\n"));
+//}

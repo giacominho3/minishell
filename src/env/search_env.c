@@ -37,11 +37,13 @@ char	*get_content_by_name(struct s_env **head, char *name)
 void	print_env(struct s_env **head)
 {
 	struct s_env *tmp;
+	int i = 0;
 
 	tmp = (*head);
 	while (tmp != NULL)
 	{
-		printf("%s=%s\n", tmp->name, tmp->content);
+		printf("[%d]%s=%s\n", i, tmp->name, tmp->content);
+		i++;
 		tmp = tmp->next;
 	}
 }

@@ -99,20 +99,19 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 void	pipeline_wrapper(t_main *main)
 {
 	char	**matrix_env = NULL;
-	int		i;
+//	int		i;
 
 	matrix_env = fill_env_mat(&main->env_head);
 	//debug print
-	printf("___fill_env_mat___\n");
-	i = 0;
-	while (matrix_env[i])
-	{
-		printf("matrix_env[%d]: %s\n", i, matrix_env[i]);
-		i++;
-	}
-
-	printf("------------------\n");
+//	printf("___print_env_mat___\n");
+//	i = 0;
+//	while (matrix_env[i])
+//	{
+//		printf("matrix_env[%d]: %s\n", i, matrix_env[i]);
+//		i++;
+//	}
+//	printf("------------------\n");
 	//---------------------------------------//
 	pipeline(&main->cmd_head, matrix_env);
-	ft_free_matrix(matrix_env);
+//	ft_free_matrix(matrix_env);
 }

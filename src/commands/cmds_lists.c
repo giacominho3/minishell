@@ -46,13 +46,18 @@ void clear_cmd_list(t_cmd **head)
 		next = current->next;
 		write(1, "a\n", 2);
 		if (current->cmd)
+		{
+			printf("current->cmd: %p\n", &current->cmd);
 			free(current->cmd);
-		write(1, "b\n", 2);
-		if (current->out != NULL) //for some reasons this cause:  malloc: *** error for object 0xf000000000000000: pointer being freed was not allocated
-			free(current->out);
+		}
+		if (current->execve_args) {
+			printf("current->execve_args: %p\n", &current->execve_args);
+//			ft_free_matrix(current->execve_args);
+		}
 		write(1, "c\n", 2);
 		clear_tokens(&current->tok_head);
 		write(1, "d\n", 2);
+		printf("current: %p\n", &current);
 		free(current);
 		current = next;
 	}

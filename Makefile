@@ -29,11 +29,9 @@ CFILES = src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c 
 			src/signals/signals.c src/parsing/utils/parsing_utils.c \
 			src/parsing/quotes_handler/quotes_handler.c src/parsing/tokenizer/tokenization_utils/body_scan.c \
 			src/parsing/tokenizer/tokenization_utils/head_scan.c src/parsing/tokenizer/tokenization_utils/scan_utils.c \
-			src/parsing/tokenizer/tokenization_utils/tokenization_utils.c \
+			src/parsing/tokenizer/tokenization_utils/tokenization_utils.c src/parsing/tokenizer/token_list2.c \
 			src/parsing/tokenizer/token_list.c src/parsing/tokenizer/tokenizer.c src/parsing/tokenizer/tokenization_utils/tail_scan.c \
-			src/exec/pipeline.c src/exec/pipe_utils.c \
-
-
+			src/exec/pipeline.c src/exec/pipe_utils.c src/exec/access/access.c src/exec/access/access_utils.c \
 
 OBJECTS = $(CFILES:.c=.o)
 
