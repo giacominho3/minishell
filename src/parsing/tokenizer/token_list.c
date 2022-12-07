@@ -130,7 +130,10 @@ char	*get_tok_content_by_type(t_token_list **head, t_tokens type)
 			break ;
 		curr = curr->next;
 	}
-	return (curr->token);
+	if (curr->type == type)
+		return (curr->token);
+	else
+		return (NULL);
 }
 
 void	print_toks(t_token_list **head)

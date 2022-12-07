@@ -35,6 +35,7 @@
 # include "../src/parsing/_incl/tok_types.h"
 # include "../src/commands/_incl/cmd_types.h"
 # include "main_types.h"
+# include "../src/exec/_incl/export _types.h"
 /**
  * other includes
  * */
@@ -48,6 +49,7 @@
 # include "../src/parsing/_incl/parse.h"
 # include "../src/exec/_incl/exec.h"
 # include "../src/exec/_incl/pipeline.h"
+# include "../src/exec/_incl/builtins.h"
 
 extern   void   rl_replace_line(const char *text, int clear_undo);
 

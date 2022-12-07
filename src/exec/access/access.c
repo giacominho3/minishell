@@ -35,13 +35,8 @@ int	exe_builtins(t_cmd *cmd)
 	if (!tmp)
 		return 1;
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
-
 	if (!ft_strcmp("echo", tmp))
-	{
-		/* bin_echo(); should return 0*/
-		printf("echo\n");
-		return 0;
-	}
+		return (builtin_echo(cmd));
 	if (!ft_strcmp("cd", tmp))
 	{
 		/* bin_cd(); should return 0 */
@@ -56,16 +51,11 @@ int	exe_builtins(t_cmd *cmd)
 	}
 	if (!ft_strcmp("export", tmp))
 	{
-		/* bin_export(); should return 0 */
-		printf("export\n");
-		return 0;
+		printf("executing export builtin\n");
+		return (builtin_export(cmd));
 	}
 	if (!ft_strcmp("env", tmp))
-	{
-		/* bin_env(); should return 0 */
-		printf("env\n");
-		return 0;
-	}
+		return (builtin_env(cmd));
 	if (!ft_strcmp("unset", tmp))
 	{
 		/* bin_unset(); should return 0 */
