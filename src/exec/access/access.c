@@ -45,8 +45,7 @@ int	exe_builtins(t_cmd *cmd)
 	}
 	if (!ft_strcmp("pwd", tmp))
 	{
-		/* bin_pwd(); should return 0 */
-		printf("pwd\n");
+		builtin_pwd(cmd);
 		return 0;
 	}
 	if (!ft_strcmp("export", tmp))

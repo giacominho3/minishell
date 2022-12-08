@@ -32,7 +32,7 @@ CFILES = src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c 
 			src/parsing/tokenizer/tokenization_utils/tokenization_utils.c src/parsing/tokenizer/token_list2.c \
 			src/parsing/tokenizer/token_list.c src/parsing/tokenizer/tokenizer.c src/parsing/tokenizer/tokenization_utils/tail_scan.c \
 			src/exec/pipeline.c src/exec/pipe_utils.c src/exec/access/access.c src/exec/access/access_utils.c \
-			src/exec/bin/export.c src/exec/bin/export_utils.c src/exec/bin/echo.c src/exec/bin/env.c \
+			src/exec/bin/export.c src/exec/bin/export_utils.c src/exec/bin/echo.c src/exec/bin/env.c src/exec/bin/pwd.c \
 
 OBJECTS = $(CFILES:.c=.o)
 
