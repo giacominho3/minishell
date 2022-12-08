@@ -39,8 +39,7 @@ int	exe_builtins(t_cmd *cmd)
 		return (builtin_echo(cmd));
 	if (!ft_strcmp("cd", tmp))
 	{
-		/* bin_cd(); should return 0 */
-		printf("cd\n");
+		builtin_cd(cmd);
 		return 0;
 	}
 	if (!ft_strcmp("pwd", tmp))
@@ -74,6 +73,7 @@ int	exe_builtins(t_cmd *cmd)
 int	execute(t_cmd *cmd, char **env_matrix)
 {
 	char *path;
+
 	if (exe_builtins(cmd))
 	{
 		path = find_cmd_path(cmd);

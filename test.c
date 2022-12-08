@@ -217,9 +217,19 @@ char	*find_cmd_path(char *cmd, char **env, int i)
 }
 
 */
+#include "incl/minishell.h"
 int main(int argc, char **argv, char **envp)
 {
-	printf("|%c|\n", 10);
+	t_main main;
 
-//	find_cmd_path("lpc", envp, 0);
+	copy_env(&main.env_head, envp);
+	char *tmp1 = get_content_by_name(&main.env_head, "PWD");
+	printf("tmp len: %d\n", ft_strlen(tmp1));
+	printf("%s\n", tmp1);
+	int ret = chdir("src");
+	printf("ret: %d\n", ret);
+	char tmp[PATH_MAX];
+	getcwd(tmp, PATH_MAX);
+	printf("%s\n", tmp);
+	//	find_cmd_path("lpc", envp, 0);
 }

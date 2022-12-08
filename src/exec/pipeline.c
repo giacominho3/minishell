@@ -33,7 +33,7 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 {
 	pid = fork();
 	if (pid < 0)
-		return 2;
+		return (2);
 	if (pid == 0)
 	{
 		dup2(*tmp, STDIN_FILENO);
@@ -46,7 +46,7 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 		while (waitpid(-1, NULL, WUNTRACED) != -1);
 		*tmp = dup(0);
 	}
-	return 0;
+	return (0);
 }
 
 int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
@@ -71,7 +71,7 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 		close(fd[WRITE]);
 		*tmp = fd[READ];
 	}
-	return 0;
+	return (0);
 }
 
 int	pipeline(t_cmd **cmd_head, char **matrix_env)
@@ -86,6 +86,13 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 	pid = 0;
 	while (curr != NULL)
 	{
+		if (exe_builtins(curr) == 0)
+		{
+			curr = curr->next;
+			continue ;
+		}
+		else if(exe_builtins(curr) == -1)
+			break;
 		if (curr->next == NULL)
 			gen_last_process(curr, pid, &tmp, matrix_env);
 		else
@@ -93,25 +100,14 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 		curr = curr->next;
 	}
 	close(tmp);
-	return 0;
+	return (0);
 }
 
 void	pipeline_wrapper(t_main *main)
 {
 	char	**matrix_env = NULL;
-//	int		i;
 
+	matrix_env = NULL;
 	matrix_env = fill_env_mat(&main->env_head);
-	//debug print
-//	printf("___print_env_mat___\n");
-//	i = 0;
-//	while (matrix_env[i])
-//	{
-//		printf("matrix_env[%d]: %s\n", i, matrix_env[i]);
-//		i++;
-//	}
-//	printf("------------------\n");
-	//---------------------------------------//
 	pipeline(&main->cmd_head, matrix_env);
-//	ft_free_matrix(matrix_env);
 }

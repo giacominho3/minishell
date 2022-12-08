@@ -39,6 +39,6 @@ int	builtin_echo(t_cmd *cmd)
 	}
 	if (keep_n_line)
 		printf("\n");
-	exit(0);
+	return (0);
 }
 

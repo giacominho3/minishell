@@ -18,6 +18,8 @@ char	*complete_path(char *src, t_cmd *cmd);
 void	ft_free_matrix(char **matrix);
 char	*complete_path(char *src, t_cmd *cmd);
 void	args_format(t_cmd *cmd, char *path);
+int		exe_builtins(t_cmd *cmd);
+
 
 
 #endif //MINISHELL_EXEC_H

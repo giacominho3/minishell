@@ -25,5 +25,6 @@ void	ft_set_data(struct s_env *node, char *str);
 char	*get_content_by_name(struct s_env **head, char *name);
 char	*ft_get_content(char *str, char c);
 char	*ft_get_name(char *str, char c);
+int		modify_node_content(t_env **env_head, char *node_name, char *new_content);
 
 #endif

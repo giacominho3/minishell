@@ -3,5 +3,5 @@
 int	builtin_env(t_cmd *cmd)
 {
 	print_env(&cmd->main_ref->env_head);
-	exit(EXIT_SUCCESS);
+	return (0);
 }
