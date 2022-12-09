@@ -48,26 +48,15 @@
 # include "../src/parsing/_incl/tokens.h"
 # include "../src/commands/_incl/commands.h"
 # include "../src/parsing/_incl/parse.h"
+# include "../src/exec/_incl/heredoc.h"
 # include "../src/exec/_incl/exec.h"
 # include "../src/exec/_incl/pipeline.h"
 # include "../src/exec/_incl/builtins.h"
+extern void	rl_replace_line(const char *text, int clear_undo);
 
-extern   void   rl_replace_line(const char *text, int clear_undo);
-
-/************************************
-*				syntax				*
-*************************************/
-
-
-/************************************
-*				tokenization_utils				*
-*************************************/
-int		ft_mat_col(char *str);
-int		ft_mat_row(char **matrix);
-
-/************************************
-*			string tokenization_utils			*
-*************************************/
+/********************************
+*	string tokenization_utils	*
+*********************************/
 int		ft_strcmp(char *s1, char *s2);
 bool	is_in_strings(char c, char *str);
 int		ft_strlen(const char *str);

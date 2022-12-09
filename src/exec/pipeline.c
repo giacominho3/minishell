@@ -86,13 +86,13 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 	pid = 0;
 	while (curr != NULL)
 	{
-		if (exe_builtins(curr) == 0)
+		if (exe_builtins(curr, fd, &tmp) == 0)
 		{
 			curr = curr->next;
 			continue ;
 		}
-		else if(exe_builtins(curr) == -1)
-			break;
+//		else if(exe_builtins(curr, &tmp) == -1)
+//			break;
 		if (curr->next == NULL)
 			gen_last_process(curr, pid, &tmp, matrix_env);
 		else

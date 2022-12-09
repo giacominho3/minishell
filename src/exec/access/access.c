@@ -27,7 +27,7 @@ char	*find_cmd_path(t_cmd *cmd)
 	return (NULL);
 }
 
-int	exe_builtins(t_cmd *cmd)
+int	exe_builtins(t_cmd *cmd, int fd[], int *tmp_fd)
 {
 	char	*tmp;
 
@@ -44,7 +44,7 @@ int	exe_builtins(t_cmd *cmd)
 	}
 	if (!ft_strcmp("pwd", tmp))
 	{
-		builtin_pwd(cmd);
+		builtin_pwd(cmd, fd, tmp_fd);
 		return 0;
 	}
 	if (!ft_strcmp("export", tmp))
@@ -74,15 +74,11 @@ int	execute(t_cmd *cmd, char **env_matrix)
 {
 	char *path;
 
-	if (exe_builtins(cmd))
-	{
-		path = find_cmd_path(cmd);
-		printf("result path: %s\n", path);
-		args_format(cmd, path);
-		execve(path, cmd->execve_args, env_matrix);
-		return (write(2, "execve error\n", 13));
-	}
-	return (0);
+	path = find_cmd_path(cmd);
+	printf("result path: %s\n", path);
+	args_format(cmd, path);
+	execve(path, cmd->execve_args, env_matrix);
+	return (write(2, "execve error\n", 13));
 }
 
 ///*				TEST				*/

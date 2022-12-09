@@ -18,7 +18,7 @@ char	*complete_path(char *src, t_cmd *cmd);
 void	ft_free_matrix(char **matrix);
 char	*complete_path(char *src, t_cmd *cmd);
 void	args_format(t_cmd *cmd, char *path);
-int		exe_builtins(t_cmd *cmd);
+int		exe_builtins(t_cmd *cmd, int fd[], int *tmp_fd);
 
 
 
