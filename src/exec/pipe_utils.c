@@ -162,11 +162,11 @@ void	args_format(t_cmd *cmd, char *path)
 		{
 			cmd->execve_args[i] = get_tok_content_by_type(&curr, TOK_ARGS);
 			printf("cmd->execve_args[%d]: %s\n", i, get_tok_content_by_type(&curr, TOK_ARGS));
+			i++;
 		}
 		printf("arg just cpy[%d]: %s\n", i, cmd->execve_args[i]);
 		printf("arg (get_tok): %s\n", get_tok_content_by_type(&curr, TOK_ARGS));
 		curr = curr->next;
-		i++;
 	}
 	write(1, "dio\n", 4);
 	cmd->execve_args[i] = 0;
