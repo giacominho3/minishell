@@ -7,7 +7,7 @@
  */
 void	add_env_and_export(t_export *export, t_env *env);
 int		builtin_export(t_cmd *cmd);
-int		builtin_pwd(t_cmd *cmd, int fd[], int *tmp_fd);
+int		builtin_pwd(t_cmd *cmd);
 int		builtin_cd(t_cmd *cmd);
 
 /**

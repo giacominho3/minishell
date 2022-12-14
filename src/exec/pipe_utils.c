@@ -95,6 +95,34 @@ char	**fill_env_mat(t_env **env_head)
 	return (mat);
 }
 
+int	format_flags(t_cmd *cmd, t_token_list *curr_ref)
+{
+	int	i;
+	int	n_flags;
+	t_token_list *curr;
+
+	curr = curr_ref;
+	i = 1;
+	n_flags = cont_tok_by_type(&curr, TOK_FLAGS);
+	if (n_flags == 0)
+	{
+		printf("n_flags = 0\n");
+		return (1);
+	}
+	while(n_flags > 0)
+	{
+		if (curr->type == TOK_FLAGS)
+		{
+			cmd->execve_args[i] = curr->token;
+			printf("inserted flag: %s\n", curr->token);
+			n_flags--;
+		}
+		curr = curr->next;
+	}
+	printf("cont_tok_by_type: %d\n", cont_tok_by_type(&curr_ref, TOK_FLAGS));
+	return (cont_tok_by_type(&curr_ref, TOK_FLAGS) + 1);
+}
+
 void	args_format(t_cmd *cmd, char *path)
 {
 	t_token_list	*curr;
@@ -102,35 +130,48 @@ void	args_format(t_cmd *cmd, char *path)
 
 	printf("____ARGS FORMAT CALL____\n");
 	curr = cmd->tok_head;
-	cmd->execve_args = malloc(sizeof(char *) * token_list_len(&cmd->tok_head) + 1);
-	printf("token_list_len: %d\n", token_list_len(&cmd->tok_head));
-	printf("path: %s\n", path);
-	cmd->execve_args[0] = ft_strdup(path);
-	if (token_list_len(&cmd->tok_head) == 1)
+	i = 0;
+	cmd->execve_args = malloc(sizeof(char *) * token_list_len(&curr) + 1);
+	printf("token list len: %d\n", token_list_len(&curr));
+	cmd->execve_args[0] = complete_path(path, cmd);
+	printf("execve_args[0]: %s\n", cmd->execve_args[0]);
+	if (token_list_len(&curr) == 1)
 	{
+		printf("porco\n");
 		cmd->execve_args[1] = 0;
 		return ;
 	}
-//	ft_strcpy(cmd->execve_args[0], path);
-	printf("cmd->execve_args[0]: %s\n", cmd->execve_args[0]);
-	i = 1;
+	printf("before: %s\n", curr->token);
+	i += format_flags(cmd, curr);
+	printf("i val after format flags: %d\n", i);
+	printf("after: %s\n", curr->token);
 	cmd->execve_args[i + 1] = 0;
+	if (curr == NULL)
+		printf("curr == NULL\n");
 	while (curr != NULL)
 	{
 		if (curr->type == TOK_CMD)
 		{
+			printf("skipping tok cmd\n");
 			curr = curr->next;
 			continue ;
 		}
-		cmd->execve_args[i] = get_tok_content_by_type(&cmd->tok_head, curr->type);
-		printf("get_tok_content_by_type: %s\n", get_tok_content_by_type(&cmd->tok_head, curr->type));
+		printf("curr->type: %d\n", curr->type);
+		printf("curr->token: %s\n", curr->token);
+		if (curr->type == TOK_ARGS)
+		{
+			cmd->execve_args[i] = get_tok_content_by_type(&curr, TOK_ARGS);
+			printf("cmd->execve_args[%d]: %s\n", i, get_tok_content_by_type(&curr, TOK_ARGS));
+		}
 		printf("arg just cpy[%d]: %s\n", i, cmd->execve_args[i]);
+		printf("arg (get_tok): %s\n", get_tok_content_by_type(&curr, TOK_ARGS));
 		curr = curr->next;
 		i++;
 	}
+	write(1, "dio\n", 4);
 	cmd->execve_args[i] = 0;
-	printf("find_cmd_path: %s\n", find_cmd_path(cmd));
-	printf("cmd->execve_args[0]: %s\n", cmd->execve_args[0]);
+//	printf("find_cmd_path: %s\n", find_cmd_path(cmd));
+//	printf("cmd->execve_args[0]: %s\n", cmd->execve_args[0]);
 	i = 0;
 	printf("____ARGS FORMAT____\n");
 	while (cmd->execve_args[i])

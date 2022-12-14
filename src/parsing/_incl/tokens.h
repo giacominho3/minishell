@@ -19,6 +19,7 @@ char	*get_redir(char *cmd, int i);
 int		calc_tok_len(char *cmd, int i);
 bool	is_metacharacter(char c);
 bool	is_skippable(char c);
+int		skip_spaces(char *cmd, int i);
 bool	not_operator(char c);
 int		calc_arg_len(char *cmd, int i);
 char	*get_heredoc(char *cmd, int i);

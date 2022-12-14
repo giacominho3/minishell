@@ -10,7 +10,7 @@ LIBFT = $(LIBFT_PATH)libft.a
 
 #M1 flags: -L/opt/homebrew/opt/ruby/lib -I/opt/homebrew/opt/ruby/include
 #42 flags: -L$$HOME/.brew/opt/readline/lib -I $$HOME/.brew/opt/readline/include
-RL_FAGS = -L/usr/include -lreadline -L$$HOME/.brew/opt/readline/lib -I $$HOME/.brew/opt/readline/include
+RL_FAGS = -L/usr/include -lreadline -L/opt/homebrew/opt/ruby/lib -I/opt/homebrew/opt/ruby/include
 
 Y = "\033[33m"
 R = "\033[31m"

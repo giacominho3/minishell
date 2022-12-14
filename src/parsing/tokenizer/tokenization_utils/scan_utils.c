@@ -80,13 +80,31 @@ bool	not_operator(char c)
 
 int	calc_arg_len(char *cmd, int i)
 {
-	int cont;
+	int		cont;
+	bool	single_q;
+	bool	double_q;
 
 	cont = 0;
+	single_q = false;
+	double_q = false;
 	while (cmd[i] && not_operator(cmd[i]))
 	{
+		if (cmd[i] == 39)
+			single_q = !single_q;
+		if (cmd[i] == 34)
+			double_q = !double_q;
+		if (cmd[i] == 45 && !single_q && !double_q)
+			break ;
 		cont++;
 		i++;
 	}
 	return (cont);
+}
+
+
+int	skip_spaces(char *cmd, int i)
+{
+	while (cmd[i] && !is_metacharacter(cmd[i]) && is_skippable(cmd[i]))
+		i++;
+	return (i);
 }

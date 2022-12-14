@@ -1,5 +1,24 @@
 #include "../../_incl/tokens.h"
 
+int	redir_skip(char *cmd, int i)
+{
+	int tmp_index;
+
+	tmp_index = i;
+	tmp_index += 2;
+	while (cmd[tmp_index] == 32)
+		tmp_index++;
+	printf("REDIR_SKIP\n");
+	while(cmd[tmp_index] && !is_metacharacter(cmd[tmp_index])
+		&& !is_skippable(cmd[tmp_index]))
+	{
+		printf("|%c|\n", cmd[tmp_index]);
+		tmp_index++;
+	}
+	printf("-------------\n");
+	return(tmp_index);
+}
+
 /**
  * @param current_char char of the cmd string that is being analyzed
  * @return number of chars that compose the redirection
@@ -9,23 +28,23 @@
 int	scan_redirections(char *cmd, int i, t_token_list **tok_head)
 {
 	char	*tmp;
-	int		ret;
 
 	if (cmd[i] == 60 || cmd[i] == 62)
 	{
+		printf("i val: %d\n", i);
 		if (cmd[i] == 60 && cmd[i + 1] == 60)
 		{
 			tmp = get_heredoc(cmd, i);
+			printf("(redirections scan): tmp: %s\n", tmp);
 			ft_add_tok_last(tok_head, TOK_HEREDOC, tmp);
-			ret = ft_strlen(tmp);
 			free(tmp);
-			return (i + ret);
+			printf("i val: %d\n", i);
+			return (redir_skip(cmd, i));
 		}
 		tmp = get_redir(cmd, i);
 		ft_add_tok_last(tok_head, TOK_REDIRECTION, tmp);
-		ret = ft_strlen(tmp);
 		free(tmp);
-		return (i + ret);
+		return (i + 1);
 	}
 	return (i);
 }

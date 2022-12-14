@@ -40,3 +40,4 @@ int	calc_tok_len(char *cmd, int i)
 	}
 	return (cont);
 }
+
