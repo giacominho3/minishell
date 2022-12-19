@@ -3,11 +3,11 @@
 
 typedef struct s_main
 {
-	char 	*cmd_line;
-	t_env	*env_head;
-	t_cmd	*cmd_head;
-	int		pid;
-	int		exit_status;
+	char		*cmd_line;
+	t_env		*env_head;
+	t_cmd		*cmd_head;
+	t_export	*export_head;
+	int			exit_status;
 }	t_main;
 
 #endif

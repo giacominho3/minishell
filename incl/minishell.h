@@ -35,8 +35,8 @@
 # include "../src/env/_incl/env_types.h"
 # include "../src/parsing/_incl/tok_types.h"
 # include "../src/commands/_incl/cmd_types.h"
+# include "../src/exec/_incl/export_types.h"
 # include "main_types.h"
-# include "../src/exec/_incl/export _types.h"
 /**
  * other includes
  * */

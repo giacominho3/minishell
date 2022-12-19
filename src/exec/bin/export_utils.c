@@ -80,58 +80,73 @@ void	edit_export(char *arg, t_export *export, t_env **env)
 	}
 }
 
-char	**add_to_export(char *arg, t_export *export)
+//add a node to the end of the list
+void	ft_add_export(t_export **head, char *str)
 {
-	int		i;
-	char	**new_export;
+	t_export	*new;
+	t_export	*last;
 
-	i = 0;
-	while (export->entries[i])
-		i++;
-	new_export = (char **)malloc((i + 2) * sizeof(char *));
-	i = 0;
-	while (export->entries[i])
+	last = (*head);
+	new = (t_export *)malloc(sizeof(t_export));
+	if (!new)
 	{
-		new_export[i] = malloc(ft_strlen(export->entries[i]));
-		ft_strcpy(new_export[i], export->entries[i]);
-		free(export->entries[i]);
-		i++;
+		printf("add_last: error while allocating new node: str(%s)\n", str);
+		return ;
 	}
-	i++;
-	new_export[i] = malloc(ft_strlen(arg));
-	ft_strcpy(new_export[i], arg);
-	free(arg);
-	i++;
-	new_export[i] = 0;
-	free(export);
-	return (new_export);
+	ft_set_data(new, str);
+	new->next = NULL;
+	if ((*head) == NULL)
+	{
+		new->prev = NULL;
+		(*head) = new;
+		return ;
+	}
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new;
+	new->prev = last;
 }
 
-void	add_env_and_export(t_export *export, t_env *env)
+/**
+ * @brief check if the arg of a command
+ * is valid to be added to the export
+ */
+int	check_if_valid(char *arg)
 {
-	int	i;
-	int	j;
-	int	equals;
 
-	i = 0;
-	j = 0;
-	equals = 0;
-	while (export->args[i])
+}
+
+void	add_to_export(t_cmd *cmd, char *arg)
+{
+	if (check_if_valid(arg))
+	ft_add_export(&cmd->main_ref->export_head, arg);
+
+}
+
+
+/**
+ * @param cmd cmd being executed
+ * @return
+ *
+ * @brief adds an element to the export
+ */
+int	add_export_element(t_cmd *cmd)
+{
+	t_token_list	*curr;
+
+	curr = cmd->tok_head;
+	while (curr != NULL)
 	{
-		if (is_in_export(export->args[i], export))
-			edit_export(export->args[i], export, &env);
-		else
+		if (curr->type == TOK_ARGS)
 		{
-			while (export->args[i][j])
+			if (check_if_valid(curr->token))
 			{
-				if (export->args[i][j] == '=')
-					equals = 1;
-				j++;
+				printf("minishell: export: '%s': not a valid indentifier\n", curr->token);
+				return (1);
 			}
-			if (!equals)
-				ft_add_last(&env, export->args[i]);
-			export->entries = add_to_export(export->args[i], export);
+			add_to_export(cmd, curr->type);
 		}
-		i++;
+		curr = curr->next;
 	}
+	return (0);
 }

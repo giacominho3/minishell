@@ -4,9 +4,10 @@
 
 typedef struct	s_export
 {
-	char	**entries;
-	char	**args;
-	int		size;
+	char			*name;
+	char			*content;
+	struct s_export	*next;
+	struct s_export	*prev;
 }	t_export;
 
 #endif
