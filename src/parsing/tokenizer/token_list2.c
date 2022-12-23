@@ -1,7 +1,6 @@
 #include "../_incl/tokens.h"
 
 /**
- *
  * @param tok_head head to the token list of a command
  * @return length of the token list
  *

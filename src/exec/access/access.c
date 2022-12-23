@@ -50,7 +50,8 @@ int	exe_builtins(t_cmd *cmd)
 	if (!ft_strcmp("export", tmp))
 	{
 		printf("executing export builtin\n");
-		return (builtin_export(cmd));
+		builtin_export(cmd);
+		return (0);
 	}
 	if (!ft_strcmp("env", tmp))
 		return (builtin_env(cmd));

@@ -31,6 +31,5 @@ int	builtin_cd(t_cmd *cmd)
 		printf("minishell: cd: error while updating the OLDPWD\n");
 		return (-1);
 	}
-	printf("new PWD: %s\n", get_content_by_name(&cmd->main_ref->env_head, "PWD"));
-	return (0);
+	return 0;
 }

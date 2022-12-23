@@ -1,7 +1,6 @@
 #include "../_incl/tokens.h"
 
 /**
- *
  * @param node pointer to the node to set
  * @param type type of token that you want to assign
  * @param val string at witch assign the token type
@@ -31,7 +30,6 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 }
 
 /**
- *
  * @param head = head to the @struct t_token_list
  * @param type = type to assign to the @struct @param type
  * @param tok_val = token to assign to the @struct @param type
@@ -113,11 +111,11 @@ int	cont_tok_by_type(t_token_list **head, t_tokens type)
 /**
  * @param head head to the token list contained in a command node
  * @param type type of token from the @enum t_tokens struct to look for
- * @return @param @param token if found, if not a null string
+ * @return token if found, if not a null string
  *
- * @brief function scans the @struct t_token_list of a command to find if there's a node with
- * the @struct @param type corresponding to the given @param type if found @return the
- * @struct @param token if there isn't a node with the given @param type @return a null string
+ * @brief \n this function scans the t_token_list of a command to find if there's a node with
+ * the type corresponding to the given type if found the
+ * token if there isn't a node with the given type a null string
  */
 char	*get_tok_content_by_type(t_token_list **head, t_tokens type)
 {

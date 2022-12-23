@@ -64,7 +64,9 @@ int	main(int argc, char **argv, char **envp)
 	fancy_init();
 	main.env_head = NULL;
 	main.cmd_head = NULL;
+	main.export_head = NULL;
 	copy_env(&main.env_head, envp);
+	copy_env_to_export(&main.export_head, envp);
 	signal(SIGINT, wt_sig);
 	while (exit != 1)
 	{
