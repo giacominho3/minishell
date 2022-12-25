@@ -42,8 +42,8 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 	}
 	else
 	{
-		close(*tmp);
 		while (waitpid(-1, NULL, WUNTRACED) != -1);
+		close(*tmp);
 		*tmp = dup(0);
 	}
 	return (0);
@@ -63,7 +63,6 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 		dup2(*tmp, STDIN_FILENO);
 		close(*tmp);
 		execute(cmd, envp);
-		return  (error("error: cannot execute ", "diocane"));
 	}
 	else
 	{
@@ -86,6 +85,11 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 	pid = 0;
 	while (curr != NULL)
 	{
+		if (!exe_builtins(curr))
+		{
+			curr = curr->next;
+			continue ;
+		}
 		if (curr->next == NULL)
 			gen_last_process(curr, pid, &tmp, matrix_env);
 		else

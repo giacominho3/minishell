@@ -87,7 +87,8 @@ int	calc_arg_len(char *cmd, int i)
 	cont = 0;
 	single_q = false;
 	double_q = false;
-	while (cmd[i] && not_operator(cmd[i]))
+	while (cmd[i] && not_operator(cmd[i])
+		&& !is_metacharacter(cmd[i]) && cmd[i] != 32)
 	{
 		if (cmd[i] == 39)
 			single_q = !single_q;

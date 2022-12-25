@@ -1,90 +1,10 @@
 #include "../_incl/builtins.h"
 
-//int	ft_modded_strcmp(char *s1, char *s2)
-//{
-//	while (*s1 != '\0' && *s1 != '=' && (*s1 == *s2))
-//	{
-//		s1++;
-//		s2++;
-//	}
-//	return (*(char *)s1 - *(char *)s2);
-//}
-//
-//int	is_in_export(char *arg, t_export *export)
-//{
-//	int		i;
-//	char	*tmp;
-//
-//	i = 0;
-//	while (arg[i] && arg[i] != '=')
-//		i++;
-//	tmp = ft_strndup(arg, i);
-//	while (export->entries[i])
-//	{
-//		if (!ft_modded_strcmp(export->entries[i], tmp))
-//			return (1);
-//		i++;
-//	}
-//	return (0);
-//}
-//
-//int	is_in_env(char *arg, t_env **env)
-//{
-//	int		i;
-//	char	*tmp;
-//	t_env	*head;
-//
-//	i = 0;
-//	head = (*env);
-//	while (arg[i] != '=')
-//		i++;
-//	tmp = ft_strndup(arg, i);
-//	if (!ft_modded_strcmp(get_content_by_name(&head, tmp), ""))
-//		return (1);
-//	return (0);
-//}
-//
-//void	edit_env(char *arg, t_env **env)
-//{
-//	t_env	*curr;
-//
-//	curr = (*env);
-//	while (curr->next)
-//	{
-//		if (!ft_modded_strcmp(curr->content, arg))
-//			ft_set_data(curr, arg);
-//		curr = curr->next;
-//	}
-//}
-//
-//void	edit_export(char *arg, t_export *export, t_env **env)
-//{
-//	int		i;
-//	char	*tmp;
-//
-//	i = 0;
-//	if (is_in_env(arg, env))
-//		edit_env(arg, env);
-//	while (arg[i] && arg[i] != '=')
-//		i++;
-//	tmp = ft_strndup(arg, i);
-//	while (export->entries[i])
-//	{
-//		if (!ft_modded_strcmp(export->entries[i], tmp))
-//		{
-//			free(export->entries[i]);
-//			export->entries[i] = malloc(ft_strlen(arg) + 1);
-//			ft_strcpy(export->entries[i], arg);
-//		}
-//		i++;
-//	}
-//}
-
 void	ft_set_export_data(t_export *node, char *str)
 {
 	if (!find_char_instr('=', str))
 	{
-		node->name = str;
+		node->name = ft_get_name(str, 61);
 		printf("name added: %s\n", node->name);
 		node->content = NULL;
 		return ;
@@ -191,8 +111,6 @@ void	add_elements_to_export(t_cmd *cmd)
 
 //	printf("____export print____\n");
 //	print_export(cmd);
-	printf("executing test\n");
-	cmd->main_ref->export_head->content = "/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/sus";
 	curr = cmd->tok_head;
 	while (curr != NULL)
 	{
@@ -208,12 +126,11 @@ void	add_elements_to_export(t_cmd *cmd)
 		}
 		curr = curr->next;
 	}
-	printf("__finished export exec__\n");
 	print_export(cmd);
-	t_export *last;
+}
 
-	last = cmd->main_ref->export_head;
-	while(last->next != NULL)
-		last = last->next;
-	printf("last name: %s\n", last->name);
+void	unset(t_cmd *cmd)
+{
+
+
 }
