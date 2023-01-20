@@ -73,6 +73,29 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 	return (0);
 }
 
+int req_main_proc(t_cmd *cmd)
+{
+	char	*tmp;
+
+	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
+	if (!tmp)
+		return 1;
+	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
+	if (!ft_strcmp("cd", tmp))
+		return (builtin_cd(cmd));
+	if (!ft_strcmp("export", tmp))
+		return (builtin_export(cmd));
+	if (!ft_strcmp("unset", tmp))
+	{
+		/* bin_unset(); should return 0 */
+		printf("unset\n");
+		unset(cmd);
+		return 0;
+	}
+	free(tmp);
+	return 1;
+}
+
 int	pipeline(t_cmd **cmd_head, char **matrix_env)
 {
 	int		fd[2];
@@ -85,6 +108,11 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 	pid = 0;
 	while (curr != NULL)
 	{
+		if (!req_main_proc(curr))
+		{
+			curr = curr->next;
+			continue ;
+		}
 		if (!exe_builtins(curr))
 		{
 			curr = curr->next;

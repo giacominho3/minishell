@@ -128,9 +128,3 @@ void	add_elements_to_export(t_cmd *cmd)
 	}
 	print_export(cmd);
 }
-
-void	unset(t_cmd *cmd)
-{
-
-
-}

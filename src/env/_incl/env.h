@@ -9,6 +9,7 @@ void	ft_add_front(struct s_env **head, char *str);
 void	ft_add_last(struct s_env **head, char *str);
 void	ft_add_after(struct s_env *prev_node, char *str);
 void	ft_add_before(struct s_env *next_node, char *str);
+void	free_env_node(t_env *node);
 
 /**
  * general functions

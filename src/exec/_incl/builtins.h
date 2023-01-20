@@ -31,5 +31,9 @@ int		builtin_echo(t_cmd *cmd);
  * env
  */
 int		builtin_env(t_cmd *cmd);
+/**
+ * unset
+ */
+void	unset(t_cmd *cmd);
 
 #endif

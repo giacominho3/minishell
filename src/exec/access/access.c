@@ -47,20 +47,20 @@ int	exe_builtins(t_cmd *cmd)
 		builtin_pwd(cmd);
 		return 0;
 	}
-	if (!ft_strcmp("export", tmp))
-	{
-		printf("executing export builtin\n");
-		builtin_export(cmd);
-		return (0);
-	}
+//	if (!ft_strcmp("export", tmp))
+//	{
+//		printf("executing export builtin\n");
+//		builtin_export(cmd);
+//		return (0);
+//	}
 	if (!ft_strcmp("env", tmp))
 		return (builtin_env(cmd));
-	if (!ft_strcmp("unset", tmp))
-	{
-		/* bin_unset(); should return 0 */
-		printf("unset\n");
-		return 0;
-	}
+//	if (!ft_strcmp("unset", tmp))
+//	{
+//		/* bin_unset(); should return 0 */
+//		printf("unset\n");
+//		return 0;
+//	}
 	if (!ft_strcmp("exit", tmp))
 	{
 		/* bin_exit(); should return 0 */

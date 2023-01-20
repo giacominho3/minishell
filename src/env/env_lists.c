@@ -31,6 +31,17 @@ void	ft_add_front(struct s_env **head, char *str)
 	(*head) = new;
 }
 
+void	free_env_node(t_env *node)
+{
+	t_env *prev;
+
+	prev = node->prev;
+	prev->next = node->next;
+	free(node->name);
+	free(node->content);
+	free(node);
+}
+
 void	ft_add_last(struct s_env **head, char *str)
 {
 	//add a node to the end of the list
