@@ -14,26 +14,6 @@ void	free_export_node(t_export *node)
 	free(node);
 }
 
-void	remove_from_env(t_export *node, t_env *env_head)
-{
-	char	*var_name;
-	t_env	*tmp;
-
-	if (node->content == NULL)
-		return ;
-	var_name = ft_strdup(node->name);
-	tmp = env_head;
-	while (tmp != NULL)
-	{
-		if (!ft_strcmp(tmp->name, var_name))
-		{
-			free_env_node(tmp);
-			break ;
-		}
-		tmp = tmp->next;
-	}
-
-}
 
 void	remove_from_export(t_cmd *cmd, char *token)
 {
@@ -44,8 +24,10 @@ void	remove_from_export(t_cmd *cmd, char *token)
 	{
 		if (!ft_strcmp(tmp->name, token))
 		{
+			write(1, "a\n", 2);
 			free_export_node(tmp);
-			remove_from_env(tmp, cmd->main_ref->env_head);
+			write(1, "b\n", 2);
+			write(1, "c\n", 2);
 			break ;
 		}
 		tmp = tmp->next;
@@ -66,6 +48,22 @@ int	is_in_export(t_cmd *cmd, char *find)
 	return (0);
 }
 
+void	remove_from_env(t_cmd *cmd, char *token)
+{
+	t_env	*tmp;
+
+	tmp = cmd->main_ref->env_head;
+	while (tmp != NULL)
+	{
+		if (!ft_strcmp(tmp->name, token))
+		{
+			free_env_node(tmp);
+			break ;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	unset(t_cmd *cmd)
 {
 	t_token_list *curr;
@@ -76,7 +74,10 @@ void	unset(t_cmd *cmd)
 		if (curr->type == TOK_ARGS)
 		{
 			if (is_in_export(cmd, curr->token))
+			{
 				remove_from_export(cmd, curr->token);
+				remove_from_env(cmd, curr->token);
+			}
 
 		}
 		curr = curr->next;

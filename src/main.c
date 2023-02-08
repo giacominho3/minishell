@@ -73,8 +73,8 @@ int	main(int argc, char **argv, char **envp)
 		buff = readline("Minishell> ");
 		if (!buff)
 			return (printf("Minishell> exit\n"));
-		if (ft_strcmp(buff, "env") == 0)
-			print_env(&main.env_head);
+//		if (ft_strcmp(buff, "env") == 0)
+//			print_env(&main.env_head);
 		add_history(buff);
 		if (buff != NULL)
 			interpreter(buff, &main);

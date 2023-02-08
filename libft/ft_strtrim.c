@@ -48,3 +48,37 @@ char	*ft_strtrim(char const *s1, char const *set)
 	buffer[i] = 0;
 	return ((char *)buffer);
 }
+
+/**
+ * @param str input string
+ * @param set charset
+ *
+ * @brief removes all the characters in set
+ * from the beginning of set
+ */
+char	*ft_trim_mod(char *str, char *set)
+{
+	char	*new;
+	int		i;
+	int 	h;
+
+	if (!str)
+		return (NULL);
+	if (!set)
+		return (str);
+	i = 0;
+	while (str[i] && is_in_string(str[i], set))
+		i++;
+	new = malloc((ft_strlen(str) - i) + 1);
+	if (!new)
+		return (NULL);
+	h = 0;
+	while(str[i])
+	{
+		new[h] = str[i];
+		i++;
+		h++;
+	}
+	new[h] = 0;
+	return (new);
+}

@@ -22,16 +22,16 @@ int	ft_strcmp(char *s1, char *s2)
 	return (*(char *)s1 - *(char *)s2);
 }
 
-bool	is_in_strings(char c, char *str)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (true);
-		str++;
-	}
-	return (false);
-}
+//bool	is_in_strings(char c, char *str)
+//{
+//	while (*str)
+//	{
+//		if (*str == c)
+//			return (true);
+//		str++;
+//	}
+//	return (false);
+//}
 
 bool	is_valid_char(char c)
 {

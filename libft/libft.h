@@ -66,6 +66,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_trim_mod(char *str, char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 t_list	*ft_lstnew(void *content);

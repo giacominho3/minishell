@@ -1,11 +1,11 @@
 #include "../../incl/minishell.h"
 
 /**
+ * @param input string in which we look for a command
+ * @param offset starting index of the research
+ * @return len of the command
  *
- * @param input = string in which we look for a command
- * @param offset = starting index of the research
- * @return = len of the command
- * determinate the len of a command by navigating the string until it finds
+ * @brief determinate the len of a command by navigating the string until it finds
  * a command separator
  */
 int	cmd_len(char *input, int offset)

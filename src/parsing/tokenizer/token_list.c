@@ -138,14 +138,21 @@ void	print_toks(t_token_list **head)
 {
 	t_token_list	*tmp;
 
+	printf("___TOKS PRINT___\n");
 	tmp = (*head);
 	while (tmp != NULL)
 	{
 		printf("%s : %d (ascii val: %d)\n", tmp->token, tmp->type, tmp->token[0]);
 		tmp = tmp->next;
 	}
+	printf("________________\n");
 }
 
+/**
+ * @param head head of the command list
+ *
+ * @brief all the tokens lists of each command
+ */
 void	print_token_lists(t_cmd **head)
 {
 	t_cmd *tmp;

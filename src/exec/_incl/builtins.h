@@ -35,5 +35,8 @@ int		builtin_env(t_cmd *cmd);
  * unset
  */
 void	unset(t_cmd *cmd);
-
+/**
+ * exit
+ */
+void	builtin_exit(t_cmd *cmd);
 #endif

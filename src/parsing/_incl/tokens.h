@@ -33,7 +33,7 @@ void	print_token_lists(t_cmd **head);
 int		cont_tok_by_type(t_token_list **head, t_tokens type);
 int		token_list_len(t_token_list **tok_head);
 char	*get_tok_content_by_type(t_token_list **head, t_tokens type);
-
+void	print_toks(t_token_list **head);
 
 /**
  * General tokenization_utils functions

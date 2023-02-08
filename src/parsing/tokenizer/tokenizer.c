@@ -21,8 +21,12 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 		printf("i val after head: %d\n", i);
 		i = body_scan(cmd, i, tok_head);
 		printf("i val after body: %d (char: %c)\n", i, cmd[i]);
+		print_toks(tok_head);
 		i = tail_scan(cmd, i, tok_head);
+		if (!cmd[i])
+			break ;
 		printf("i val after tail: %d (char: %c)\n", i, cmd[i]);
+		print_toks(tok_head);
 	}
 	printf("tokenization termianted\n");
 }

@@ -36,8 +36,13 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 		return (2);
 	if (pid == 0)
 	{
-		dup2(*tmp, STDIN_FILENO);
-		close(*tmp);
+		if (cont_tok_by_type(&cmd->tok_head, TOK_REDIRECTION))
+			redirections(cmd, NULL, tmp);
+		else
+		{
+			dup2(*tmp, STDIN_FILENO);
+			close(*tmp);
+		}
 		execute(cmd, envp);
 	}
 	else
@@ -58,10 +63,15 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 		return 1;
 	if (pid == 0)
 	{
-		dup2(fd[WRITE], STDOUT_FILENO);
-		close(fd[READ]);
-		dup2(*tmp, STDIN_FILENO);
-		close(*tmp);
+		if (cont_tok_by_type(&cmd->tok_head, TOK_REDIRECTION))
+			redirections(cmd, fd, tmp);
+		else
+		{
+			dup2(fd[WRITE], STDOUT_FILENO);
+			close(fd[READ]);
+			dup2(*tmp, STDIN_FILENO);
+			close(*tmp);
+		}
 		execute(cmd, envp);
 	}
 	else
@@ -92,6 +102,13 @@ int req_main_proc(t_cmd *cmd)
 		unset(cmd);
 		return 0;
 	}
+	if (!ft_strcmp("exit", tmp))
+	{
+		/* bin_exit(); should return 0 */
+		printf("exit\n");
+		builtin_exit(cmd);
+		return 0;
+	}
 	free(tmp);
 	return 1;
 }
@@ -113,11 +130,6 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 			curr = curr->next;
 			continue ;
 		}
-		if (!exe_builtins(curr))
-		{
-			curr = curr->next;
-			continue ;
-		}
 		if (curr->next == NULL)
 			gen_last_process(curr, pid, &tmp, matrix_env);
 		else
@@ -125,6 +137,7 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 		curr = curr->next;
 	}
 	close(tmp);
+	close(fd[WRITE]);
 	return (0);
 }
 

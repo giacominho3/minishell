@@ -42,6 +42,37 @@ int	ft_isprint(int arg)
 	return (0);
 }
 
+/**
+ *
+ * @param str
+ * @param i
+ *
+ * @brief check if the name of the file
+ * used/created by the redirection contains only valid chars
+ */
+int check_redir_name(char *str, int i)
+{
+
+}
+
+int	redirections_syntax(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 62 )
+		{
+			if (str[i + 1] == 62 || check_redir_name(str, i +1))
+			{
+				printf(SYNTAX_ERR_REDIR);
+				return (1);
+			}
+		}
+	}
+}
+
 /* wrapper function for syntax checks */
 int	syntax(char *str)
 {
@@ -52,5 +83,6 @@ int	syntax(char *str)
 	}
 	if (open_char_wrapper(str))
 		return (1);
+	if (redirections_syntax(str))
 	return (0);
 }

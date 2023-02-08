@@ -21,6 +21,7 @@ int	builtin_echo(t_cmd *cmd)
 	int				len;
 	t_token_list	*curr;
 
+	printf("___ECHO___\n");
 	keep_n_line = true;
 	if (cont_tok_by_type(&cmd->tok_head, TOK_FLAGS) > 0)
 	{
@@ -33,12 +34,14 @@ int	builtin_echo(t_cmd *cmd)
 	curr = cmd->tok_head;
 	while (curr != NULL)
 	{
+		if (curr->type == TOK_FLAGS && strcmp("-n", curr->token))
+			printf("%s ", curr->token);
 		if (curr->type == TOK_ARGS)
-			printf("%s", curr->token);
+			printf("%s ", curr->token);
 		curr = curr->next;
 	}
 	if (keep_n_line)
 		printf("\n");
-	return (0);
+	exit(0);
 }
 

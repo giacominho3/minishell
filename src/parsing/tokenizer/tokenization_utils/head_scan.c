@@ -1,6 +1,6 @@
 #include "../../_incl/tokens.h"
 
-int	redir_skip(char *cmd, int i)
+int	heredoc_skip(char *cmd, int i)
 {
 	int tmp_index;
 
@@ -19,35 +19,55 @@ int	redir_skip(char *cmd, int i)
 	return(tmp_index);
 }
 
+int	redir_skip(char *cmd, int i)
+{
+	int tmp_index;
+
+	tmp_index = i+1;
+	while (cmd[tmp_index] == 32)
+		tmp_index++;
+	printf("cursor at index: %d (char: %c)\n", tmp_index, cmd[tmp_index]);
+	while(cmd[tmp_index] && !is_metacharacter(cmd[tmp_index])
+		  && !is_skippable(cmd[tmp_index]))
+	{
+		printf("|%c|\n", cmd[tmp_index]);
+		tmp_index++;
+	}
+	printf("-------------\n");
+	printf("tmp_index: %d (char: %c)\n", tmp_index - 1, cmd[tmp_index - 1]);
+	return(tmp_index - 1);
+}
+
 /**
  * @param current_char char of the cmd string that is being analyzed
  * @return number of chars that compose the redirection
  *
  * @brief function that scans the cmd string to find if there are redirections
  */
-int	scan_redirections(char *cmd, int i, t_token_list **tok_head)
+int scan_redirections(char *cmd, int i, t_token_list **tok_head)
 {
 	char	*tmp;
+	int		new_index;
 
-	if (cmd[i] == 60 || cmd[i] == 62)
+	new_index = i;
+	new_index += skip_intial_spaces(cmd);
+	if (cmd[new_index] == 60 && cmd[new_index + 1] == 60)
 	{
-		printf("i val: %d\n", i);
-		if (cmd[i] == 60 && cmd[i + 1] == 60)
-		{
-			tmp = get_heredoc(cmd, i);
-			printf("(redirections scan): tmp: %s\n", tmp);
-			ft_add_tok_last(tok_head, TOK_HEREDOC, tmp);
-			free(tmp);
-			printf("i val: %d\n", i);
-			return (redir_skip(cmd, i));
-		}
-		tmp = get_redir(cmd, i);
+		tmp = get_heredoc(cmd, new_index);
+		ft_add_tok_last(tok_head, TOK_HEREDOC, tmp);
+		free(tmp);
+		return (heredoc_skip(cmd, new_index));
+	}
+	if (cmd[new_index] == 60 || cmd[new_index] == 62)
+	{
+		tmp = get_redir(cmd, new_index);
 		ft_add_tok_last(tok_head, TOK_REDIRECTION, tmp);
 		free(tmp);
-		return (i + 1);
+		return (redir_skip(cmd, new_index));
 	}
 	return (i);
 }
+
 
 /**
  * @param cmd string to be tokenized
