@@ -13,22 +13,22 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 	int	i;
 
 	i = 0;
-	printf("cmd len: %d\n", ft_strlen(cmd));
+//	printf("cmd len: %d\n", ft_strlen(cmd));
 	while (cmd[i] && cmd[i+1])
 	{
-		printf("i val beginning: %d\n", i);
+//		printf("i val beginning: %d\n", i);
 		i = head_scan(cmd, i, tok_head);
-		printf("i val after head: %d\n", i);
+//		printf("i val after head: %d\n", i);
 		i = body_scan(cmd, i, tok_head);
-		printf("i val after body: %d (char: %c)\n", i, cmd[i]);
-		print_toks(tok_head);
+//		printf("i val after body: %d (char: %c)\n", i, cmd[i]);
+//		print_toks(tok_head);
 		i = tail_scan(cmd, i, tok_head);
 		if (!cmd[i])
 			break ;
-		printf("i val after tail: %d (char: %c)\n", i, cmd[i]);
-		print_toks(tok_head);
+//		printf("i val after tail: %d (char: %c)\n", i, cmd[i]);
+//		print_toks(tok_head);
 	}
-	printf("tokenization termianted\n");
+//	printf("tokenization termianted\n");
 }
 
 /**
@@ -46,7 +46,7 @@ int	tokenizer(t_cmd **cmd_head)
 		_tokenizer(curr->cmd, &curr->tok_head);
 		curr = curr->next;
 	}
-	printf("tokenizer termianted\n");
-	print_token_lists(cmd_head);
+//	printf("tokenizer termianted\n");
+//	print_token_lists(cmd_head);
 	return (0);
 }

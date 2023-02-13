@@ -89,16 +89,16 @@ void	quotes_handler(t_parse *parse)
 
 	parse->single_quotes = false;
 	parse->double_quotes = false;
-	printf("parse.out: %s\n", parse->out);
-	printf("parse.out len: %d\n", ft_strlen(parse->out));
+//	printf("parse.out: %s\n", parse->out);
+//	printf("parse.out len: %d\n", ft_strlen(parse->out));
 	cont = count_quotes_to_remove(parse->out);
-	printf("quotes to skip found: %d\n", cont);
-	printf("buf allocated for: %d\n", ((ft_strlen(parse->out) - cont) + 1));
+//	printf("quotes to skip found: %d\n", cont);
+//	printf("buf allocated for: %d\n", ((ft_strlen(parse->out) - cont) + 1));
 	buf = malloc((ft_strlen(parse->out) - cont) + 1);
 	ft_strcpy(buf, parse->out);
-	printf("strcopy test: %s\n", buf);
+//	printf("strcopy test: %s\n", buf);
 	remove_quotes(buf, parse->out);
-	printf("string once quotes removed: %s\n", buf);
+//	printf("string once quotes removed: %s\n", buf);
 	free(parse->out);
 	parse->out = malloc(ft_strlen(buf) + 1);
 	i = -1;

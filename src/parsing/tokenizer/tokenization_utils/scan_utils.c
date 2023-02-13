@@ -102,10 +102,17 @@ int	calc_arg_len(char *cmd, int i)
 	return (cont);
 }
 
-
-int	skip_spaces(char *cmd, int i)
+/**
+ *
+ * @param str string
+ * @param i string index
+ *
+ * @brief gives the new index for the first
+ * non-space char after the given index
+ */
+int	skip_spaces(char *str, int i)
 {
-	while (cmd[i] && !is_metacharacter(cmd[i]) && is_skippable(cmd[i]))
+	while (str[i] && !is_metacharacter(str[i]) && is_skippable(str[i]))
 		i++;
 	return (i);
 }

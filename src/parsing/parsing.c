@@ -39,14 +39,14 @@ int	_expand(t_parse *parse, int out_offset, int in_offset, t_env **head)
 	content = malloc(get_content_len(parse, head, in_offset + 1));
 	get_var_name(parse, name, in_offset + 1);
 	content = get_content_by_name(head, name);
-	printf("CONTENT: %s\n", content); //debug print
-	printf("NAME: %s\n", name); //debug print
+//	printf("CONTENT: %s\n", content); //debug print
+//	printf("NAME: %s\n", name); //debug print
 	i = 0;
 	while (content[i])
 	{
 		parse->out[out_offset] = content[i];
-		printf("PARSE.OUT: %c\n", parse->out[out_offset]); //debug print
-		printf("CONTENT: %c\n", content[i]); //debug print
+//		printf("PARSE.OUT: %c\n", parse->out[out_offset]); //debug print
+//		printf("CONTENT: %c\n", content[i]); //debug print
 		out_offset++;
 		i++;
 	}
@@ -63,10 +63,10 @@ void	expand(t_parse *parse, t_env **head)
 
 	i = 0;
 	j = 0;
-	printf("___expand___\n"); //debug print
+//	printf("___expand___\n"); //debug print
 	while (parse->input[i])
 	{
-		printf("reading char[%d]: %c\n", i, parse->input[i]); //debug print
+//		printf("reading char[%d]: %c\n", i, parse->input[i]); //debug print
 		expand_check(parse, i);
 		if (parse->input[i] == 36 && parse->extend
 			&& valid_var_name(parse->input[i+1]))
@@ -87,7 +87,7 @@ void	new_cmd_line(t_token_list *token, t_parse *parse)
 	int	i;
 
 	i = 0;
-	printf("parse.out: |%s|\n", parse->out);
+//	printf("parse.out: |%s|\n", parse->out);
 	token->token = malloc(parse->out_len + 1);
 	while (parse->out[i])
 	{
@@ -95,7 +95,7 @@ void	new_cmd_line(t_token_list *token, t_parse *parse)
 		i++;
 	}
 	token->token[i] = 0;
-	printf("cmd.out: |%s|\n", token->token);
+//	printf("cmd.out: |%s|\n", token->token);
 }
 
 int	_parse(char *cmd_line, t_token_list *curr_tok, t_main *main)
@@ -114,13 +114,13 @@ int	_parse(char *cmd_line, t_token_list *curr_tok, t_main *main)
 	parse.single_quotes = false;
 	parse.extend = true;
 	expand(&parse, &main->env_head);
-	printf("extended len: %d\n", extended_len(&parse, &main->env_head)); //debug print
-	printf("el stringo: |%s|\n", parse.out); //debug print
-	printf("___quotes handler___\n"); //debug print
+//	printf("extended len: %d\n", extended_len(&parse, &main->env_head)); //debug print
+//	printf("el stringo: |%s|\n", parse.out); //debug print
+//	printf("___quotes handler___\n"); //debug print
 	quotes_handler(&parse);
-	printf("el stringo2: |%s|\n", parse.out); //debug print
+//	printf("el stringo2: |%s|\n", parse.out); //debug print
 	new_cmd_line(curr_tok, &parse); // to fix: input param for t_cmd
-	printf("new_command_line: %s\n", curr_tok->token);
+//	printf("new_command_line: %s\n", curr_tok->token);
  	return (0);
 }
 

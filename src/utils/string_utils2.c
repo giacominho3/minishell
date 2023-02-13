@@ -12,6 +12,11 @@
 
 #include "../../incl/minishell.h"
 
+/**
+ * @param str
+ *
+ * @brief gives the number of spaces to skip for the first char
+ */
 int	skip_intial_spaces(char *str)
 {
 	int	i;

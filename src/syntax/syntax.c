@@ -52,7 +52,15 @@ int	ft_isprint(int arg)
  */
 int check_redir_name(char *str, int i)
 {
+	int	j;
 
+	j = i;
+
+	j = skip_spaces(str, j);
+	if (is_metacharacter(str[j])
+		|| is_in_strings(str[j], "?$|=/"))
+		return (1);
+	return (0);
 }
 
 int	redirections_syntax(char *str)
@@ -62,7 +70,7 @@ int	redirections_syntax(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 62 )
+		if (str[i] == 62)
 		{
 			if (str[i + 1] == 62 || check_redir_name(str, i +1))
 			{
@@ -70,7 +78,20 @@ int	redirections_syntax(char *str)
 				return (1);
 			}
 		}
+		if (str[i] == 60)
+		{
+			if (str[i + 1] == 60)
+			{
+				if (check_redir_name(str, i + 2) || str[i + 2] == 60)
+				{
+					printf(SYNTAX_ERR_REDIR);
+					return (1);
+				}
+			}
+		}
+		i++;
 	}
+	return (0);
 }
 
 /* wrapper function for syntax checks */
@@ -84,5 +105,6 @@ int	syntax(char *str)
 	if (open_char_wrapper(str))
 		return (1);
 	if (redirections_syntax(str))
+		return (1);
 	return (0);
 }

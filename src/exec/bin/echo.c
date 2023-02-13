@@ -21,7 +21,7 @@ int	builtin_echo(t_cmd *cmd)
 	int				len;
 	t_token_list	*curr;
 
-	printf("___ECHO___\n");
+//	printf("___ECHO___\n");
 	keep_n_line = true;
 	if (cont_tok_by_type(&cmd->tok_head, TOK_FLAGS) > 0)
 	{

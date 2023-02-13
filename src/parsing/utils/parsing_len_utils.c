@@ -41,15 +41,15 @@ int	extended_len(t_parse *parse, t_env **head)
 	len = 0;
 	while (parse->input[i])
 	{
-		printf("curr char: %c\n", parse->input[i]);
+//		printf("curr char: %c\n", parse->input[i]);
 		expand_check(parse, i);
 		if (parse->input[i] == 36 && parse->extend
 			&& valid_var_name(parse->input[i+1]))
 		{
 			len += get_content_len(parse, head, i + 1);
-			printf("len: %d\n", len);
+//			printf("len: %d\n", len);
 			i += 1 + var_name_len(parse->input, i + 1);
-			printf("i: %d\n", i);
+//			printf("i: %d\n", i);
 			continue ;
 		}
 		len++;

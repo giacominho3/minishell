@@ -16,10 +16,10 @@ char	*find_cmd_path(t_cmd *cmd)
 		if (!access(path, F_OK))
 		{
 			ft_free_matrix(path_matrix);
-			printf("result path(pre return): %s\n", path);
+//			printf("result path(pre return): %s\n", path);
 			return (path);
 		}
-		printf("result path(pre return out): %s\n", path);
+//		printf("result path(pre return out): %s\n", path);
 		free(path);
 		i++;
 	}
@@ -73,7 +73,7 @@ int	execute(t_cmd *cmd, char **env_matrix)
 	if (exe_builtins(cmd))
 	{
 		path = find_cmd_path(cmd);
-		printf("result path: %s\n", path);
+//		printf("result path: %s\n", path);
 		args_format(cmd, path);
 		execve(path, cmd->execve_args, env_matrix);
 		return (write(2, "execve error\n", 13));

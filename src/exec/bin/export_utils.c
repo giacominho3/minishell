@@ -21,7 +21,7 @@ void	ft_add_export(t_export **head, char *str)
 	t_export	*new;
 	t_export	*last;
 
-	printf("adding: %s\n", str);
+//	printf("adding: %s\n", str);
 	last = (*head);
 	new = (t_export *)malloc(sizeof(t_export));
 	if (!new)
@@ -30,7 +30,7 @@ void	ft_add_export(t_export **head, char *str)
 		return ;
 	}
 	ft_set_export_data(new, str);
-	printf("new name: %s\n", new->name);
+//	printf("new name: %s\n", new->name);
 	new->next = NULL;
 	if ((*head) == NULL)
 	{
@@ -42,7 +42,7 @@ void	ft_add_export(t_export **head, char *str)
 		last = last->next;
 	last->next = new;
 	new->prev = last;
-	printf("final: %s\n", new->name);
+//	printf("final: %s\n", new->name);
 }
 
 void	copy_env_to_export(t_export **head, char **envp)

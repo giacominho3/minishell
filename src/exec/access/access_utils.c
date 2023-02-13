@@ -7,19 +7,19 @@ void	ft_free_matrix(char **matrix)
 	i = 0;
 	if (!matrix)
 		return ;
-	printf("here matrix[%d]: %s\n", i, matrix[i]);
-	write(1, "crash\n", 6);
+//	printf("here matrix[%d]: %s\n", i, matrix[i]);
+//	write(1, "crash\n", 6);
 	while (matrix[i])
 	{
-		write(1, "crash1\n", 7);
+//		write(1, "crash1\n", 7);
 		if (matrix[i]) {
-			printf("matrix[%d]: %p\n", i, &matrix[i]);
+//			printf("matrix[%d]: %p\n", i, &matrix[i]);
 			free(matrix[i]);
 		}
 		i++;
 	}
 	if (matrix) {
-		printf("matrix: %p\n", &matrix);
+//		printf("matrix: %p\n", &matrix);
 		free(matrix);
 	}
 }
@@ -44,33 +44,33 @@ char	*complete_path(char *path, t_cmd *cmd)
 	int		j;
 
 	dst = malloc(ft_strlen(path) + ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 2);
-	write(1, "1\n", 2);
+//	write(1, "1\n", 2);
 	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
-	write(1, "2\n", 2);
+//	write(1, "2\n", 2);
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
-	write(1, "3\n", 2);
+//	write(1, "3\n", 2);
 	if (!tmp || !dst)
 		return (NULL);
 	i = 0;
-	write(1, "4\n", 2);
+//	write(1, "4\n", 2);
 	while (path[i])
 	{
 		dst[i] = path[i];
 		i++;
 	}
-	write(1, "5\n", 2);
+//	write(1, "5\n", 2);
 	dst[i++] = '/';
 	j = 0;
-	write(1, "6\n", 2);
+//	write(1, "6\n", 2);
 	while (tmp[j])
 	{
 		dst[i] = tmp[j];
 		i++;
 		j++;
 	}
-	write(1, "7\n", 2);
+//	write(1, "7\n", 2);
 	dst[i] = 0;
 	free(tmp);
-	write(1, "8\n", 2);
+//	write(1, "8\n", 2);
 	return (dst);
 }

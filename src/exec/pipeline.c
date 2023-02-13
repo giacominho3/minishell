@@ -37,7 +37,7 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 	if (pid == 0)
 	{
 		if (cont_tok_by_type(&cmd->tok_head, TOK_REDIRECTION))
-			redirections(cmd, NULL, tmp);
+			redirections(cmd, NULL, tmp, 0);
 		else
 		{
 			dup2(*tmp, STDIN_FILENO);
@@ -64,7 +64,7 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 	if (pid == 0)
 	{
 		if (cont_tok_by_type(&cmd->tok_head, TOK_REDIRECTION))
-			redirections(cmd, fd, tmp);
+			redirections(cmd, fd, tmp, 1);
 		else
 		{
 			dup2(fd[WRITE], STDOUT_FILENO);

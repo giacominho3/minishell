@@ -90,8 +90,8 @@ int	modify_node_content(t_env **env_head, char *node_name, char *new_content)
 	{
 		if (ft_strcmp(curr->name, node_name) == 0)
 		{
-			printf("node content: %s\n", curr->content);
-			printf("new_content: %s\n", new_content);
+//			printf("node content: %s\n", curr->content);
+//			printf("new_content: %s\n", new_content);
 
 			if (curr->content)
 				free(curr->content);
@@ -106,7 +106,7 @@ int	modify_node_content(t_env **env_head, char *node_name, char *new_content)
 			}
 			curr->content[i] = 0;
 //			change_content(curr->content, new_content);
-			printf("updated node content: %s\n", curr->content);
+//			printf("updated node content: %s\n", curr->content);
 			return (0);
 		}
 		curr = curr->next;

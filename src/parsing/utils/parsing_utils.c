@@ -29,7 +29,7 @@ void	expand_check(t_parse *parse, int i)
 
 void	init_parse(char *input, t_parse *parse)
 {
-	printf("parsing init started\n");
+//	printf("parsing init started\n");
 	parse->input = malloc(ft_strlen(input) + 1);
 	ft_strcpy(parse->input, input);
 	parse->out = malloc(ft_strlen(input) + 1);
@@ -38,12 +38,12 @@ void	init_parse(char *input, t_parse *parse)
 		printf("error while allocating your mom(too fat)\n");
 		return ;
 	}
-	printf("input: %s\n", input);
-	printf("parse.input: %s\n", parse->input);
+//	printf("input: %s\n", input);
+//	printf("parse.input: %s\n", parse->input);
 	parse->extend = true;
 	parse->double_quotes = false;
 	parse->single_quotes = false;
-	printf("parsing init terminated\n");
+//	printf("parsing init terminated\n");
 }
 
 /**

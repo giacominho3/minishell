@@ -8,14 +8,14 @@ int	heredoc_skip(char *cmd, int i)
 	tmp_index += 2;
 	while (cmd[tmp_index] == 32)
 		tmp_index++;
-	printf("REDIR_SKIP\n");
+//	printf("REDIR_SKIP\n");
 	while(cmd[tmp_index] && !is_metacharacter(cmd[tmp_index])
 		&& !is_skippable(cmd[tmp_index]))
 	{
-		printf("|%c|\n", cmd[tmp_index]);
+//		printf("|%c|\n", cmd[tmp_index]);
 		tmp_index++;
 	}
-	printf("-------------\n");
+//	printf("-------------\n");
 	return(tmp_index);
 }
 
@@ -26,15 +26,15 @@ int	redir_skip(char *cmd, int i)
 	tmp_index = i+1;
 	while (cmd[tmp_index] == 32)
 		tmp_index++;
-	printf("cursor at index: %d (char: %c)\n", tmp_index, cmd[tmp_index]);
+//	printf("cursor at index: %d (char: %c)\n", tmp_index, cmd[tmp_index]);
 	while(cmd[tmp_index] && !is_metacharacter(cmd[tmp_index])
 		  && !is_skippable(cmd[tmp_index]))
 	{
-		printf("|%c|\n", cmd[tmp_index]);
+//		printf("|%c|\n", cmd[tmp_index]);
 		tmp_index++;
 	}
-	printf("-------------\n");
-	printf("tmp_index: %d (char: %c)\n", tmp_index - 1, cmd[tmp_index - 1]);
+//	printf("-------------\n");
+//	printf("tmp_index: %d (char: %c)\n", tmp_index - 1, cmd[tmp_index - 1]);
 	return(tmp_index - 1);
 }
 

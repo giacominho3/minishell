@@ -59,7 +59,7 @@ char	*join_name_and_cont(char *name, char *content)
 		i++;
 		j++;
 	}
-	printf("tmp: %s\n", tmp);
+//	printf("tmp: %s\n", tmp);
 	return (tmp);
 }
 
@@ -150,11 +150,11 @@ void	args_format(t_cmd *cmd, char *path)
 	}
 	cmd->execve_args[i] = 0;
 	i = 0;
-	printf("____ARGS FORMAT____\n");
-	while (cmd->execve_args[i])
-	{
-		printf("[%d]: %s\n", i, cmd->execve_args[i]);
-		i++;
-	}
-	printf("____________________\n");
+//	printf("____ARGS FORMAT____\n");
+//	while (cmd->execve_args[i])
+//	{
+//		printf("[%d]: %s\n", i, cmd->execve_args[i]);
+//		i++;
+//	}
+//	printf("____________________\n");
 }
