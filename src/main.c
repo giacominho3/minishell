@@ -80,5 +80,4 @@ int	main(int argc, char **argv, char **envp)
 			interpreter(buff, &main);
 		free(buff);
 	}
-	return (0);
 }

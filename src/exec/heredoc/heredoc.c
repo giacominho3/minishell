@@ -1,25 +1,35 @@
 #include "../_incl/heredoc.h"
-#include "../../../incl/minishell.h"
+
+void	ft_putstring_fd(int fd, char *string)
+{
+	int	i;
+
+	i = 0;
+	while (string[i])
+	{
+		write(fd, &string[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
+}
 
 void	reading(char *limiter, int fd_doc)
 {
 	char	*buf;
-	int		backup;
 
-	backup = dup(STDOUT_FILENO);
-	printf("limiter(reading): %s\n", limiter);
 	while (1)
 	{
-		dup2(backup, fd_doc);
 		buf = readline("heredoc> ");
-		if (!ft_strcmp(buf, limiter))
+		if (!buf)
+		{
+			perror("minishell");
+			return ;
+		}
+		if (!ft_strcmp(limiter, buf))
 			break ;
-		dup2(fd_doc, STDOUT_FILENO);
-		printf("%s\n", buf);
-//		int diff = ft_strcmp(buf, limiter);
-//		fprintf(stderr, "%d\n", diff);
+		ft_putstring_fd(fd_doc, buf);
+		free(buf);
 	}
-	dup2(backup, fd_doc);
 }
 
 /**
