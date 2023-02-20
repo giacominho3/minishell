@@ -22,17 +22,40 @@ int	skip_intial_spaces(char *str)
 	int	i;
 
 	i = 0;
-	while (is_in_strings(str[i], "\t\n\v\f\r "))
+	while (is_in_strings(str[i], SPACE_CHARS))
 		i++;
 	return (i);
 }
 
 int	trim_spaces(char *str, int len)
 {
-	while (is_in_strings(str[len - 1], "\t\n\v\f\r "))
+	while (is_in_strings(str[len - 1], SPACE_CHARS))
 		len--;
 	return (len);
 }
+
+char	*trim_trailing_spaces(char *str)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	while (str[i] && is_skippable(str[i]))
+		i++;
+	new = malloc(i + 1);
+	if (!new)
+		return (NULL);
+	j = 0;
+	while (j < i)
+	{
+		new[j] =str[j];
+		j++;
+	}
+	free(str);
+	return (new);
+}
+
 
 char	*ft_strdup(const char *src)
 {

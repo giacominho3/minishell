@@ -5,7 +5,7 @@
  * @param head = head to the token list of the current cmd list node
  *
  * @brief functions acts like a wrapper for some sub-functions that are going to
- * search for specifics types of tokens inside the command passed as a parameter
+ * search for specifics types of tokens inside the command passed abb a parameter
  * and returns a pointer to the head of the list of tokens for that command
  */
 void	_tokenizer(char *cmd, t_token_list **tok_head)

@@ -73,7 +73,7 @@ char	*ft_trim_mod(char *str, char *set)
 	if (!new)
 		return (NULL);
 	h = 0;
-	while(str[i])
+	while(str[i] && !is_in_string(str[i], SPACE_CHARS))
 	{
 		new[h] = str[i];
 		i++;

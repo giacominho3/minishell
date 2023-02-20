@@ -12,7 +12,7 @@
 
 #include "../../incl/minishell.h"
 
-/* wrapper function for characters that can be opened such as quotes */
+/* wrapper function for characters that can be opened such abb quotes */
 int	open_char_wrapper(char *str)
 {
 	if (open_quotes_syntax(str, 34))

@@ -4,7 +4,7 @@
  * @param c char to analyze
  * @return true if it's in the list of metacharacter, false if not
  *
- * @brief check if the char passed as argument is a metacharacter
+ * @brief check if the char passed abb argument is a metacharacter
  */
 bool	is_metacharacter(char c)
 {
@@ -16,7 +16,7 @@ bool	is_metacharacter(char c)
 
 bool	is_skippable(char c)
 {
-	if (c == 32 || c == 9)
+	if (is_in_strings(c, SPACE_CHARS))
 		return (true);
 	return (false);
 }

@@ -70,6 +70,7 @@ bool	valid_var_name(char c);
 bool	var_term(char c);
 char	*ft_strndup(char *s, size_t n);
 char	*ft_strncpy(char *dst, const char *src, size_t n);
+char	*trim_trailing_spaces(char *str);
 
 //char	*ft_strjoin(char const *s1, char const *s2);
 

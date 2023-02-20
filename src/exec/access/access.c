@@ -47,12 +47,8 @@ int	exe_builtins(t_cmd *cmd)
 		builtin_pwd(cmd);
 		return 0;
 	}
-//	if (!ft_strcmp("export", tmp))
-//	{
-//		printf("executing export builtin\n");
-//		builtin_export(cmd);
-//		return (0);
-//	}
+	if (!ft_strcmp("export", tmp) && (token_list_len(&cmd->tok_head) == 1))
+		return (export_printing(cmd));
 	if (!ft_strcmp("env", tmp))
 		return (builtin_env(cmd));
 //	if (!ft_strcmp("unset", tmp))
@@ -66,6 +62,19 @@ int	exe_builtins(t_cmd *cmd)
 	return (1);
 }
 
+void	print_mat(char **mat)
+{
+	int i = 0;
+
+	if (mat[i] == NULL)
+		printf("dioghane\n");
+	while (mat[i])
+	{
+		printf("%d -> %s\n", i, mat[i]);
+		i++;
+	}
+}
+
 int	execute(t_cmd *cmd, char **env_matrix)
 {
 	char *path;
@@ -73,39 +82,13 @@ int	execute(t_cmd *cmd, char **env_matrix)
 	if (exe_builtins(cmd))
 	{
 		path = find_cmd_path(cmd);
-//		printf("result path: %s\n", path);
+		printf("path: %s\n", path);
 		args_format(cmd, path);
-		execve(path, cmd->execve_args, env_matrix);
-		return (write(2, "execve error\n", 13));
+		if (execve(path, cmd->execve_args, env_matrix) == -1)
+		{
+			perror("Minishell");
+			exit (EXIT_FAILURE);
+		}
 	}
-	return (write(2, "execve error1\n", 14));
+	exit(EXIT_FAILURE);
 }
-
-
-//	path = find_cmd_path(cmd);
-//	printf("result path: %s\n", path);
-//	args_format(cmd, path);
-//	printf("arg[0]: %s\n", cmd->execve_args[0]);
-//	printf("arg[1]: %s\n", cmd->execve_args[1]);
-//	return (execve(path, cmd->execve_args, env_matrix));
-
-///*				TEST				*/
-//void	test(t_main *main)
-//{
-//	add_cmd_last(&main->cmd_head, main, "export");
-//}
-//
-//int main(int argc, char **argv, char **envp)
-//{
-//	t_main main;
-//
-//	main.env_head = NULL;
-//	main.cmd_head = NULL;
-//	copy_env(&main.env_head, envp);
-//	test(&main);
-//	execute(main.cmd_head);
-////	printf("cmd.cmd2: %s\n", main.cmd_head->cmd );
-//	clear_cmd_list(&main.cmd_head);
-//	clear_env(&main.env_head);
-//	return (printf("path took correctly\n"));
-//}

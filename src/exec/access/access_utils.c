@@ -43,34 +43,25 @@ char	*complete_path(char *path, t_cmd *cmd)
 	int		i;
 	int		j;
 
+	if (!path)
+		return (NULL);
 	dst = malloc(ft_strlen(path) + ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 2);
-//	write(1, "1\n", 2);
 	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
-//	write(1, "2\n", 2);
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
-//	write(1, "3\n", 2);
 	if (!tmp || !dst)
 		return (NULL);
-	i = 0;
-//	write(1, "4\n", 2);
-	while (path[i])
-	{
+	i = -1;
+	while (path[++i])
 		dst[i] = path[i];
-		i++;
-	}
-//	write(1, "5\n", 2);
 	dst[i++] = '/';
 	j = 0;
-//	write(1, "6\n", 2);
 	while (tmp[j])
 	{
 		dst[i] = tmp[j];
 		i++;
 		j++;
 	}
-//	write(1, "7\n", 2);
 	dst[i] = 0;
 	free(tmp);
-//	write(1, "8\n", 2);
 	return (dst);
 }

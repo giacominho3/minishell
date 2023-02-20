@@ -21,6 +21,7 @@
 # define INT_MIN -2147483648
 # define INT_MAX 2147483647
 
+# define SPACE_CHARS "\t\n\v\f\r "
 typedef struct s_list
 {
 	void			*content;

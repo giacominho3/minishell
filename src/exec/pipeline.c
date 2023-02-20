@@ -93,7 +93,7 @@ int req_main_proc(t_cmd *cmd)
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
 	if (!ft_strcmp("cd", tmp))
 		return (builtin_cd(cmd));
-	if (!ft_strcmp("export", tmp))
+	if (!ft_strcmp("export", tmp) && (token_list_len(&cmd->tok_head) != 1))
 		return (builtin_export(cmd));
 	if (!ft_strcmp("unset", tmp))
 	{
@@ -110,7 +110,7 @@ int req_main_proc(t_cmd *cmd)
 		return 0;
 	}
 	free(tmp);
-	return 1;
+	return (1);
 }
 
 int	pipeline(t_cmd **cmd_head, char **matrix_env)

@@ -15,13 +15,13 @@ void	print_export(t_cmd *cmd)
 	}
 }
 
+int	export_printing(t_cmd *cmd)
+{
+	print_export(cmd);
+	exit (EXIT_SUCCESS);
+}
 int	builtin_export(t_cmd *cmd)
 {
-	if (token_list_len(&cmd->tok_head) == 1)
-	{
-		print_export(cmd);
-		return 0;
-	}
 	add_elements_to_export(cmd);
 	return 0;
 }

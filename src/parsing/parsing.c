@@ -131,7 +131,8 @@ int	parse(t_token_list **tok_head, t_main *main)
 	curr = (*tok_head);
 	while (curr != NULL)
 	{
-		_parse(curr->token, curr, main);
+		if (curr->type != TOK_HEREDOC)
+			_parse(curr->token, curr, main);
 		curr = curr->next;
 	}
 	return (0);

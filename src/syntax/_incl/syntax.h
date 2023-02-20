@@ -6,6 +6,7 @@
 # define SYNTAX_ERR_SQUOT "Minishell: syntax error: single quotes opened but not closed\n"
 # define SYNTAX_ERR_INVALID_CHAR "Minishell: syntax error: invalid character\n"
 # define SYNTAX_ERR_REDIR "Minishell: syntax error: invalid redirection token\n"
+
 int		syntax_wrapper(struct s_cmd **cmd_head);
 int		syntax(char *str);
 bool	is_valid_syntax(char *str);

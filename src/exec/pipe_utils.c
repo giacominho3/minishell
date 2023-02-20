@@ -129,6 +129,7 @@ void	args_format(t_cmd *cmd, char *path)
 	cmd->execve_args[0] = complete_path(path, cmd);
 	if (token_list_len(&curr) == 1)
 	{
+		printf("cmd->execve_args[0] = %s\n", cmd->execve_args[0]);
 		cmd->execve_args[1] = 0;
 		return ;
 	}
@@ -146,15 +147,20 @@ void	args_format(t_cmd *cmd, char *path)
 			cmd->execve_args[i] = get_tok_content_by_type(&curr, TOK_ARGS);
 			i++;
 		}
+		if (curr->type == TOK_HEREDOC)
+		{
+			cmd->execve_args[i] = get_tok_content_by_type(&curr, TOK_HEREDOC);
+			i++;
+		}
 		curr = curr->next;
 	}
 	cmd->execve_args[i] = 0;
 	i = 0;
-//	printf("____ARGS FORMAT____\n");
-//	while (cmd->execve_args[i])
-//	{
-//		printf("[%d]: %s\n", i, cmd->execve_args[i]);
-//		i++;
-//	}
-//	printf("____________________\n");
+	printf("____ARGS FORMAT____\n");
+	while (cmd->execve_args[i])
+	{
+		printf("[%d]: %s\n", i, cmd->execve_args[i]);
+		i++;
+	}
+	printf("____________________\n");
 }
