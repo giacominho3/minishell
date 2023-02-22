@@ -1,5 +1,30 @@
 #include "../_incl/heredoc.h"
 
+void	remove_file(char *file_name)
+{
+
+}
+
+/**
+ *
+ * @param cmd_head
+ *
+ * @brief removes all the heredoc files generated
+ * during the pipeline execution
+ */
+void	clear_heredoc(t_cmd *cmd_head)
+{
+	t_token_list	*curr;
+
+	curr = cmd_head->tok_head;
+	while (curr != NULL)
+	{
+		if (curr->type == TOK_HEREDOC)
+			remove_file(curr->token);
+		curr = curr->next;
+	}
+}
+
 void	ft_putstring_fd(int fd, char *string)
 {
 	int	i;
