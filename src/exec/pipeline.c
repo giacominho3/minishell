@@ -148,5 +148,5 @@ void	pipeline_wrapper(t_main *main)
 	matrix_env = NULL;
 	matrix_env = fill_env_mat(&main->env_head);
 	pipeline(&main->cmd_head, matrix_env);
-
+	clear_heredoc(main->cmd_head);
 }

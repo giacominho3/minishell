@@ -1,8 +1,18 @@
 #include "../_incl/heredoc.h"
 
-void	remove_file(char *file_name)
+void	remove_file(char *file_name, t_cmd *cmd)
 {
+	char	*matrix[3];
+	char	**envp;
 
+	printf("file name: |%s|\n", file_name);
+	matrix[0] = "bin/rm/rm";
+	matrix[1] = file_name;
+	matrix[2] = 0;
+	envp = NULL;
+	envp = fill_env_mat(&cmd->main_ref->env_head);
+	if (execve("bin/rm", matrix, envp) == -1)
+		perror("minishell:");
 }
 
 /**
@@ -20,7 +30,7 @@ void	clear_heredoc(t_cmd *cmd_head)
 	while (curr != NULL)
 	{
 		if (curr->type == TOK_HEREDOC)
-			remove_file(curr->token);
+			remove_file(curr->token, cmd_head);
 		curr = curr->next;
 	}
 }
