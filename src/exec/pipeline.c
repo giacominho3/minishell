@@ -97,8 +97,6 @@ int req_main_proc(t_cmd *cmd)
 		return (builtin_export(cmd));
 	if (!ft_strcmp("unset", tmp))
 	{
-		/* bin_unset(); should return 0 */
-		printf("unset\n");
 		unset(cmd);
 		return 0;
 	}

@@ -40,23 +40,12 @@ void	interpreter(char *input, t_main *main)
 	if (parsing(main))
 		return ;
 	pipeline_wrapper(main);
-//	if (main->cmd_head != NULL)
-//	{
-//		printf("num of heredoc tok: %d\n", search_tok_by_type(&main->cmd_head->tok_head, TOK_HEREDOC));
-//		printf("print1:\n");
-//		printf("token list after parsing: \n");
-//		print_token_lists(&main->cmd_head);
-////		print_cmd(&main->cmd_head);
-//		printf("___________________\n");
-//	}
 	clear_cmd_list(&main->cmd_head);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		exit = 0;
 	char	*buff;
-//	int i = 0;
 	t_main	main;
 
 	(void)argc;
@@ -65,16 +54,16 @@ int	main(int argc, char **argv, char **envp)
 	main.env_head = NULL;
 	main.cmd_head = NULL;
 	main.export_head = NULL;
+	main.exit_status = 0;
 	copy_env(&main.env_head, envp);
 	copy_env_to_export(&main.export_head, envp);
-	signal(SIGINT, wt_sig);
-	while (exit != 1)
+	while (1)
 	{
+		signal(SIGINT, wt_sig);
+		signal(SIGQUIT, wt_sig1);
 		buff = readline("Minishell> ");
 		if (!buff)
-			return (printf("Minishell> exit\n"));
-//		if (ft_strcmp(buff, "env") == 0)
-//			print_env(&main.env_head);
+			return (0);
 		add_history(buff);
 		if (buff != NULL)
 			interpreter(buff, &main);
