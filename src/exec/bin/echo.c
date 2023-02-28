@@ -14,14 +14,34 @@ int check_echo_flag(char *flag)
 	return (0);
 }
 
+void	echo_print(t_cmd *cmd)
+{
+	t_token_list	*curr;
+
+	curr = cmd->tok_head;
+	while (curr != NULL)
+	{
+		if (curr->type == TOK_ARGS && !strcmp("$?", curr->token))
+		{
+			printf("%d ", cmd->main_ref->exit_status);
+			curr = curr->next;
+			continue ;
+		}
+		if (curr->type == TOK_FLAGS && strcmp("-n", curr->token))
+			printf("%s ", curr->token);
+		if (curr->type == TOK_ARGS)
+			printf("%s ", curr->token);
+		curr = curr->next;
+	}
+
+}
+
 int	builtin_echo(t_cmd *cmd)
 {
 	bool			keep_n_line;
 	char			*flag;
 	int				len;
-	t_token_list	*curr;
 
-//	printf("___ECHO___\n");
 	keep_n_line = true;
 	if (cont_tok_by_type(&cmd->tok_head, TOK_FLAGS) > 0)
 	{
@@ -31,15 +51,7 @@ int	builtin_echo(t_cmd *cmd)
 		if (check_echo_flag(flag) == 0)
 			keep_n_line = false;
 	}
-	curr = cmd->tok_head;
-	while (curr != NULL)
-	{
-		if (curr->type == TOK_FLAGS && strcmp("-n", curr->token))
-			printf("%s ", curr->token);
-		if (curr->type == TOK_ARGS)
-			printf("%s ", curr->token);
-		curr = curr->next;
-	}
+	echo_print(cmd);
 	if (keep_n_line)
 		printf("\n");
 	exit(0);

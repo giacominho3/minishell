@@ -30,6 +30,5 @@ void	builtin_exit(t_cmd *cmd)
 	while (value != NULL && value->type != TOK_ARGS)
 		value = value->next;
 	code = get_exit_code(value->token);
-	printf("code: %d\n", code);
 	exit(code);
 }
