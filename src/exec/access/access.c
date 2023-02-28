@@ -82,7 +82,7 @@ int	execute(t_cmd *cmd, char **env_matrix)
 	if (exe_builtins(cmd))
 	{
 		path = find_cmd_path(cmd);
-		printf("path: %s\n", path);
+//		printf("path: %s\n", path);
 		args_format(cmd, path);
 		if (execve(path, cmd->execve_args, env_matrix) == -1)
 		{

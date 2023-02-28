@@ -19,19 +19,19 @@ int	redir_in(char *file_name)
 	return (fd_in);
 }
 
-void	redir_out(char *file_name, int fd[], int *tmp)
+void	redir_out(char *file_name, int *tmp)
 {
 	char	*path;
 	int		fd_out;
 
-	printf("redir_out\n");
 	path = ft_strjoin("./", ft_trim_mod(file_name, "> "));
-	if ((fd_out = open(path, O_CREAT | O_WRONLY)) < 0)
+	if ((fd_out = open(path, O_CREAT | O_WRONLY, 0644)) < 0)
 		perror("minishell: redir_out: error while opening the file\n");
 	dup2(fd_out, STDOUT_FILENO);
-	close(fd[READ]);
+	close(fd_out);
 	dup2(*tmp, STDIN_FILENO);
 	close(*tmp);
+
 }
 
 void	redirections(t_cmd *cmd, int fd[], int *tmp, int proc_type)
@@ -42,7 +42,6 @@ void	redirections(t_cmd *cmd, int fd[], int *tmp, int proc_type)
 
 	tok_tmp = cmd->tok_head;
 	out_redir = false;
-	printf("___redirections___\n");
 	while (tok_tmp != NULL)
 	{
 		if (tok_tmp->type == TOK_REDIRECTION)
@@ -51,7 +50,7 @@ void	redirections(t_cmd *cmd, int fd[], int *tmp, int proc_type)
 				test = redir_in(tok_tmp->token);
 			if (tok_tmp->token[0] == 62)
 			{
-				redir_out(tok_tmp->token, fd, tmp);
+				redir_out(tok_tmp->token, tmp);
 				out_redir = true;
 			}
 		}
@@ -63,7 +62,5 @@ void	redirections(t_cmd *cmd, int fd[], int *tmp, int proc_type)
 		close(fd[READ]);
 		dup2(*tmp, test);
 		close(*tmp);
-		printf("here\n");
 	}
-	write(2, "_______out________\n", ft_strlen("_______out________\n"));
 }
