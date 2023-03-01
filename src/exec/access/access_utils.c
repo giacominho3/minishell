@@ -53,6 +53,7 @@ char	*complete_path(char *path, t_cmd *cmd)
 	i = -1;
 	while (path[++i])
 		dst[i] = path[i];
+//	dst[i++] = 0;
 	dst[i++] = '/';
 	j = 0;
 	while (tmp[j])

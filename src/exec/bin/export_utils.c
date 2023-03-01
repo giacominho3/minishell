@@ -95,7 +95,7 @@ void	add_to_export(t_cmd *cmd, char *arg)
 	if (not_valid_for_env(arg))
 		return ;
 	ft_add_last(&cmd->main_ref->env_head, arg);
-	cmd->main_ref->exit_status = 0;
+	g_exit_status = 0;
 }
 
 /**
@@ -117,7 +117,7 @@ void	add_elements_to_export(t_cmd *cmd)
 			if (check_if_valid(curr->token))
 			{
 				printf("minishell: export: '%s': not a valid indentifier\n", curr->token);
-				cmd->main_ref->exit_status = 1;
+				g_exit_status = 1;
 				curr = curr->next;
 				continue ;
 			}

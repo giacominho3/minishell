@@ -39,6 +39,8 @@ void	interpreter(char *input, t_main *main)
 		return ;
 	if (parsing(main))
 		return ;
+//	print_cmd(&main->cmd_head);
+//	print_token_lists(&main->cmd_head);
 	pipeline_wrapper(main);
 	clear_cmd_list(&main->cmd_head);
 }
@@ -54,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 	main.env_head = NULL;
 	main.cmd_head = NULL;
 	main.export_head = NULL;
-	main.exit_status = 0;
+	g_exit_status = 0;
 	copy_env(&main.env_head, envp);
 	copy_env_to_export(&main.export_head, envp);
 	while (1)

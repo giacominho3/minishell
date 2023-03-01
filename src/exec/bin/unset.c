@@ -78,5 +78,5 @@ void	unset(t_cmd *cmd)
 		}
 		curr = curr->next;
 	}
-	cmd->main_ref->exit_status = 0;
+	g_exit_status = 0;
 }

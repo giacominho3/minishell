@@ -129,7 +129,6 @@ void	args_format(t_cmd *cmd, char *path)
 	cmd->execve_args[0] = complete_path(path, cmd);
 	if (token_list_len(&curr) == 1)
 	{
-//		printf("cmd->execve_args[0] = %s\n", cmd->execve_args[0]);
 		cmd->execve_args[1] = 0;
 		return ;
 	}

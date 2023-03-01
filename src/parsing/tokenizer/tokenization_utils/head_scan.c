@@ -17,7 +17,6 @@ char	*get_limiter(char *cmd, int index)
 	if (!limiter)
 		printf("minishell: error while allocating limiter\n");
 	i = 0;
-	write(1, "a\n", 2);
 	while (cmd[new_index] && !is_metacharacter(cmd[new_index])
 		&& !is_skippable(cmd[new_index]))
 	{

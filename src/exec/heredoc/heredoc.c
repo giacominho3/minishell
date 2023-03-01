@@ -1,18 +1,32 @@
 #include "../_incl/heredoc.h"
 
+void	print_mat1(char **mat)
+{
+	int i = 0;
+
+	if (mat[i] == NULL)
+		printf("dioghane\n");
+	while (mat[i])
+	{
+		printf("%d -> |%s|\n", i, mat[i]);
+		i++;
+	}
+}
+
 void	remove_file(char *file_name, t_cmd *cmd)
 {
 	char	*matrix[3];
 	char	**envp;
 
 	printf("file name: |%s|\n", file_name);
-	matrix[0] = "bin/rm/rm";
-	matrix[1] = file_name;
+	matrix[0] = "/bin/rm";
+	matrix[1] = "./.heredoc4";
 	matrix[2] = 0;
 	envp = NULL;
 	envp = fill_env_mat(&cmd->main_ref->env_head);
-	if (execve("bin/rm", matrix, envp) == -1)
-		perror("minishell:");
+	print_mat1(matrix);
+	if (execve("/bin/rm/rm", matrix, envp) == -1)
+		perror("Minishell");
 }
 
 /**

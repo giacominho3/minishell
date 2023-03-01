@@ -8,11 +8,13 @@ void	print_cmd(t_cmd **head)
 	struct s_cmd	*tmp;
 
 	tmp = (*head);
+	printf("cmds:\n");
 	while (tmp != NULL)
 	{
 		printf("%s\n", tmp->cmd);
 		tmp = tmp->next;
 	}
+	printf("________\n");
 }
 
 /**

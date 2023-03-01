@@ -97,11 +97,11 @@ int	redirections_syntax(char *str)
 /* wrapper function for syntax checks */
 int	syntax(char *str)
 {
-	if (ft_strlen(str) <= 1)
-	{
-		printf("Minishell: Bad address\n");
-		return (1);
-	}
+//	if (ft_strlen(str) <= 1)
+//	{
+//		printf("Minishell: Bad address\n");
+//		return (1);
+//	}
 	if (!is_valid_syntax(str))
 	{
 		printf(SYNTAX_ERR_INVALID_CHAR);
