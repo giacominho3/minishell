@@ -8,9 +8,9 @@ char	*get_limiter(char *cmd, int index)
 	char	*limiter;
 
 	new_index = index + 2;
-	len = index + 2;
-	while (cmd[len] == 32)
-		len++;
+	while (cmd[new_index] == 32 && cmd[new_index])
+		new_index++;
+	len = new_index;
 	while (cmd[len] && !is_metacharacter(cmd[len]))
 		len++;
 	limiter = malloc((len - index + 2) + 1);
@@ -36,14 +36,9 @@ int	heredoc_skip(char *cmd, int i)
 	tmp_index += 2;
 	while (cmd[tmp_index] == 32)
 		tmp_index++;
-//	printf("REDIR_SKIP\n");
 	while(cmd[tmp_index] && !is_metacharacter(cmd[tmp_index])
 		&& !is_skippable(cmd[tmp_index]))
-	{
-//		printf("|%c|\n", cmd[tmp_index]);
-		tmp_index++;
-	}
-//	printf("-------------\n");
+			tmp_index++;
 	return(tmp_index);
 }
 
@@ -83,7 +78,9 @@ int scan_redirections(char *cmd, int i, t_token_list **tok_head)
 	if (cmd[new_index] == 60 && cmd[new_index + 1] == 60)
 	{
 		tmp = get_limiter(cmd, new_index);
+		printf("starting heredoc\n");
 		heredoc(tmp, new_index, tok_head);
+		printf("finished heredoc\n");
 		free(tmp);
 		return (heredoc_skip(cmd, new_index));
 	}

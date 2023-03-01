@@ -92,15 +92,10 @@ int req_main_proc(t_cmd *cmd)
 {
 	char	*tmp;
 
-	printf("get_cont: %s\n", get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
-//	printf("size: %d\n", ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
 	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
-	printf("1\n");
 	if (!tmp)
 		return 1;
-	printf("2\n");
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
-	printf("3\n");
 	if (!ft_strcmp("cd", tmp))
 		return (builtin_cd(cmd));
 	if (!ft_strcmp("export", tmp) && (token_list_len(&cmd->tok_head) != 1))
@@ -133,18 +128,13 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 	pid = 0;
 	while (curr != NULL)
 	{
-		printf("aba\n");
 		if (!req_main_proc(curr))
 		{
 			curr = curr->next;
 			continue ;
 		}
-		printf("aaa\n");
 		if (curr->next == NULL)
-		{
-			printf("last\n");
 			gen_last_process(curr, pid, &tmp, matrix_env);
-		}
 		else
 			gen_std_process(curr, fd, pid, &tmp, matrix_env);
 		curr = curr->next;
@@ -158,7 +148,6 @@ void	pipeline_wrapper(t_main *main)
 {
 	char	**matrix_env = NULL;
 
-	printf("pipe\n");
 	matrix_env = NULL;
 	matrix_env = fill_env_mat(&main->env_head);
 	pipeline(&main->cmd_head, matrix_env);

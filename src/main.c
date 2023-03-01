@@ -61,8 +61,8 @@ int	main(int argc, char **argv, char **envp)
 	copy_env_to_export(&main.export_head, envp);
 	while (1)
 	{
-		signal(SIGINT, wt_sig);
-		signal(SIGQUIT, wt_sig1);
+//		signal(SIGINT, wt_sig);
+//		signal(SIGQUIT, wt_sig1);
 		buff = readline("Minishell> ");
 		if (!buff)
 			return (0);

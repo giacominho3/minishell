@@ -20,13 +20,17 @@ void	remove_file(char *file_name, t_cmd *cmd)
 
 	printf("file name: |%s|\n", file_name);
 	matrix[0] = "/bin/rm";
-	matrix[1] = "./.heredoc4";
+	matrix[1] = file_name;
 	matrix[2] = 0;
 	envp = NULL;
 	envp = fill_env_mat(&cmd->main_ref->env_head);
 	print_mat1(matrix);
-	if (execve("/bin/rm/rm", matrix, envp) == -1)
-		perror("Minishell");
+	if (!fork())
+	{
+		if (execve("/bin/rm", matrix, envp) == -1)
+			perror("Minishell");
+		exit(0);
+	}
 }
 
 /**
