@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		signal(SIGINT, wt_sig);
-		signal(SIGQUIT, wt_sig1);
+		signal(SIGQUIT, SIG_IGN);
 		buff = readline("Minishell> ");
 		if (!buff)
 		{

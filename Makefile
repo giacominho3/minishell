@@ -2,7 +2,20 @@ NAME=minishell
 
 CC=gcc
 
+LIBFT=./libft/libft.a
+LIBFT_PATH = libft/
+
 FLAGS=-Wall -Werror -Wextra
+READLINE = -lreadline -I/opt/homebrew/Cellar/readline/8.2.1/include -L/opt/homebrew/Cellar/readline/8.2.1/lib -lreadline
+
+Y = "\033[33m"
+R = "\033[31m"
+G = "\033[32m"
+B = "\033[34m"
+P = "\033[36m"
+X = "\033[0m"
+UP = "\033[A"
+CUT = "\033[K"
 
 SRCS=	src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c \
 			src/syntax/syntax.c src/syntax/utils/syntax_utils.c \
@@ -21,23 +34,36 @@ SRCS=	src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c \
 OBJS=$(SRCS:.c=.o)
 
 %.o:%.c
+	@echo $(Y)Compiling [$<]...$(X)
 	$(CC) $(FLAGS) -c $< -o$@
-
-LIBFT=./libft/libft.a
-READLINE = -L/usr/include -lreadline -D_DEFAULT_SOURCE -D_XOPEN_SOURCE=600
+	@printf $(UP)$(CUT)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) -Wl,--allow-multiple-definition $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) $(READLINE)
+	@echo $(Y)Compiling [$(SRCS)]...$(X)
+	@echo $(G)Finished [$(SRCS)]$(X)
+	@echo
+	@echo $(Y)Compiling [$(NAME)]...$(X)
+	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) $(READLINE)
+	@echo $(G)Finished [$(NAME)]$(X)
+
 $(LIBFT):
+	@echo $(B)
 	$(MAKE) -C ./libft/
+
 all:$(NAME)
 
 clean:
-	rm -f *.o
-	$(MAKE) clean -C ./libft
+	@make -C $(LIBFT_PATH) clean
+	@rm -f $(OBJS)
+	@echo $(R)Removed [$(OBJS)]$(X)
+	@echo $(R)Removed libraries.o$(X)
+
 fclean: clean
+	@make -C $(LIBFT_PATH) clean
 	rm -f $(NAME)
-	$(MAKE) fclean -C ./libft
+	@rm -f $(NAME)
+	@echo $(R)Removed [$(NAME)]$(X)
+
 re: fclean all
 
 .PHONY: all clean fclean re

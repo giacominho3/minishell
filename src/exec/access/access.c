@@ -83,7 +83,6 @@ int	execute(t_cmd *cmd, char **env_matrix)
 	{
 		path = find_cmd_path(cmd);
 		args_format(cmd, path);
-		print_mat(cmd->execve_args);
 		if (execve(path, cmd->execve_args, env_matrix) == -1)
 		{
 			perror("Minishell");

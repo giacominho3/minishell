@@ -33,7 +33,6 @@ void	echo_print(t_cmd *cmd)
 			printf("%s ", curr->token);
 		curr = curr->next;
 	}
-
 }
 
 int	builtin_echo(t_cmd *cmd)

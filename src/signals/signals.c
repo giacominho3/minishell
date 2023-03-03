@@ -1,4 +1,5 @@
 #include "incl/signals.h"
+# include <termios.h>
 
 void	wt_sig(int sig)
 {
@@ -13,23 +14,8 @@ void	wt_sig(int sig)
 	{
 		printf("\n");
 		rl_on_new_line();
-//		rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-}
-
-void	reset_terminal(void)
-{
-	struct termios attributes;
-
-	tcgetattr(STDIN_FILENO, &attributes);
-	attributes.c_lflag |= (ECHO | ICANON);
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
-
-}
-
-void	wt_sig1(int sig)
-{
-	if (sig == SIGQUIT)
-		return ;
+	g_exit_status = 130;
 }

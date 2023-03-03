@@ -31,8 +31,6 @@ int	error(char *str, char *err)
 
 int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 {
-	int exit_status;
-
 	pid = fork();
 	if (pid < 0)
 		return (2);
@@ -49,10 +47,7 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 	}
 	else
 	{
-		while (waitpid(-1, &exit_status, 0) != -1);
-		//g_exit_status = WEXITSTATUS(exit_status);
-		//printf("g_exit2: %d\n", g_exit_status);
-		printf("%d \n", exit_status);
+		while (waitpid(-1, &g_exit_status, 0) != -1);
 		close(*tmp);
 		*tmp = dup(0);
 	}
