@@ -12,7 +12,7 @@
 
 #include "../incl/minishell.h"
 
-void	fancy_init(void)
+void	fancy_init(t_main *main)
 {
 	printf ("\033[0;36m");
 	printf("\t███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗\n"
@@ -26,6 +26,9 @@ void	fancy_init(void)
 	printf("\033[0;35m");
 	printf("\t\t    |Hopefully abb beautiful abb a shell T.T|\n");
 	printf("\033[0m\n");
+	main->env_head = NULL;
+	main->cmd_head = NULL;
+	main->export_head = NULL;
 }
 
 void	interpreter(char *input, t_main *main)
@@ -56,17 +59,14 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	fancy_init();
-	main.env_head = NULL;
-	main.cmd_head = NULL;
-	main.export_head = NULL;
+	fancy_init(&main);
 	g_exit_status = 0;
 	copy_env(&main.env_head, envp);
 	copy_env_to_export(&main.export_head, envp);
+	signal(SIGINT, wt_sig);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		signal(SIGINT, wt_sig);
-		signal(SIGQUIT, SIG_IGN);
 		buff = readline("Minishell> ");
 		if (!buff)
 		{
@@ -75,6 +75,8 @@ int	main(int argc, char **argv, char **envp)
 			printf("\b\b  \nMinishell> exit");
 			return (0);
 		}
+		if (ft_strlen(buff) == 0)
+			continue ;
 		add_history(buff);
 		if (buff != NULL)
 			interpreter(buff, &main);

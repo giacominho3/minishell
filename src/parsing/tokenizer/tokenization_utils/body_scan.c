@@ -89,7 +89,6 @@ int	copy_tok(char *cmd, int new_index, int len, char *tok_cpy)
 				continue ;
 			}
 		tok_cpy[tok_index] = cmd[new_index];
-//		printf("copied: %c in tok_cpy\n", tok_cpy[tok_index]);
 		new_index++;
 		tok_index++;
 	}
@@ -101,7 +100,6 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 {
 	int		new_index;
 	char	*tok_cpy;
-//	int		tok_index;
 	int		len;
 
 	if (cmd[i] && !is_metacharacter(cmd[i]))
@@ -117,12 +115,6 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 		tok_cpy = malloc(len);
 //		printf("calc_arg_len: %d\n", calc_arg_len(cmd, i));
 		new_index = copy_tok(cmd, new_index, len, tok_cpy);
-//		while (cmd[new_index] && tok_index < len - 1 && !is_metacharacter(cmd[new_index]))
-//		{
-//			tok_cpy[++tok_index] = cmd[new_index];
-//			printf("copied: %c in tok_cpy\n", tok_cpy[tok_index]);
-//			new_index++;
-//		}
 		ft_add_tok_last(tok_head, TOK_ARGS, tok_cpy);
 //		printf("arg tok: %s\n", tok_cpy);
 		free(tok_cpy);

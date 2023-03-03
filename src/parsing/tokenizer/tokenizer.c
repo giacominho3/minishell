@@ -13,7 +13,7 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 	int	i;
 
 	i = 0;
-	while (cmd[i] && cmd[i+1] != '|') // && cmd[i+1]
+	while (cmd[i] && cmd [i] != '|' && cmd[i+1] != '|') // && cmd[i+1]
 	{
 //		printf("i val beginning: %d(char %c)\n", i, cmd[i]);
 		i = head_scan(cmd, i, tok_head);
