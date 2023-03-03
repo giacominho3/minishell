@@ -42,10 +42,12 @@ void	interpreter(char *input, t_main *main)
 	clear_cmd_list(&main->cmd_head);
 }
 
-//void	ft_exit(t_main **main)
-//{
-//
-//}
+void	ft_exit(t_main *main)
+{
+	clear_env(&main->env_head);
+	clear_cmd_list(&main->cmd_head);
+	clear_export(&main->export_head);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -68,6 +70,8 @@ int	main(int argc, char **argv, char **envp)
 		buff = readline("Minishell> ");
 		if (!buff)
 		{
+			ft_exit(&main);
+			free(buff);
 			printf("\b\b  \nMinishell> exit");
 			return (0);
 		}

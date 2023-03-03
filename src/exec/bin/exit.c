@@ -30,5 +30,6 @@ void	builtin_exit(t_cmd *cmd)
 	while (value != NULL && value->type != TOK_ARGS)
 		value = value->next;
 	code = get_exit_code(value->token);
+	ft_exit(&cmd->main_ref);
 	exit(code);
 }

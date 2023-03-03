@@ -1,5 +1,20 @@
 #include "../_incl/builtins.h"
 
+void clear_export(t_export **head)
+{
+	t_export	*current;
+	t_export	*next;
+
+	current = (*head);
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	(*head) = NULL;
+}
+
 void	print_export(t_cmd *cmd)
 {
 	t_export	*curr;

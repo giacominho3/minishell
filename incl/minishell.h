@@ -58,6 +58,7 @@ extern void	rl_replace_line(const char *text, int clear_undo);
 /********************************
 *	string tokenization_utils	*
 *********************************/
+void	ft_exit(t_main *main);
 int		ft_strcmp(char *s1, char *s2);
 bool	is_in_strings(char c, char *str);
 int		ft_strlen(const char *str);

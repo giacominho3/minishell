@@ -12,7 +12,7 @@ int		builtin_export(t_cmd *cmd);
 int		add_export_element(t_cmd *cmd);
 void	print_export(t_cmd *cmd);
 void	add_elements_to_export(t_cmd *cmd);
-
+void clear_export(t_export **head);
 
 /**
  * pwd
