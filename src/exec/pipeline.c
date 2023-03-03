@@ -107,8 +107,6 @@ int req_main_proc(t_cmd *cmd)
 	}
 	if (!ft_strcmp("exit", tmp))
 	{
-		/* bin_exit(); should return 0 */
-		printf("exit\n");
 		builtin_exit(cmd);
 		return 0;
 	}
