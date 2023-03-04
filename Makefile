@@ -6,7 +6,9 @@ LIBFT=./libft/libft.a
 LIBFT_PATH = libft/
 
 FLAGS=-Wall -Werror -Wextra
-READLINE = -lreadline -I/opt/homebrew/Cellar/readline/8.2.1/include -L/opt/homebrew/Cellar/readline/8.2.1/lib -lreadline
+#Ubuntu: -I/usr/include/readline -D_DEFAULT_SOURCE -D_XOPEN_SOURCE=600 -L/usr/lib/x86_64-linux-gnu -lreadline
+#last used: -L/usr/include -lreadline -L/opt/homebrew/opt/ruby/lib -I/opt/homebrew/opt/ruby/include
+RL_FAGS = -I/usr/include/readline -D_DEFAULT_SOURCE -D_XOPEN_SOURCE=600 -L/usr/lib/x86_64-linux-gnu
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -35,7 +37,7 @@ OBJS=$(SRCS:.c=.o)
 
 %.o:%.c
 	@echo $(Y)Compiling [$<]...$(X)
-	$(CC) $(FLAGS) -c $< -o$@
+	$(CC) $(FLAGS) -c $< -o $@
 	@printf $(UP)$(CUT)
 
 $(NAME): $(OBJS) $(LIBFT)
@@ -43,7 +45,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	@echo $(G)Finished [$(SRCS)]$(X)
 	@echo
 	@echo $(Y)Compiling [$(NAME)]...$(X)
-	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) $(READLINE)
+	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) $(RL_FLAGS) -lreadline
 	@echo $(G)Finished [$(NAME)]$(X)
 
 $(LIBFT):

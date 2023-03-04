@@ -31,6 +31,7 @@ void	remove_file(char *file_name, t_cmd *cmd)
 			perror("Minishell");
 		exit(0);
 	}
+	ft_free_matrix(envp);
 }
 
 /**

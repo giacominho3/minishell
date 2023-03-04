@@ -29,6 +29,7 @@ void	fancy_init(t_main *main)
 	main->env_head = NULL;
 	main->cmd_head = NULL;
 	main->export_head = NULL;
+	main->exit_status = 0;
 }
 
 void	interpreter(char *input, t_main *main)
@@ -42,14 +43,17 @@ void	interpreter(char *input, t_main *main)
 	if (parsing(main))
 		return ;
 	pipeline_wrapper(main);
-	clear_cmd_list(&main->cmd_head);
+	clear_cmd_list(&main->cmd_head); //the execve matrix free has been commented since was causing segfault on ubuntu
 }
 
 void	ft_exit(t_main *main)
 {
 	clear_env(&main->env_head);
 	clear_cmd_list(&main->cmd_head);
+	printf("exit:\n");
 	clear_export(&main->export_head);
+	print_env(&main->env_head);
+	print_cmd(&main->cmd_head);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -60,9 +64,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	fancy_init(&main);
-	g_exit_status = 0;
 	copy_env(&main.env_head, envp);
-	copy_env_to_export(&main.export_head, envp);
+    copy_env_to_export(&main.export_head, envp);
 	signal(SIGINT, wt_sig);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -72,14 +75,13 @@ int	main(int argc, char **argv, char **envp)
 		{
 			ft_exit(&main);
 			free(buff);
-			printf("\b\b  \nMinishell> exit");
-			return (0);
+			return (printf("\b\b  \nMinishell> exit"));
 		}
-		if (ft_strlen(buff) == 0)
+        if (ft_strlen(buff) == 0)
 			continue ;
-		add_history(buff);
-		if (buff != NULL)
+        add_history(buff);
+        if (buff != NULL)
 			interpreter(buff, &main);
-		free(buff);
+        free(buff);
 	}
 }

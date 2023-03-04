@@ -5,7 +5,7 @@ void	ft_free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	if (!matrix)
+	if (!matrix || matrix == NULL)
 		return ;
 //	printf("here matrix[%d]: %s\n", i, matrix[i]);
 //	write(1, "crash\n", 6);
