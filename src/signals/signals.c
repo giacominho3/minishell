@@ -17,5 +17,4 @@ void	wt_sig(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	g_exit_status = 130;
 }

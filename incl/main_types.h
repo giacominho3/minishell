@@ -1,8 +1,6 @@
 #ifndef MINISHELL_MAIN_TYPES_H
 # define MINISHELL_MAIN_TYPES_H
 
-
-
 typedef struct s_main
 {
 	char		*cmd_line;

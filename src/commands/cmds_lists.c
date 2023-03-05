@@ -11,11 +11,11 @@ void	ft_set_cmd(t_cmd *node, t_main *main, char *cmd)
 
 void	add_cmd_last(t_cmd **head, t_main *main, char *cmd)
 {
-	struct s_cmd	*new;
-	struct s_cmd	*last;
+	t_cmd	*new;
+	t_cmd	*last;
 
 	last = (*head);
-	new = (struct s_cmd *) malloc(sizeof(struct s_cmd));
+	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 	{
 		printf("add_cmd_last: error while allocating new node: cmd: (%s)\n", cmd);
@@ -47,7 +47,7 @@ void clear_cmd_list(t_cmd **head)
 //		write(1, "a\n", 2);
 		clear_tokens(&current->tok_head);
 //		if (current->execve_args) {
-//    		printf("current->execve_args: %p\n", &current->execve_args);
+//			printf("current->execve_args: %p\n", &current->execve_args);
 //			ft_free_matrix(current->execve_args);
 //		}
 		if (current->cmd)

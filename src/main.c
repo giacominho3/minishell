@@ -24,12 +24,13 @@ void	fancy_init(t_main *main)
 		"╚══════╝\n");
 	printf("\033[0m\n");
 	printf("\033[0;35m");
-	printf("\t\t    |Hopefully abb beautiful abb a shell T.T|\n");
+	printf("\t\t    |Hopefully as beautiful as a shell T.T|\n");
 	printf("\033[0m\n");
 	main->env_head = NULL;
 	main->cmd_head = NULL;
 	main->export_head = NULL;
 	main->exit_status = 0;
+	AliMalloc = NULL;
 }
 
 void	interpreter(char *input, t_main *main)
@@ -65,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	fancy_init(&main);
 	copy_env(&main.env_head, envp);
-    copy_env_to_export(&main.export_head, envp);
+	copy_env_to_export(&main.export_head, envp);
 	signal(SIGINT, wt_sig);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -77,11 +78,11 @@ int	main(int argc, char **argv, char **envp)
 			free(buff);
 			return (printf("\b\b  \nMinishell> exit"));
 		}
-        if (ft_strlen(buff) == 0)
+		if (ft_strlen(buff) == 0)
 			continue ;
-        add_history(buff);
-        if (buff != NULL)
+		add_history(buff);
+		if (buff != NULL)
 			interpreter(buff, &main);
-        free(buff);
+		free(buff);
 	}
 }

@@ -33,6 +33,7 @@
 /**
  * structures includes
  * */
+# include "../src/gc/_incl/AliMalloc.h"
 # include "../src/env/_incl/env_types.h"
 # include "../src/parsing/_incl/tok_types.h"
 # include "../src/commands/_incl/cmd_types.h"
@@ -53,6 +54,9 @@
 # include "../src/exec/_incl/exec.h"
 # include "../src/exec/_incl/pipeline.h"
 # include "../src/exec/_incl/builtins.h"
+
+t_AliMalloc	*AliMalloc;
+
 extern void	rl_replace_line(const char *text, int clear_undo);
 
 /********************************

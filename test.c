@@ -4,40 +4,35 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdint.h>
 
-int main(int argc, char* argv[], char **envp) {
-	int pid = fork();
-	if (pid == -1) {
+
+void	*ft_malloc(size_t size)
+{
+	void	*pointer;
+
+	pointer = malloc(size);
+	if (!pointer)
+	{
+		perror("oh fuck");
+		exit (EXIT_FAILURE) ;
+	}
+	return (pointer);
+}
+
+int main(int argc, char* argv[], char **envp)
+{
+	int		*x;
+	void	*address;
+
+	x = ft_malloc(sizeof(int) * 2);
+	if (!x)
+	{
+		perror("err");
 		return 1;
 	}
-
-	char *matrix[3];
-	matrix[0] = "/bin/lds";
-	matrix[1] = "";
-	matrix[2] = 0;
-
-	if (pid == 0) {
-		int err = execve("/bin/ls", matrix, envp);
-		if (err == -1) {
-			printf("Could not find program to execute or other error ocurred\n");
-			return 2;
-		}
-	} else {
-		int wstatus;
-		int status;
-
-		waitpid(pid, &wstatus, WEXITSTATUS(status));
-		printf("wexit: %d\n", WEXITSTATUS(status));
-		printf("wexit1: %d\n", wstatus);
-		if (WIFEXITED(status)) {
-			int statusCode = WEXITSTATUS(status);
-			if (statusCode == 0) {
-				printf("Success\n");
-			} else {
-				printf("Failure with status code %d\n", statusCode);
-			}
-		}
-	}
-
-	return 0;
+	printf("pointer: %p\n", &x);
+	address = x;
+	printf("address: %p\n", address);
+	free(address);
 }

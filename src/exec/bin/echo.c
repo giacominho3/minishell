@@ -23,7 +23,7 @@ void	echo_print(t_cmd *cmd)
 	{
 		if (curr->type == TOK_ARGS && !strcmp("$?", curr->token))
 		{
-			printf("%d ", g_exit_status);
+			printf("%d ", cmd->main_ref->exit_status);
 			curr = curr->next;
 			continue ;
 		}

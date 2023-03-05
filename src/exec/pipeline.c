@@ -47,7 +47,7 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 	}
 	else
 	{
-		while (waitpid(-1, &g_exit_status, 0) != -1);
+		while (waitpid(-1, &cmd->main_ref->exit_status, 0) != -1);
 		close(*tmp);
 		*tmp = dup(0);
 	}
