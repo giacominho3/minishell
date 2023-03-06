@@ -28,6 +28,7 @@ void	*ft_malloc(size_t size)
 {
 	void	*pointer;
 
+	pointer = NULL;
 	pointer = malloc(size);
 	if (!pointer)
 	{
@@ -47,7 +48,11 @@ void	gc_clear(t_AliMalloc **gc_head)
 	while (curr != NULL)
 	{
 		next = curr->next;
-		free(curr->address);
+		if (curr->address != NULL)
+		{
+			printf("AliMalloc: address: %p\n", curr->address);
+			free(curr->address);
+		}
 		free(curr);
 		curr = next;
 	}

@@ -59,6 +59,7 @@ void	ft_add_last(struct s_env **head, char *str)
 	new->next = NULL;
 	if ((*head) == NULL)
 	{
+		printf("first node addr: %p\n", &new);
 		new->prev = NULL;
 		(*head) = new;
 		return ;
