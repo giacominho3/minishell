@@ -39,7 +39,7 @@ void	*ft_malloc(size_t size)
 	return (pointer);
 }
 
-void	*ft_free(void *pointer)
+void	ft_free(void *pointer)
 {
 	if (pointer != NULL)
 	{
