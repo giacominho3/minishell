@@ -40,7 +40,7 @@ char	**ft_split(const char *s, char c)
 	if (!s)
 		return (0);
 	i = 0;
-	ret = malloc(sizeof(char *) * (get_word(s, c) + 1));
+	ret = ft_malloc(sizeof(char *) * (get_word(s, c) + 1));
 	if (!ret)
 		return (0);
 	while (*s)

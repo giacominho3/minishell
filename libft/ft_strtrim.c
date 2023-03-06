@@ -39,7 +39,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	k = ft_strlen((char *) s1);
 	while (k > j && is_in_string(s1[k - 1], set))
 		k--;
-	buffer = (char *) malloc(sizeof(*s1) * (k - j + 1));
+	buffer = (char *) ft_malloc(sizeof(*s1) * (k - j + 1));
 	if (!buffer)
 		return (NULL);
 	i = 0;
@@ -69,7 +69,7 @@ char	*ft_trim_mod(char *str, char *set)
 	i = 0;
 	while (str[i] && is_in_string(str[i], set))
 		i++;
-	new = malloc((ft_strlen(str) - i) + 1);
+	new = ft_malloc((ft_strlen(str) - i) + 1);
 	if (!new)
 		return (NULL);
 	h = 0;

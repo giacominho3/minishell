@@ -31,7 +31,7 @@ char	*ft_itoa(int nb)
 	const char	*digits = "0123456789";
 
 	len = lenght(nb, 10);
-	str = malloc(sizeof(char) * (len + 1));
+	str = ft_malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
 	str[len] = 0;
