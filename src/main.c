@@ -55,6 +55,7 @@ void	ft_exit(t_main *main)
 	clear_export(&main->export_head);
 	print_env(&main->env_head);
 	print_cmd(&main->cmd_head);
+	gc_clear(&AliMalloc);
 }
 
 int	main(int argc, char **argv, char **envp)

@@ -55,7 +55,7 @@
 # include "../src/exec/_incl/pipeline.h"
 # include "../src/exec/_incl/builtins.h"
 
-t_AliMalloc	*AliMalloc;
+struct s_AliMalloc	*AliMalloc;
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 

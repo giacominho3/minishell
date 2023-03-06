@@ -10,5 +10,5 @@ typedef struct s_AliMalloc
 }	t_AliMalloc;
 
 void	*ft_malloc(size_t size);
-
+void	gc_clear(t_AliMalloc **gc_head);
 #endif //MINISHELL_GARBAGE_COLLECTOR_H
