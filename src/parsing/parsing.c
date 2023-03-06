@@ -35,8 +35,8 @@ int	_expand(t_parse *parse, int out_offset, int in_offset, t_env **head)
 	char	*content;
 	int		i;
 
-	name = malloc(var_name_len(parse->input, out_offset + 1) + 1);
-	content = malloc(get_content_len(parse, head, in_offset + 1));
+	name = ft_malloc(var_name_len(parse->input, out_offset + 1) + 1);
+	content = ft_malloc(get_content_len(parse, head, in_offset + 1));
 	get_var_name(parse, name, in_offset + 1);
 	content = get_content_by_name(head, name);
 //	printf("CONTENT: %s\n", content); //debug print
@@ -88,7 +88,7 @@ void	new_cmd_line(t_token_list *token, t_parse *parse)
 
 	i = 0;
 //	printf("parse.out: |%s|\n", parse->out);
-	token->token = malloc(parse->out_len + 1);
+	token->token = ft_malloc(parse->out_len + 1);
 	while (parse->out[i])
 	{
 		token->token[i] = parse->out[i];
@@ -104,7 +104,7 @@ int	_parse(char *cmd_line, t_token_list *curr_tok, t_main *main)
 
 	init_parse(cmd_line, &parse);
 	parse.out_len = extended_len(&parse, &main->env_head);
-	parse.out = malloc(parse.out_len + 1);
+	parse.out = ft_malloc(parse.out_len + 1);
 	if (!parse.out)
 	{
 		printf("error while allocating parse.out\n");

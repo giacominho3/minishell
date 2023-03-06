@@ -18,7 +18,7 @@ char	*get_redir(char *cmd, int i)
 		len++;
 		index++;
 	}
-	ret = malloc(len + 2);
+	ret = ft_malloc(len + 2);
 	ret[0] = c;
 	index = 1;
 	while (cmd[index] && !is_metacharacter(cmd[i]))
@@ -51,7 +51,7 @@ char	*get_heredoc(char *cmd, int i)
 		index++;
 	}
 	printf("len: %d\n", len);
-	ret = malloc(len + 3);
+	ret = ft_malloc(len + 3);
 	ret[0] = '<';
 	ret[1] = '<';
 	index = 2;

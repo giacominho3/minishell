@@ -72,7 +72,7 @@ int get_content_len(t_parse *parse, struct s_env **head, int offset)
 	printf("FIRST CHAR OF THE VAR NAME[%d]: %c\n", offset, parse->input[offset]);
 	printf("offset: %d\n", offset);
 	printf("VAR NAME LEN: %d\n", var_name_len(parse->input, offset) + 1);
-	buf = malloc(var_name_len(parse->input, offset) + 1);
+	buf = ft_malloc(var_name_len(parse->input, offset) + 1);
 	if (!buf)
 		return (0);
 	while (parse->input[j] && !var_end_name(parse->input[j]))

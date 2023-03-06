@@ -13,7 +13,7 @@ char	*get_limiter(char *cmd, int index)
 	len = new_index;
 	while (cmd[len] && !is_metacharacter(cmd[len]))
 		len++;
-	limiter = malloc((len - index + 2) + 1);
+	limiter = ft_malloc((len - index + 2) + 1);
 	if (!limiter)
 		printf("minishell: error while allocating limiter\n");
 	i = 0;

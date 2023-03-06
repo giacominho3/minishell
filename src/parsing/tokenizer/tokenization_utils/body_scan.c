@@ -15,7 +15,7 @@ int	scan_cmd(char *cmd, int i, t_token_list **tok_head)
 	new_index = i;
 	tok_index = 0;
 //	printf("calc tok len: %d\n", calc_tok_len(cmd, i));
-	tok_cpy = malloc(calc_tok_len(cmd, i) + 1);
+	tok_cpy = ft_malloc(calc_tok_len(cmd, i) + 1);
 	while (cmd[new_index] && !is_metacharacter(cmd[new_index])
 		&& !is_skippable(cmd[new_index]))
 	{
@@ -45,7 +45,7 @@ int	scan_flags(char *cmd, int i, t_token_list **tok_head)
 		return (i);
 	new_index = i;
 	tok_index = 0;
-	tok_cpy = malloc(calc_tok_len(cmd, i));
+	tok_cpy = ft_malloc(calc_tok_len(cmd, i));
 //	printf("calc_tok_len(flags): %d\n", calc_tok_len(cmd, i));
 //	printf("new_index(flag) val: %d (on char %c)\n", new_index, cmd[new_index]);
 	while (cmd[new_index] && !is_metacharacter(cmd[new_index])
@@ -112,7 +112,7 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 //		printf("new_index initial value: %d\n", new_index);
 //		tok_index = -1;
 		len = calc_arg_len(cmd ,i);
-		tok_cpy = malloc(len);
+		tok_cpy = ft_malloc(len);
 //		printf("calc_arg_len: %d\n", calc_arg_len(cmd, i));
 		new_index = copy_tok(cmd, new_index, len, tok_cpy);
 		ft_add_tok_last(tok_head, TOK_ARGS, tok_cpy);

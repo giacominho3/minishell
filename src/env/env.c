@@ -31,7 +31,7 @@ char	*ft_get_name(char *str, char c)
 	char	*tmp;
 
 	i = 0;
-	tmp = (char *)malloc(ft_strlen(str));
+	tmp = (char *)ft_malloc(ft_strlen(str));
 	if (!tmp)
 		perror("env.c:34:36 | ft_get_name(), allocation failure");
 	while (str[i] && str[i] != c)
@@ -49,7 +49,7 @@ char	*ft_get_content(char *str, char c)
 	int		j;
 	char	*tmp;
 
-	tmp = (char *)malloc(sizeof(int) * ft_strlen(str));
+	tmp = (char *)ft_malloc(sizeof(int) * ft_strlen(str));
 	if (!tmp)
 		perror("env.c:55:57 | ft_get_content(), allocation failure");
 	i = 0;

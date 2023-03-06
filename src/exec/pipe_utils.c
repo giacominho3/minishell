@@ -39,7 +39,7 @@ char	*join_name_and_cont(char *name, char *content)
 	int		i;
 	int		j;
 
-	tmp = malloc(ft_strlen(name) + ft_strlen(content) + 1);
+	tmp = ft_malloc(ft_strlen(name) + ft_strlen(content) + 1);
 	if (!tmp)
 		return (NULL);
 	i = 0;
@@ -84,7 +84,7 @@ char	**fill_env_mat(t_env **env_head)
 	t_env	*curr;
 
 	curr = (*env_head);
-	mat = malloc(sizeof(char *) * (calc_env_y(env_head)));
+	mat = ft_malloc(sizeof(char *) * (calc_env_y(env_head)));
 	i = 0;
 	while (curr != NULL)
 	{
@@ -125,7 +125,7 @@ void	args_format(t_cmd *cmd, char *path)
 
 	curr = cmd->tok_head;
 	i = 0;
-	cmd->execve_args = malloc(sizeof(char *) * token_list_len(&curr) + 1);
+	cmd->execve_args = ft_malloc(sizeof(char *) * token_list_len(&curr) + 1);
 	cmd->execve_args[0] = complete_path(path, cmd);
 	if (token_list_len(&curr) == 1)
 	{

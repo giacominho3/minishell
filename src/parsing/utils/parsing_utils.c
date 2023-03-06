@@ -30,9 +30,9 @@ void	expand_check(t_parse *parse, int i)
 void	init_parse(char *input, t_parse *parse)
 {
 //	printf("parsing init started\n");
-	parse->input = malloc(ft_strlen(input) + 1);
+	parse->input = ft_malloc(ft_strlen(input) + 1);
 	ft_strcpy(parse->input, input);
-	parse->out = malloc(ft_strlen(input) + 1);
+	parse->out = ft_malloc(ft_strlen(input) + 1);
 	if (!parse->input || !parse->out)
 	{
 		printf("error while allocating your mom(too fat)\n");

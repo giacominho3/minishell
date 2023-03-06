@@ -15,7 +15,7 @@ void	add_cmd_last(t_cmd **head, t_main *main, char *cmd)
 	t_cmd	*last;
 
 	last = (*head);
-	new = (t_cmd *)malloc(sizeof(t_cmd));
+	new = (t_cmd *)ft_malloc(sizeof(t_cmd));
 	if (!new)
 	{
 		printf("add_cmd_last: error while allocating new node: cmd: (%s)\n", cmd);

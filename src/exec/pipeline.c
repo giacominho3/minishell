@@ -87,7 +87,7 @@ int req_main_proc(t_cmd *cmd)
 {
 	char	*tmp;
 
-	tmp = malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
+	tmp = ft_malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
 	if (!tmp)
 		return 1;
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));

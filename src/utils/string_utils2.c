@@ -43,7 +43,7 @@ char	*trim_trailing_spaces(char *str)
 	i = 0;
 	while (str[i] && is_skippable(str[i]))
 		i++;
-	new = malloc(i + 1);
+	new = ft_malloc(i + 1);
 	if (!new)
 		return (NULL);
 	j = 0;
@@ -65,7 +65,7 @@ char	*ft_strdup(const char *src)
 	i = 0;
 	while (src[i])
 		i++;
-	ptr = malloc(sizeof(char) * (i + 1));
+	ptr = ft_malloc(sizeof(char) * (i + 1));
 	if (!ptr)
 		return (NULL);
 	i = 0;

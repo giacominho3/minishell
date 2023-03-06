@@ -23,7 +23,11 @@ void	echo_print(t_cmd *cmd)
 	{
 		if (curr->type == TOK_ARGS && !strcmp("$?", curr->token))
 		{
+<<<<<<< HEAD
+			printf("%d", g_exit_status);
+=======
 			printf("%d ", cmd->main_ref->exit_status);
+>>>>>>> eb937253804edd7f83e3ebe816327579884bb61a
 			curr = curr->next;
 			continue ;
 		}
@@ -45,7 +49,7 @@ int	builtin_echo(t_cmd *cmd)
 	if (cont_tok_by_type(&cmd->tok_head, TOK_FLAGS) > 0)
 	{
 		len = ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_FLAGS));
-		flag = malloc(len + 1);
+		flag = ft_malloc(len + 1);
 		ft_strcpy(flag, get_tok_content_by_type(&cmd->tok_head, TOK_FLAGS));
 		if (check_echo_flag(flag) == 0)
 			keep_n_line = false;

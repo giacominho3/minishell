@@ -15,7 +15,7 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 	curr = (*node);
 	i = 0;
 	curr->type = type;
-	curr->token = (char *) malloc(ft_strlen(val) + 1);
+	curr->token = (char *) ft_malloc(ft_strlen(val) + 1);
 	if (!curr->token)
 	{
 		perror("token_list.c:17:20 | ft_set_tok(), allocation failure\n");
@@ -42,7 +42,7 @@ void	ft_add_tok_last(t_token_list **head, t_tokens type, char *tok_val)
 	t_token_list	*last;
 
 	last = (*head);
-	new = (t_token_list *)malloc(sizeof(t_token_list));
+	new = (t_token_list *)ft_malloc(sizeof(t_token_list));
 	if (!new)
 	{
 		printf("token_list.c:42:45 | add_tok_last: error while allocating new node: tok_val(%s)\n", tok_val);

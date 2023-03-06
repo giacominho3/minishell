@@ -37,7 +37,7 @@ char	*ft_strndup(char *s, size_t n)
 {
 	char			*str;
 
-	str = (char *)malloc(sizeof(char) * n + 1);
+	str = (char *)ft_malloc(sizeof(char) * n + 1);
 	if (str == NULL)
 		return (NULL);
 	str = ft_strncpy(str, s, n);

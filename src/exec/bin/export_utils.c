@@ -23,7 +23,7 @@ void	ft_add_export(t_export **head, char *str)
 
 //	printf("adding: %s\n", str);
 	last = (*head);
-	new = (t_export *)malloc(sizeof(t_export));
+	new = (t_export *)ft_malloc(sizeof(t_export));
 	if (!new)
 	{
 		printf("add_last: error while allocating new node: str(%s)\n", str);

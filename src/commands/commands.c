@@ -31,7 +31,7 @@ int	command_splitter(char *input, t_main *main)
 	i = 0;
 	while (input[i] != 0)
 	{
-		cmd = (char *)malloc(cmd_len(input, i) + 1);
+		cmd = (char *)ft_malloc(cmd_len(input, i) + 1);
 		if (!cmd)
 		{
 			perror("tokenizer.c:97:100 error while allocating cmd");

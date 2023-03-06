@@ -17,7 +17,7 @@ void	ft_add_front(struct s_env **head, char *str)
 	//add a node at the beginning of the list
 	struct s_env	*new;
 
-	new = (struct s_env *)malloc(sizeof(struct s_env));
+	new = (struct s_env *)ft_malloc(sizeof(struct s_env));
 	if (!new)
 	{
 		printf("add_front: error while allocating new node: str(%s)\n", str);
@@ -49,7 +49,7 @@ void	ft_add_last(struct s_env **head, char *str)
 	struct s_env	*last;
 
 	last = (*head);
-	new = (struct s_env *)malloc(sizeof(struct s_env));
+	new = (struct s_env *)ft_malloc(sizeof(struct s_env));
 	if (!new)
 	{
 		printf("add_last: error while allocating new node: str(%s)\n", str);
@@ -79,7 +79,7 @@ void	ft_add_after(struct s_env *prev_node, char *str)
 		printf("ft_add_before: invalid prev node\n");
 		return ;
 	}
-	new = (struct s_env*)malloc(sizeof(struct s_env));
+	new = (struct s_env*)ft_malloc(sizeof(struct s_env));
 	if (!new)
 		return ;
 	ft_set_data(new, str);
@@ -100,7 +100,7 @@ void	ft_add_before(struct s_env *next_node, char *str)
 		printf("ft_add_before: invalid prev node\n");
 		return;
 	}
-	new = (struct s_env *)malloc(sizeof(struct s_env));
+	new = (struct s_env *)ft_malloc(sizeof(struct s_env));
 	if (!new)
 		return;
 	ft_set_data(new, str);
