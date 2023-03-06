@@ -40,7 +40,7 @@ int	command_splitter(char *input, t_main *main)
 		ft_cmdcpy(cmd, input, cmd_len(input, i), i);
 		i += cmd_len(input, i);
 		add_cmd_last(&main->cmd_head, main, cmd);
-		free(cmd);
+		ft_free(cmd);
 	}
 //	printf("commands:\n");
 //	print_cmd(&main->cmd_head);

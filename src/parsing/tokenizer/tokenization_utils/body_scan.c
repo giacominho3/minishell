@@ -26,7 +26,7 @@ int	scan_cmd(char *cmd, int i, t_token_list **tok_head)
 	tok_cpy[tok_index] = 0;
 	ft_add_tok_last(tok_head, TOK_CMD, tok_cpy);
 //	printf("cmd tok: %s\n", tok_cpy);
-	free(tok_cpy);
+	ft_free(tok_cpy);
 //	printf("new index: %d\n", new_index); //debug print
 	return (new_index);
 }
@@ -59,7 +59,7 @@ int	scan_flags(char *cmd, int i, t_token_list **tok_head)
 	tok_cpy[tok_index] = 0;
 	ft_add_tok_last(tok_head, TOK_FLAGS, tok_cpy);
 //	printf("flag tok: %s\n", tok_cpy);
-	free(tok_cpy);
+	ft_free(tok_cpy);
 	new_index = scan_flags(cmd, new_index, tok_head);
 //	printf("new index: %d\n", new_index); //debug print
 	return (new_index);
@@ -117,7 +117,7 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 		new_index = copy_tok(cmd, new_index, len, tok_cpy);
 		ft_add_tok_last(tok_head, TOK_ARGS, tok_cpy);
 //		printf("arg tok: %s\n", tok_cpy);
-		free(tok_cpy);
+		ft_free(tok_cpy);
 //		printf("new index(scan args): %d\n", new_index); //debug print
 		return (new_index);
 	}

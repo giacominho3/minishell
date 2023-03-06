@@ -81,14 +81,14 @@ int scan_redirections(char *cmd, int i, t_token_list **tok_head)
 		printf("starting heredoc\n");
 		heredoc(tmp, new_index, tok_head);
 		printf("finished heredoc\n");
-		free(tmp);
+		ft_free(tmp);
 		return (heredoc_skip(cmd, new_index));
 	}
 	if (cmd[new_index] == 60 || cmd[new_index] == 62)
 	{
 		tmp = get_redir(cmd, new_index);
 		ft_add_tok_last(tok_head, TOK_REDIRECTION, tmp);
-		free(tmp);
+		ft_free(tmp);
 		printf("REDIR_SKIP: %d\n", redir_skip(cmd, new_index));
 		return (redir_skip(cmd, new_index));
 	}

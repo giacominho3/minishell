@@ -77,9 +77,9 @@ void clear_tokens(t_token_list **head)
 	{
 		next = current->next;
 //		printf("current->token: %p\n", &current->token);
-		free(current->token);
+		ft_free(current->token);
 //		printf("current: %p\n", &current);
-		free(current);
+		ft_free(current);
 		current = next;
 	}
 	(*head) = NULL;

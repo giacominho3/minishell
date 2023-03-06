@@ -1,6 +1,6 @@
 #include "../_incl/builtins.h"
 
-void	free_export_node(t_export **export_head, t_export *node)
+void	ft_free_export_node(t_export **export_head, t_export *node)
 {
 	if (*export_head == NULL || node == NULL)
 		return;
@@ -10,7 +10,7 @@ void	free_export_node(t_export **export_head, t_export *node)
 		node->next->prev = node->prev;
 	if (node->prev != NULL)
 		node->prev->next = node->next;
-	free(node);
+	ft_free(node);
 }
 
 

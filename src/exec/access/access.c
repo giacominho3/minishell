@@ -20,7 +20,7 @@ char	*find_cmd_path(t_cmd *cmd)
 			return (path);
 		}
 //		printf("result path(pre return out): %s\n", path);
-		free(path);
+		ft_free(path);
 		i++;
 	}
 	ft_free_matrix(path_matrix);
@@ -58,7 +58,7 @@ int	exe_builtins(t_cmd *cmd)
 //		return 0;
 //	}
 
-	free(tmp);
+	ft_free(tmp);
 	return (1);
 }
 

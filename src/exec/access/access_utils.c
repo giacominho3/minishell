@@ -14,7 +14,7 @@ void	ft_free_matrix(char **matrix)
 //		write(1, "crash1\n", 7);
 		if (matrix[i]) {
 //			printf("matrix[%d]: %p\n", i, &matrix[i]);
-			free(matrix[i]);
+			ft_free(matrix[i]);
 		}
 		i++;
 	}
@@ -63,6 +63,6 @@ char	*complete_path(char *path, t_cmd *cmd)
 		j++;
 	}
 	dst[i] = 0;
-	free(tmp);
+	ft_free(tmp);
 	return (dst);
 }

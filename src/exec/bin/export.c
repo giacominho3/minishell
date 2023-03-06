@@ -9,7 +9,7 @@ void clear_export(t_export **head)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current);
+		ft_free(current);
 		current = next;
 	}
 	(*head) = NULL;

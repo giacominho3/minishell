@@ -82,7 +82,7 @@ void	reading(char *limiter, int fd_doc)
 		if (!ft_strcmp(limiter, buf))
 			break ;
 		ft_putstring_fd(fd_doc, buf);
-		free(buf);
+		ft_free(buf);
 	}
 }
 

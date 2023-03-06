@@ -15,7 +15,7 @@ void	add_cmd_last(t_cmd **head, t_main *main, char *cmd)
 	t_cmd	*last;
 
 	last = (*head);
-	new = (t_cmd *)ft_malloc(sizeof(t_cmd));
+	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 	{
 		printf("add_cmd_last: error while allocating new node: cmd: (%s)\n", cmd);
@@ -53,12 +53,12 @@ void clear_cmd_list(t_cmd **head)
 		if (current->cmd)
 		{
 //			printf("current->cmd: %p\n", &current->cmd);
-			free(current->cmd);
+			ft_free(current->cmd);
 		}
 //		write(1, "c\n", 2);
 //		write(1, "d\n", 2);
 //		printf("current: %p\n", &current);
-		free(current);
+		ft_free(current);
 		current = next;
 	}
 	*head = NULL;

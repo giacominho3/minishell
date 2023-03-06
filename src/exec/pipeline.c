@@ -105,7 +105,7 @@ int req_main_proc(t_cmd *cmd)
 		builtin_exit(cmd);
 		return 0;
 	}
-	free(tmp);
+	ft_free(tmp);
 	return (1);
 }
 

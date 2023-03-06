@@ -94,7 +94,7 @@ int	modify_node_content(t_env **env_head, char *node_name, char *new_content)
 //			printf("new_content: %s\n", new_content);
 
 			if (curr->content)
-				free(curr->content);
+				ft_free(curr->content);
 			curr->content = ft_malloc(ft_strlen(new_content) + 1);
 			if(!curr->content)
 				return (2);

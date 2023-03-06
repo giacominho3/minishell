@@ -82,6 +82,6 @@ int get_content_len(t_parse *parse, struct s_env **head, int offset)
 	i = ft_strlen(get_content_by_name(head, buf));
 	printf("get_content_by_name output: %s\n", get_content_by_name(head, buf)); //debug print
 	printf("get_content_len output: %d\n", i); //debug print
-	free(buf);
+	ft_free(buf);
 	return (i);
 }

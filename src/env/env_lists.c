@@ -37,9 +37,9 @@ void	free_env_node(t_env *node)
 
 	prev = node->prev;
 	prev->next = node->next;
-	free(node->name);
-	free(node->content);
-	free(node);
+	ft_free(node->name);
+	ft_free(node->content);
+	ft_free(node);
 }
 
 void	ft_add_last(struct s_env **head, char *str)
@@ -120,7 +120,7 @@ void clear_env(struct s_env **head)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current);
+		ft_free(current);
 		current = next;
 	}
 	(*head) = NULL;

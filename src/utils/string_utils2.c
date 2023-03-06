@@ -52,7 +52,7 @@ char	*trim_trailing_spaces(char *str)
 		new[j] =str[j];
 		j++;
 	}
-	free(str);
+	ft_free(str);
 	return (new);
 }
 
