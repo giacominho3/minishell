@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!buff)
 		{
 			ft_exit(&main);
-			ft_free(buff);
+			free(buff);
 			return (printf("\b\b  \nMinishell> exit"));
 		}
 		if (ft_strlen(buff) == 0)
@@ -89,6 +89,6 @@ int	main(int argc, char **argv, char **envp)
 		add_history(buff);
 		if (buff != NULL)
 			interpreter(buff, &main);
-		ft_free(buff);
+		free(buff);
 	}
 }
