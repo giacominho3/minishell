@@ -23,7 +23,7 @@ void	remove_from_export(t_cmd *cmd, char *token)
 	{
 		if (!ft_strcmp(tmp->name, token))
 		{
-			free_export_node(&cmd->main_ref->export_head, tmp);
+			ft_free_export_node(&cmd->main_ref->export_head, tmp);
 			break ;
 		}
 		tmp = tmp->next;

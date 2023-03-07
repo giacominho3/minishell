@@ -2,7 +2,7 @@ NAME=minishell
 
 CC=gcc
 
-FLAGS=-Wall -Werror -Wextra
+FLAGS=-Wall -Werror -Wextra -g
 
 SRCS=	src/main.c src/parsing/parsing.c src/parsing/utils/parsing_len_utils.c \
 			src/syntax/syntax.c src/syntax/utils/syntax_utils.c \
@@ -26,8 +26,9 @@ OBJS=$(SRCS:.c=.o)
 LIBFT=./libft/libft.a
 READLINE = -L/usr/include -lreadline -D_DEFAULT_SOURCE -D_XOPEN_SOURCE=600
 
+#may need this flag on asahi  -Wl,--allow-multiple-definition
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) -Wl,--allow-multiple-definition $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) $(READLINE)
+	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) $(READLINE)
 $(LIBFT):
 	$(MAKE) -C ./libft/
 all:$(NAME)

@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include "../src/gc/_incl/AliMalloc.h"
 # undef	INT_MIN
 # undef	INT_MAX
 

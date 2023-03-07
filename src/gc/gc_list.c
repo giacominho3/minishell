@@ -39,13 +39,34 @@ void	*ft_malloc(size_t size)
 	return (pointer);
 }
 
+void	remove_AliMalloc_node(t_AliMalloc **gc_head, void *pointer)
+{
+	t_AliMalloc	*tmp;
+	t_AliMalloc	*prev;
+
+	tmp = (*gc_head);
+	if (tmp != NULL && tmp->address == pointer)
+	{
+		(*gc_head) = tmp->next;
+		free(tmp->address);
+		free(tmp);
+		return ;
+	}
+	while (tmp != NULL && tmp->address != pointer)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return ;
+	prev->next = tmp->next;
+	free(pointer);
+	free(tmp);
+}
+
 void	ft_free(void *pointer)
 {
-	if (pointer != NULL)
-	{
-		free(pointer);
-		pointer = NULL;
-	}
+	remove_AliMalloc_node(&AliMalloc, pointer);
 }
 
 void	gc_clear(t_AliMalloc **gc_head)
@@ -58,10 +79,7 @@ void	gc_clear(t_AliMalloc **gc_head)
 	{
 		next = curr->next;
 		if (curr->address != NULL)
-		{
-			printf("AliMalloc: address: %p\n", curr->address);
 			ft_free(curr->address);
-		}
 		ft_free(curr);
 		curr = next;
 	}
