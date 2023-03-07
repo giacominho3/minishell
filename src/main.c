@@ -53,14 +53,11 @@ void	ft_exit(t_main *main)
 		clear_env(&main->env_head);
 	if (main->cmd_head)
 		clear_cmd_list(&main->cmd_head);
-	printf("adexit:\n");
 	if (main->export_head)
 		clear_export(&main->export_head);
 	if (main->env_head)
 		print_env(&main->env_head);
-	printf("iasdexit2\n");
 	gc_clear(&AliMalloc);
-	printf("asdexit3\n");
 }
 
 int	main(int argc, char **argv, char **envp)
