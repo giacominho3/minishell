@@ -42,9 +42,5 @@ int	command_splitter(char *input, t_main *main)
 		add_cmd_last(&main->cmd_head, main, cmd);
 		ft_free(cmd);
 	}
-//	printf("commands:\n");
-//	print_cmd(&main->cmd_head);
-//	printf("Command splitter terminated\n");
 	return (0);
 }
-

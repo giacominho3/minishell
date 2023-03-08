@@ -44,7 +44,7 @@ void	interpreter(char *input, t_main *main)
 	if (parsing(main))
 		return ;
 	pipeline_wrapper(main);
-	clear_cmd_list(&main->cmd_head); //the execve matrix free has been commented since was causing segfault on ubuntu
+	clear_cmd_list(&main->cmd_head);
 }
 
 void	ft_exit(t_main *main)
@@ -84,8 +84,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(buff) == 0)
 			continue ;
 		add_history(buff);
-		if (buff != NULL)
-			interpreter(buff, &main);
+		interpreter(buff, &main);
 		free(buff);
 	}
 }

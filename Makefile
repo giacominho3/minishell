@@ -35,8 +35,9 @@ $(LIBFT):
 all:$(NAME)
 
 clean:
-	rm -f *.o
+	rm -f ./**/*.o
 	$(MAKE) clean -C ./libft
+
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C ./libft

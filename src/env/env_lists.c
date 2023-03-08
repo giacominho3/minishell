@@ -12,28 +12,9 @@
 
 #include "../../incl/minishell.h"
 
-void	ft_add_front(struct s_env **head, char *str)
-{
-	//add a node at the beginning of the list
-	struct s_env	*new;
-
-	new = (struct s_env *)ft_malloc(sizeof(struct s_env));
-	if (!new)
-	{
-		printf("add_front: error while allocating new node: str(%s)\n", str);
-		return ;
-	}
-	ft_set_data(new, str);
-	new->next = (*head);
-	new->prev = NULL;
-	if ((*head) != NULL)
-		(*head)->prev = new;
-	(*head) = new;
-}
-
 void	free_env_node(t_env *node)
 {
-	t_env *prev;
+	t_env	*prev;
 
 	prev = node->prev;
 	prev->next = node->next;
@@ -44,7 +25,6 @@ void	free_env_node(t_env *node)
 
 void	ft_add_last(struct s_env **head, char *str)
 {
-	//add a node to the end of the list
 	struct s_env	*new;
 	struct s_env	*last;
 
@@ -72,7 +52,6 @@ void	ft_add_last(struct s_env **head, char *str)
 
 void	ft_add_after(struct s_env *prev_node, char *str)
 {
-	//add a node after a given node
 	struct s_env	*new;
 
 	if (prev_node == NULL)
@@ -80,9 +59,7 @@ void	ft_add_after(struct s_env *prev_node, char *str)
 		printf("ft_add_before: invalid prev node\n");
 		return ;
 	}
-	new = (struct s_env*)ft_malloc(sizeof(struct s_env));
-	if (!new)
-		return ;
+	new = (struct s_env *)ft_malloc(sizeof(struct s_env));
 	ft_set_data(new, str);
 	new->next = prev_node->next;
 	prev_node->next = new;
@@ -93,17 +70,14 @@ void	ft_add_after(struct s_env *prev_node, char *str)
 
 void	ft_add_before(struct s_env *next_node, char *str)
 {
-	// add a new node before a given node
-	struct s_env *new;
+	struct s_env	*new;
 
 	if (next_node == NULL)
 	{
 		printf("ft_add_before: invalid prev node\n");
-		return;
+		return ;
 	}
 	new = (struct s_env *)ft_malloc(sizeof(struct s_env));
-	if (!new)
-		return;
 	ft_set_data(new, str);
 	new->next = next_node;
 	new->prev = next_node->prev;
@@ -111,7 +85,7 @@ void	ft_add_before(struct s_env *next_node, char *str)
 	next_node->prev = new;
 }
 
-void clear_env(struct s_env **head)
+void	clear_env(struct s_env **head)
 {
 	struct s_env	*current;
 	struct s_env	*next;
@@ -125,4 +99,3 @@ void clear_env(struct s_env **head)
 	}
 	(*head) = NULL;
 }
-

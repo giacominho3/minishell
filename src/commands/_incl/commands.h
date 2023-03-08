@@ -2,7 +2,7 @@
 # define MINISHELL_COMMANDS_H
 # include "../../../incl/minishell.h"
 
-struct s_main;
+struct	s_main;
 
 void	add_cmd_last(t_cmd **head, t_main *main, char *cmd);
 int		command_splitter(char *input, struct s_main *main);

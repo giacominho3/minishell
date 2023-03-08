@@ -5,7 +5,8 @@
  * @param offset starting index of the research
  * @return len of the command
  *
- * @brief determinate the len of a command by navigating the string until it finds
+ * @brief determinate the len of a command by navigating
+ * the string until it finds
  * a command separator
  */
 int	cmd_len(char *input, int offset)
@@ -15,7 +16,7 @@ int	cmd_len(char *input, int offset)
 
 	cont = 0;
 	quotes = false;
-	while(input[offset])
+	while (input[offset])
 	{
 		if (input[offset] == 34 || input[offset] == 39)
 			quotes = !quotes;
@@ -47,7 +48,6 @@ bool	cmd_split(const char *str, int index)
 	return (false);
 }
 
-
 void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
 {
 	int	i;
@@ -55,7 +55,7 @@ void	ft_cmdcpy(char *dest, const char *src, int len, int offset)
 	i = 0;
 	while (src[offset] && src[offset] == 32)
 		offset++;
-	while(src[offset] && i < len)
+	while (src[offset] && i < len)
 	{
 		dest[i] = src[offset];
 		i++;
