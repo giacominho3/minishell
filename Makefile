@@ -24,11 +24,12 @@ OBJS=$(SRCS:.c=.o)
 	$(CC) $(FLAGS) -c $< -o$@
 
 LIBFT=./libft/libft.a
-READLINE = -L/usr/include -lreadline -D_DEFAULT_SOURCE -D_XOPEN_SOURCE=600
+READLINE = -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
+#L/usr/include -D_DEFAULT_SOURCE -D_XOPEN_SOURCE=600
 
 #may need this flag on asahi  -Wl,--allow-multiple-definition
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) $(READLINE)
+	$(CC) $(FLAGS) $(READLINE) $(SRCS) $(LIBFT) -o $(NAME) -lreadline
 $(LIBFT):
 	$(MAKE) -C ./libft/
 all:$(NAME)

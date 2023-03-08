@@ -54,6 +54,7 @@
 # include "../src/exec/_incl/exec.h"
 # include "../src/exec/_incl/pipeline.h"
 # include "../src/exec/_incl/builtins.h"
+#define ECHOCTL         0x00000040
 
 struct s_AliMalloc	*AliMalloc;
 
