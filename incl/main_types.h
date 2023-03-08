@@ -4,6 +4,7 @@
 typedef struct s_main
 {
 	char		*cmd_line;
+	char		**env_mat;
 	t_env		*env_head;
 	t_cmd		*cmd_head;
 	t_export	*export_head;

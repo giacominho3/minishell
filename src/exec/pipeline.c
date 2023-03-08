@@ -29,7 +29,7 @@ int	error(char *str, char *err)
 	return (1);
 }
 
-int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
+int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp)
 {
 	pid = fork();
 	if (pid < 0)
@@ -43,7 +43,7 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 			dup2(*tmp, STDIN_FILENO);
 			close(*tmp);
 		}
-		execute(cmd, envp);
+		execute(cmd);
 	}
 	else
 	{
@@ -54,7 +54,7 @@ int	gen_last_process(t_cmd *cmd, pid_t pid, int *tmp, char **envp)
 	return (0);
 }
 
-int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
+int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp)
 {
 	if (pipe(fd) < 0)
 		return 2;
@@ -72,7 +72,7 @@ int	gen_std_process(t_cmd *cmd, int fd[], pid_t pid, int *tmp, char **envp)
 			dup2(*tmp, STDIN_FILENO);
 			close(*tmp);
 		}
-		execute(cmd, envp);
+		execute(cmd);
 	}
 	else
 	{
@@ -109,7 +109,7 @@ int req_main_proc(t_cmd *cmd)
 	return (1);
 }
 
-int	pipeline(t_cmd **cmd_head, char **matrix_env)
+int	pipeline(t_cmd **cmd_head)
 {
 	int		fd[2];
 	pid_t 	pid;
@@ -127,9 +127,9 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 			continue ;
 		}
 		if (curr->next == NULL)
-			gen_last_process(curr, pid, &tmp, matrix_env);
+			gen_last_process(curr, pid, &tmp);
 		else
-			gen_std_process(curr, fd, pid, &tmp, matrix_env);
+			gen_std_process(curr, fd, pid, &tmp);
 		curr = curr->next;
 	}
 	close(tmp);
@@ -139,10 +139,9 @@ int	pipeline(t_cmd **cmd_head, char **matrix_env)
 
 void	pipeline_wrapper(t_main *main)
 {
-	char	**matrix_env = NULL;
 
-	matrix_env = NULL;
-	matrix_env = fill_env_mat(&main->env_head);
-	pipeline(&main->cmd_head, matrix_env);
+	main->env_mat = NULL;
+	main->env_mat = fill_env_mat(&main->env_head);
+	pipeline(&main->cmd_head);
 	clear_heredoc(main->cmd_head);
 }

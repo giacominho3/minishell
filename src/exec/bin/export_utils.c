@@ -5,7 +5,6 @@ void	ft_set_export_data(t_export *node, char *str)
 	if (!find_char_instr('=', str))
 	{
 		node->name = ft_get_name(str, 61);
-		printf("name added: %s\n", node->name);
 		node->content = NULL;
 		return ;
 	}
@@ -125,5 +124,4 @@ void	add_elements_to_export(t_cmd *cmd)
 		}
 		curr = curr->next;
 	}
-	print_export(cmd);
 }

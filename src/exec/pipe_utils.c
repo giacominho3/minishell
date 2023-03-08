@@ -39,7 +39,7 @@ char	*join_name_and_cont(char *name, char *content)
 	int		i;
 	int		j;
 
-	tmp = ft_malloc(ft_strlen(name) + ft_strlen(content) + 1);
+	tmp = ft_malloc(ft_strlen(name) + ft_strlen(content) + 2);
 	if (!tmp)
 		return (NULL);
 	i = 0;
@@ -92,6 +92,7 @@ char	**fill_env_mat(t_env **env_head)
 		curr = curr->next;
 		i++;
 	}
+	mat[i] = 0;
 	return (mat);
 }
 

@@ -8,7 +8,7 @@
 /**
  * Access
  */
-int		execute(t_cmd *cmd, char **env_matrix);
+int		execute(t_cmd *cmd);
 
 /**
  * Access utils

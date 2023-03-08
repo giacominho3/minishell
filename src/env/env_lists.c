@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lists.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmazzocc <mmazzocc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:03:21 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/27 12:50:53 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:29:04 by mmazzocc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_add_last(struct s_env **head, char *str)
 	new->next = NULL;
 	if ((*head) == NULL)
 	{
-		printf("first node addr: %p\n", &new);
 		new->prev = NULL;
 		(*head) = new;
 		return ;

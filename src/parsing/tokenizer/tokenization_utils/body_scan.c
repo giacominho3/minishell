@@ -116,7 +116,7 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 //		printf("calc_arg_len: %d\n", calc_arg_len(cmd, i));
 		new_index = copy_tok(cmd, new_index, len, tok_cpy);
 		ft_add_tok_last(tok_head, TOK_ARGS, tok_cpy);
-//		printf("arg tok: %s\n", tok_cpy);
+		printf("arg tok: |%s|\n", tok_cpy);
 		ft_free(tok_cpy);
 //		printf("new index(scan args): %d\n", new_index); //debug print
 		return (new_index);

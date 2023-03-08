@@ -23,14 +23,14 @@ void	echo_print(t_cmd *cmd)
 	{
 		if (curr->type == TOK_ARGS && !strcmp("$?", curr->token))
 		{
-			printf("%d ", cmd->main_ref->exit_status);
+			printf("%d", cmd->main_ref->exit_status);
 			curr = curr->next;
 			continue ;
 		}
 		if (curr->type == TOK_FLAGS && strcmp("-n", curr->token))
 			printf("%s ", curr->token);
 		if (curr->type == TOK_ARGS)
-			printf("%s ", curr->token);
+			printf("%s", curr->token);
 		curr = curr->next;
 	}
 }
