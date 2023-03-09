@@ -1,5 +1,5 @@
-#ifndef MINISHELL_ENV_H
-# define MINISHELL_ENV_H
+#ifndef ENV_H
+# define ENV_H
 # include "../../../incl/minishell.h"
 
 /**

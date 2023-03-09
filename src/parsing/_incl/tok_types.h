@@ -1,5 +1,5 @@
-#ifndef MINISHELL_TOK_TYPES_H
-#define MINISHELL_TOK_TYPES_H
+#ifndef TOK_TYPES_H
+#define TOK_TYPES_H
 
 typedef enum e_tokens
 {

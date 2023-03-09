@@ -1,5 +1,5 @@
-#ifndef MINISHELL_EXPORT__TYPES_H
-# define MINISHELL_EXPORT__TYPES_H
+#ifndef EXPORT_TYPES_H
+# define EXPORT_TYPES_H
 # include "../../../incl/minishell.h"
 
 typedef struct	s_export

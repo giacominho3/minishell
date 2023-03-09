@@ -1,5 +1,5 @@
-#ifndef MINISHELL_ENV_TYPES_H
-#define MINISHELL_ENV_TYPES_H
+#ifndef ENV_TYPES_H
+#define ENV_TYPES_H
 
 typedef struct	s_env
 {

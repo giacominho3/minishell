@@ -1,5 +1,5 @@
-#ifndef MINISHELL_TOKENS_H
-# define MINISHELL_TOKENS_H
+#ifndef TOKENS_H
+# define TOKENS_H
 # include "../../../incl/minishell.h"
 
 int		tokenizer(t_cmd **cmd_head);

@@ -1,5 +1,17 @@
-#ifndef MINISHELL_MAIN_TYPES_H
-# define MINISHELL_MAIN_TYPES_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_types.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/09 03:26:02 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/09 03:26:03 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MAIN_TYPES_H
+# define MAIN_TYPES_H
 
 typedef struct s_main
 {

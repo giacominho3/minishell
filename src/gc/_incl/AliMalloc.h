@@ -1,5 +1,5 @@
-#ifndef MINISHELL_GARBAGE_COLLECTOR_H
-# define MINISHELL_GARBAGE_COLLECTOR_H
+#ifndef ALIMALLOC_H
+# define ALIMALLOC_H
 
 # include "../../../incl/minishell.h"
 

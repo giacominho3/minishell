@@ -1,5 +1,5 @@
-#ifndef MINISHELL_SYNTAX_H
-# define MINISHELL_SYNTAX_H
+#ifndef SYNTAX_H
+# define SYNTAX_H
 # include "../../../incl/minishell.h"
 
 # define SYNTAX_ERR_DQUOT "Minishell: syntax error: double quotes opened but not closed\n"

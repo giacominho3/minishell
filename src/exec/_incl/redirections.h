@@ -1,5 +1,5 @@
-#ifndef MINISHELL_REDIRECTIONS_H
-# define MINISHELL_REDIRECTIONS_H
+#ifndef REDIRECTIONS_H
+# define REDIRECTIONS_H
 # include "../../../incl/minishell.h"
 
 void	ft_heredoc(t_token_list **head, char *limiter);

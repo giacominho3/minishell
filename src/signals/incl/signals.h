@@ -1,5 +1,5 @@
-#ifndef MINISHELL_SIGNALS_H
-# define MINISHELL_SIGNALS_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
 # include "../../../incl/minishell.h"
 

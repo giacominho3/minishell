@@ -1,5 +1,5 @@
-#ifndef MINISHELL_PARSE_H
-# define MINISHELL_PARSE_H
+#ifndef PARSE_H
+# define PARSE_H
 # include "../../../incl/minishell.h"
 
 typedef struct s_main t_main;

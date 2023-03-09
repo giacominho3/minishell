@@ -1,5 +1,5 @@
-#ifndef MINISHELL_EXEC_H
-# define MINISHELL_EXEC_H
+#ifndef EXEC_H
+# define EXEC_H
 # include "../../../incl/minishell.h"
 
 # define READ 0

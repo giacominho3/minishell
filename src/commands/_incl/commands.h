@@ -1,5 +1,5 @@
-#ifndef MINISHELL_COMMANDS_H
-# define MINISHELL_COMMANDS_H
+#ifndef COMMANDS_H
+# define COMMANDS_H
 # include "../../../incl/minishell.h"
 
 struct	s_main;

@@ -1,5 +1,5 @@
-#ifndef MINISHELL_HEREDOC_H
-# define MINISHELL_HEREDOC_H
+#ifndef HEREDOC_H
+# define HEREDOC_H
 # include "../../../incl/minishell.h"
 
 void	heredoc(char *cmd, int index, t_token_list **tok_head);
