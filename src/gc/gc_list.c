@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_list.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 05:22:25 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:59:32 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 17:57:14 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	*ft_malloc(size_t size)
 {
 	void	*pointer;
 
+	if (size < 0)
+		return (0);
 	pointer = NULL;
 	pointer = malloc(size);
 	if (!pointer)
@@ -60,7 +62,9 @@ void	remove_ali_malloc_node(t_ali_malloc **gc_head, void *pointer)
 	if (tmp != NULL && tmp->address == pointer)
 	{
 		(*gc_head) = tmp->next;
-		free(tmp->address);
+		if (pointer)
+			free(pointer);
+		pointer = NULL;
 		return ;
 	}
 	while (tmp != NULL && tmp->address != pointer)
@@ -73,7 +77,9 @@ void	remove_ali_malloc_node(t_ali_malloc **gc_head, void *pointer)
 	prev->next = tmp->next;
 	if (pointer)
 		free(pointer);
+	pointer = NULL;
 	free(tmp);
+	tmp = NULL;
 }
 
 void	ft_free(void *pointer)
@@ -92,7 +98,7 @@ void	gc_clear(t_ali_malloc **gc_head)
 	{
 		next = curr->next;
 		if (curr->address != NULL)
-			ft_free(curr->address);
+			free(curr->address);
 		free(curr);
 		curr = next;
 	}
