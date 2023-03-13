@@ -26,6 +26,24 @@ int	check_echo_flag(char *flag)
 	return (0);
 }
 
+bool	flag_check(char *string)
+{
+	int	i;
+
+	i = 1;
+	if (strcmp("-n", string))
+		return (true);
+	if (string[0] != '-')
+		return (false);
+	while (string[i])
+	{
+		if (string[i] != 'n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 void	echo_print(t_cmd *cmd)
 {
 	t_token_list	*curr;
@@ -39,7 +57,7 @@ void	echo_print(t_cmd *cmd)
 			curr = curr->next;
 			continue ;
 		}
-		if (curr->type == TOK_FLAGS && strcmp("-n", curr->token))
+		if (curr->type == TOK_FLAGS && !flag_check(curr->token))
 			printf("%s ", curr->token);
 		if (curr->type == TOK_ARGS)
 			printf("%s", curr->token);
