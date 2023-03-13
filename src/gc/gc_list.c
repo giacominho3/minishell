@@ -60,7 +60,6 @@ void	remove_ali_malloc_node(t_ali_malloc **gc_head, void *pointer)
 	if (tmp != NULL && tmp->address == pointer)
 	{
 		(*gc_head) = tmp->next;
-		free(tmp->address);
 		free(tmp);
 		return ;
 	}
@@ -72,7 +71,8 @@ void	remove_ali_malloc_node(t_ali_malloc **gc_head, void *pointer)
 	if (tmp == NULL)
 		return ;
 	prev->next = tmp->next;
-	free(pointer);
+	if (pointer)
+		free(pointer);
 	free(tmp);
 }
 

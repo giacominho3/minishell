@@ -49,15 +49,16 @@ void	interpreter(char *input, t_main *main)
 
 void	ft_exit(t_main *main)
 {
+	(void)main;
 	write(2, "here2\n", ft_strlen("here1\n"));
-	if (main->env_head)
-		clear_env(&main->env_head);
-	write(2, "here3\n", ft_strlen("here1\n"));
-	if (main->cmd_head)
-		clear_cmd_list(&main->cmd_head);
-	write(2, "here4\n", ft_strlen("here1\n"));
-	if (main->export_head)
-		clear_export(&main->export_head);
+//	if (main->env_head)
+//		clear_env(&main->env_head);
+//	write(2, "here3\n", ft_strlen("here1\n"));
+//	if (main->cmd_head)
+//		clear_cmd_list(&main->cmd_head);
+//	write(2, "here4\n", ft_strlen("here1\n"));
+//	if (main->export_head)
+//		clear_export(&main->export_head);
 	write(2, "here5\n", ft_strlen("here1\n"));
 	gc_clear(&g_ali_malloc);
 	write(2, "here6\n", ft_strlen("here1\n"));
