@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   syntax_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 02:52:19 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:52:22 by tterribi         ###   ########.fr       */
+/*   Created: 2023/03/13 01:19:39 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 01:20:09 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
-int	ft_mat_col(char *str)
+int	ft_isprint(int arg)
 {
-	int	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count - 1);
-}
-
-int	ft_mat_row(char **matrix)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (matrix[y])
-	{
-		x = 0;
-		while (matrix[y][x])
-			x++;
-		y++;
-	}
-	return (y - 1);
+	if (arg >= 32 && arg <= 126)
+		return (1);
+	return (0);
 }

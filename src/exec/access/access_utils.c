@@ -1,4 +1,16 @@
-# include "../_incl/exec.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   access_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/09 04:01:55 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/09 04:06:25 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../_incl/exec.h"
 
 void	ft_free_matrix(char **matrix)
 {
@@ -7,21 +19,14 @@ void	ft_free_matrix(char **matrix)
 	i = 0;
 	if (!matrix || matrix == NULL)
 		return ;
-//	printf("here matrix[%d]: %s\n", i, matrix[i]);
-//	write(1, "crash\n", 6);
 	while (matrix[i])
 	{
-//		write(1, "crash1\n", 7);
-		if (matrix[i]) {
-//			printf("matrix[%d]: %p\n", i, &matrix[i]);
+		if (matrix[i])
 			ft_free(matrix[i]);
-		}
 		i++;
 	}
-	if (matrix) {
-//		printf("matrix: %p\n", &matrix);
+	if (matrix)
 		free(matrix);
-	}
 }
 
 /**
@@ -45,23 +50,18 @@ char	*complete_path(char *path, t_cmd *cmd)
 
 	if (!path)
 		return (NULL);
-	dst = ft_malloc(ft_strlen(path) + ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 2);
-	tmp = ft_malloc(ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
+	dst = ft_malloc(ft_strlen(path)
+			+ ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 2);
+	tmp = ft_malloc(
+			ft_strlen(get_tok_content_by_type(&cmd->tok_head, TOK_CMD)) + 1);
 	ft_strcpy(tmp, get_tok_content_by_type(&cmd->tok_head, TOK_CMD));
-	if (!tmp || !dst)
-		return (NULL);
 	i = -1;
 	while (path[++i])
 		dst[i] = path[i];
-//	dst[i++] = 0;
 	dst[i++] = '/';
 	j = 0;
 	while (tmp[j])
-	{
-		dst[i] = tmp[j];
-		i++;
-		j++;
-	}
+		dst[i++] = tmp[j++];
 	dst[i] = 0;
 	ft_free(tmp);
 	return (dst);

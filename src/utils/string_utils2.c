@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:53:37 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/27 11:36:51 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 02:51:32 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ char	*trim_trailing_spaces(char *str)
 	j = 0;
 	while (j < i)
 	{
-		new[j] =str[j];
+		new[j] = str[j];
 		j++;
 	}
 	ft_free(str);
 	return (new);
 }
-
 
 char	*ft_strdup(const char *src)
 {
@@ -77,32 +76,6 @@ char	*ft_strdup(const char *src)
 	ptr[i] = '\0';
 	return (ptr);
 }
-
-//char	*ft_strjoin(char const *s1, char const *s2)
-//{
-//	int		i;
-//	int		j;
-//	char	*str;
-//
-//	i = 0;
-//	j = 0;
-//	if (!s1 || !s2)
-//		return (NULL);
-//	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-//	if (str == NULL)
-//		return (NULL);
-//	while (s1[i])
-//		str[j++] = s1[i++];
-//	i = 0;
-//	while (s2[i])
-//	{
-//		str[j] = s2[i];
-//		i++;
-//		j++;
-//	}
-//	str[j] = '\0';
-//	return (str);
-//}
 
 void	ft_strcpy(char *dst, char *src)
 {

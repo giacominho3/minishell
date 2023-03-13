@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:08:38 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 19:28:26 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 01:22:53 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,8 @@ int	open_char_wrapper(char *str)
 		return (1);
 	}
 	if (pipe_appended(str, 124))
-	{
-
 		return (1);
-	}
 	if (open_char_syntax(str, 40, 41))
-		return (1);
-	return (0);
-}
-
-int	ft_isprint(int arg)
-{
-	if (arg >= 32 && arg <= 126)
 		return (1);
 	return (0);
 }
@@ -50,12 +40,11 @@ int	ft_isprint(int arg)
  * @brief check if the name of the file
  * used/created by the redirection contains only valid chars
  */
-int check_redir_name(char *str, int i)
+int	check_redir_name(char *str, int i)
 {
 	int	j;
 
 	j = i;
-
 	j = skip_spaces(str, j);
 	if (is_metacharacter(str[j])
 		|| is_in_strings(str[j], "?$|=/"))
@@ -63,33 +52,32 @@ int check_redir_name(char *str, int i)
 	return (0);
 }
 
+int	redir_syntax_err(char *err_msg, int ret_val)
+{
+	printf("%s", err_msg);
+	return (ret_val);
+}
+
 int	redirections_syntax(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] == 62)
 		{
 			if (str[i + 1] == 62 || check_redir_name(str, i +1))
-			{
-				printf(SYNTAX_ERR_REDIR);
-				return (1);
-			}
+				return (redir_syntax_err(SYNTAX_ERR_REDIR, 1));
 		}
 		if (str[i] == 60)
 		{
 			if (str[i + 1] == 60)
 			{
 				if (check_redir_name(str, i + 2) || str[i + 2] == 60)
-				{
-					printf(SYNTAX_ERR_REDIR);
-					return (1);
-				}
+					return (redir_syntax_err(SYNTAX_ERR_REDIR, 1));
 			}
 		}
-		i++;
 	}
 	return (0);
 }
@@ -97,11 +85,6 @@ int	redirections_syntax(char *str)
 /* wrapper function for syntax checks */
 int	syntax(char *str)
 {
-//	if (ft_strlen(str) <= 1)
-//	{
-//		printf("Minishell: Bad address\n");
-//		return (1);
-//	}
 	if (!is_valid_syntax(str))
 	{
 		printf(SYNTAX_ERR_INVALID_CHAR);

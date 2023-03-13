@@ -6,11 +6,25 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:19:08 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/25 19:54:28 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 01:30:33 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../_incl/parse.h"
+
+void	new_cmd_line(t_token_list *token, t_parse *parse)
+{
+	int	i;
+
+	i = 0;
+	token->token = ft_malloc(parse->out_len + 1);
+	while (parse->out[i])
+	{
+		token->token[i] = parse->out[i];
+		i++;
+	}
+	token->token[i] = 0;
+}
 
 /**
  * @brief check if a variable have to be extended or considering quotes
@@ -29,7 +43,6 @@ void	expand_check(t_parse *parse, int i)
 
 void	init_parse(char *input, t_parse *parse)
 {
-//	printf("parsing init started\n");
 	parse->input = ft_malloc(ft_strlen(input) + 1);
 	ft_strcpy(parse->input, input);
 	parse->out = ft_malloc(ft_strlen(input) + 1);
@@ -38,12 +51,9 @@ void	init_parse(char *input, t_parse *parse)
 		printf("error while allocating your mom(too fat)\n");
 		return ;
 	}
-//	printf("input: %s\n", input);
-//	printf("parse.input: %s\n", parse->input);
 	parse->extend = true;
 	parse->double_quotes = false;
 	parse->single_quotes = false;
-//	printf("parsing init terminated\n");
 }
 
 /**
@@ -60,3 +70,19 @@ bool	var_end_name(char c)
 	return (false);
 }
 
+/**
+ * @brief get the name of a variable from the input string
+ */
+void	get_var_name(t_parse *parse, char *buf, int offset)
+{
+	int	i;
+
+	i = 0;
+	while (parse->input[offset] && !var_end_name(parse->input[offset]))
+	{
+		buf[i] = parse->input[offset];
+		offset++;
+		i++;
+	}
+	buf[i] = 0;
+}

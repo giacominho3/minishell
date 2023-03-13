@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_len_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:36:42 by tterribi          #+#    #+#             */
-/*   Updated: 2022/10/26 09:15:36 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 01:30:13 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,12 @@ int	extended_len(t_parse *parse, t_env **head)
 	len = 0;
 	while (parse->input[i])
 	{
-//		printf("curr char: %c\n", parse->input[i]);
 		expand_check(parse, i);
 		if (parse->input[i] == 36 && parse->extend
-			&& valid_var_name(parse->input[i+1]))
+			&& valid_var_name(parse->input[i + 1]))
 		{
 			len += get_content_len(parse, head, i + 1);
-//			printf("len: %d\n", len);
 			i += 1 + var_name_len(parse->input, i + 1);
-//			printf("i: %d\n", i);
 			continue ;
 		}
 		len++;
@@ -61,7 +58,7 @@ int	extended_len(t_parse *parse, t_env **head)
 /**
  * @brief gets the len of the content of an env's var
  */
-int get_content_len(t_parse *parse, struct s_env **head, int offset)
+int	get_content_len(t_parse *parse, struct s_env **head, int offset)
 {
 	char	*buf;
 	int		i;
@@ -78,10 +75,7 @@ int get_content_len(t_parse *parse, struct s_env **head, int offset)
 	while (parse->input[j] && !var_end_name(parse->input[j]))
 		buf[i++] = parse->input[j++];
 	buf[i] = 0;
-	printf("buf: %s\n", buf); //debug print
 	i = ft_strlen(get_content_by_name(head, buf));
-	printf("get_content_by_name output: %s\n", get_content_by_name(head, buf)); //debug print
-	printf("get_content_len output: %d\n", i); //debug print
 	ft_free(buf);
 	return (i);
 }

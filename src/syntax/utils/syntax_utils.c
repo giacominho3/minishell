@@ -1,15 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 01:17:41 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 01:23:06 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../incl/minishell.h"
 
-int print_syntax_err(int cont_open, int cont_close, char open, char close)
+int	print_syntax_err(int cont_open, int cont_close, char open, char close)
 {
 	if (cont_open > cont_close)
-	{
-		printf("test: Minishell: syntax error: '%c' opened but not closed\n", open);
-	}
+		printf("test: Minishell: syntax: '%c' opened but not closed\n",
+			open);
 	if (cont_open < cont_close)
-	{
-		printf("test: Minishell: syntax error: '%c' closed but not opened\n", close);
-	}
+		printf("test: Minishell: syntax: '%c' closed but not opened\n",
+			close);
 	return (1);
 }
 
@@ -89,7 +99,7 @@ bool	is_valid_syntax(char *str)
 	int		i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!((str[i] >= 32 && str[i] <= 126) || str[i] == 10 || str[i] == 9))
 			return (false);
@@ -111,4 +121,3 @@ int	pipe_appended(char *string, char pipe)
 	}
 	return (0);
 }
-

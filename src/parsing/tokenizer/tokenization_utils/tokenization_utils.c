@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenization_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 02:28:23 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 02:28:51 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../_incl/tokens.h"
 
 /**
@@ -25,11 +37,12 @@ bool	is_skippable(char c)
  * @param cmd cmd line string
  * @param i index to the beginning of the token
  *
- * @brief calculates the length of the token that have to be inserted int he tok list
+ * @brief calculates the length of the token that have to
+ * be inserted int he tok list
  */
 int	calc_tok_len(char *cmd, int i)
 {
-	int cont;
+	int	cont;
 
 	cont = 0;
 	while (cmd[i] && !is_metacharacter(cmd[i])
@@ -40,4 +53,3 @@ int	calc_tok_len(char *cmd, int i)
 	}
 	return (cont);
 }
-

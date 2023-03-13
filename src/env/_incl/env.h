@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/09 03:55:59 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/09 03:56:33 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENV_H
 # define ENV_H
 # include "../../../incl/minishell.h"
@@ -26,6 +38,6 @@ void	ft_set_data(struct s_env *node, char *str);
 char	*get_content_by_name(struct s_env **head, char *name);
 char	*ft_get_content(char *str, char c);
 char	*ft_get_name(char *str, char c);
-int		modify_node_content(t_env **env_head, char *node_name, char *new_content);
+int		modify_node_content(t_env **head, char *node_name, char *new_content);
 
 #endif

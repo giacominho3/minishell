@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   AliMalloc.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 05:22:09 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 02:57:27 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ALIMALLOC_H
 # define ALIMALLOC_H
 
 # include "../../../incl/minishell.h"
 
-typedef struct s_AliMalloc
+typedef struct s_ali_malloc
 {
 	void				*address;
 	struct s_AliMalloc	*next;
-}	t_AliMalloc;
+}	t_ali_malloc;
 
 void	*ft_malloc(size_t size);
 void	ft_free(void *pointer);
-void	gc_clear(t_AliMalloc **gc_head);
+void	gc_clear(t_ali_malloc **gc_head);
 
 #endif //MINISHELL_GARBAGE_COLLECTOR_H

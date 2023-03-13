@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokens.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 01:47:10 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 01:47:17 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TOKENS_H
 # define TOKENS_H
 # include "../../../incl/minishell.h"
@@ -40,6 +52,5 @@ void	print_toks(t_token_list **head);
  */
 char	*ft_strndup(char *s, size_t n);
 char	**ft_split_args(char *str);
-
 
 #endif

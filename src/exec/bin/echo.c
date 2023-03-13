@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/09 04:07:02 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/09 04:07:15 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../_incl/builtins.h"
 
-int check_echo_flag(char *flag)
+int	check_echo_flag(char *flag)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (flag[i])
@@ -55,4 +67,3 @@ int	builtin_echo(t_cmd *cmd)
 		printf("\n");
 	exit(0);
 }
-

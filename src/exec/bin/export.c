@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 04:56:33 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/12 05:00:00 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../_incl/builtins.h"
 
-void clear_export(t_export **head)
+void	clear_export(t_export **head)
 {
 	t_export	*current;
 	t_export	*next;
@@ -35,8 +47,9 @@ int	export_printing(t_cmd *cmd)
 	print_export(cmd);
 	exit (EXIT_SUCCESS);
 }
+
 int	builtin_export(t_cmd *cmd)
 {
 	add_elements_to_export(cmd);
-	return 0;
+	return (0);
 }

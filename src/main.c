@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:52:50 by tterribi          #+#    #+#             */
-/*   Updated: 2022/11/05 11:25:19 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 02:55:40 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	fancy_init(t_main *main)
 	main->cmd_head = NULL;
 	main->export_head = NULL;
 	main->exit_status = 0;
-	AliMalloc = NULL;
+	g_ali_malloc = NULL;
 }
 
 void	interpreter(char *input, t_main *main)
@@ -57,7 +57,7 @@ void	ft_exit(t_main *main)
 		clear_export(&main->export_head);
 	if (main->env_head)
 		print_env(&main->env_head);
-	gc_clear(&AliMalloc);
+	gc_clear(&g_ali_malloc);
 }
 
 int	main(int argc, char **argv, char **envp)

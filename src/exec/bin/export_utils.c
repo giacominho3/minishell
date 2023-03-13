@@ -1,60 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 04:54:58 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 01:01:26 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../_incl/builtins.h"
-
-void	ft_set_export_data(t_export *node, char *str)
-{
-	if (!find_char_instr('=', str))
-	{
-		node->name = ft_get_name(str, 61);
-		node->content = NULL;
-		return ;
-	}
-	node->name = ft_get_name(str, 61);
-	node->content = ft_get_content(str, 61);
-}
-
-/**
- * @brief add a node to the end of the export list
- */
-void	ft_add_export(t_export **head, char *str)
-{
-	t_export	*new;
-	t_export	*last;
-
-//	printf("adding: %s\n", str);
-	last = (*head);
-	new = (t_export *)ft_malloc(sizeof(t_export));
-	if (!new)
-	{
-		printf("add_last: error while allocating new node: str(%s)\n", str);
-		return ;
-	}
-	ft_set_export_data(new, str);
-//	printf("new name: %s\n", new->name);
-	new->next = NULL;
-	if ((*head) == NULL)
-	{
-		new->prev = NULL;
-		(*head) = new;
-		return ;
-	}
-	while (last->next != NULL)
-		last = last->next;
-	last->next = new;
-	new->prev = last;
-//	printf("final: %s\n", new->name);
-}
-
-void	copy_env_to_export(t_export **head, char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		ft_add_export(head, envp[i]);
-		i++;
-	}
-}
 
 /**
  * @brief check if the arg of a command
@@ -89,7 +45,6 @@ int	not_valid_for_env(char *arg)
  */
 void	add_to_export(t_cmd *cmd, char *arg)
 {
-
 	ft_add_export(&cmd->main_ref->export_head, arg);
 	if (not_valid_for_env(arg))
 		return ;
@@ -107,7 +62,6 @@ void	add_elements_to_export(t_cmd *cmd)
 {
 	t_token_list	*curr;
 
-
 	curr = cmd->tok_head;
 	while (curr != NULL)
 	{
@@ -115,7 +69,8 @@ void	add_elements_to_export(t_cmd *cmd)
 		{
 			if (check_if_valid(curr->token))
 			{
-				printf("minishell: export: '%s': not a valid indentifier\n", curr->token);
+				printf("minishell: export: '%s': not a valid indentifier\n",
+					curr->token);
 				cmd->main_ref->exit_status = 1;
 				curr = curr->next;
 				continue ;

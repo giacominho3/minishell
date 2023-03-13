@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/09 03:57:36 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 02:30:16 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUILTINS_H
 # define BUILTINS_H
 # include "../../../incl/minishell.h"
@@ -12,7 +24,8 @@ int		builtin_export(t_cmd *cmd);
 int		add_export_element(t_cmd *cmd);
 void	print_export(t_cmd *cmd);
 void	add_elements_to_export(t_cmd *cmd);
-void clear_export(t_export **head);
+void	clear_export(t_export **head);
+void	ft_add_export(t_export **head, char *str);
 
 /**
  * pwd
@@ -40,4 +53,5 @@ void	unset(t_cmd *cmd);
  * exit
  */
 void	builtin_exit(t_cmd *cmd);
+
 #endif

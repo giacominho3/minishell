@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 19:19:50 by tterribi          #+#    #+#             */
-/*   Updated: 2022/01/19 19:20:40 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 03:00:36 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define INT_MAX 2147483647
 
 # define SPACE_CHARS "\t\n\v\f\r "
+
 typedef struct s_list
 {
 	void			*content;

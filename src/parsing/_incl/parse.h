@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 01:46:20 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 01:46:38 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 # include "../../../incl/minishell.h"
 
-typedef struct s_main t_main;
+typedef struct s_main	t_main;
 
-typedef struct	s_parse
+typedef struct s_parse
 {
 	int		out_len;
 	bool	extend;
@@ -26,4 +38,7 @@ int		get_content_len(t_parse *parse, struct s_env **head, int offset);
 void	expand_check(t_parse *parse, int i);
 int		extended_len(t_parse *parse, t_env **head);
 void	quotes_handler(t_parse *parse);
+void	get_var_name(t_parse *parse, char *buf, int offset);
+void	new_cmd_line(t_token_list *token, t_parse *parse);
+
 #endif

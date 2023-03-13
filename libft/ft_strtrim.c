@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 19:19:24 by tterribi          #+#    #+#             */
-/*   Updated: 2022/01/19 19:19:25 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 03:00:04 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_trim_mod(char *str, char *set)
 {
 	char	*new;
 	int		i;
-	int 	h;
+	int		h;
 
 	if (!str)
 		return (NULL);
@@ -73,7 +73,7 @@ char	*ft_trim_mod(char *str, char *set)
 	if (!new)
 		return (NULL);
 	h = 0;
-	while(str[i] && !is_in_string(str[i], SPACE_CHARS))
+	while (str[i] && !is_in_string(str[i], SPACE_CHARS))
 	{
 		new[h] = str[i];
 		i++;

@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_list2.c                                      :+:      :+:    :+:   */
+/*   pipe_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 03:54:08 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:10:05 by tterribi         ###   ########.fr       */
+/*   Created: 2023/03/12 05:19:07 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 02:50:13 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../_incl/tokens.h"
+#include "_incl/pipeline.h"
 
-/**
- * @param tok_head head to the token list of a command
- * @return length of the token list
- *
- * @brief calculates the number of tokens inside the list
- */
-int	token_list_len(t_token_list **tok_head)
+int	calc_env_x(t_env **env_head)
 {
-	t_token_list	*curr;
-	int				cont;
+	t_env	*curr;
+	int		max_x_cont;
+	int		curr_x_len;
 
-	curr = (*tok_head);
-	cont = 0;
+	max_x_cont = 0;
+	curr = (*env_head);
 	while (curr != NULL)
 	{
-		cont++;
+		curr_x_len = ft_strlen(curr->name) + ft_strlen(curr->content) + 1;
+		if (curr_x_len > max_x_cont)
+			max_x_cont = curr_x_len;
 		curr = curr->next;
+	}
+	return (max_x_cont);
+}
+
+int	env_len(t_env **env_head)
+{
+	t_env	*curr;
+	int		cont;
+
+	cont = 0;
+	curr = (*env_head);
+	while (curr != NULL)
+	{
+		curr = curr->next;
+		cont++;
 	}
 	return (cont);
 }

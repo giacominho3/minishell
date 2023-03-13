@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   head_scan.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 02:20:11 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 02:23:15 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../_incl/tokens.h"
 
 char	*get_limiter(char *cmd, int index)
@@ -30,36 +42,30 @@ char	*get_limiter(char *cmd, int index)
 
 int	heredoc_skip(char *cmd, int i)
 {
-	int tmp_index;
+	int	tmp_index;
 
 	tmp_index = i;
 	tmp_index += 2;
 	while (cmd[tmp_index] == 32)
 		tmp_index++;
-	while(cmd[tmp_index] && !is_metacharacter(cmd[tmp_index])
+	while (cmd[tmp_index] && !is_metacharacter(cmd[tmp_index])
 		&& !is_skippable(cmd[tmp_index]))
 			tmp_index++;
-	return(tmp_index);
+	return (tmp_index);
 }
 
 int	redir_skip(char *cmd, int i)
 {
-	int tmp_index;
+	int	tmp_index;
 
-	tmp_index = i+1;
+	tmp_index = i + 1;
 	printf("i -> %d\n", i);
 	while (cmd[tmp_index] == 32)
 		tmp_index++;
-//	printf("cursor at index: %d (char: %c)\n", tmp_index, cmd[tmp_index]);
-	while(cmd[tmp_index] && (!is_metacharacter(cmd[tmp_index])
-		  || !is_skippable(cmd[tmp_index])))
-	{
-//		printf("|%c|\n", cmd[tmp_index]);
+	while (cmd[tmp_index] && (!is_metacharacter(cmd[tmp_index])
+			|| !is_skippable(cmd[tmp_index])))
 		tmp_index++;
-	}
-//	printf("-------------\n");
-//	printf("tmp_index: %d (char: %c)\n", tmp_index - 1, cmd[tmp_index - 1]);
-	return(tmp_index - 1);
+	return (tmp_index - 1);
 }
 
 /**
@@ -68,7 +74,7 @@ int	redir_skip(char *cmd, int i)
  *
  * @brief function that scans the cmd string to find if there are redirections
  */
-int scan_redirections(char *cmd, int i, t_token_list **tok_head)
+int	scan_redirections(char *cmd, int i, t_token_list **tok_head)
 {
 	char	*tmp;
 	int		new_index;
@@ -95,7 +101,6 @@ int scan_redirections(char *cmd, int i, t_token_list **tok_head)
 	return (i);
 }
 
-
 /**
  * @param cmd string to be tokenized
  * @param i index where the tokenizer is arrived
@@ -113,4 +118,3 @@ int	head_scan(char *cmd, int i, t_token_list **tok_head)
 	new_index = scan_redirections(cmd, new_index, tok_head);
 	return (new_index);
 }
-

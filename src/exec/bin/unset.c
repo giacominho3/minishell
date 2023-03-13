@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 05:02:17 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/12 05:03:00 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../_incl/builtins.h"
 
 void	ft_free_export_node(t_export **export_head, t_export *node)
 {
 	if (*export_head == NULL || node == NULL)
-		return;
+		return ;
 	if (*export_head == node)
 		*export_head = node->next;
 	if (node->next != NULL)
@@ -12,7 +24,6 @@ void	ft_free_export_node(t_export **export_head, t_export *node)
 		node->prev->next = node->next;
 	ft_free(node);
 }
-
 
 void	remove_from_export(t_cmd *cmd, char *token)
 {
@@ -32,10 +43,10 @@ void	remove_from_export(t_cmd *cmd, char *token)
 
 int	is_in_export(t_cmd *cmd, char *find)
 {
-	t_export *tmp;
+	t_export	*tmp;
 
 	tmp = cmd->main_ref->export_head;
-	while(tmp != NULL)
+	while (tmp != NULL)
 	{
 		if (!strcmp(find, tmp->name))
 			return (1);
@@ -62,7 +73,7 @@ void	remove_from_env(t_cmd *cmd, char *token)
 
 void	unset(t_cmd *cmd)
 {
-	t_token_list *curr;
+	t_token_list	*curr;
 
 	curr = cmd->tok_head;
 	while (curr != NULL)
@@ -74,7 +85,6 @@ void	unset(t_cmd *cmd)
 				remove_from_export(cmd, curr->token);
 				remove_from_env(cmd, curr->token);
 			}
-
 		}
 		curr = curr->next;
 	}

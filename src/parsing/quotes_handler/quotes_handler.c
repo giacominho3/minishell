@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quotes_handler.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 01:31:05 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 01:45:52 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../_incl/parse.h"
 
-int count_quotes_to_remove(char *string)
+int	count_quotes_to_remove(char *string)
 {
 	int		i;
 	int		cont;
@@ -33,21 +45,20 @@ void	remove_quotes(char *modified, char *original)
 {
 	int		i;
 	int		j;
-	bool	keep_single;
-	bool	keep_double;
+	bool	singleq;
+	bool	doubleq;
 
 	i = 0;
 	j = 0;
-	keep_double = false;
-	keep_single = false;
+	doubleq = false;
+	singleq = false;
 	while (original[i])
 	{
-		if (original[i] == 39 && !keep_single)
-			keep_double = !keep_double;
-		if (original[i] == 34 && !keep_double)
-			keep_single = !keep_single;
-		if ((original[i] == 34 && !keep_double)
-			|| (original[i] == 39 && !keep_single))
+		if (original[i] == 39 && !singleq)
+			doubleq = !doubleq;
+		if (original[i] == 34 && !doubleq)
+			singleq = !singleq;
+		if ((original[i] == 34 && !doubleq) || (original[i] == 39 && !singleq))
 		{
 			i++;
 			continue ;
@@ -59,28 +70,6 @@ void	remove_quotes(char *modified, char *original)
 	modified[j] = 0;
 }
 
-/*
-		if (original[i] == 34 && original[i - 1] != 92)
-			keep_single = !keep_single;
-		if (original[i] == 39 && original[i - 1] != 92)
-			keep_double = !keep_double;
-		if (original[i] == 92 && !keep_single && !keep_double)
-		{
-			i++;
-			modified[j] = original[i];
-			i++;
-			j++;
-			continue ;
-		}
-		if ((original[i] == 34 && !keep_double) || (original[i] == 39 && !keep_single))
-		{
-			i++;
-			continue ;
-		}
-		modified[j] = original[i];
-		i++;
-		j++;
-*/
 void	quotes_handler(t_parse *parse)
 {
 	int		i;
@@ -89,16 +78,10 @@ void	quotes_handler(t_parse *parse)
 
 	parse->single_quotes = false;
 	parse->double_quotes = false;
-//	printf("parse.out: %s\n", parse->out);
-//	printf("parse.out len: %d\n", ft_strlen(parse->out));
 	cont = count_quotes_to_remove(parse->out);
-//	printf("quotes to skip found: %d\n", cont);
-//	printf("buf allocated for: %d\n", ((ft_strlen(parse->out) - cont) + 1));
 	buf = ft_malloc((ft_strlen(parse->out) - cont) + 1);
 	ft_strcpy(buf, parse->out);
-//	printf("strcopy test: %s\n", buf);
 	remove_quotes(buf, parse->out);
-//	printf("string once quotes removed: %s\n", buf);
 	ft_free(parse->out);
 	parse->out = ft_malloc(ft_strlen(buf) + 1);
 	i = -1;

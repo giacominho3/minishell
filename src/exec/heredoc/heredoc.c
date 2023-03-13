@@ -1,17 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 05:03:25 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 01:01:08 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../_incl/heredoc.h"
-
-void	print_mat1(char **mat)
-{
-	int i = 0;
-
-	if (mat[i] == NULL)
-		printf("dioghane\n");
-	while (mat[i])
-	{
-		printf("%d -> |%s|\n", i, mat[i]);
-		i++;
-	}
-}
 
 void	remove_file(char *file_name, t_cmd *cmd)
 {
@@ -24,7 +23,6 @@ void	remove_file(char *file_name, t_cmd *cmd)
 	matrix[2] = 0;
 	envp = NULL;
 	envp = fill_env_mat(&cmd->main_ref->env_head);
-	print_mat1(matrix);
 	if (!fork())
 	{
 		if (execve("/bin/rm", matrix, envp) == -1)
@@ -110,7 +108,8 @@ void	heredoc(char *limiter, int index, t_token_list **tok_head)
 		return ;
 	printf("limiter(heredoc): %s\n", limiter);
 	path = ft_strjoin("./.heredoc", ft_itoa(index));
-	if ((file_doc = open(path, O_CREAT | O_WRONLY, 0777)) < 0)
+	file_doc = open(path, O_CREAT | O_WRONLY, 0777);
+	if (file_doc < 0)
 		perror("minishell");
 	reading(limiter, file_doc);
 	ft_add_tok_last(tok_head, TOK_HEREDOC, path);

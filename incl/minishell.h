@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:53:13 by tterribi          #+#    #+#             */
-/*   Updated: 2022/11/03 03:50:47 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 03:02:04 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,27 @@
 # include "../src/exec/_incl/pipeline.h"
 # include "../src/exec/_incl/builtins.h"
 
-
-struct s_AliMalloc	*AliMalloc;
+struct s_ali_malloc	*g_ali_malloc;
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 
 /********************************
 *	string tokenization_utils	*
 *********************************/
-void	ft_exit(t_main *main);
-int		ft_strcmp(char *s1, char *s2);
-bool	is_in_strings(char c, char *str);
-int		ft_strlen(const char *str);
-bool	is_valid_char(char c);
-void	ft_strcpy(char *dst, char *src);
-int		skip_intial_spaces(char *str);
-int		trim_spaces(char *str, int len);
-void	ft_offset_copy(char *dst, char *src, int offset, int stop);
-char	*ft_strdup(const char *src);
-bool	valid_var_name(char c);
-bool	var_term(char c);
-char	*ft_strndup(char *s, size_t n);
-char	*ft_strncpy(char *dst, const char *src, size_t n);
-char	*trim_trailing_spaces(char *str);
-
-//char	*ft_strjoin(char const *s1, char const *s2);
+void		ft_exit(t_main *main);
+int			ft_strcmp(char *s1, char *s2);
+bool		is_in_strings(char c, char *str);
+int			ft_strlen(const char *str);
+bool		is_valid_char(char c);
+void		ft_strcpy(char *dst, char *src);
+int			skip_intial_spaces(char *str);
+int			trim_spaces(char *str, int len);
+void		ft_offset_copy(char *dst, char *src, int offset, int stop);
+char		*ft_strdup(const char *src);
+bool		valid_var_name(char c);
+bool		var_term(char c);
+char		*ft_strndup(char *s, size_t n);
+char		*ft_strncpy(char *dst, const char *src, size_t n);
+char		*trim_trailing_spaces(char *str);
 
 #endif

@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gc_list.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 05:22:25 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 02:59:32 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./_incl/AliMalloc.h"
 
-void	ali_malloc_add(t_AliMalloc **gc_head, void	*pointer)
+void	ali_malloc_add(t_ali_malloc **gc_head, void	*pointer)
 {
-	t_AliMalloc *new;
-	t_AliMalloc *last;
+	t_ali_malloc	*new;
+	t_ali_malloc	*last;
 
 	last = *(gc_head);
-	new = (t_AliMalloc *)malloc(sizeof(t_AliMalloc));
+	new = (t_ali_malloc *)malloc(sizeof(t_ali_malloc));
 	if (!new)
 	{
 		perror("AliMalloc");
@@ -35,14 +47,14 @@ void	*ft_malloc(size_t size)
 		perror("AliMalloc");
 		exit(EXIT_FAILURE);
 	}
-	ali_malloc_add(&AliMalloc, pointer);
+	ali_malloc_add(&g_ali_malloc, pointer);
 	return (pointer);
 }
 
-void	remove_AliMalloc_node(t_AliMalloc **gc_head, void *pointer)
+void	remove_ali_malloc_node(t_ali_malloc **gc_head, void *pointer)
 {
-	t_AliMalloc	*tmp;
-	t_AliMalloc	*prev;
+	t_ali_malloc	*tmp;
+	t_ali_malloc	*prev;
 
 	tmp = (*gc_head);
 	if (tmp != NULL && tmp->address == pointer)
@@ -66,13 +78,13 @@ void	remove_AliMalloc_node(t_AliMalloc **gc_head, void *pointer)
 
 void	ft_free(void *pointer)
 {
-	remove_AliMalloc_node(&AliMalloc, pointer);
+	remove_ali_malloc_node(&g_ali_malloc, pointer);
 }
 
-void	gc_clear(t_AliMalloc **gc_head)
+void	gc_clear(t_ali_malloc **gc_head)
 {
-	t_AliMalloc	*curr;
-	t_AliMalloc	*next;
+	t_ali_malloc	*curr;
+	t_ali_malloc	*next;
 
 	curr = (*gc_head);
 	while (curr != NULL)

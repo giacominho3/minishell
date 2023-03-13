@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scan_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 02:23:27 by tterribi          #+#    #+#             */
+/*   Updated: 2023/03/13 02:27:45 by tterribi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../_incl/tokens.h"
 
 char	*get_redir(char *cmd, int i)
@@ -9,7 +21,7 @@ char	*get_redir(char *cmd, int i)
 
 	c = cmd[i];
 	i++;
-	while(cmd[i] && (cmd[i] == 32 || cmd[i] == 9))
+	while (cmd[i] && (cmd[i] == 32 || cmd[i] == 9))
 		i++;
 	len = 0;
 	index = i;
@@ -22,11 +34,7 @@ char	*get_redir(char *cmd, int i)
 	ret[0] = c;
 	index = 1;
 	while (cmd[index] && !is_metacharacter(cmd[i]))
-	{
-		ret[index] = cmd[i];
-		index++;
-		i++;
-	}
+		ret[index++] = cmd[i++];
 	ret[index] = 0;
 	return (ret);
 }
@@ -37,36 +45,24 @@ char	*get_heredoc(char *cmd, int i)
 	int		index;
 	int		len;
 
-	printf("heredoc cursor on: %c\n", cmd[i]);
-	printf("heredoc cursor on(next): %c\n", cmd[i+1]);
 	i += 2;
-	while(cmd[i] && (cmd[i] == 32 || cmd[i] == 9))
+	while (cmd[i] && (cmd[i] == 32 || cmd[i] == 9))
 		i++;
 	len = 0;
 	index = i;
-	printf("index: %d\n", len);
 	while (cmd[index] && !is_metacharacter(cmd[i]))
 	{
 		len++;
 		index++;
 	}
-	printf("len: %d\n", len);
 	ret = ft_malloc(len + 3);
 	ret[0] = '<';
 	ret[1] = '<';
 	index = 2;
-	while(cmd[i] && (cmd[i] == 32 || cmd[i] == 9))
-	{
-		ret[index] = cmd[i];
-		index++;
-		i++;
-	}
+	while (cmd[i] && (cmd[i] == 32 || cmd[i] == 9))
+		ret[index++] = cmd[i++];
 	while (cmd[i] && !is_metacharacter(cmd[i]))
-	{
-		ret[index] = cmd[i];
-		index++;
-		i++;
-	}
+		ret[index++] = cmd[i++];
 	ret[index] = 0;
 	return (ret);
 }
@@ -103,7 +99,6 @@ int	calc_arg_len(char *cmd, int i)
 }
 
 /**
- *
  * @param str string
  * @param i string index
  *
