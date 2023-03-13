@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 05:22:09 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:57:27 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 03:04:55 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_ali_malloc
 {
 	void				*address;
-	struct s_AliMalloc	*next;
+	struct s_ali_malloc	*next;
 }	t_ali_malloc;
 
 void	*ft_malloc(size_t size);

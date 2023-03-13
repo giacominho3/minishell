@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 05:18:18 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:49:39 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 03:23:42 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,11 @@ void	args_format(t_cmd *cmd, char *path)
 	int				i;
 
 	curr = cmd->tok_head;
-	i = 1;
+	i = 0;
 	cmd->execve_args = ft_malloc(sizeof(char *) * token_list_len(&curr) + 1);
 	cmd->execve_args[0] = complete_path(path, cmd);
-	cmd->execve_args[1] = 0;
+	i += format_flags(cmd, curr);
+	cmd->execve_args[i + 1] = 0;
 	while (curr != NULL)
 	{
 		if (curr->type == TOK_CMD)

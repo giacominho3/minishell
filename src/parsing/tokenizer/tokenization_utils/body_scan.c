@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:10:33 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:19:57 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 03:28:02 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 	char	*tok_cpy;
 	int		len;
 
+	//add a check to see if there are quotes, in that case you should tokenize everythin inbetween those quotes
 	if (cmd[i] && !is_metacharacter(cmd[i]))
 	{
 		i = skip_spaces(cmd, i);
