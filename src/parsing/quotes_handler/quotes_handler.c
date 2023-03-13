@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 01:31:05 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 01:45:52 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:41:50 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../_incl/parse.h"
+
+bool	keep_double_quotes(char *string, int i, bool k_double)
+{
+	if (string[i - 1] == 92)
+		return (true);
+	if (string[i] == 34 && !k_double)
+	{
+		return (!k_double);
+	}
+	return (k_double);
+}
+
+bool	keep_single_quotes(char *string, int i, bool k_single)
+{
+	if (string[i - 1] == 92)
+		return (true);
+	if (string[i] == 34 && !k_single)
+	{
+		return (!k_single);
+	}
+	return (k_single);
+}
 
 int	count_quotes_to_remove(char *string)
 {
@@ -23,14 +45,15 @@ int	count_quotes_to_remove(char *string)
 	cont = 0;
 	keep_double = false;
 	keep_single = false;
+	printf("string: %s\n", string);
 	while (string[i])
 	{
 		if (string[i] == 39 && !keep_single)
 			keep_double = !keep_double;
 		if (string[i] == 34 && !keep_double)
 			keep_single = !keep_single;
-		if ((string[i] == 34 && !keep_double)
-			|| (string[i] == 39 && !keep_single))
+		if (((string[i] == 34 && !keep_double)
+			|| (string[i] == 39 && !keep_single)) && string[i - 1] != 92)
 		{
 			i++;
 			cont++;
@@ -38,6 +61,7 @@ int	count_quotes_to_remove(char *string)
 		}
 		i++;
 	}
+	printf("cont: %d\n", cont);
 	return (cont);
 }
 
@@ -58,7 +82,7 @@ void	remove_quotes(char *modified, char *original)
 			doubleq = !doubleq;
 		if (original[i] == 34 && !doubleq)
 			singleq = !singleq;
-		if ((original[i] == 34 && !doubleq) || (original[i] == 39 && !singleq))
+		if (((original[i] == 34 && !doubleq) || (original[i] == 39 && !singleq)) && original[i - 1] != 92)
 		{
 			i++;
 			continue ;

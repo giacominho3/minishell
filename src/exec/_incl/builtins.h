@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 03:57:36 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:30:16 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:52:14 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	print_export(t_cmd *cmd);
 void	add_elements_to_export(t_cmd *cmd);
 void	clear_export(t_export **head);
 void	ft_add_export(t_export **head, char *str);
+void	ft_set_export_data(t_export *node, char *str);
+int		check_if_valid(char *arg);
 
 /**
  * pwd

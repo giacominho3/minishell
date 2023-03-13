@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_len_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:36:42 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 10:32:06 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:50:15 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	extended_len(t_parse *parse, t_env **head)
 	{
 		expand_check(parse, i);
 		if (parse->input[i] == 36 && parse->extend
-			&& valid_var_name(parse->input[i + 1]))
+			&& valid_var_name(parse->input[i + 1]) && parse->input[i - 1] != 92)
 		{
 			len += get_content_len(parse, head, i + 1);
 			i += 1 + var_name_len(parse->input, i + 1);

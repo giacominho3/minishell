@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:51:40 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 01:26:45 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:05:18 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,20 @@ int	_expand(t_parse *parse, int out_offset, int in_offset, t_env **head)
  */
 void	expand(t_parse *parse, t_env **head)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	bool	back_slash;
 
 	i = 0;
 	j = 0;
+	back_slash = false;
 	while (parse->input[i])
 	{
 		expand_check(parse, i);
+		if (parse->input[i] == 92 && parse->input[i - 1] != 92)
+			i++;
 		if (parse->input[i] == 36 && parse->extend
-			&& valid_var_name(parse->input[i + 1]))
+			&& valid_var_name(parse->input[i + 1]) && parse->input[i - 1] != 92)
 		{
 			j = _expand(parse, j, i, head);
 			i += 1 + var_name_len(parse->input, i + 1);

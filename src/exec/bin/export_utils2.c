@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 04:58:14 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 01:01:49 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:51:20 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../_incl/builtins.h"
+
+/**
+ * @brief check if the arg of a command
+ * is valid to be added to the export
+ */
+int	check_if_valid(char *arg)
+{
+	if ((arg[0] >= 65 && arg[0] <= 90)
+		|| (arg[0] >= 97 && arg[0] <= 122) || arg[0] == 95)
+		return (0);
+	return (1);
+}
 
 void	ft_set_export_data(t_export *node, char *str)
 {

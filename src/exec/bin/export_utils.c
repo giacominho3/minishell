@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 04:54:58 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 03:25:32 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:51:15 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../_incl/builtins.h"
-
-/**
- * @brief check if the arg of a command
- * is valid to be added to the export
- */
-int	check_if_valid(char *arg)
-{
-	if ((arg[0] >= 65 && arg[0] <= 90)
-		|| (arg[0] >= 97 && arg[0] <= 122) || arg[0] == 95)
-		return (0);
-	return (1);
-}
 
 /**
  * @param arg
@@ -52,6 +40,40 @@ void	add_to_export(t_cmd *cmd, char *arg)
 	cmd->main_ref->exit_status = 0;
 }
 
+bool	check_if_exist(t_export **export_head, char *string)
+{
+	t_export	*curr;
+	char		*tmp;
+
+	tmp = ft_get_name(string, '=');
+	curr = (*export_head);
+	while (curr != NULL)
+	{
+		if (!ft_strcmp(curr->name, tmp))
+			return (true);
+		curr = curr->next;
+	}
+	return (false);
+}
+
+void	modify_env_node(t_export **export_head, char *string)
+{
+	char		*tmp;
+	t_export	*curr;
+
+	tmp = ft_get_name(string, '=');
+	curr = (*export_head);
+	while (curr != NULL)
+	{
+		if (!ft_strcmp(tmp, curr->name))
+		{
+			ft_set_export_data(curr, string);
+			return ;
+		}
+		curr = curr->next;
+	}
+}
+
 /**
  * @param cmd ref of the cmd being executed
  * @return
@@ -67,6 +89,12 @@ void	add_elements_to_export(t_cmd *cmd)
 	{
 		if (curr->type == TOK_ARGS)
 		{
+			if (check_if_exist(&cmd->main_ref->export_head, curr->token))
+			{
+				modify_env_node(&cmd->main_ref->export_head, curr->token);
+				curr = curr->next;
+				continue ;
+			}
 			if (check_if_valid(curr->token))
 			{
 				printf("minishell: export: '%s': not a valid indentifier\n",

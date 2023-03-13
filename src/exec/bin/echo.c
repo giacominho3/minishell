@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: rpoggi <rpoggi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 04:07:02 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/09 04:07:15 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:28:19 by rpoggi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	echo_print(t_cmd *cmd)
 	curr = cmd->tok_head;
 	while (curr != NULL)
 	{
-		if (curr->type == TOK_ARGS && !strcmp("$?", curr->token))
+		if (curr->type == TOK_ARGS && !ft_strcmp("$?", curr->token))
 		{
 			printf("%d", cmd->main_ref->exit_status);
 			curr = curr->next;
