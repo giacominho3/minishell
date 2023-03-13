@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:52:50 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:55:40 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:30:57 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	ft_exit(t_main *main)
 		clear_cmd_list(&main->cmd_head);
 	if (main->export_head)
 		clear_export(&main->export_head);
-	if (main->env_head)
-		print_env(&main->env_head);
 	gc_clear(&g_ali_malloc);
 }
 

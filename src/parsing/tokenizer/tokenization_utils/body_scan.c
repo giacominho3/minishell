@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:10:33 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 03:28:02 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:32:52 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,12 @@ int	copy_tok(char *cmd, int new_index, int len, char *tok_cpy)
 	while (cmd[new_index] && tok_index < len
 		&& !is_metacharacter(cmd[new_index]))
 	{
+		if ((sq == false && dq == false) && cmd[new_index] == 32)
+			break ;
 		if (cmd[new_index] == 34 && !dq)
 			sq = !sq;
 		if (cmd[new_index] == 34 && !sq)
 			dq = !dq;
-		if ((cmd[new_index] == 32 || cmd[new_index] == 9) && (!dq || !sq))
-		{
-			new_index++;
-			tok_index++;
-			continue ;
-		}
 		tok_cpy[tok_index++] = cmd[new_index++];
 	}
 	tok_cpy[tok_index] = 0;
@@ -99,7 +95,6 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 	char	*tok_cpy;
 	int		len;
 
-	//add a check to see if there are quotes, in that case you should tokenize everythin inbetween those quotes
 	if (cmd[i] && !is_metacharacter(cmd[i]))
 	{
 		i = skip_spaces(cmd, i);

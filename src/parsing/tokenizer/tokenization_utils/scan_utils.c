@@ -6,7 +6,7 @@
 /*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:23:27 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/13 02:27:45 by tterribi         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:20:56 by tterribi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,12 @@ int	calc_arg_len(char *cmd, int i)
 	cont = 0;
 	single_q = false;
 	double_q = false;
-	while (cmd[i] && not_operator(cmd[i])
-		&& !is_metacharacter(cmd[i]) && cmd[i] != 32)
+	while (cmd[i] != 0 && not_operator(cmd[i]) && !is_metacharacter(cmd[i]))
 	{
+		if ((single_q == false && double_q == false) && cmd[i] == 32)
+			break ;
 		if (cmd[i] == 39)
-			single_q = !single_q;
+				single_q = !single_q;
 		if (cmd[i] == 34)
 			double_q = !double_q;
 		if (cmd[i] == 45 && !single_q && !double_q)
