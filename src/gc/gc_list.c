@@ -60,7 +60,7 @@ void	remove_ali_malloc_node(t_ali_malloc **gc_head, void *pointer)
 	if (tmp != NULL && tmp->address == pointer)
 	{
 		(*gc_head) = tmp->next;
-		free(tmp);
+		free(tmp->address);
 		return ;
 	}
 	while (tmp != NULL && tmp->address != pointer)
@@ -79,6 +79,7 @@ void	remove_ali_malloc_node(t_ali_malloc **gc_head, void *pointer)
 void	ft_free(void *pointer)
 {
 	remove_ali_malloc_node(&g_ali_malloc, pointer);
+	pointer = NULL;
 }
 
 void	gc_clear(t_ali_malloc **gc_head)
@@ -92,7 +93,7 @@ void	gc_clear(t_ali_malloc **gc_head)
 		next = curr->next;
 		if (curr->address != NULL)
 			ft_free(curr->address);
-		ft_free(curr);
+		free(curr);
 		curr = next;
 	}
 	*gc_head = NULL;

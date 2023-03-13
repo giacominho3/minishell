@@ -4,7 +4,7 @@ CC=gcc
 
 LIBFT=./libft/libft.a
 
-FLAGS=-Wall -Werror -Wextra -g
+FLAGS=-Wall -Werror -Wextra
 
 READLINE = -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 #M1 flags: -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include

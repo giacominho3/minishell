@@ -26,8 +26,6 @@ char	*get_limiter(char *cmd, int index)
 	while (cmd[len] && !is_metacharacter(cmd[len]))
 		len++;
 	limiter = ft_malloc((len - index + 2) + 1);
-	if (!limiter)
-		printf("minishell: error while allocating limiter\n");
 	i = 0;
 	while (cmd[new_index] && !is_metacharacter(cmd[new_index])
 		&& !is_skippable(cmd[new_index]))
@@ -59,7 +57,6 @@ int	redir_skip(char *cmd, int i)
 	int	tmp_index;
 
 	tmp_index = i + 1;
-	printf("i -> %d\n", i);
 	while (cmd[tmp_index] == 32)
 		tmp_index++;
 	while (cmd[tmp_index] && (!is_metacharacter(cmd[tmp_index])
@@ -84,9 +81,7 @@ int	scan_redirections(char *cmd, int i, t_token_list **tok_head)
 	if (cmd[new_index] == 60 && cmd[new_index + 1] == 60)
 	{
 		tmp = get_limiter(cmd, new_index);
-		printf("starting heredoc\n");
 		heredoc(tmp, new_index, tok_head);
-		printf("finished heredoc\n");
 		ft_free(tmp);
 		return (heredoc_skip(cmd, new_index));
 	}
@@ -95,8 +90,7 @@ int	scan_redirections(char *cmd, int i, t_token_list **tok_head)
 		tmp = get_redir(cmd, new_index);
 		ft_add_tok_last(tok_head, TOK_REDIRECTION, tmp);
 		ft_free(tmp);
-		printf("REDIR_SKIP: %d\n", redir_skip(cmd, new_index));
-		return (redir_skip(cmd, new_index));
+		return (redir_skip(cmd, new_index) + 1);
 	}
 	return (i);
 }

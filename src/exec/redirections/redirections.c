@@ -17,16 +17,10 @@ int	redir_in(char *file_name)
 	char	*path;
 	int		fd_in;
 
-	printf("redir_in\n");
-	printf("filename: %s\n", file_name);
 	path = ft_strjoin("./", ft_trim_mod(file_name, "< "));
-	printf("path name: %s\n", path);
 	fd_in = open(path, O_RDONLY);
 	if (fd_in < 0)
-	{
-		printf("fd_in: %d\n", fd_in);
 		perror("minishell: redir_in");
-	}
 	dup2(fd_in, STDIN_FILENO);
 	close(fd_in);
 	return (fd_in);

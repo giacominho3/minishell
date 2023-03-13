@@ -25,7 +25,7 @@ char	*get_redir(char *cmd, int i)
 		i++;
 	len = 0;
 	index = i;
-	while (cmd[index] && !is_metacharacter(cmd[i]))
+	while (cmd[index] && !is_metacharacter(cmd[i]) && cmd[index] != 32)
 	{
 		len++;
 		index++;
@@ -33,7 +33,7 @@ char	*get_redir(char *cmd, int i)
 	ret = ft_malloc(len + 2);
 	ret[0] = c;
 	index = 1;
-	while (cmd[index] && !is_metacharacter(cmd[i]))
+	while (cmd[i] && !is_metacharacter(cmd[i]) && cmd[i] != 32)
 		ret[index++] = cmd[i++];
 	ret[index] = 0;
 	return (ret);

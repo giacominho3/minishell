@@ -17,7 +17,6 @@ void	remove_file(char *file_name, t_cmd *cmd)
 	char	*matrix[3];
 	char	**envp;
 
-	printf("file name: |%s|\n", file_name);
 	matrix[0] = "/bin/rm";
 	matrix[1] = file_name;
 	matrix[2] = 0;
@@ -103,15 +102,12 @@ void	heredoc(char *limiter, int index, t_token_list **tok_head)
 	int		file_doc;
 	char	*path;
 
-	printf("___HEREDOC___\n");
 	if (index < 0)
 		return ;
-	printf("limiter(heredoc): %s\n", limiter);
 	path = ft_strjoin("./.heredoc", ft_itoa(index));
 	file_doc = open(path, O_CREAT | O_WRONLY, 0777);
 	if (file_doc < 0)
 		perror("minishell");
 	reading(limiter, file_doc);
 	ft_add_tok_last(tok_head, TOK_HEREDOC, path);
-	printf("_____________\n");
 }

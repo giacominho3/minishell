@@ -31,8 +31,6 @@ bool	flag_check(char *string)
 	int	i;
 
 	i = 1;
-	if (strcmp("-n", string))
-		return (true);
 	if (string[0] != '-')
 		return (false);
 	while (string[i])
@@ -58,7 +56,9 @@ void	echo_print(t_cmd *cmd)
 			continue ;
 		}
 		if (curr->type == TOK_FLAGS && !flag_check(curr->token))
+		{
 			printf("%s ", curr->token);
+		}
 		if (curr->type == TOK_ARGS)
 			printf("%s", curr->token);
 		curr = curr->next;
