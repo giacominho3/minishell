@@ -40,11 +40,8 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 	while (cmd[i] && invalid_pipe(cmd, i))
 	{
 		i = head_scan(cmd, i, tok_head);
-		printf("i val after head scan: %d\n", i);
 		i = body_scan(cmd, i, tok_head);
-		printf("i val after body scan: %d\n", i);
 		i = tail_scan(cmd, i, tok_head);
-		printf("i val after tail scan: %d\n", i);
 		if (!cmd[i])
 			break ;
 	}
