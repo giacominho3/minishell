@@ -12,6 +12,15 @@
 
 #include "../../../incl/minishell.h"
 
+bool	invalid_pipe(char *cmd_line, int i)
+{
+	if (cmd_line[i] == '|' && (cmd_line[i - 1] != 34 && cmd_line[i - 1] != 39))
+		return (false);
+	if (cmd_line[i + 1] == '|' && (cmd_line[i] != 34 && cmd_line[i] != 39))
+		return (false);
+	return (true);
+}
+
 /**
  * @param sub_string = current analyzed command
  * @param head = head to the token list of the current cmd list node
@@ -25,7 +34,7 @@ void	_tokenizer(char *cmd, t_token_list **tok_head)
 	int	i;
 
 	i = 0;
-	while (cmd[i] && cmd [i] != '|' && cmd[i + 1] != '|')
+	while (cmd[i] && invalid_pipe(cmd, i))
 	{
 		i = head_scan(cmd, i, tok_head);
 		i = body_scan(cmd, i, tok_head);

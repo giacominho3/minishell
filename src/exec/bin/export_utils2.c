@@ -46,11 +46,6 @@ void	ft_add_export(t_export **head, char *str)
 
 	last = (*head);
 	new = (t_export *)ft_malloc(sizeof(t_export));
-	if (!new)
-	{
-		printf("add_last: error while allocating new node: str(%s)\n", str);
-		return ;
-	}
 	ft_set_export_data(new, str);
 	new->next = NULL;
 	if ((*head) == NULL)

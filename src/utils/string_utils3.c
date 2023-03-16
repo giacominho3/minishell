@@ -39,7 +39,7 @@ char	*ft_strncpy(char *dst, const char *src, size_t n)
 	}
 	while (i < n)
 	{
-		dst[i] = '\0';
+		dst[i] = 0;
 		i++;
 	}
 	return (dst);
@@ -53,6 +53,6 @@ char	*ft_strndup(char *s, size_t n)
 	if (str == NULL)
 		return (NULL);
 	str = ft_strncpy(str, s, n);
-	str[n] = '\0';
+	str[n] = 0;
 	return (str);
 }

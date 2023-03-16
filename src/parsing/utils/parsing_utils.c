@@ -31,9 +31,13 @@ void	new_cmd_line(t_token_list *token, t_parse *parse)
  */
 void	expand_check(t_parse *parse, int i)
 {
-	if (parse->input[i] == 34 && parse->input[i - 1] != 92)
+	if (parse->back_slash)
+		parse->back_slash = false;
+	if (parse->input[i] == 92 && parse->input[i - 1] != 92)
+		parse->back_slash = true;
+	if (parse->input[i] == 34 && !parse->back_slash)
 		parse->double_quotes = !parse->double_quotes;
-	if (parse->input[i] == 39 && parse->input[i - 1] != 92)
+	if (parse->input[i] == 39 && !parse->back_slash)
 		parse->single_quotes = !parse->single_quotes;
 	if (parse->double_quotes)
 		parse->extend = true;

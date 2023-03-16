@@ -49,7 +49,8 @@ int	extended_len(t_parse *parse, t_env **head)
 			i += 1 + var_name_len(parse->input, i + 1);
 			continue ;
 		}
-		len++;
+		if (!parse->back_slash)
+			len++;
 		i++;
 	}
 	return (len);

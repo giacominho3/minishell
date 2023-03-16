@@ -69,7 +69,7 @@ char	*get_heredoc(char *cmd, int i)
 
 bool	not_operator(char c)
 {
-	if (c != 60 && c != 62 && c != 124)
+	if (c != 60 && c != 62)
 		return (true);
 	return (false);
 }

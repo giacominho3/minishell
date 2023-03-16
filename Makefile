@@ -6,7 +6,7 @@ LIBFT=./libft/libft.a
 
 FLAGS=-Wall -Werror -Wextra
 
-READLINE = -L$$HOME/.brew/opt/readline/lib -I$$HOME/.brew/opt/readline/include
+READLINE = -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 #M1 flags: -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 #42 flags: L$$HOME/.brew/opt/readline/lib -I$$HOME/.brew/opt/readline/include
 

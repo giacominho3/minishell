@@ -59,6 +59,9 @@ void	echo_print(t_cmd *cmd)
 			printf("%s ", curr->token);
 		if (curr->type == TOK_ARGS)
 			printf("%s", curr->token);
+		if (curr->next != NULL && curr->prev != NULL
+			&& curr->next->type == TOK_ARGS)
+			printf(" ");
 		curr = curr->next;
 	}
 }

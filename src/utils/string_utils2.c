@@ -52,6 +52,7 @@ char	*trim_trailing_spaces(char *str)
 		new[j] = str[j];
 		j++;
 	}
+	new[j] = 0;
 	ft_free(str);
 	return (new);
 }
@@ -73,7 +74,7 @@ char	*ft_strdup(const char *src)
 		ptr[i] = src[i];
 		i++;
 	}
-	ptr[i] = '\0';
+	ptr[i] = 0;
 	return (ptr);
 }
 

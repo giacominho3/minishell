@@ -52,9 +52,10 @@ void	clear_cmd_list(t_cmd **head)
 	{
 		next = current->next;
 		clear_tokens(&current->tok_head);
-		if (current->cmd)
+		if (current->cmd != NULL)
 			ft_free(current->cmd);
-		ft_free(current);
+		if (current != NULL)
+			ft_free(current);
 		current = next;
 	}
 	*head = NULL;

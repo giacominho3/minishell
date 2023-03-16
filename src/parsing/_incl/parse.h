@@ -22,6 +22,7 @@ typedef struct s_parse
 	bool	extend;
 	bool	single_quotes;
 	bool	double_quotes;
+	bool	back_slash;
 	char	*out;
 	char	*input;
 }	t_parse;

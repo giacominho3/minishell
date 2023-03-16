@@ -30,11 +30,6 @@ void	ft_add_last(struct s_env **head, char *str)
 
 	last = (*head);
 	new = (struct s_env *)ft_malloc(sizeof(struct s_env));
-	if (!new)
-	{
-		printf("add_last: error while allocating new node: str(%s)\n", str);
-		return ;
-	}
 	ft_set_data(new, str);
 	new->next = NULL;
 	if ((*head) == NULL)

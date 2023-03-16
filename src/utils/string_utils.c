@@ -67,5 +67,5 @@ void	ft_offset_copy(char *dst, char *src, int offset, int stop)
 		i++;
 		offset++;
 	}
-	dst[i] = '\0';
+	dst[i] = 0;
 }

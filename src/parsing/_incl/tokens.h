@@ -15,6 +15,7 @@
 # include "../../../incl/minishell.h"
 
 int		tokenizer(t_cmd **cmd_head);
+bool	invalid_pipe(char *cmd_line, int i);
 
 /**
  * Scan functions

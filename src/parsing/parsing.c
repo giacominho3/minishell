@@ -39,16 +39,12 @@ void	expand(t_parse *parse, t_env **head)
 {
 	int		i;
 	int		j;
-	bool	back_slash;
 
 	i = 0;
 	j = 0;
-	back_slash = false;
 	while (parse->input[i])
 	{
 		expand_check(parse, i);
-		if (parse->input[i] == 92 && parse->input[i - 1] != 92)
-			i++;
 		if (parse->input[i] == 36 && parse->extend
 			&& valid_var_name(parse->input[i + 1]) && parse->input[i - 1] != 92)
 		{
@@ -70,11 +66,6 @@ int	_parse(char *cmd_line, t_token_list *curr_tok, t_main *main)
 	init_parse(cmd_line, &parse);
 	parse.out_len = extended_len(&parse, &main->env_head);
 	parse.out = ft_malloc(parse.out_len + 1);
-	if (!parse.out)
-	{
-		printf("error while allocating parse.out\n");
-		return (1);
-	}
 	parse.double_quotes = false;
 	parse.single_quotes = false;
 	parse.extend = true;

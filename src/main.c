@@ -52,6 +52,7 @@ void	ft_exit(t_main *main)
 	if (!main)
 		return ;
 	gc_clear(&g_ali_malloc);
+	printf("\b\b  \nMinishell> exit");
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -72,7 +73,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!buff)
 		{
 			ft_exit(&main);
-			return (printf("\b\b  \nMinishell> exit"));
+			return (1);
 		}
 		if (ft_strlen(buff) == 0)
 			continue ;

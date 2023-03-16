@@ -48,11 +48,8 @@ char	*join_name_and_cont(char *name, char *content)
 	j = 0;
 	i++;
 	while (content[j])
-	{
-		tmp[i] = content[j];
-		i++;
-		j++;
-	}
+		tmp[i++] = content[j++];
+	tmp[i] = 0;
 	return (tmp);
 }
 

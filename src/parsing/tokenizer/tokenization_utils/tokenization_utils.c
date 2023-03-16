@@ -20,7 +20,7 @@
  */
 bool	is_metacharacter(char c)
 {
-	if (c == 124 || c == 10 || c == 60
+	if (c == 10 || c == 60
 		|| c == 62)
 		return (true);
 	return (false);

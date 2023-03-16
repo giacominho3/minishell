@@ -12,48 +12,35 @@
 
 #include "../_incl/parse.h"
 
-bool	keep_double_quotes(char *string, int i, bool k_double)
+void	quotes_check(t_parse *parse, int i)
 {
-	if (string[i - 1] == 92)
-		return (true);
-	if (string[i] == 34 && !k_double)
-	{
-		return (!k_double);
-	}
-	return (k_double);
+	if (parse->back_slash)
+		parse->back_slash = false;
+	if (parse->input[i] == 92 && parse->input[i - 1] != 92)
+		parse->back_slash = true;
+	if (parse->input[i] == 39 && !parse->back_slash)
+		parse->double_quotes = !parse->double_quotes;
+	if (parse->input[i] == 34 && !parse->back_slash)
+		parse->single_quotes = !parse->single_quotes;
+	if (parse->double_quotes)
+		parse->extend = true;
+	if (parse->single_quotes && !parse->double_quotes)
+		parse->extend = false;
 }
 
-bool	keep_single_quotes(char *string, int i, bool k_single)
-{
-	if (string[i - 1] == 92)
-		return (true);
-	if (string[i] == 34 && !k_single)
-	{
-		return (!k_single);
-	}
-	return (k_single);
-}
-
-int	count_quotes_to_remove(char *string)
+int	count_quotes_to_remove(t_parse *parse)
 {
 	int		i;
 	int		cont;
-	bool	keep_single;
-	bool	keep_double;
 
-	i = 0;
 	cont = 0;
-	keep_double = false;
-	keep_single = false;
-	printf("string: %s\n", string);
-	while (string[i])
+	i = 0;
+	while (parse->out[i])
 	{
-		if (string[i] == 39 && !keep_single)
-			keep_double = !keep_double;
-		if (string[i] == 34 && !keep_double)
-			keep_single = !keep_single;
-		if (((string[i] == 34 && !keep_double)
-			|| (string[i] == 39 && !keep_single)) && string[i - 1] != 92)
+		quotes_check(parse, i);
+		if (((parse->out[i] == 34 && !parse->double_quotes)
+				|| (parse->out[i] == 39 && !parse->single_quotes))
+			&& !parse->back_slash)
 		{
 			i++;
 			cont++;
@@ -61,33 +48,29 @@ int	count_quotes_to_remove(char *string)
 		}
 		i++;
 	}
-	printf("cont: %d\n", cont);
 	return (cont);
 }
 
-void	remove_quotes(char *modified, char *original)
+void	remove_quotes(char *modified, t_parse *parse)
 {
 	int		i;
 	int		j;
-	bool	singleq;
-	bool	doubleq;
 
 	i = 0;
 	j = 0;
-	doubleq = false;
-	singleq = false;
-	while (original[i])
+	while (parse->out[i])
 	{
-		if (original[i] == 39 && !singleq)
-			doubleq = !doubleq;
-		if (original[i] == 34 && !doubleq)
-			singleq = !singleq;
-		if (((original[i] == 34 && !doubleq) || (original[i] == 39 && !singleq)) && original[i - 1] != 92)
+		quotes_check(parse, i);
+		if (parse->back_slash)
+			i++;
+		if (((parse->out[i] == 34 && !parse->double_quotes)
+				|| (parse->out[i] == 39 && !parse->single_quotes))
+			&& !parse->back_slash)
 		{
 			i++;
 			continue ;
 		}
-		modified[j] = original[i];
+		modified[j] = parse->out[i];
 		i++;
 		j++;
 	}
@@ -102,10 +85,14 @@ void	quotes_handler(t_parse *parse)
 
 	parse->single_quotes = false;
 	parse->double_quotes = false;
-	cont = count_quotes_to_remove(parse->out);
+	parse->back_slash = false;
+	cont = count_quotes_to_remove(parse);
 	buf = ft_malloc((ft_strlen(parse->out) - cont) + 1);
 	ft_strcpy(buf, parse->out);
-	remove_quotes(buf, parse->out);
+	parse->single_quotes = false;
+	parse->double_quotes = false;
+	parse->back_slash = false;
+	remove_quotes(buf, parse);
 	ft_free(parse->out);
 	parse->out = ft_malloc(ft_strlen(buf) + 1);
 	i = -1;

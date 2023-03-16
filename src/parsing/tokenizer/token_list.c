@@ -38,7 +38,7 @@ void	ft_set_tok(t_token_list **node, t_tokens type, char *val)
 		curr->token[i] = val[i];
 		i++;
 	}
-	curr->token[i] = '\0';
+	curr->token[i] = 0;
 }
 
 /**

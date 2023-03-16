@@ -25,8 +25,7 @@ void	ft_free_matrix(char **matrix)
 			ft_free(matrix[i]);
 		i++;
 	}
-	if (matrix)
-		free(matrix);
+	ft_free(matrix);
 }
 
 /**
