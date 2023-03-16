@@ -125,5 +125,4 @@ void	pipeline_wrapper(t_main *main)
 	main->env_mat = NULL;
 	main->env_mat = fill_env_mat(&main->env_head);
 	pipeline(&main->cmd_head);
-	clear_heredoc(main->cmd_head);
 }

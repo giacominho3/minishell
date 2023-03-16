@@ -24,6 +24,7 @@ void	remove_file(char *file_name, t_cmd *cmd)
 	envp = fill_env_mat(&cmd->main_ref->env_head);
 	if (!fork())
 	{
+		printf("removing: %s\n", file_name);
 		if (execve("/bin/rm", matrix, envp) == -1)
 			perror("Minishell");
 		exit(0);
@@ -38,16 +39,22 @@ void	remove_file(char *file_name, t_cmd *cmd)
  * @brief removes all the heredoc files generated
  * during the pipeline execution
  */
-void	clear_heredoc(t_cmd *cmd_head)
+void	clear_heredoc(t_cmd **cmd_head)
 {
-	t_token_list	*curr;
+	t_cmd			*curr_cmd;
+	t_token_list	*curr_tok;
 
-	curr = cmd_head->tok_head;
-	while (curr != NULL)
+	curr_cmd = (*cmd_head);
+	while (curr_cmd != NULL)
 	{
-		if (curr->type == TOK_HEREDOC)
-			remove_file(curr->token, cmd_head);
-		curr = curr->next;
+		curr_tok = curr_cmd->tok_head;
+		while (curr_tok != NULL)
+		{
+			if (curr_tok->type == TOK_HEREDOC)
+				remove_file(curr_tok->token, curr_cmd);
+			curr_tok = curr_tok->next;
+		}
+		curr_cmd = curr_cmd->next;
 	}
 }
 
@@ -72,15 +79,13 @@ void	reading(char *limiter, int fd_doc)
 	{
 		buf = readline("heredoc> ");
 		if (!buf)
-		{
-			perror("minishell");
-			return ;
-		}
+			break ;
 		if (!ft_strcmp(limiter, buf))
 			break ;
 		ft_putstring_fd(fd_doc, buf);
 		ft_free(buf);
 	}
+	free(buf);
 }
 
 /**
@@ -111,3 +116,5 @@ void	heredoc(char *limiter, int index, t_token_list **tok_head)
 	reading(limiter, file_doc);
 	ft_add_tok_last(tok_head, TOK_HEREDOC, path);
 }
+
+// cat <<e <<e

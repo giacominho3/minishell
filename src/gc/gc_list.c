@@ -94,6 +94,8 @@ void	gc_clear(t_ali_malloc **gc_head)
 	t_ali_malloc	*next;
 
 	curr = (*gc_head);
+	if (curr == NULL)
+		exit(EXIT_FAILURE);
 	while (curr != NULL)
 	{
 		next = curr->next;

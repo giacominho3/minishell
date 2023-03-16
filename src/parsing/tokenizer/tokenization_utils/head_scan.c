@@ -60,7 +60,7 @@ int	redir_skip(char *cmd, int i)
 	while (cmd[tmp_index] == 32)
 		tmp_index++;
 	while (cmd[tmp_index] && (!is_metacharacter(cmd[tmp_index])
-			|| !is_skippable(cmd[tmp_index])))
+			|| !is_skippable(cmd[tmp_index])) && cmd[tmp_index] != 32)
 		tmp_index++;
 	return (tmp_index - 1);
 }

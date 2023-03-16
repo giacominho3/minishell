@@ -22,7 +22,7 @@ int	skip_intial_spaces(char *str)
 	int	i;
 
 	i = 0;
-	while (is_in_strings(str[i], SPACE_CHARS))
+	while (str[i] == 32 || str[i] == '\t')
 		i++;
 	return (i);
 }

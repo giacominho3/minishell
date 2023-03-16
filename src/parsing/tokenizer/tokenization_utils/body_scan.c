@@ -75,7 +75,7 @@ int	copy_tok(char *cmd, int new_index, int len, char *tok_cpy)
 	sq = false;
 	dq = false;
 	while (cmd[new_index] && tok_index < len
-		&& !is_metacharacter(cmd[new_index]))
+		&& !is_metacharacter(cmd[new_index]) && invalid_pipe(cmd, new_index))
 	{
 		if ((sq == false && dq == false) && cmd[new_index] == 32)
 			break ;
@@ -99,10 +99,12 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 	{
 		i = skip_spaces(cmd, i);
 		new_index = i;
+		printf("new index: %d(char: %c)", new_index, cmd[new_index]);
 		len = calc_arg_len(cmd, i);
 		tok_cpy = ft_malloc(len);
 		new_index = copy_tok(cmd, new_index, len, tok_cpy);
-		ft_add_tok_last(tok_head, TOK_ARGS, tok_cpy);
+		if (ft_strlen(tok_cpy) >= 1)
+			ft_add_tok_last(tok_head, TOK_ARGS, tok_cpy);
 		ft_free(tok_cpy);
 		return (new_index);
 	}
