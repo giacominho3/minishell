@@ -28,6 +28,7 @@ void	clear_export(t_export **head);
 void	ft_add_export(t_export **head, char *str);
 void	ft_set_export_data(t_export *node, char *str);
 int		check_if_valid(char *arg);
+int		not_valid_for_env(char *arg);
 
 /**
  * pwd

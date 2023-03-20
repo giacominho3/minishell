@@ -13,6 +13,18 @@
 #include "../_incl/builtins.h"
 
 /**
+ * @param arg
+ *
+ * @brief check if the arg is valid to be added also to the env
+ */
+int	not_valid_for_env(char *arg)
+{
+	if (is_in_strings(61, arg))
+		return (0);
+	return (1);
+}
+
+/**
  * @brief check if the arg of a command
  * is valid to be added to the export
  */

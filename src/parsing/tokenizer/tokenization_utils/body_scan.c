@@ -99,7 +99,6 @@ int	scan_args(char *cmd, int i, t_token_list **tok_head)
 	{
 		i = skip_spaces(cmd, i);
 		new_index = i;
-		printf("new index: %d(char: %c)", new_index, cmd[new_index]);
 		len = calc_arg_len(cmd, i);
 		tok_cpy = ft_malloc(len);
 		new_index = copy_tok(cmd, new_index, len, tok_cpy);

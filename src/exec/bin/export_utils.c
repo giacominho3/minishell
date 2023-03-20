@@ -13,18 +13,6 @@
 #include "../_incl/builtins.h"
 
 /**
- * @param arg
- *
- * @brief check if the arg is valid to be added also to the env
- */
-int	not_valid_for_env(char *arg)
-{
-	if (is_in_strings(61, arg))
-		return (0);
-	return (1);
-}
-
-/**
  * @param cmd ref of the cmd being executed
  * @param arg of the cmd to add to the export
  *
@@ -56,7 +44,7 @@ bool	check_if_exist(t_export **export_head, char *string)
 	return (false);
 }
 
-void	modify_env_node(t_export **export_head, char *string)
+void	modify_exp_node(t_export **export_head, char *string)
 {
 	char		*tmp;
 	t_export	*curr;
@@ -72,6 +60,27 @@ void	modify_env_node(t_export **export_head, char *string)
 		}
 		curr = curr->next;
 	}
+}
+
+void	update_env(t_cmd *cmd, char *string)
+{
+	char	*tmp_name;
+	char	*tmp_cont;
+	t_env	*curr;
+
+	curr = cmd->main_ref->env_head;
+	tmp_name = ft_get_name(string, '=');
+	tmp_cont = ft_get_content(string, '=');
+	while (curr != NULL)
+	{
+		if (!ft_strcmp(tmp_name, curr->name))
+		{
+			modify_node_content(&cmd->main_ref->env_head, tmp_name, tmp_cont);
+			return ;
+		}
+		curr = curr->next;
+	}
+	ft_add_last(&cmd->main_ref->env_head, string);
 }
 
 /**
@@ -91,14 +100,14 @@ void	add_elements_to_export(t_cmd *cmd)
 		{
 			if (check_if_exist(&cmd->main_ref->export_head, curr->token))
 			{
-				modify_env_node(&cmd->main_ref->export_head, curr->token);
+				modify_exp_node(&cmd->main_ref->export_head, curr->token);
+				update_env(cmd, curr->token);
 				curr = curr->next;
 				continue ;
 			}
 			if (check_if_valid(curr->token))
 			{
-				printf("minishell: export: '%s': not a valid indentifier\n",
-					curr->token);
+				printf("minishell: export: '%s': not valid\n", curr->token);
 				cmd->main_ref->exit_status = 1;
 				curr = curr->next;
 				continue ;
