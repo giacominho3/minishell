@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tterribi <tterribi@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: gifulvi <gifulvi@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 05:05:51 by tterribi          #+#    #+#             */
-/*   Updated: 2023/03/12 05:14:43 by tterribi         ###   ########.fr       */
+/*   Created: 2023/03/12 05:05:51 by gifulvi          #+#    #+#             */
+/*   Updated: 2023/03/12 05:14:43 by gifulvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

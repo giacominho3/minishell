@@ -14,7 +14,8 @@ Y = "\033[33m"
 R = "\033[31m"
 G = "\033[32m"
 B = "\033[34m"
-P = "\033[36m"
+P = "\033[35m"
+C = "\033[36m"
 X = "\033[0m"
 UP = "\033[A"
 CUT = "\033[K"
@@ -60,13 +61,13 @@ all:$(NAME)
 clean:
 	rm -f $(OBJS)
 	@$(MAKE) clean -C ./libft
-	@echo $(R)Removed [$(OBJS)]$(X)
-	@echo $(R)Removed libraries.o$(X)
+	@echo $(P)Removed [$(OBJS)]$(X)
+	@echo $(P)Removed libraries.o$(X)
 
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C ./libft
-	@echo $(R)Removed [$(NAME)]$(X)
+	@echo $(P)Removed [$(NAME)]$(X)
 
 re: fclean all
 
